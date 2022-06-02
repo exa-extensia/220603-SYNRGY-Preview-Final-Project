@@ -1,13 +1,33 @@
-body {
-	@apply top-0 left-0 m-0 overflow-x-hidden p-0;
-	box-sizing: border-box;
+@font-face {
+	font-family: "Juana";
+	src: url("../fonts/juana-semi-bold.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
 }
 
-h1,
-h2,
-h3,
-p,
-ul,
-li:hover {
-	cursor: default;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	h1,
+	h2,
+	h3 {
+		font-family: "Juana";
+	}
+
+	h1,
+	h2,
+	h3,
+	p,
+	ul,
+	li:hover {
+		cursor: default;
+	}
+
+	body {
+		@apply top-0 left-0 m-0 overflow-x-hidden p-0;
+		box-sizing: border-box;
+	}
 }
