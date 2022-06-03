@@ -39,7 +39,7 @@
 }
 
 #kategoriproduk .pt__bttm {
-	@apply grid;
+	@apply hidden sm:grid;
 	grid-template-columns: repeat(3, 1fr);
 	grid-template-rows: masonry;
 }
