@@ -1,84 +1,57 @@
-.jumbo__bg {
-	@apply relative mb-10 bg-linear-cream py-20 text-black lg:mb-0;
-	letter-spacing: 1.5px;
+#produktrending {
+	@apply flex items-center justify-center;
 }
 
-.jumbo__wrapper {
-	@apply container h-full sm:flex sm:justify-between sm:gap-4 lg:gap-12;
+.pt__wrapper {
+	@apply container mx-4 pt-12 sm:container sm:mx-10 lg:mx-20 xl:mx-40;
 }
 
-.jumbo__left {
-	@apply mb-10 flex max-w-lg flex-col justify-center gap-4 pt-10 sm:mb-0 sm:pt-0;
+.pt__top {
+	@apply flex justify-between;
 }
 
-.jumbo__title {
-	@apply mb-4 text-3xl font-bold lg:text-4xl xl:text-5xl;
+.pt__top h3 {
+	@apply sm:text-lg lg:text-2xl;
 }
 
-.jumbo__desc {
-	@apply text-sm font-normal lg:text-base xl:text-xl;
+.pt__top button {
+	@apply rounded-2xl border px-2 text-xs sm:text-sm lg:text-base;
 }
 
-.jumbo__right {
-	@apply mt-auto mb-0 block;
+.pt__bttm {
+	@apply mb-64 hidden gap-4 pt-6 sm:static sm:mb-0 sm:flex sm:flex-wrap sm:items-center sm:justify-center;
 }
 
-.jumbo__img {
-	@apply w-full bg-cover bg-center bg-no-repeat xl:h-[300px];
+.product__item {
+	@apply h-[300px] w-[200px] rounded-lg border-2 border-[#a67a4a] bg-[#fcf5ea];
 }
 
-.warnawrapper {
-	@apply flex;
+#kategoriproduk {
+	@apply flex items-center justify-center;
 }
 
-.testwarna {
-	@apply h-[100px] w-[100px] border-[0.5px];
+#kategoriproduk .pt__wrapper {
+	@apply flex flex-col items-center justify-center gap-4;
 }
 
-.warna1 {
-	@apply bg-brown;
+#kategoriproduk .pt__top {
+	@apply flex items-center justify-center;
 }
 
-.warna2 {
-	@apply bg-goldie;
+#kategoriproduk .pt__bttm {
+	@apply hidden sm:grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: masonry;
 }
 
-.warna3 {
-	@apply bg-cream;
+#kategoriproduk .product__item:nth-child(odd) {
+	@apply h-[300px] w-[200px] break-inside-avoid rounded-lg border-2 border-[#a67a4a] bg-[#fcf5ea];
 }
 
-.warna4 {
-	@apply bg-black;
+#kategoriproduk .product__item:nth-child(even) {
+	@apply h-[200px] w-[200px] break-inside-avoid rounded-lg border-2 border-[#a67a4a] bg-[#fcf5ea];
 }
 
-.warna5 {
-	@apply bg-grey;
-}
-
-.warna6 {
-	@apply bg-med-gray;
-}
-
-.warna7 {
-	@apply bg-soft-gray;
-}
-
-.warna8 {
-	@apply bg-success;
-}
-
-.warna9 {
-	@apply bg-warning;
-}
-
-.warna10 {
-	@apply bg-danger;
-}
-
-.warna11 {
-	@apply bg-primary;
-}
-
-.warna12 {
-	@apply bg-neutral;
+#kategoriproduk button {
+	@apply rounded-2xl border px-2 text-xs sm:text-sm lg:text-base;
 }

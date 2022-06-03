@@ -1,34 +1,58 @@
+import Navbar from "../../components/sections/_navbar/Navbar";
+import Header from "../../components/sections/home-header/Header";
+
 export default function Jumbotron() {
+	let product = [
+		{ name: "1" },
+		{ name: "2" },
+		{ name: "3" },
+		{ name: "4" },
+		{ name: "5" },
+		{ name: "6" },
+		{ name: "7" },
+		{ name: "8" },
+		{ name: "9" },
+		{ name: "10" },
+	];
+
 	return (
-		<div className="jumbo__bg">
-			<div className="jumbo__wrapper">
-				<div className="jumbo__left">
-					<h2 className="jumbo__title">Kenapa harus beli di Flambo ?</h2>
-					<p className="jumbo__desc">
-						Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-						accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-						quae ab illo inventore veritatis et quasi architecto beatae vitae
-						dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
-						aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
-						eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est,
-						fugiat quo voluptas nulla pariatur?
-					</p>
-					<div className="warnawrapper">
-						<div className="testwarna warna1"></div>
-						<div className="testwarna warna2"></div>
-						<div className="testwarna warna3"></div>
-						<div className="testwarna warna4"></div>
-						<div className="testwarna warna5"></div>
-						<div className="testwarna warna6"></div>
-						<div className="testwarna warna7"></div>
-						<div className="testwarna warna8"></div>
-						<div className="testwarna warna9"></div>
-						<div className="testwarna warna10"></div>
-						<div className="testwarna warna11"></div>
-						<div className="testwarna warna12"></div>
+		<>
+			<Navbar />
+			<Header />
+			{/* Produk Trending */}
+			<section id="produktrending">
+				<div className="pt__wrapper">
+					<div className="pt__top">
+						<h3>Produk Trending</h3>
+						<button>Lihat Semua</button>
+					</div>
+					<div className="pt__bttm">
+						{product.map((item) => (
+							<div className="product__item">{item.name}</div>
+						))}
 					</div>
 				</div>
-			</div>
-		</div>
+			</section>
+			{/* Kategori Produk */}
+			<section id="kategoriproduk">
+				<div className="pt__wrapper">
+					<div className="pt__top">
+						<h3>Kategori Produk</h3>
+					</div>
+					<div className="pt__bttm">
+						{product.map((item) => (
+							<div className="product__item">{item.name}</div>
+						))}
+					</div>
+					<button>Lihat Semua Kategori</button>
+				</div>
+			</section>
+			{/* Ribuan Brand */}
+			<section id="ribuanbrand"></section>
+			{/* Kenapa Flambo */}
+			<section id="kenapaflambo"></section>
+			{/* Footer */}
+			<footer></footer>
+		</>
 	);
 }
