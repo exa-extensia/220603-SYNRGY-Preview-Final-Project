@@ -1,20 +1,6 @@
 module.exports = {
 	content: ["./src/**/*.{js,jsx,ts,tsx}"],
 	theme: {
-		colors: {
-			brown: "#A67A4A",
-			goldie: "#FFEDCD",
-			cream: "#FCF5EA",
-			black: "#515151",
-			grey: "#C4C4C4",
-			"med-gray": "#E3E3E3",
-			"soft-gray": "#F6F6F6",
-			success: "#7EC722",
-			warning: "#FFC634",
-			danger: "#FF6523",
-			primary: "#5FADF4",
-			neutral: "#C4C4C4",
-		},
 		fontFamily: {
 			sans: ["Nunito", "sans-serif"],
 		},
@@ -36,6 +22,21 @@ module.exports = {
 				// 	xl: "6rem",
 				// 	"2xl": "8rem",
 				// },
+			},
+			colors: {
+				brown: "#A67A4A",
+				goldie: "#FFEDCD",
+				cream: "#FCF5EA",
+				black: "#515151",
+				grey: "#C4C4C4",
+				"med-gray": "#E3E3E3",
+				"soft-gray": "#F6F6F6",
+				success: "#7EC722",
+				warning: "#FFC634",
+				danger: "#FF6523",
+				primary: "#5FADF4",
+				neutral: "#C4C4C4",
+				white: "#FFF",
 			},
 			backgroundImage: {
 				"linear-cream":

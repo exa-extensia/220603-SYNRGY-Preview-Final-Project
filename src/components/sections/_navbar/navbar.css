@@ -1,0 +1,66 @@
+nav {
+	@apply flex items-center justify-center pt-4;
+	box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.2);
+}
+
+.nav__wrapper {
+	@apply hidden sm:container sm:mx-10 sm:block lg:mx-20 xl:mx-40;
+}
+
+.nav__wrapper_top {
+	@apply flex h-[70px] justify-between;
+}
+
+.nav__brand {
+	@apply flex items-center gap-4;
+}
+
+.nav__brand .logo {
+	@apply h-16 w-16;
+}
+
+.nav__brand .logo__title {
+	@apply text-2xl tracking-wider text-brown;
+}
+
+.nav__cart-profile {
+	@apply hidden items-center gap-6 sm:flex;
+}
+
+.nav__profile {
+	@apply flex items-center gap-2;
+}
+
+.nav__wrapper_bttm {
+	@apply flex h-[72px] items-center justify-between;
+}
+
+.nav__linkitems {
+	@apply hidden list-none text-center sm:flex sm:items-center sm:gap-2 sm:text-sm;
+}
+
+.nav__searchbar__wrapper {
+	@apply relative flex flex-row items-center;
+}
+
+.nav__inputsearch {
+	@apply hidden w-64 rounded-2xl bg-soft-gray p-2 pl-4 text-sm text-black sm:block;
+}
+
+nav .input__icon {
+	@apply absolute hidden translate-x-56 text-black sm:block;
+}
+
+/*Nav Mobile  */
+
+.nav__mobile {
+	@apply relative mx-4 flex h-[75px] w-full items-center justify-between sm:hidden;
+}
+
+nav .dropdown__icon {
+	@apply sm:hidden;
+}
+
+.nav__right--mobile {
+	@apply absolute right-4 top-full z-10 flex w-2/5 list-none flex-col gap-4 rounded-b-xl rounded-tl-xl  bg-cream p-4 text-right shadow-md;
+}
