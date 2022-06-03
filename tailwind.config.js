@@ -7,14 +7,14 @@ module.exports = {
 		extend: {
 			container: {
 				center: true,
-				mx: {
-					pp: "20px",
-					pl: "20px",
-					tp: "40px",
-					tl: "40px",
-					lp: "120px",
-					dp: "120px",
-				},
+				// mx: {
+				// 	pp: "20px",
+				// 	pl: "20px",
+				// 	tp: "40px",
+				// 	tl: "40px",
+				// 	lp: "120px",
+				// 	dp: "120px",
+				// },
 				// padding: {
 				// 	DEFAULT: "1rem",
 				// 	sm: "2rem",
@@ -40,7 +40,7 @@ module.exports = {
 			},
 			backgroundImage: {
 				"linear-cream":
-					"linear-gradient(180deg, #FCF5EA 0%, rgba(252, 245, 234, 0) 100%);",
+					"linear-gradient(89.55deg, #FFF9EE 0%, rgba(255, 240, 215, 0) 100%);",
 			},
 		},
 	},

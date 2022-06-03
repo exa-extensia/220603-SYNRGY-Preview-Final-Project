@@ -7,5 +7,6 @@
 @import "./pages/Home/home.css";
 /* Components  */
 @import "./components/sections/_navbar/navbar.css";
+@import "./components/sections/home-header/header.css";
 
 @import "tailwindcss/utilities";
