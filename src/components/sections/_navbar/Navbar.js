@@ -23,7 +23,7 @@ export default function Navbar() {
 			<div className="nav__wrapper">
 				<div className="nav__wrapper_top">
 					<div className="nav__brand">
-						<img className="logo" src={LOTUS} />
+						<img className="logo" src={LOTUS} alt="lotus" />
 						<h1 className="logo__title">Glowing</h1>
 					</div>
 					<div className="nav__cart-profile">
@@ -54,7 +54,7 @@ export default function Navbar() {
 
 			<div className="nav__mobile">
 				<div className="nav__brand sm:hidden">
-					<img className="logo" src={LOTUS} />
+					<img className="logo" src={LOTUS} alt="lotus" />
 					<h1 className="logo__title">Glowing</h1>
 				</div>
 				<div className="nav__mobile__right">
