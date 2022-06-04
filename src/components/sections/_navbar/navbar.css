@@ -40,7 +40,7 @@ nav {
 }
 
 .nav__linkitems .item {
-	@apply hover:cursor-pointer hover:border-b-2 hover:border-brown;
+	@apply hover:cursor-pointer hover:border-b-2 hover:border-brown  active:font-bold active:text-brown;
 }
 
 .nav__searchbar__wrapper {
@@ -74,5 +74,5 @@ nav .dropdown__icon {
 }
 
 .nav__mobile__dropdown {
-	@apply absolute right-4 top-full z-10 flex w-2/5 list-none flex-col gap-4 rounded-b-xl rounded-tl-xl  bg-cream p-4 text-right shadow-md;
+	@apply absolute right-4 top-full z-50 flex w-2/5 list-none flex-col gap-4 rounded-b-xl rounded-tl-xl  bg-cream p-4 text-right shadow-md;
 }
