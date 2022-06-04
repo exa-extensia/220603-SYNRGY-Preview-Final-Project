@@ -3,5 +3,5 @@
 }
 
 .header__carousel img {
-	@apply absolute  bg-cover bg-center bg-no-repeat;
+	@apply absolute  bg-cover bg-center bg-no-repeat object-cover;
 }

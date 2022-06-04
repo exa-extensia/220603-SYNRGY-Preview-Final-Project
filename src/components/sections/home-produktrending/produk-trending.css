@@ -1,0 +1,60 @@
+#produktrending {
+	@apply flex w-full items-center justify-center;
+}
+
+.pt__wrapper {
+	@apply container mx-4 overflow-hidden  pt-12 sm:mx-10 lg:mx-20 xl:mx-40;
+}
+
+.pt__top {
+	@apply flex justify-between;
+}
+
+.pt__top h3 {
+	@apply sm:text-lg lg:text-2xl;
+}
+
+.pt__top button {
+	@apply rounded-2xl border px-2 text-xs sm:text-sm lg:text-base;
+}
+
+.pt__bttm {
+	@apply pt-6;
+}
+
+.pt__carousel {
+	@apply cursor-grab overflow-hidden;
+}
+
+.pt__innercarousel {
+	@apply flex gap-6;
+}
+
+.pt__card {
+	@apply flex h-[300px] min-w-[200px] flex-col overflow-hidden rounded-lg border border-med-gray hover:cursor-pointer hover:border-2 hover:border-[#a67a4a] hover:bg-[#fcf5ea];
+}
+
+.pt__card__img {
+	@apply mx-auto mt-3 h-36 w-36 overflow-hidden rounded-md;
+}
+
+.pt__card__img img {
+	@apply pointer-events-none  h-full w-full bg-cover bg-center bg-no-repeat object-cover;
+}
+
+.pt__card__text {
+	@apply mx-auto mt-5 mb-3 flex flex-col gap-1 text-center;
+}
+
+.pt__card__text .brand {
+	@apply text-[12px] font-light uppercase text-brown;
+}
+.pt__card__text .desc {
+	@apply px-2  text-[14px] text-black;
+}
+.pt__card__text .price {
+	@apply text-[16px] font-semibold text-black;
+}
+.pt__card__text .rating {
+	@apply mx-auto;
+}

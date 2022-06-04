@@ -8,6 +8,7 @@
 /* Components Sections  */
 @import "./components/sections/_navbar/navbar.css";
 @import "./components/sections/home-header/header.css";
+@import "./components/sections/home-produktrending/produk-trending.css";
 /* Components Blocks  */
 @import "./components/blocks/header-carousel/headercarousel.css";
 @import "./components/blocks/header-article/headerarticle.css";
