@@ -1,0 +1,7 @@
+.header__carousel {
+	@apply relative w-11/12 overflow-hidden sm:w-7/12;
+}
+
+.header__carousel img {
+	@apply absolute  bg-cover bg-center bg-no-repeat;
+}
