@@ -1,31 +1,3 @@
-#produktrending {
-	@apply flex items-center justify-center;
-}
-
-.pt__wrapper {
-	@apply container mx-4 pt-12 sm:container sm:mx-10 lg:mx-20 xl:mx-40;
-}
-
-.pt__top {
-	@apply flex justify-between;
-}
-
-.pt__top h3 {
-	@apply sm:text-lg lg:text-2xl;
-}
-
-.pt__top button {
-	@apply rounded-2xl border px-2 text-xs sm:text-sm lg:text-base;
-}
-
-.pt__bttm {
-	@apply mb-64 hidden gap-4 pt-6 sm:static sm:mb-0 sm:flex sm:flex-wrap sm:items-center sm:justify-center;
-}
-
-.product__item {
-	@apply h-[300px] w-[200px] rounded-lg border-2 border-[#a67a4a] bg-[#fcf5ea];
-}
-
 #kategoriproduk {
 	@apply flex items-center justify-center;
 }
