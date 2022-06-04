@@ -36,7 +36,11 @@ nav {
 }
 
 .nav__linkitems {
-	@apply hidden list-none text-center sm:flex sm:items-center sm:gap-2 sm:text-sm;
+	@apply hidden list-none text-center sm:flex sm:items-center sm:gap-2 sm:text-xs lg:text-base xl:gap-4 2xl:gap-6;
+}
+
+.nav__linkitems .item {
+	@apply hover:cursor-pointer hover:border-b-2 hover:border-brown;
 }
 
 .nav__searchbar__wrapper {
@@ -57,10 +61,18 @@ nav .input__icon {
 	@apply relative mx-4 flex h-[75px] w-full items-center justify-between sm:hidden;
 }
 
+.nav__mobile__right {
+	@apply flex items-center gap-2;
+}
+
+.nav__cart--mobile {
+	@apply sm:hidden;
+}
+
 nav .dropdown__icon {
 	@apply sm:hidden;
 }
 
-.nav__right--mobile {
+.nav__mobile__dropdown {
 	@apply absolute right-4 top-full z-10 flex w-2/5 list-none flex-col gap-4 rounded-b-xl rounded-tl-xl  bg-cream p-4 text-right shadow-md;
 }

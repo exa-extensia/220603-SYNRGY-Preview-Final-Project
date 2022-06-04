@@ -58,10 +58,13 @@ export default function Navbar() {
 					<h1 className="logo__title">Glowing</h1>
 				</div>
 				<div className="nav__mobile__right">
+					<div className="nav__cart--mobile">
+						<BsHandbag size={20} />
+					</div>
 					<div className="dropdown__icon" onClick={handleClick}>
 						{!nav ? <AiOutlineMenu /> : <AiOutlineClose />}
 					</div>
-					<div className={!nav ? "hidden" : "nav__right--mobile"}>
+					<div className={!nav ? "hidden" : "nav__mobile__dropdown"}>
 						{nav__links.map((link__item) => (
 							<li className="list__items" onClick={handleClose}>
 								{link__item.name}
