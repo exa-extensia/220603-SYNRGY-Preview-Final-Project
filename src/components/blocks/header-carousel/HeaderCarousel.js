@@ -1,5 +1,4 @@
 import { Carousel } from "flowbite-react";
-import WARDAH from "../../../assets/images/header-carousel/wardah.png";
 
 export default function HeaderCarousel() {
 	return (
