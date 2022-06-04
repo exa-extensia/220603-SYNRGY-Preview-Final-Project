@@ -1,5 +1,6 @@
 import Navbar from "../../components/sections/_navbar/Navbar";
 import Header from "../../components/sections/home-header/Header";
+import HomeSection3 from "../../components/sections/home-section3/Home-section3";
 
 export default function Jumbotron() {
 	let product = [
@@ -49,6 +50,7 @@ export default function Jumbotron() {
 			</section>
 			{/* Ribuan Brand */}
 			<section id="ribuanbrand"></section>
+			<HomeSection3 />
 			{/* Kenapa Flambo */}
 			<section id="kenapaflambo"></section>
 			{/* Footer */}
