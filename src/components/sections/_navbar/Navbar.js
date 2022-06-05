@@ -1,17 +1,18 @@
 import LOTUS from "../../../assets/images/logos/mainlogo-lotus.png";
 import { BsHandbag, BsSearch, BsPerson, BsCaretDownFill } from "react-icons/bs";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 import { useState } from "react";
 
 export default function Navbar() {
 	let nav__links = [
-		{ name: "Home", url: "/#" },
-		{ name: "Kategori", url: "/#" },
-		{ name: "Produk Trending", url: "/#" },
-		{ name: "Brands", url: "/#" },
-		{ name: "Beauty Feed", url: "/#" },
-		{ name: "Produk Organik", url: "/#" },
+		{ name: "Home", url: "/" },
+		{ name: "Kategori", url: "/kategori" },
+		{ name: "Produk Trending", url: "/trending" },
+		{ name: "Brands", url: "/brands" },
+		{ name: "Beauty Feed", url: "/feed" },
+		{ name: "Produk Organik", url: "/organik" },
 	];
 
 	const [nav, setNav] = useState(false);
@@ -41,7 +42,9 @@ export default function Navbar() {
 				<div className="nav__wrapper_bttm">
 					<div className="nav__linkitems">
 						{nav__links.map((item) => (
-							<li className="item">{item.name}</li>
+							<Link to={item.url}>
+								<li className="item">{item.name}</li>
+							</Link>
 						))}
 					</div>
 					<div className="nav__searchbar__wrapper">
@@ -65,10 +68,12 @@ export default function Navbar() {
 						{!nav ? <AiOutlineMenu /> : <AiOutlineClose />}
 					</div>
 					<div className={!nav ? "hidden" : "nav__mobile__dropdown"}>
-						{nav__links.map((link__item) => (
-							<li className="list__items" onClick={handleClose}>
-								{link__item.name}
-							</li>
+						{nav__links.map((item) => (
+							<Link to={item.url}>
+								<li className="mobile__items" onClick={handleClose}>
+									{item.name}
+								</li>
+							</Link>
 						))}
 					</div>
 				</div>
