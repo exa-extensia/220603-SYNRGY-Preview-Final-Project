@@ -57,7 +57,7 @@ export default function ProductDetail() {
 									<Rating.Star filled={false} />
 								</Rating>
 							</div>
-							<div className="pd__brand mb-10 mt-10 flex w-2/4 items-center gap-4 rounded-lg bg-cream py-4 px-4 pt-3">
+							<div className="pd__brand mb-10 mt-10 flex w-full items-center gap-4 rounded-lg bg-cream py-4 px-4 pt-3 lg:w-3/4 xl:w-2/4">
 								<div className="aspect-square h-12 overflow-hidden rounded-md">
 									<img
 										src="https://source.unsplash.com/random/?brand"
@@ -147,11 +147,11 @@ export default function ProductDetail() {
 								<p className="mb-3 text-[16px] font-semibold">Subtotal</p>
 								<p className="text-[20px] font-bold text-brown">Rp 75.000</p>
 							</div>
-							<div className="flex gap-4">
-								<button className="w-full rounded-full bg-cream py-2 px-5">
+							<div className="flex gap-4 lg:flex-col 2xl:flex-row">
+								<button className="w-full rounded-full bg-cream py-2 px-5 text-xs">
 									Add to Cart
 								</button>
-								<button className="w-full rounded-full border py-2 px-5">
+								<button className="w-full rounded-full border py-2 px-5 text-xs">
 									Buy Now
 								</button>
 							</div>
