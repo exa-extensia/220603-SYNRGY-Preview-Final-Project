@@ -14,7 +14,7 @@ import img12 from '../../../assets/images/logos/homepage-section3/hp-s3-12.png'
 export default function HomeSection3() {
     return (
         <section>
-            <div className="max-w-7xl my-10 container bg-cream max-w-screen-2lg lg:container" id="ribuan-brand">
+            <div className="mt-10 container bg-cream max-w-lg sm:max-w-xl md:max-w-3xl lg:max-w-4xl xl:max-w-7xl 2xl:max-w-[1300px]" id="ribuan-brand">
                 <h1 className="text-center pt-10 text-sm sm:text-xl md:text-2xl">Ribuan <span className="text-brown">BRAND</span> produk untuk
                     menjadikanmu cantik
                 </h1>
