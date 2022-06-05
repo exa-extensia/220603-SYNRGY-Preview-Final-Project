@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import { Rating } from "flowbite-react";
+import { Link } from "react-router-dom";
 
 let product = [
 	"https://source.unsplash.com/random/?cosmetic?sig=1",
@@ -43,25 +44,27 @@ export default function ProdukTrending() {
 							className="pt__innercarousel"
 						>
 							{product.map((item) => (
-								<motion.div className="pt__card" key={item}>
-									<div className="pt__card__img">
-										<img src={item} alt="pt" />
-									</div>
-									<div className="pt__card__text">
-										<p className="brand">Whitelab</p>
-										<p className="desc">Brightening Face Serum 20ml</p>
-										<p className="price">Rp. 77.000</p>
-										<div className="rating">
-											<Rating>
-												<Rating.Star />
-												<Rating.Star />
-												<Rating.Star />
-												<Rating.Star />
-												<Rating.Star filled={false} />
-											</Rating>
+								<Link to={`/productdetail`}>
+									<motion.div className="pt__card" key={item}>
+										<div className="pt__card__img">
+											<img src={item} alt="pt" />
 										</div>
-									</div>
-								</motion.div>
+										<div className="pt__card__text">
+											<p className="brand">Whitelab</p>
+											<p className="desc">Brightening Face Serum 20ml</p>
+											<p className="price">Rp. 77.000</p>
+											<div className="rating">
+												<Rating>
+													<Rating.Star />
+													<Rating.Star />
+													<Rating.Star />
+													<Rating.Star />
+													<Rating.Star filled={false} />
+												</Rating>
+											</div>
+										</div>
+									</motion.div>
+								</Link>
 							))}
 						</motion.div>
 					</motion.div>
