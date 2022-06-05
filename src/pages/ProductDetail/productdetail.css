@@ -36,8 +36,13 @@ img {
 
 /* .pd_main {
 	@apply h-3/12 col-span-4 aspect-[4/3] bg-cream sm:col-span-5 lg:col-span-5;
+} */
+
+.pd__input {
+	box-shadow: 0px 4px 20px 5px rgba(181, 181, 181, 0.25);
+	border-radius: 8px;
 }
 
-.pd_input {
-	@apply h-3/12 col-span-4 aspect-[4/3] bg-cream sm:col-span-5 sm:col-start-4 lg:col-span-3 lg:col-start-10;
-} */
+.pd_input2 {
+	/* @apply h-3/12 col-span-4 aspect-[4/3] bg-cream sm:col-span-5 sm:col-start-4 lg:col-span-3 lg:col-start-10; */
+}
