@@ -1,7 +1,8 @@
-import Breadcrumb from "../../components/atoms/breadcrumb/Breadcrumb";
+import Breadcrumb from "../../components/atoms/breadcrumb/BC-ProductDetail";
 import Navbar from "../../components/sections/_navbar/Navbar";
 import { Rating, Tabs } from "flowbite-react";
 import { HiMinusSm, HiPlusSm } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 export default function ProductDetail() {
 	return (
@@ -73,7 +74,7 @@ export default function ProductDetail() {
 									</a>
 								</div>
 							</div>
-							<Tabs.Group aria-label="Tabs with icons" style="underline">
+							<Tabs.Group aria-label="Default tabs" style="default">
 								<Tabs.Item active={true} title="Deskripsi">
 									<ol>
 										<li>
@@ -128,7 +129,7 @@ export default function ProductDetail() {
 						<div className="pd__input col-span-4 flex h-fit w-full flex-col bg-white p-5 sm:col-span-5 sm:col-start-4 lg:col-span-3 lg:col-start-10">
 							<div className="mb-7">
 								<p className="mb-3 text-lg font-bold">Ringkasan Belanja</p>
-								<div className="w-20 border border-brown"></div>
+								<div className="w-20 border-b-2 border-brown" />
 							</div>
 
 							<div className="mb-7">
@@ -151,8 +152,9 @@ export default function ProductDetail() {
 								<button className="w-full rounded-full bg-cream py-2 px-5 text-xs">
 									Add to Cart
 								</button>
+
 								<button className="w-full rounded-full border py-2 px-5 text-xs">
-									Buy Now
+									<Link to={`/cart`}>Buy Now</Link>
 								</button>
 							</div>
 						</div>

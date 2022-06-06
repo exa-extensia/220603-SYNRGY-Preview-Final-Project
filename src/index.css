@@ -6,6 +6,7 @@
 /* Pages  */
 @import "./pages/Home/home.css";
 @import "./pages/ProductDetail/productdetail.css";
+@import "./pages/Cart/cartpage.css";
 /* Components Sections  */
 @import "./components/sections/_navbar/navbar.css";
 @import "./components/sections/home-header/header.css";

@@ -23,13 +23,17 @@ export default function Navbar() {
 		<nav>
 			<div className="nav__wrapper">
 				<div className="nav__wrapper_top">
-					<div className="nav__brand">
-						<img className="logo" src={LOTUS} alt="lotus" />
-						<h1 className="logo__title">Glowing</h1>
-					</div>
+					<Link to={`/`}>
+						<div className="nav__brand">
+							<img className="logo" src={LOTUS} alt="lotus" />
+							<h1 className="logo__title">Flambo</h1>
+						</div>
+					</Link>
 					<div className="nav__cart-profile">
 						<div className="nav__cart">
-							<BsHandbag size={20} />
+							<Link to={`/cart`}>
+								<BsHandbag size={20} />
+							</Link>
 						</div>
 						<div className="nav__profile">
 							<BsPerson size={20} />
@@ -56,13 +60,17 @@ export default function Navbar() {
 			{/* Nav Mobile */}
 
 			<div className="nav__mobile">
-				<div className="nav__brand sm:hidden">
-					<img className="logo" src={LOTUS} alt="lotus" />
-					<h1 className="logo__title">Glowing</h1>
-				</div>
+				<Link to={`/`}>
+					<div className="nav__brand">
+						<img className="logo" src={LOTUS} alt="lotus" />
+						<h1 className="logo__title">Flambo</h1>
+					</div>
+				</Link>
 				<div className="nav__mobile__right">
 					<div className="nav__cart--mobile">
-						<BsHandbag size={20} />
+						<Link to={`/cart`}>
+							<BsHandbag size={20} />
+						</Link>
 					</div>
 					<div className="dropdown__icon" onClick={handleClick}>
 						{!nav ? <AiOutlineMenu /> : <AiOutlineClose />}
