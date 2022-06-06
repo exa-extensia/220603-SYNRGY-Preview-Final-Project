@@ -1,6 +1,6 @@
 import Breadcrumb from "../../components/atoms/breadcrumb/BC-ProductDetail";
 import Navbar from "../../components/sections/_navbar/Navbar";
-import { Rating, Tabs } from "flowbite-react";
+import Rating from "@mui/material/Rating";
 import { HiMinusSm, HiPlusSm } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import PD_Tab from "../../components/blocks/pd-tabs/Tabs";
@@ -51,13 +51,12 @@ export default function ProductDetail() {
 								Rp75.000
 							</p>
 							<div className="pd__rating">
-								<Rating>
-									<Rating.Star />
-									<Rating.Star />
-									<Rating.Star />
-									<Rating.Star />
-									<Rating.Star filled={false} />
-								</Rating>
+								<Rating
+									defaultValue={2.5}
+									precision={0.5}
+									readOnly
+									size="small"
+								/>
 							</div>
 							<div className="pd__brand mb-10 mt-10 flex w-full items-center gap-4 rounded-lg bg-cream py-4 px-4 pt-3 lg:w-3/4 xl:w-2/4">
 								<div className="aspect-square h-12 overflow-hidden rounded-md">

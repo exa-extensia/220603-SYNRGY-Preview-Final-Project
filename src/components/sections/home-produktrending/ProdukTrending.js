@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-import { Rating } from "flowbite-react";
+import Rating from "@mui/material/Rating";
 import { Link } from "react-router-dom";
 
 let product = [
@@ -54,13 +54,12 @@ export default function ProdukTrending() {
 											<p className="desc">Brightening Face Serum 20ml</p>
 											<p className="price">Rp. 77.000</p>
 											<div className="rating">
-												<Rating>
-													<Rating.Star />
-													<Rating.Star />
-													<Rating.Star />
-													<Rating.Star />
-													<Rating.Star filled={false} />
-												</Rating>
+												<Rating
+													defaultValue={2.5}
+													precision={0.5}
+													readOnly
+													size="small"
+												/>
 											</div>
 										</div>
 									</motion.div>
