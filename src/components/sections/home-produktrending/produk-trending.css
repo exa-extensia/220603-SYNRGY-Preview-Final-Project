@@ -3,7 +3,7 @@
 }
 
 .pt__wrapper {
-	@apply container mx-4 overflow-hidden  pt-12 sm:mx-10 lg:mx-20 xl:mx-40;
+	@apply container mx-4 overflow-hidden pt-12 sm:max-w-[688px] lg:max-w-[864px] xl:max-w-[1200px];
 }
 
 .pt__top {

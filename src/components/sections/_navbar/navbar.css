@@ -4,7 +4,7 @@ nav {
 }
 
 .nav__wrapper {
-	@apply hidden sm:container sm:mx-10 sm:block lg:mx-20 xl:mx-40;
+	@apply hidden   sm:container  sm:block sm:max-w-[688px] lg:max-w-[864px] xl:max-w-[1200px];
 }
 
 .nav__wrapper_top {
