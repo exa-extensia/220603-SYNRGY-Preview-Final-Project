@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Layout from "./common/Layout";
+import CartPage from "./pages/Cart/CartPage";
 import Error404 from "./pages/Error404/Error404";
 
 import Home from "./pages/Home/Home";
@@ -12,6 +13,7 @@ function App() {
 				<Route path="/" element={<Layout />}>
 					<Route index element={<Home />} />
 					<Route path="/productdetail" element={<ProductDetail />} />
+					<Route path="/cart" element={<CartPage />} />
 					{/* <Route path="/login" element={} /> */}
 					{/* <Route path="/register" element={} /> */}
 					<Route path="*" element={<Error404 />} />

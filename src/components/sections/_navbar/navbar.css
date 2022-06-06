@@ -20,7 +20,7 @@ nav {
 }
 
 .nav__brand .logo__title {
-	@apply text-2xl tracking-wider text-brown;
+	@apply text-2xl tracking-wider text-brown hover:cursor-pointer;
 }
 
 .nav__cart-profile {
