@@ -1,7 +1,74 @@
-export default function Tabs() {
+import * as React from "react";
+import PropTypes from "prop-types";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import { styled } from "@mui/material/styles";
+
+function TabPanel(props) {
+	const { children, value, index, ...other } = props;
+
 	return (
-		<Tabs.Group aria-label="Tabs with underline" style="underline">
-			<Tabs.Item active={true} title="Deskripsi">
+		<div
+			role="tabpanel"
+			hidden={value !== index}
+			id={`simple-tabpanel-${index}`}
+			aria-labelledby={`simple-tab-${index}`}
+			{...other}
+		>
+			{value === index && (
+				<Box sx={{ p: 3 }}>
+					<Typography>{children}</Typography>
+				</Box>
+			)}
+		</div>
+	);
+}
+
+TabPanel.propTypes = {
+	children: PropTypes.node,
+	index: PropTypes.number.isRequired,
+	value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+	return {
+		id: `simple-tab-${index}`,
+		"aria-controls": `simple-tabpanel-${index}`,
+	};
+}
+
+export default function BasicTabs() {
+	const [value, setValue] = React.useState(0);
+
+	const handleChange = (event, newValue) => {
+		setValue(newValue);
+	};
+
+	const StyledTab = styled(Tab)({
+		"&.Mui-selected": {
+			color: "#A67A4A",
+		},
+	});
+
+	return (
+		<Box sx={{ width: "100%" }}>
+			<Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+				<Tabs
+					value={value}
+					onChange={handleChange}
+					variant="scrollable"
+					scrollButtons="auto"
+					aria-label="scrollable auto tabs example"
+					TabIndicatorProps={{ style: { background: "#A67A4A" } }}
+				>
+					<StyledTab label="Deskripsi" />
+					<StyledTab label="Cara Pakai" />
+					<StyledTab label="Komposisi" />
+				</Tabs>
+			</Box>
+			<TabPanel value={value} index={0}>
 				<ol>
 					<li>
 						Di dalam Scarlett Whitening Facial Wash terdapat kandungan
@@ -14,8 +81,8 @@ export default function Tabs() {
 					<li>4. Membantu menghilangkan beruntus/jerawat di wajah.</li>
 					<li>5. Membantu meregenerasi kulit wajah agar tampak lebih fresh.</li>
 				</ol>
-			</Tabs.Item>
-			<Tabs.Item title="Cara Penggunaan">
+			</TabPanel>
+			<TabPanel value={value} index={1}>
 				<ol>
 					<li>1. Basuh wajah dengan air</li>
 					<li>
@@ -28,8 +95,8 @@ export default function Tabs() {
 						Moisturizer Scarlett.
 					</li>
 				</ol>
-			</Tabs.Item>
-			<Tabs.Item title="Komposisi">
+			</TabPanel>
+			<TabPanel value={value} index={2}>
 				<ol>
 					<li>1. Glutathione</li>
 					<li>2. TOCOPHEROL</li>
@@ -38,7 +105,7 @@ export default function Tabs() {
 					<li>5. Tetrahydroxypropyl Ethylenediamine</li>
 					<li>6. Dmdm hydantoin</li>
 				</ol>
-			</Tabs.Item>
-		</Tabs.Group>
+			</TabPanel>
+		</Box>
 	);
 }

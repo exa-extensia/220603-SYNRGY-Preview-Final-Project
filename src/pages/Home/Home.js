@@ -3,7 +3,6 @@ import Header from "../../components/sections/home-header/Header";
 import HomeSection3 from "../../components/sections/home-section3/Home-section3";
 import ProdukTrending from "../../components/sections/home-produktrending/ProdukTrending";
 import KenapaFlambo from "../../components/sections/home-knapaFlembo/Home-kenapaFlembo";
-import { Button } from "@mui/material";
 
 export default function Jumbotron() {
 	return (
@@ -33,9 +32,6 @@ export default function Jumbotron() {
 			<KenapaFlambo />
 			{/* Footer */}
 			<footer></footer>
-			<Button variant="contained" className="bg-black">
-				Contained
-			</Button>
 		</>
 	);
 }
