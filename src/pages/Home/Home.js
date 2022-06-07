@@ -3,6 +3,7 @@ import Header from "../../components/sections/home-header/Header";
 import HomeSection3 from "../../components/sections/home-section3/Home-section3";
 import ProdukTrending from "../../components/sections/home-produktrending/ProdukTrending";
 import KenapaFlambo from "../../components/sections/home-knapaFlembo/Home-kenapaFlembo";
+import Footer from "../../components/sections/footer/Footer";
 
 export default function Jumbotron() {
 	return (
@@ -31,7 +32,8 @@ export default function Jumbotron() {
 			<section id="kenapaflambo"></section>
 			<KenapaFlambo />
 			{/* Footer */}
-			<footer></footer>
+			<Footer />
+			{/* <footer></footer> */}
 		</>
 	);
 }
