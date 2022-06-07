@@ -48,7 +48,7 @@ export default function BasicTabs() {
 
 	const StyledTab = styled(Tab)({
 		"&.Mui-selected": {
-			color: "#A67A4A",
+			color: "#c09863",
 		},
 	});
 
@@ -61,7 +61,7 @@ export default function BasicTabs() {
 					variant="scrollable"
 					scrollButtons="auto"
 					aria-label="scrollable auto tabs example"
-					TabIndicatorProps={{ style: { background: "#A67A4A" } }}
+					TabIndicatorProps={{ style: { background: "#c09863" } }}
 				>
 					<StyledTab label="Deskripsi" />
 					<StyledTab label="Cara Pakai" />

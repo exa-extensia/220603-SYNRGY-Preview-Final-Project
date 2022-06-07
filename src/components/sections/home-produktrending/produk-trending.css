@@ -15,7 +15,7 @@
 }
 
 .pt__top button {
-	@apply rounded-2xl border px-2 text-xs sm:text-sm lg:text-base;
+	@apply rounded-2xl px-2 text-xs sm:text-sm lg:text-base;
 }
 
 .pt__bttm {

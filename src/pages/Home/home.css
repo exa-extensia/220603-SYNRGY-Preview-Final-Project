@@ -25,5 +25,5 @@
 }
 
 #kategoriproduk button {
-	@apply rounded-2xl border px-2 text-xs sm:text-sm lg:text-base;
+	@apply rounded-2xl border px-2 py-1 text-xs sm:text-sm lg:text-base;
 }

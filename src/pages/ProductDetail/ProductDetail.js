@@ -3,7 +3,7 @@ import Navbar from "../../components/sections/_navbar/Navbar";
 import Rating from "@mui/material/Rating";
 import { HiMinusSm, HiPlusSm } from "react-icons/hi";
 import { Link } from "react-router-dom";
-import PD_Tab from "../../components/blocks/pd-tabs/Tabs";
+import PDTab from "../../components/blocks/pd-tabs/Tabs";
 
 export default function ProductDetail() {
 	return (
@@ -74,7 +74,7 @@ export default function ProductDetail() {
 									</a>
 								</div>
 							</div>
-							<PD_Tab />
+							<PDTab />
 						</div>
 						<div className="pd__input col-span-4 flex h-fit w-full flex-col bg-white p-5 sm:col-span-5 sm:col-start-4 lg:col-span-3 lg:col-start-10">
 							<div className="mb-7">
@@ -99,11 +99,11 @@ export default function ProductDetail() {
 								<p className="text-[20px] font-bold text-brown">Rp 75.000</p>
 							</div>
 							<div className="flex gap-4 lg:flex-col 2xl:flex-row">
-								<button className="w-full rounded-full bg-cream py-2 px-5 text-xs">
+								<button className="btn-grad w-full rounded-full py-2 px-5 text-xs text-white">
 									Add to Cart
 								</button>
 
-								<button className="w-full rounded-full border py-2 px-5 text-xs">
+								<button className="btn-sec w-full rounded-full py-2 px-5 text-xs">
 									<Link to={`/cart`}>Buy Now</Link>
 								</button>
 							</div>

@@ -30,7 +30,7 @@ export default function ProdukTrending() {
 			<div className="pt__wrapper">
 				<div className="pt__top">
 					<h3>Produk Trending</h3>
-					<button>Lihat Semua</button>
+					<button className="btn-sec-home">Lihat Semua</button>
 				</div>
 				<div className="pt__bttm">
 					<motion.div

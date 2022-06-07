@@ -50,7 +50,7 @@ nav {
 }
 
 .nav__linkitems .item {
-	@apply hover:cursor-pointer hover:border-b-2 hover:border-brown  active:font-bold active:text-brown;
+	@apply hover:cursor-pointer hover:border-b-2 hover:border-med-brown  active:font-bold active:text-med-brown;
 }
 
 .nav__searchbar__wrapper {

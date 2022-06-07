@@ -21,7 +21,7 @@ export default function Jumbotron() {
 							<div className="product__item">{item.name}</div>
 						))} */}
 					</div>
-					<button>Lihat Semua Kategori</button>
+					<button className="btn-sec-home">Lihat Semua Kategori</button>
 				</div>
 			</section>
 			{/* Ribuan Brand */}
