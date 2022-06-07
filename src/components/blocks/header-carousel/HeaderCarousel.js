@@ -33,6 +33,23 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Pagination, Navigation, Autoplay } from "swiper";
 
+function rand(min, max) {
+	return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function imgUrl() {
+	const id = rand(1, 10);
+	return `https://source.unsplash.com/random/?cosmetic?sig=${id}`;
+}
+
+function createSlide() {
+	return (
+		<SwiperSlide>
+			<img src={imgUrl()} alt="img header carousel" />
+		</SwiperSlide>
+	);
+}
+
 export default function HeaderCarousel() {
 	return (
 		<div className="header__carousel">
@@ -44,7 +61,7 @@ export default function HeaderCarousel() {
 				spaceBetween={30}
 				centeredSlides={true}
 				autoplay={{
-					delay: 1800,
+					delay: 2200,
 					disableOnInteraction: false,
 				}}
 				pagination={{
@@ -54,24 +71,11 @@ export default function HeaderCarousel() {
 				modules={[Autoplay, Pagination, Navigation]}
 				className="h-full w-full"
 			>
-				<SwiperSlide>
-					<img
-						src="https://source.unsplash.com/random/?cosmetic?sig=1"
-						alt="header-carousel"
-					/>
-				</SwiperSlide>
-				<SwiperSlide>
-					<img
-						src="https://source.unsplash.com/random/?cosmetic?sig=2"
-						alt="header-carousel"
-					/>
-				</SwiperSlide>
-				<SwiperSlide>
-					<img
-						src="https://source.unsplash.com/random/?cosmetic?sig=3"
-						alt="header-carousel"
-					/>
-				</SwiperSlide>
+				{createSlide()}
+				{createSlide()}
+				{createSlide()}
+				{createSlide()}
+				{createSlide()}
 			</Swiper>
 		</div>
 	);
