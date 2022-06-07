@@ -20,7 +20,17 @@ nav {
 }
 
 .nav__brand .logo__title {
-	@apply text-2xl tracking-wider text-brown hover:cursor-pointer;
+	@apply text-3xl tracking-wider hover:cursor-pointer sm:text-4xl;
+	background: radial-gradient(
+			54.48% 263.64% at 100% 240.91%,
+			#efcc90 0%,
+			#a67a4a 100%
+		)
+		/* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	text-fill-color: transparent;
 }
 
 .nav__cart-profile {

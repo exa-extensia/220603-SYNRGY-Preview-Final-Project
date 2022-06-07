@@ -26,6 +26,7 @@ module.exports = {
 			},
 			colors: {
 				brown: "#A67A4A",
+				"med-brown": "#c09863",
 				goldie: "#FFEDCD",
 				cream: "#FCF5EA",
 				black: "#515151",
