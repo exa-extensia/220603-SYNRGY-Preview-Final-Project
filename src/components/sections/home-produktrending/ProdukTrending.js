@@ -2,9 +2,9 @@ import Rating from "@mui/material/Rating";
 import { Link } from "react-router-dom";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Autoplay } from "swiper";
+import { Scrollbar, Autoplay, Mousewheel } from "swiper";
 import "swiper/css";
-import "swiper/css/pagination";
+import "swiper/css/scrollbar";
 
 let product = [
 	"https://source.unsplash.com/random/?cosmetic?sig=1",
@@ -30,13 +30,12 @@ export default function ProdukTrending() {
 				</div>
 				<div className="pt__bttm">
 					<Swiper
-						style={{
-							"--swiper-pagination-color": "#c09863",
-						}}
 						slidesPerView={2}
 						spaceBetween={10}
-						pagination={{
-							clickable: true,
+						mousewheel={true}
+						autoplay={{
+							delay: 1500,
+							disableOnInteraction: false,
 						}}
 						breakpoints={{
 							640: {
@@ -56,29 +55,34 @@ export default function ProdukTrending() {
 								spaceBetween: 10,
 							},
 						}}
-						modules={[Pagination]}
-						className=" h-[360px]"
+						modules={[Scrollbar, Mousewheel, Autoplay]}
+						scrollbar={{
+							hide: true,
+						}}
+						className=" h-[340px]"
 					>
 						{product.map((item) => (
 							<SwiperSlide>
-								<div className="pt__card" key={item}>
-									<div className="pt__card__img">
-										<img src={item} alt="pt" />
-									</div>
-									<div className="pt__card__text">
-										<p className="brand">Whitelab</p>
-										<p className="desc">Brightening Face Serum 20ml</p>
-										<p className="price">Rp. 77.000</p>
-										<div className="rating">
-											<Rating
-												defaultValue={2.5}
-												precision={0.5}
-												readOnly
-												size="small"
-											/>
+								<Link to={`/productdetail`}>
+									<div className="pt__card" key={item}>
+										<div className="pt__card__img">
+											<img src={item} alt="pt" />
+										</div>
+										<div className="pt__card__text">
+											<p className="brand">Whitelab</p>
+											<p className="desc">Brightening Face Serum 20ml</p>
+											<p className="price">Rp. 77.000</p>
+											<div className="rating">
+												<Rating
+													defaultValue={2.5}
+													precision={0.5}
+													readOnly
+													size="small"
+												/>
+											</div>
 										</div>
 									</div>
-								</div>
+								</Link>
 							</SwiperSlide>
 						))}
 					</Swiper>
