@@ -2,9 +2,9 @@ import Rating from "@mui/material/Rating";
 import { Link } from "react-router-dom";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Scrollbar, Autoplay } from "swiper";
+import { Pagination, Autoplay } from "swiper";
 import "swiper/css";
-import "swiper/css/scrollbar";
+import "swiper/css/pagination";
 
 let product = [
 	"https://source.unsplash.com/random/?cosmetic?sig=1",
@@ -30,8 +30,14 @@ export default function ProdukTrending() {
 				</div>
 				<div className="pt__bttm">
 					<Swiper
+						style={{
+							"--swiper-pagination-color": "#c09863",
+						}}
 						slidesPerView={2}
 						spaceBetween={10}
+						pagination={{
+							clickable: true,
+						}}
 						breakpoints={{
 							640: {
 								slidesPerView: 3,
@@ -50,11 +56,8 @@ export default function ProdukTrending() {
 								spaceBetween: 10,
 							},
 						}}
-						modules={[Scrollbar]}
-						scrollbar={{
-							hide: true,
-						}}
-						className=" h-[340px]"
+						modules={[Pagination]}
+						className=" h-[360px]"
 					>
 						{product.map((item) => (
 							<SwiperSlide>
