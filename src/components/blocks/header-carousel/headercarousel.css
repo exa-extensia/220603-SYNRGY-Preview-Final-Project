@@ -4,9 +4,5 @@
 }
 
 .header__carousel img {
-	@apply bg-cover bg-center bg-no-repeat object-cover;
-}
-
-.header__carousel .swiper-button-next .swiper-button-prev {
-	@apply bg-white text-white after:hidden;
+	@apply h-full w-full bg-cover bg-center bg-no-repeat object-cover;
 }
