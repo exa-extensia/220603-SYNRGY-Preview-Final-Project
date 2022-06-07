@@ -204,7 +204,7 @@ export default function CartPage() {
 										<p className="font-bold">Rp 445.000</p>
 									</div>
 								</div>
-								<button className="w-full rounded-full bg-brown py-2 font-bold uppercase text-white">
+								<button className="btn-grad w-full rounded-full py-2 font-bold uppercase text-white">
 									Checkout
 								</button>
 							</div>
