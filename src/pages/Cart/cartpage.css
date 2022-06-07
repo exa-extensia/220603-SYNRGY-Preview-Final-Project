@@ -7,7 +7,7 @@
 }
 
 .cp__wrapper {
-	@apply container mx-4 sm:max-w-[688px] lg:max-w-[864px] xl:max-w-[1200px];
+	@apply container mx-4 mb-10 sm:max-w-[688px] lg:max-w-[864px] xl:max-w-[1200px];
 }
 
 .cp__breadcrumbs {

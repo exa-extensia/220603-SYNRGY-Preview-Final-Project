@@ -8,6 +8,7 @@ import {
 	HiOutlineTicket,
 	HiOutlineChevronRight,
 } from "react-icons/hi";
+import Footer from "../../components/sections/footer/Footer";
 
 export default function CartPage() {
 	return (
@@ -212,6 +213,7 @@ export default function CartPage() {
 					</div>
 				</div>
 			</section>
+			<Footer />
 		</>
 	);
 }

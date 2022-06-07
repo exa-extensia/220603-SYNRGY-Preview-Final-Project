@@ -4,6 +4,7 @@ import Rating from "@mui/material/Rating";
 import { HiMinusSm, HiPlusSm } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import PDTab from "../../components/blocks/pd-tabs/Tabs";
+import Footer from "../../components/sections/footer/Footer";
 
 export default function ProductDetail() {
 	return (
@@ -111,6 +112,7 @@ export default function ProductDetail() {
 					</div>
 				</div>
 			</section>
+			<Footer />
 		</>
 	);
 }
