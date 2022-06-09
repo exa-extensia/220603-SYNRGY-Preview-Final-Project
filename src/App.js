@@ -5,6 +5,8 @@ import Error404 from "./pages/Error404/Error404";
 
 import Home from "./pages/Home/Home";
 import ProductDetail from "./pages/ProductDetail/ProductDetail";
+import Register from "./pages/Login-Register/Register";
+import Login from "./pages/Login-Register/Login";
 
 function App() {
 	return (
@@ -14,8 +16,8 @@ function App() {
 					<Route index element={<Home />} />
 					<Route path="/productdetail" element={<ProductDetail />} />
 					<Route path="/cart" element={<CartPage />} />
-					{/* <Route path="/login" element={} /> */}
-					{/* <Route path="/register" element={} /> */}
+					<Route path="/login" element={<Login />} />
+					<Route path="/register" element={<Register />} />
 					<Route path="*" element={<Error404 />} />
 				</Route>
 			</Routes>
