@@ -8,6 +8,7 @@ import {
 	HiOutlineTicket,
 	HiOutlineChevronRight,
 } from "react-icons/hi";
+import Footer from "../../components/sections/footer/Footer";
 
 export default function CartPage() {
 	return (
@@ -204,7 +205,7 @@ export default function CartPage() {
 										<p className="font-bold">Rp 445.000</p>
 									</div>
 								</div>
-								<button className="w-full rounded-full bg-brown py-2 font-bold uppercase text-white">
+								<button className="btn-grad w-full rounded-full py-2 font-bold uppercase text-white">
 									Checkout
 								</button>
 							</div>
@@ -212,6 +213,7 @@ export default function CartPage() {
 					</div>
 				</div>
 			</section>
+			<Footer />
 		</>
 	);
 }

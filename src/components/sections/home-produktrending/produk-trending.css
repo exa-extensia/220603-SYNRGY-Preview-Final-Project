@@ -15,7 +15,7 @@
 }
 
 .pt__top button {
-	@apply rounded-2xl border px-2 text-xs sm:text-sm lg:text-base;
+	@apply rounded-2xl px-2 text-xs sm:text-sm lg:text-base;
 }
 
 .pt__bttm {
@@ -31,7 +31,7 @@
 }
 
 .pt__card {
-	@apply flex h-[300px] min-w-[200px] flex-col overflow-hidden rounded-lg border border-med-gray hover:cursor-pointer hover:border-2 hover:border-[#a67a4a] hover:bg-[#fcf5ea];
+	@apply flex  flex-col overflow-hidden rounded-lg border border-med-gray hover:cursor-pointer hover:border-2 hover:border-[#c09863] hover:bg-[#fcf5ea];
 }
 
 .pt__card__img {

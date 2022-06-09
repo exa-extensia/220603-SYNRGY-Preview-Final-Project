@@ -1,8 +1,8 @@
 .header__carousel {
-	@apply relative w-11/12 overflow-hidden rounded-lg  sm:w-7/12;
+	@apply h-[224px] w-11/12 overflow-hidden rounded-lg  sm:h-[256px] sm:w-6/12 xl:h-[320px] 2xl:h-[384px];
 	box-shadow: 6px 10px 20px rgba(0, 0, 0, 0.3);
 }
 
 .header__carousel img {
-	@apply absolute  bg-cover bg-center bg-no-repeat object-cover;
+	@apply h-full w-full bg-cover bg-center bg-no-repeat object-cover;
 }

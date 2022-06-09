@@ -1,8 +1,10 @@
 import Breadcrumb from "../../components/atoms/breadcrumb/BC-ProductDetail";
 import Navbar from "../../components/sections/_navbar/Navbar";
-import { Rating, Tabs } from "flowbite-react";
+import Rating from "@mui/material/Rating";
 import { HiMinusSm, HiPlusSm } from "react-icons/hi";
 import { Link } from "react-router-dom";
+import PDTab from "../../components/blocks/pd-tabs/Tabs";
+import Footer from "../../components/sections/footer/Footer";
 
 export default function ProductDetail() {
 	return (
@@ -50,13 +52,12 @@ export default function ProductDetail() {
 								Rp75.000
 							</p>
 							<div className="pd__rating">
-								<Rating>
-									<Rating.Star />
-									<Rating.Star />
-									<Rating.Star />
-									<Rating.Star />
-									<Rating.Star filled={false} />
-								</Rating>
+								<Rating
+									defaultValue={2.5}
+									precision={0.5}
+									readOnly
+									size="small"
+								/>
 							</div>
 							<div className="pd__brand mb-10 mt-10 flex w-full items-center gap-4 rounded-lg bg-cream py-4 px-4 pt-3 lg:w-3/4 xl:w-2/4">
 								<div className="aspect-square h-12 overflow-hidden rounded-md">
@@ -74,57 +75,7 @@ export default function ProductDetail() {
 									</a>
 								</div>
 							</div>
-							<Tabs.Group aria-label="Default tabs" style="default">
-								<Tabs.Item active={true} title="Deskripsi">
-									<ol>
-										<li>
-											Di dalam Scarlett Whitening Facial Wash terdapat kandungan
-											Glutathione, Vitamin E, Rose Petals dan Aloe Vera yang
-											sangat bagus untuk :
-										</li>
-										<li>1. Membantu mencerahkan wajah.</li>
-										<li>
-											2. Membantu menutrisi serta mengecilkan pori-pori di
-											wajah.
-										</li>
-										<li>
-											3. Membantu mengontrol kadar minyak berlebih di wajah.
-										</li>
-										<li>
-											4. Membantu menghilangkan beruntus/jerawat di wajah.
-										</li>
-										<li>
-											5. Membantu meregenerasi kulit wajah agar tampak lebih
-											fresh.
-										</li>
-									</ol>
-								</Tabs.Item>
-								<Tabs.Item title="Cara Penggunaan">
-									<ol>
-										<li>1. Basuh wajah dengan air</li>
-										<li>
-											2. Tuang Facial Wash Scarlett pada tangan lalu usapkan
-											pada wajah.
-										</li>
-										<li>3. Bilas dengan air bersih.</li>
-										<li>
-											Gunakan secara rutin sehari dua kali pada pagi dan malam
-											hari. Untuk hasil maksimal gunakan juga rangkaiannya,
-											seperti Brightening Moisturizer Scarlett.
-										</li>
-									</ol>
-								</Tabs.Item>
-								<Tabs.Item title="Komposisi">
-									<ol>
-										<li>1. Glutathione</li>
-										<li>2. TOCOPHEROL</li>
-										<li>3. Lauryl Betaine</li>
-										<li>4. Water</li>
-										<li>5. Tetrahydroxypropyl Ethylenediamine</li>
-										<li>6. Dmdm hydantoin</li>
-									</ol>
-								</Tabs.Item>
-							</Tabs.Group>
+							<PDTab />
 						</div>
 						<div className="pd__input col-span-4 flex h-fit w-full flex-col bg-white p-5 sm:col-span-5 sm:col-start-4 lg:col-span-3 lg:col-start-10">
 							<div className="mb-7">
@@ -149,11 +100,11 @@ export default function ProductDetail() {
 								<p className="text-[20px] font-bold text-brown">Rp 75.000</p>
 							</div>
 							<div className="flex gap-4 lg:flex-col 2xl:flex-row">
-								<button className="w-full rounded-full bg-cream py-2 px-5 text-xs">
+								<button className="btn-grad w-full rounded-full py-2 px-5 text-xs text-white">
 									Add to Cart
 								</button>
 
-								<button className="w-full rounded-full border py-2 px-5 text-xs">
+								<button className="btn-sec w-full rounded-full py-2 px-5 text-xs">
 									<Link to={`/cart`}>Buy Now</Link>
 								</button>
 							</div>
@@ -161,6 +112,7 @@ export default function ProductDetail() {
 					</div>
 				</div>
 			</section>
+			<Footer />
 		</>
 	);
 }

@@ -1,0 +1,31 @@
+#kategoriproduk {
+	@apply flex items-center justify-center pb-16;
+}
+
+#kategoriproduk .pt__wrapper {
+	@apply flex flex-col items-center justify-center gap-2;
+}
+
+#kategoriproduk .pt__top {
+	@apply flex items-center justify-center;
+}
+
+#kategoriproduk .pt__bttm {
+	@apply mb-6 flex h-[1000px] w-full justify-center overflow-hidden sm:h-[1400px];
+}
+
+#kategoriproduk .product__item:nth-child(odd) {
+	@apply aspect-square overflow-hidden rounded-lg sm:aspect-auto md:max-h-[600px] md:min-h-[600px];
+}
+
+#kategoriproduk .product__item:nth-child(even) {
+	@apply aspect-square overflow-hidden rounded-lg sm:aspect-auto md:max-h-[400px] md:min-h-[400px];
+}
+
+#kategoriproduk button {
+	@apply rounded-2xl border px-2 py-1 text-xs sm:text-sm lg:text-base;
+}
+
+#kategoriproduk img {
+	@apply h-full w-full bg-cover bg-center bg-no-repeat object-cover;
+}
