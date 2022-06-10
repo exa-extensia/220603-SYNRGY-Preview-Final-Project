@@ -9,7 +9,7 @@ export default function Navbar() {
 	let nav__links = [
 		{ name: "Home", url: "/" },
 		{ name: "Kategori", url: "/kategori" },
-		{ name: "Produk Trending", url: "/trending" },
+		{ name: "Produk Trending", url: "/trial-productlist" },
 		{ name: "Brands", url: "/brands" },
 		{ name: "Beauty Feed", url: "/feed" },
 		{ name: "Produk Organik", url: "/organik" },
@@ -31,7 +31,7 @@ export default function Navbar() {
 					</Link>
 					<div className="nav__cart-profile">
 						<div className="nav__cart">
-							<Link to={`/cart`}>
+							<Link to={`/trial-cart`}>
 								<BsHandbag size={20} />
 							</Link>
 						</div>
@@ -68,7 +68,7 @@ export default function Navbar() {
 				</Link>
 				<div className="nav__mobile__right">
 					<div className="nav__cart--mobile">
-						<Link to={`/cart`}>
+						<Link to={`/trial-cart`}>
 							<BsHandbag size={20} />
 						</Link>
 					</div>
