@@ -13,11 +13,7 @@ const StyledPagination = styled(Pagination)({
 	},
 });
 
-export default function ProductListPagination({
-	setPage,
-	page,
-	handlePageClick,
-}) {
+export default function ProductListPagination({ page, handlePageClick }) {
 	return (
 		<div className="pagination">
 			<StyledPagination

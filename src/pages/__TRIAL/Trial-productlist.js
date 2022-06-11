@@ -10,50 +10,59 @@ import { Link } from "react-router-dom";
 import Pagination from "./Trial-pagination";
 
 export default function ProductList() {
-	const [cars, setCars] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(false);
-	const [page, setPage] = useState(1);
-	const [perPage] = useState(10);
-	const [offset, setOffset] = useState(0);
+	const [publishdata, setPublishData] = useState([]);
+	const [page, setPage] = useState(0);
+	const [perPage] = useState(8);
+	const [offset, setOffset] = useState(1);
 
-	const fetchCars = () => {
-		axios
-			.get("https://rent-cars-api.herokuapp.com/admin/car")
-			.then((res) => {
-				console.log(res);
-				setCars(res.data);
-				setLoading(false);
-			})
-			.catch((error) => {
-				console.log(error);
-				setLoading(false);
-				setError(true);
-			});
+	const getPostData = (data) => {
+		return data.map((oneCar) => (
+			<Link to={`/detail/${oneCar.id}`}>
+				<div key={oneCar.id} className="card__onecard col-span-1">
+					<img src={oneCar.image} alt={oneCar.name} className="card__img" />
+					<div className="card__title">
+						{oneCar.name} / {oneCar.category}{" "}
+					</div>
+					<div className="card__price">
+						Rp{oneCar.price?.toLocaleString()} / hari{" "}
+					</div>
+					<div className="card__desc">
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit,
+						reprehenderit.
+					</div>
+				</div>
+			</Link>
+		));
 	};
 
-	const slice = cars.slice(offset, offset + perPage);
-	const postData = slice.map((oneCar) => (
-		<Link to={`/detail/${oneCar.id}`}>
-			<div key={oneCar.id} className="card__onecard col-span-1">
-				<img src={oneCar.image} alt={oneCar.name} className="card__img" />
-				<div className="card__title">
-					{oneCar.name} / {oneCar.category}{" "}
-				</div>
-				<div className="card__price">
-					Rp{oneCar.price?.toLocaleString()} / hari{" "}
-				</div>
-				<div className="card__desc">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit,
-					reprehenderit.
-				</div>
-			</div>
-		</Link>
-	));
-	setPage(Math.ceil(postData.length / perPage));
+	const fetchCars = async () => {
+		try {
+			const res = await axios.get(
+				"https://rent-cars-api.herokuapp.com/admin/car"
+			);
+			console.log(res.data);
+			setLoading(false);
+			const data = res.data;
+			const slice = data.slice(offset - 1, offset - 1 + perPage);
+			// For displaying Data
+			const postData = getPostData(slice);
+			// Using Hooks to set value
+			setPublishData(postData);
+			setPage(Math.ceil(data.length / perPage));
+			console.log("DATA LENGTH >>>", data.length);
+			console.log("PAGE COUNT >>>", page);
+		} catch (error) {
+			console.log(error);
+			setLoading(false);
+			setError(true);
+		}
+	};
 
 	const handlePageClick = (e) => {
 		const selectedPage = e.selected;
+		console.log(selectedPage);
 		setOffset(selectedPage + 1);
 	};
 
@@ -76,15 +85,11 @@ export default function ProductList() {
 							<div className="pl__main--header"></div>
 							<div className="pl__main--list">
 								{loading && <div>loading...</div>}
-								{!loading && !error && { postData }}
+								{!loading && !error && <>{publishdata}</>}
 								{!loading && error && <div>unexpected error</div>}
 							</div>
 							<div className="pl__main--bottom">
-								<Pagination
-									setPage={setPage}
-									page={page}
-									handlePageClick={handlePageClick}
-								/>
+								<Pagination page={page} handlePageClick={handlePageClick} />
 							</div>
 						</div>
 					</div>
