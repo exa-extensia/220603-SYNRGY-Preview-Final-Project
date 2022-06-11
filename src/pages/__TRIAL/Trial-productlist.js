@@ -13,6 +13,9 @@ export default function ProductList() {
 	const [cars, setCars] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(false);
+	const [page, setPage] = useState(1);
+	const [perPage] = useState(10);
+	const [offset, setOffset] = useState(0);
 
 	const fetchCars = () => {
 		axios
@@ -27,6 +30,31 @@ export default function ProductList() {
 				setLoading(false);
 				setError(true);
 			});
+	};
+
+	const slice = cars.slice(offset, offset + perPage);
+	const postData = slice.map((oneCar) => (
+		<Link to={`/detail/${oneCar.id}`}>
+			<div key={oneCar.id} className="card__onecard col-span-1">
+				<img src={oneCar.image} alt={oneCar.name} className="card__img" />
+				<div className="card__title">
+					{oneCar.name} / {oneCar.category}{" "}
+				</div>
+				<div className="card__price">
+					Rp{oneCar.price?.toLocaleString()} / hari{" "}
+				</div>
+				<div className="card__desc">
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit,
+					reprehenderit.
+				</div>
+			</div>
+		</Link>
+	));
+	setPage(Math.ceil(postData.length / perPage));
+
+	const handlePageClick = (e) => {
+		const selectedPage = e.selected;
+		setOffset(selectedPage + 1);
 	};
 
 	useEffect(() => {
@@ -48,33 +76,15 @@ export default function ProductList() {
 							<div className="pl__main--header"></div>
 							<div className="pl__main--list">
 								{loading && <div>loading...</div>}
-								{!loading &&
-									!error &&
-									cars.map((oneCar) => (
-										<Link to={`/detail/${oneCar.id}`}>
-											<div key={oneCar.id} className="card__onecard col-span-1">
-												<img
-													src={oneCar.image}
-													alt={oneCar.name}
-													className="card__img"
-												/>
-												<div className="card__title">
-													{oneCar.name} / {oneCar.category}{" "}
-												</div>
-												<div className="card__price">
-													Rp{oneCar.price?.toLocaleString()} / hari{" "}
-												</div>
-												<div className="card__desc">
-													Lorem ipsum dolor sit amet consectetur adipisicing
-													elit. Impedit, reprehenderit.
-												</div>
-											</div>
-										</Link>
-									))}
+								{!loading && !error && { postData }}
 								{!loading && error && <div>unexpected error</div>}
 							</div>
 							<div className="pl__main--bottom">
-								<Pagination />
+								<Pagination
+									setPage={setPage}
+									page={page}
+									handlePageClick={handlePageClick}
+								/>
 							</div>
 						</div>
 					</div>
