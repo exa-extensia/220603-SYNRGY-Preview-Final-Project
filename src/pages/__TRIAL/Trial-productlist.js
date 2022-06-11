@@ -18,19 +18,16 @@ export default function ProductList() {
 	const [offset, setOffset] = useState(1);
 
 	const getPostData = (data) => {
-		return data.map((oneCar) => (
-			<Link to={`/detail/${oneCar.id}`}>
-				<div key={oneCar.id} className="card__onecard col-span-1">
-					<img src={oneCar.image} alt={oneCar.name} className="card__img" />
-					<div className="card__title">
-						{oneCar.name} / {oneCar.category}{" "}
+		return data.map((oneProduct) => (
+			<Link to={`/detail/${oneProduct.id}`}>
+				<div key={oneProduct.id} className="card__onecard col-span-1">
+					<div className="card__img">
+						<img src={oneProduct.image} alt={oneProduct.title} />
 					</div>
+					<div className="card__category font-bold">{oneProduct.category}</div>
+					<div className="card__title">{oneProduct.title}</div>
 					<div className="card__price">
-						Rp{oneCar.price?.toLocaleString()} / hari{" "}
-					</div>
-					<div className="card__desc">
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit,
-						reprehenderit.
+						Rp{oneProduct.price?.toLocaleString()}{" "}
 					</div>
 				</div>
 			</Link>
@@ -39,9 +36,7 @@ export default function ProductList() {
 
 	const fetchCars = async () => {
 		try {
-			const res = await axios.get(
-				"https://rent-cars-api.herokuapp.com/admin/car"
-			);
+			const res = await axios.get("https://fakestoreapi.com/products");
 			console.log(res.data);
 			setLoading(false);
 			const data = res.data;

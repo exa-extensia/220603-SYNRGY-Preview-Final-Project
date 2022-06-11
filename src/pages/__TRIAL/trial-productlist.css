@@ -27,5 +27,5 @@
 }
 
 .pl__main--list {
-	@apply grid h-[1200px] w-full grid-cols-4 gap-4 overflow-hidden bg-cream p-4;
+	@apply grid h-[1200px] w-full grid-cols-2 gap-4 overflow-hidden bg-cream p-4 sm:grid-cols-4;
 }
