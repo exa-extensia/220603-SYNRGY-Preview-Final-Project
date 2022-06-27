@@ -48,7 +48,7 @@ export default function Login() {
 
 	useEffect(() => {
 		if (isError) {
-			alert.error(message);
+			alert(message);
 		}
 
 		if (isSuccess || user) {
@@ -108,6 +108,22 @@ export default function Login() {
 							>
 								Log in
 							</button>
+
+							{isLoading && (
+								<div className="col-span-4 text-center text-grey">
+									Welcoming you in...
+								</div>
+							)}
+							{isError && (
+								<div className="col-span-4 text-center text-danger">
+									Something went wrong
+								</div>
+							)}
+							{isSuccess && (
+								<div className="col-span-4 text-center text-success">
+									Success! Welcome!
+								</div>
+							)}
 						</div>
 
 						<div className="text-grey-dark mt-6">

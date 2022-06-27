@@ -14,19 +14,20 @@ export default function ProductList() {
 	const [error, setError] = useState(false);
 	const [publishdata, setPublishData] = useState([]);
 	const [page, setPage] = useState(0);
-	const [perPage] = useState(8);
+	const [perPage] = useState(18);
 	const [offset, setOffset] = useState(1);
 
 	const getPostData = (data) => {
 		return data.map((e) => (
-			<Link to={`/detail/${e.id}`}>
-				<div key={e.id} className="card__onecard col-span-1">
+			<Link to={`/detail/${e.variant.id}`}>
+				<div key={e.variant.id} className="card__onecard col-span-1">
 					<div className="card__img">
-						<img src={e.brand.banner} alt={e.name} />
+						<img src={e.brand.banner} alt="err" />
 					</div>
 					<div className="card__category font-bold">{e.brand.name}</div>
+					<div className="card__title">{e.variant[0].id}</div>
 					<div className="card__title">{e.name}</div>
-					<div className="card__price">Rp{e.price?.toLocaleString()} </div>
+					<div className="card__price">Rp{e.quantity} </div>
 				</div>
 			</Link>
 		));
@@ -34,12 +35,12 @@ export default function ProductList() {
 
 	const fetchCars = async () => {
 		try {
-			const res =
-				await axios.get(`https://cosmetic-b.herokuapp.com/api/v1/product
-			`);
-			console.log(res.data);
+			const res = await axios.get(
+				`https://cosmetic-b.herokuapp.com/api/v1/product`
+			);
+			console.log(res.data.data);
 			setLoading(false);
-			const data = res.data;
+			const data = res.data.data;
 			const slice = data.slice(offset - 1, offset - 1 + perPage);
 			// For displaying Data
 			const postData = getPostData(slice);

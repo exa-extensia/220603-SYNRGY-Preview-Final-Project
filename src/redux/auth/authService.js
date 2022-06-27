@@ -7,14 +7,11 @@ const register = async ({ name, email, password }) => {
 	const response = await axios.post(
 		`${API_URL}/register`,
 		{
-			avatar: "",
 			email: email,
 			password: password,
 			role: "ROLE_CUSTOMER",
 			user: {
 				name: name,
-				phone: "",
-				skinType: "",
 			},
 		},
 		{
@@ -25,6 +22,7 @@ const register = async ({ name, email, password }) => {
 	);
 
 	if (response.data) {
+		console.log(response.data);
 		localStorage.setItem("user", JSON.stringify(response.data));
 	}
 
@@ -33,13 +31,14 @@ const register = async ({ name, email, password }) => {
 
 // Login user
 const login = async ({ password, email }) => {
-	const response = await axios.post(`${API_URL}/login`, email, password);
+	const response = await axios.post(`${API_URL}/login`, { email, password });
 
 	if (response.data) {
+		console.log(response.data);
 		localStorage.setItem("user", JSON.stringify(response.data));
-		const token = response.data.token;
-		const storage = window.localStorage;
-		storage.setItem("token", token);
+		// const token = response.data.token;
+		// const storage = window.localStorage;
+		// storage.setItem("token", token);
 	}
 
 	return response.data;
