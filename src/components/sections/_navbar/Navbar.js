@@ -29,6 +29,16 @@ export default function Navbar() {
 							<h1 className="logo__title">Flambo</h1>
 						</div>
 					</Link>
+					{/* NAV KANAN - GA LOGIN */}
+					<div className="nav__login-daftar">
+						<Link to={`/login`}>
+							<button className="nav__btn btn-sec">Login</button>
+						</Link>
+						<Link to={`/register`}>
+							<button className="nav__btn btn-grad text-white">Register</button>
+						</Link>
+					</div>
+					{/* NAV KANAN - UDAH LOGIN */}
 					<div className="nav__cart-profile">
 						<div className="nav__cart">
 							<Link to={`/trial-cart`}>

@@ -18,17 +18,15 @@ export default function ProductList() {
 	const [offset, setOffset] = useState(1);
 
 	const getPostData = (data) => {
-		return data.map((oneProduct) => (
-			<Link to={`/detail/${oneProduct.id}`}>
-				<div key={oneProduct.id} className="card__onecard col-span-1">
+		return data.map((e) => (
+			<Link to={`/detail/${e.id}`}>
+				<div key={e.id} className="card__onecard col-span-1">
 					<div className="card__img">
-						<img src={oneProduct.image} alt={oneProduct.title} />
+						<img src={e.brand.banner} alt={e.name} />
 					</div>
-					<div className="card__category font-bold">{oneProduct.category}</div>
-					<div className="card__title">{oneProduct.title}</div>
-					<div className="card__price">
-						Rp{oneProduct.price?.toLocaleString()}{" "}
-					</div>
+					<div className="card__category font-bold">{e.brand.name}</div>
+					<div className="card__title">{e.name}</div>
+					<div className="card__price">Rp{e.price?.toLocaleString()} </div>
 				</div>
 			</Link>
 		));
@@ -36,7 +34,9 @@ export default function ProductList() {
 
 	const fetchCars = async () => {
 		try {
-			const res = await axios.get("https://fakestoreapi.com/products");
+			const res =
+				await axios.get(`https://cosmetic-b.herokuapp.com/api/v1/product
+			`);
 			console.log(res.data);
 			setLoading(false);
 			const data = res.data;
