@@ -9,6 +9,7 @@ import {
 	HiOutlineChevronRight,
 } from "react-icons/hi";
 import Footer from "../../components/sections/footer/Footer";
+import { Link } from "react-router-dom";
 
 export default function CartPage() {
 	return (
@@ -206,7 +207,7 @@ export default function CartPage() {
 									</div>
 								</div>
 								<button className="btn-grad w-full rounded-full py-2 font-bold uppercase text-white">
-									Checkout
+									<Link to={'/pembayaran'}>Checkout</Link>
 								</button>
 							</div>
 						</div>
