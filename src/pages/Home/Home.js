@@ -5,8 +5,20 @@ import ProdukTrending from "../../components/sections/home-produktrending/Produk
 import KenapaFlambo from "../../components/sections/home-knapaFlembo/Home-kenapaFlembo";
 import Footer from "../../components/sections/_footer/Footer";
 import Kategori from "../../components/sections/home-kategori/Kategori";
+import { useState, useEffect } from "react";
 
 export default function Homepage() {
+	function scrollTop() {
+		window.scrollTo({
+			top: 0,
+			behavior: "smooth",
+		});
+	}
+
+	useEffect(() => {
+		scrollTop();
+	});
+
 	return (
 		<>
 			<Navbar />

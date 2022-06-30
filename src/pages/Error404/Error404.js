@@ -3,19 +3,6 @@ import { useEffect, useState } from "react";
 import Skeleton from "@mui/material/Skeleton";
 
 export default function Error404() {
-	const [loading, setLoading] = useState(false);
-
-	// const onImageLoaded = () => setLoading(true);
-
-	// useEffect(() => {
-	// 	const imgElCurrent = imgEl.current;
-
-	// 	if (imgElCurrent) {
-	// 		imgElCurrent.addEventListener("load", onImageLoaded);
-	// 		return () => imgElCurrent.removeEventListener("load", onImageLoaded);
-	// 	}
-	// }, [imgEl]);
-
 	return (
 		<div class="max-w-screen flex max-h-screen items-center justify-center">
 			<div class="my-20 flex h-full w-full flex-wrap items-center justify-center gap-4 lg:gap-4">
@@ -34,21 +21,17 @@ export default function Error404() {
 						Go home
 					</a>
 				</div>
-				<div className="mt-4 h-80 w-80 overflow-hidden">
-					<div className={!loading ? "block" : "hidden"}>
+				<div className="relative mt-4 h-80 w-80 overflow-hidden">
+					<div className="unsplash absolute z-10">
+						<img
+							src="https://source.unsplash.com/random/600x600/?cosmetic"
+							alt="error-img"
+							class="bg-cover bg-center bg-no-repeat object-cover"
+						/>
+					</div>
+					<div className="">
 						<Skeleton variant="rectangular" height={320} animation="wave" />
 					</div>
-					<img
-						src="https://source.unsplash.com/random/600x600/?cosmetic"
-						alt="error-img"
-						class={
-							loading
-								? "bg-cover bg-center bg-no-repeat object-cover"
-								: "hidden"
-						}
-						// onLoad={() => setLoading(true)}
-						// ref={imgEl}
-					/>
 				</div>
 			</div>
 		</div>

@@ -7,6 +7,7 @@ import {
 	HiOutlineScissors,
 	HiOutlineTicket,
 	HiOutlineChevronRight,
+	HiCheck,
 } from "react-icons/hi";
 import Footer from "../../components/sections/_footer/Footer";
 
@@ -19,7 +20,10 @@ export default function CartPage() {
 					<div className="cp__breadcrumbs">
 						<Breadcrumb />
 					</div>
-					<div className="cp__totalqty mt-10 mb-6 w-full bg-cream p-4 font-bold text-brown xl:px-8">
+					<div className="cp__totalqty mt-10 mb-6 flex w-full items-center gap-2 bg-cream p-4 font-bold text-brown xl:px-8">
+						<div className="text-brown">
+							<HiCheck />
+						</div>
 						<p>3 Produk Terpilih</p>
 					</div>
 					<div className="cp__2cols">

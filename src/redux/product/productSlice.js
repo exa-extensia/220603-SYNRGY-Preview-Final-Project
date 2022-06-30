@@ -26,6 +26,23 @@ export const getAllProducts = createAsyncThunk(
 	}
 );
 
+export const getOneProduct = createAsyncThunk(
+	"product/getOneProduct",
+	async (params, thunkAPI) => {
+		try {
+			return await productService.getOneProduct(params);
+		} catch (error) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString();
+			return thunkAPI.rejectWithValue(message);
+		}
+	}
+);
+
 //////////// REDUX SLICE
 
 export const productSlice = createSlice({
@@ -43,6 +60,20 @@ export const productSlice = createSlice({
 				state.products = action.payload;
 			})
 			.addCase(getAllProducts.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
+				state.products = null;
+			})
+			.addCase(getOneProduct.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(getOneProduct.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isSuccess = true;
+				state.products = action.payload;
+			})
+			.addCase(getOneProduct.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
 				state.message = action.payload;

@@ -11,20 +11,6 @@ import "swiper/css";
 import "swiper/css/scrollbar";
 import { FaLeaf } from "react-icons/fa";
 
-// let product = [
-// 	"https://source.unsplash.com/random/?cosmetic?sig=1",
-// 	"https://source.unsplash.com/random/?cosmetic?sig=2",
-// 	"https://source.unsplash.com/random/?cosmetic?sig=3",
-// 	"https://source.unsplash.com/random/?cosmetic?sig=4",
-// 	"https://source.unsplash.com/random/?cosmetic?sig=5",
-// 	"https://source.unsplash.com/random/?cosmetic?sig=6",
-// 	"https://source.unsplash.com/random/?cosmetic?sig=7",
-// 	"https://source.unsplash.com/random/?cosmetic?sig=8",
-// 	"https://source.unsplash.com/random/?cosmetic?sig=9",
-// 	"https://source.unsplash.com/random/?cosmetic?sig=10",
-// 	"https://source.unsplash.com/random/?cosmetic?sig=11",
-// ];
-
 export default function ProdukTrending() {
 	const { products, isLoading, isError, isSuccess, message } = useSelector(
 		(state) => state.products
@@ -80,7 +66,7 @@ export default function ProdukTrending() {
 					>
 						{products.map((item) => (
 							<SwiperSlide>
-								<Link to={`/productdetail`}>
+								<Link to={`/productdetail/${item.id}`}>
 									<div
 										className="pt__card relative flex flex-col items-center"
 										key={item.id}
@@ -91,7 +77,9 @@ export default function ProdukTrending() {
 										<div className="pt__card__text">
 											<p className="brand">{item.brand.name}</p>
 											<p className="desc">{item.name}</p>
-											<p className="price">{item.variant.price}</p>
+											<p className="price">
+												Rp{item.variant[0].price.toLocaleString("id-ID")}
+											</p>
 											<div className="rating">
 												<Rating
 													defaultValue={2.5}

@@ -12,8 +12,19 @@ const getAllProducts = async () => {
 	return response.data.data;
 };
 
+const getOneProduct = async (params) => {
+	const response = await axios.get(`${API_URL}/${params.id}`);
+	console.log(response.data.data);
+
+	if (response.data.data) {
+	}
+
+	return response.data.data;
+};
+
 const productService = {
 	getAllProducts,
+	getOneProduct,
 };
 
 export default productService;

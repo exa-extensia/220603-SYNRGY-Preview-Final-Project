@@ -16,6 +16,13 @@ import { FaLeaf } from "react-icons/fa";
 import Rating from "@mui/material/Rating";
 
 export default function ProductList() {
+	function scrollTop() {
+		window.scrollTo({
+			top: 0,
+			behavior: "smooth",
+		});
+	}
+
 	const [publishdata, setPublishData] = useState([]);
 	const [page, setPage] = useState(0);
 	const [perPage] = useState(18);
@@ -28,6 +35,7 @@ export default function ProductList() {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
+		scrollTop();
 		dispatch(getAllProducts());
 		// const slice = products.slice(offset - 1, offset - 1 + perPage);
 		// // For displaying Data
@@ -93,7 +101,7 @@ export default function ProductList() {
 								{!isLoading &&
 									!isError &&
 									products.map((item) => (
-										<Link to={`/productdetail`}>
+										<Link to={`/productdetail/${item.id}`}>
 											<div
 												className="pt__card relative flex flex-col items-center"
 												key={item.id}
@@ -101,10 +109,16 @@ export default function ProductList() {
 												<div className="pt__card__img">
 													<img src={item.images} alt="pt" />
 												</div>
-												<div className="pt__card__text">
-													<p className="brand">{item.brand.name}</p>
-													<p className="desc">{item.name}</p>
-													<p className="price">{item.variant.price}</p>
+												<div className="pt__card__text hover:cursor-pointer">
+													<p className="brand hover:cursor-pointer">
+														{item.brand.name}
+													</p>
+													<p className="desc hover:cursor-pointer">
+														{item.name}
+													</p>
+													<p className="price hover:cursor-pointer">
+														Rp{item.variant[0].price.toLocaleString("id-ID")}
+													</p>
 													<div className="rating">
 														<Rating
 															defaultValue={2.5}

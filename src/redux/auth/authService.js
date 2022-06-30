@@ -26,7 +26,7 @@ const register = async ({ name, email, password }) => {
 	console.log(">>>>>>>>", decoded);
 	localStorage.setItem("user", JSON.stringify(decoded));
 
-	return response.data;
+	return decoded;
 };
 
 // Login user
