@@ -4,22 +4,42 @@ import Breadcrumb from "../../components/atoms/breadcrumb/Trial-breadcrumbs";
 import Navbar from "../../components/sections/_navbar/Navbar";
 import Footer from "../../components/sections/_footer/Footer";
 
-import axios from "axios";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import Pagination from "../../components/atoms/Trial-pagination";
 
-export default function ProductList() {
-	// const [loading, setLoading] = useState(false);
-	// const [error, setError] = useState(false);
-	// const [publishdata, setPublishData] = useState([]);
-	// const [page, setPage] = useState(0);
-	// const [perPage] = useState(18);
-	// const [offset, setOffset] = useState(1);
+import { getAllProducts } from "../../redux/product/productSlice";
 
-	// const getPostData = (data) => {
-	// 	return data.map((e) => (
+import { FaLeaf } from "react-icons/fa";
+import Rating from "@mui/material/Rating";
+
+export default function ProductList() {
+	const [publishdata, setPublishData] = useState([]);
+	const [page, setPage] = useState(0);
+	const [perPage] = useState(18);
+	const [offset, setOffset] = useState(1);
+
+	const { products, isLoading, isError, isSuccess, message } = useSelector(
+		(state) => state.products
+	);
+
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(getAllProducts());
+		// const slice = products.slice(offset - 1, offset - 1 + perPage);
+		// // For displaying Data
+		// const postData = getPostData(slice);
+		// // Using Hooks to set value
+		// setPublishData(postData);
+		// setPage(Math.ceil(products.length / perPage));
+		// console.log("DATA LENGTH >>>", products.length);
+		// console.log("PAGE COUNT >>>", page);
+	}, [dispatch]);
+
+	// const getPostData = () => {
+	// 	return products.map((e) => (
 	// 		<Link to={`/detail/${e.variant.id}`}>
 	// 			<div key={e.variant.id} className="card__onecard col-span-1">
 	// 				<div className="card__img">
@@ -35,43 +55,11 @@ export default function ProductList() {
 	// 	));
 	// };
 
-	// const fetchCars = async () => {
-	// 	try {
-	// 		const res = await axios.get(
-	// 			`https://cosmetic-b.herokuapp.com/api/v1/product`
-	// 		);
-	// 		console.log(res.data.data);
-	// 		setLoading(false);
-	// 		const data = res.data.data;
-	// 		const slice = data.slice(offset - 1, offset - 1 + perPage);
-	// 		// For displaying Data
-	// 		const postData = getPostData(slice);
-	// 		// Using Hooks to set value
-	// 		setPublishData(postData);
-	// 		setPage(Math.ceil(data.length / perPage));
-	// 		console.log("DATA LENGTH >>>", data.length);
-	// 		console.log("PAGE COUNT >>>", page);
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 		setLoading(false);
-	// 		setError(true);
-	// 	}
-	// };
-
-	// const handlePageClick = (e) => {
-	// 	const selectedPage = e.selected;
-	// 	console.log(selectedPage);
-	// 	setOffset(selectedPage + 1);
-	// };
-
-	// useEffect(() => {
-	// 	setLoading(true);
-	// 	fetchCars();
-	// }, []);
-
-	const { products, isLoading, isError, isSuccess, message } = useSelector(
-		(state) => state.products
-	);
+	const handlePageClick = (e) => {
+		const selectedPage = e.selected;
+		console.log(selectedPage);
+		setOffset(selectedPage + 1);
+	};
 
 	return (
 		<>
@@ -82,36 +70,62 @@ export default function ProductList() {
 						<Breadcrumb />
 					</div>
 					<div className="pl__2cols">
-						<div className="pl__filter"></div>
+						<div className="pl__filter">Filter</div>
 						<div className="pl__main">
-							<div className="pl__main--header"></div>
+							<div className="pl__main--header text-med-brown ">
+								<div className="pl__product-count ">
+									Jumlah Produk: {products.length}
+								</div>
+								<div className="pl__product-sort">Sort</div>
+							</div>
 							<div className="pl__main--list">
 								{isLoading && <div>isLoading...</div>}
 								{!isLoading &&
 									!isError &&
-									products.map((e) => (
-										<Link to={`/detail/${e.id}`}>
+									products.map((item) => (
+										<Link to={`/productdetail`}>
 											<div
-												key={e.variant.id}
-												className="card__onecard col-span-1"
+												className="pt__card relative flex flex-col items-center"
+												key={item.id}
 											>
-												<div className="card__img">
-													<img src={e.images} alt="err" />
+												<div className="pt__card__img">
+													<img src={item.images} alt="pt" />
 												</div>
-												<div className="card__category font-bold">
-													{e.brand.name}
+												<div className="pt__card__text">
+													<p className="brand">{item.brand.name}</p>
+													<p className="desc">{item.name}</p>
+													<p className="price">{item.variant.price}</p>
+													<div className="rating">
+														<Rating
+															defaultValue={2.5}
+															precision={0.5}
+															readOnly
+															size="small"
+														/>
+													</div>
 												</div>
-												<div className="card__title">{e.variant[0].id}</div>
-												<div className="card__title">{e.name}</div>
-												<div className="card__price">Rp{e.quantity} </div>
+												<div className="pt__organik absolute bottom-[3%]">
+													<div
+														className={
+															item.isOrganic === true
+																? "flex items-center gap-2 rounded-lg  bg-success py-1 px-2 text-xs text-white"
+																: "flex items-center gap-2 rounded-lg  bg-transparent py-1 px-2 text-xs text-transparent"
+														}
+													>
+														<p>Organic Product</p>
+														<span>
+															<FaLeaf />
+														</span>
+													</div>
+												</div>
 											</div>
 										</Link>
 									))}
 								{!isLoading && isError && <div>unexpected isError</div>}
 							</div>
-							{/* <div className="pl__main--bottom">
+							<div className="pl__main--bottom">
 								<Pagination page={page} handlePageClick={handlePageClick} />
-							</div> */}
+							</div>
 						</div>
 					</div>
 				</div>

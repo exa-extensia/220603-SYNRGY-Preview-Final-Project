@@ -15,7 +15,7 @@
 }
 
 .pl__filter {
-	@apply col-span-3  w-full bg-cream;
+	@apply col-span-3  w-full rounded-lg bg-brown text-white;
 }
 
 .pl__main {
@@ -23,9 +23,38 @@
 }
 
 .pl__main--header {
-	@apply h-[50px] w-full bg-cream;
+	@apply flex h-[50px]  w-full items-center justify-between border-b border-solid border-med-brown;
 }
 
 .pl__main--list {
-	@apply grid h-[1200px] w-full grid-cols-2 gap-4 overflow-hidden bg-cream p-4 sm:grid-cols-4;
+	@apply grid h-[1200px] w-full grid-cols-2 gap-4 overflow-hidden  p-4 sm:grid-cols-4;
+}
+
+#productlist .pt__card {
+	@apply flex  h-[320px] flex-col overflow-hidden rounded-lg border border-med-gray bg-white  hover:cursor-pointer hover:border-2 hover:border-[#c09863] hover:bg-[#fcf5ea];
+}
+
+#productlist .pt__card__img {
+	@apply mx-auto mt-3 h-36 w-36 overflow-hidden rounded-md;
+}
+
+#productlist .pt__card__img img {
+	@apply pointer-events-none  h-full w-full bg-cover bg-center bg-no-repeat object-cover;
+}
+
+#productlist .pt__card__text {
+	@apply mx-auto mt-5 mb-3 flex flex-col gap-1 text-center;
+}
+
+#productlist .pt__card__text .brand {
+	@apply text-[12px] font-light uppercase text-brown;
+}
+#productlist .pt__card__text .desc {
+	@apply px-2  text-[14px] text-black;
+}
+#productlist .pt__card__text .price {
+	@apply text-[16px] font-semibold text-black;
+}
+#productlist .pt__card__text .rating {
+	@apply mx-auto;
 }
