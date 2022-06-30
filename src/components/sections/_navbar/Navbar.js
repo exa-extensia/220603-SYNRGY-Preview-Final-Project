@@ -17,7 +17,7 @@ export default function Navbar() {
 	let nav__links = [
 		{ name: "Home", url: "/" },
 		{ name: "Kategori", url: "/kategori" },
-		{ name: "Produk Trending", url: "/trial-productlist" },
+		{ name: "Produk Trending", url: "/productlist" },
 		{ name: "Brands", url: "/brands" },
 		{ name: "Beauty Feed", url: "/feed" },
 		{ name: "Produk Organik", url: "/organik" },

@@ -1,4 +1,5 @@
 import "./productlist.css";
+import Skeleton from "@mui/material/Skeleton";
 
 import Breadcrumb from "../../components/atoms/breadcrumb/Trial-breadcrumbs";
 import Navbar from "../../components/sections/_navbar/Navbar";
@@ -79,7 +80,16 @@ export default function ProductList() {
 								<div className="pl__product-sort">Sort</div>
 							</div>
 							<div className="pl__main--list">
-								{isLoading && <div>isLoading...</div>}
+								{isLoading &&
+									products.map(() => (
+										<>
+											<Skeleton
+												variant="rectangular"
+												height={300}
+												animation="wave"
+											/>
+										</>
+									))}
 								{!isLoading &&
 									!isError &&
 									products.map((item) => (

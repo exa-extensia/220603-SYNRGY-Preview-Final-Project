@@ -15,11 +15,11 @@
 }
 
 .pl__filter {
-	@apply col-span-3  w-full rounded-lg bg-brown text-white;
+	@apply col-span-4 w-full rounded-lg bg-brown text-white sm:col-span-3;
 }
 
 .pl__main {
-	@apply col-span-9 flex w-full flex-col gap-6;
+	@apply col-span-4 flex w-full flex-col gap-6 sm:col-span-5 lg:col-span-9;
 }
 
 .pl__main--header {
@@ -27,7 +27,7 @@
 }
 
 .pl__main--list {
-	@apply grid h-[1200px] w-full grid-cols-2 gap-4 overflow-hidden  p-4 sm:grid-cols-4;
+	@apply grid h-[1200px] w-full grid-cols-2 gap-4 overflow-hidden  p-4 lg:grid-cols-4;
 }
 
 #productlist .pt__card {

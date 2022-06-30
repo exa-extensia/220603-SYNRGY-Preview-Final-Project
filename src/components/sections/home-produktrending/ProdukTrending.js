@@ -41,7 +41,9 @@ export default function ProdukTrending() {
 			<div className="pt__wrapper">
 				<div className="pt__top">
 					<h3>Produk Trending</h3>
-					<button className="btn-sec-home">Lihat Semua</button>
+					<Link to={`/productlist`}>
+						<button className="btn-sec-home">Lihat Semua</button>
+					</Link>
 				</div>
 				<div className="pt__bttm">
 					<Swiper
