@@ -56,7 +56,10 @@ export default function Navbar() {
 							</div>
 							<div className="nav__profile ">
 								<BsPerson size={20} />
-								<p>Welcome, {user.name} :)</p>
+								<p>
+									Welcome,{" "}
+									<span className="font-bold text-brown">{user.name}</span> :)
+								</p>
 								<div className="cursor-pointer" onClick={handleClick}>
 									{!nav ? (
 										<BsCaretDownFill size={20} />

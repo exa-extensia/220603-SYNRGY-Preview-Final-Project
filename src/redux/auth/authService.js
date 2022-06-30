@@ -1,4 +1,5 @@
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 const API_URL = "https://cosmetic-b.herokuapp.com/api/v1/auth";
 
@@ -21,10 +22,9 @@ const register = async ({ name, email, password }) => {
 		}
 	);
 
-	if (response.data) {
-		console.log(response.data);
-		localStorage.setItem("user", JSON.stringify(response.data));
-	}
+	const decoded = jwt_decode(response.data.data.token);
+	console.log(">>>>>>>>", decoded);
+	localStorage.setItem("user", JSON.stringify(decoded));
 
 	return response.data;
 };
@@ -33,15 +33,11 @@ const register = async ({ name, email, password }) => {
 const login = async ({ password, email }) => {
 	const response = await axios.post(`${API_URL}/login`, { email, password });
 
-	if (response.data) {
-		console.log(response.data);
-		localStorage.setItem("user", JSON.stringify(response.data));
-		// const token = response.data.token;
-		// const storage = window.localStorage;
-		// storage.setItem("token", token);
-	}
+	const decoded = jwt_decode(response.data.data.token);
+	console.log(">>>>>>>>", decoded);
+	localStorage.setItem("user", JSON.stringify(decoded));
 
-	return response.data;
+	return decoded;
 };
 
 // Logout user

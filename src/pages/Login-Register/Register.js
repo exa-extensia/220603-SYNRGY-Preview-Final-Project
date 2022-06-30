@@ -4,44 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { register, reset } from "../../redux/auth/authSlice";
 
 export default function Register() {
-	// const [name, setName] = useState('')
-	// const [email, setEmail] = useState('')
-	// const [password, setPassword] = useState('')
-	// const [phone, setPhone] = useState('')
-	// let navigate = useNavigate()
-
-	// const postRegister = (e) => {
-	//     e.preventDefault();
-	//     axios.post(`https://cosmetic-b.herokuapp.com/api/v1/auth/register`, {
-	//         avatar: '',
-	//         email,
-	//         password,
-	//         role: 'ROLE_CUSTOMER',
-	//         user: {
-	//             name,
-	//             phone,
-	//             skinType: ''
-	//         }
-	//     },
-	//         {
-	//             headers: {
-	//                 'Content-type': 'application/json'
-	//             }
-	//         })
-	//         .then((res) => {
-	//             const hasil = res.data
-	//             console.log(hasil)
-	//             console.log('berhasil register')
-	//             // navigate('/productdetail')
-	//             // const storage = window.localStorage
-	//             // storage.setItem('token', res.data.data.token)
-	//         })
-	//         .catch((error) => {
-	//             console.log(error)
-	//             console.log('gagal register')
-	//         })
-	// }
-
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 

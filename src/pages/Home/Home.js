@@ -3,7 +3,7 @@ import Header from "../../components/sections/home-header/Header";
 import HomeSection3 from "../../components/sections/home-section3/Home-section3";
 import ProdukTrending from "../../components/sections/home-produktrending/ProdukTrending";
 import KenapaFlambo from "../../components/sections/home-knapaFlembo/Home-kenapaFlembo";
-import Footer from "../../components/sections/footer/Footer";
+import Footer from "../../components/sections/_footer/Footer";
 import Kategori from "../../components/sections/home-kategori/Kategori";
 
 export default function Homepage() {

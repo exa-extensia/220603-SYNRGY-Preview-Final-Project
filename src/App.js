@@ -9,9 +9,9 @@ import Register from "./pages/Login-Register/Register";
 import Login from "./pages/Login-Register/Login";
 
 // TRIAL
-import TrialProductList from "./pages/__TRIAL/Trial-productlist";
-import TrialProductDetail from "./pages/__TRIAL/Trial-productdetail";
-import TrialCart from "./pages/__TRIAL/Trial-cart";
+import TrialProductList from "./pages/ProductList/ProductList";
+import TrialProductDetail from "./pages/ProductDetail/Trial-productdetail";
+import TrialCart from "./pages/Cart/Trial-cart";
 
 function App() {
 	return (

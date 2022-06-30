@@ -4,34 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { login, reset } from "../../redux/auth/authSlice";
 
 export default function Login() {
-	// const [email, setEmail] = useState('')
-	// const [password, setPassword] = useState('')
-	// let navigate = useNavigate()
-
-	// const postLogin = (e) => {
-	//     e.preventDefault()
-	//     console.log('===')
-	//     axios.post(`https://cosmetic-b.herokuapp.com/api/v1/auth/login`, {
-	//         email,
-	//         password
-	//     },
-	//         {
-	//             headers: {
-	//                 'Content-type': 'application/json'
-	//             }
-	//         })
-	//         .then((res) => {
-	//             const hasil = res.data
-	//             console.log(hasil)
-	//             // navigate('/productdetail')
-	//             console.log('berhasil login')
-	//         })
-	//         .catch((error) => {
-	//             console.log(error)
-	//             console.log('gagal login')
-	//         })
-	// }
-
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 

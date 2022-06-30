@@ -1,7 +1,7 @@
 import "./trial-cart.css";
 
 import Navbar from "../../components/sections/_navbar/Navbar";
-import Breadcrumb from "./Trial-breadcrumbs";
+import Breadcrumb from "../../components/atoms/breadcrumb/Trial-breadcrumbs";
 import {
 	HiMinusSm,
 	HiPlusSm,
@@ -10,7 +10,7 @@ import {
 	HiOutlineTicket,
 	HiOutlineChevronRight,
 } from "react-icons/hi";
-import Footer from "../../components/sections/footer/Footer";
+import Footer from "../../components/sections/_footer/Footer";
 
 import { useEffect, useState } from "react";
 
