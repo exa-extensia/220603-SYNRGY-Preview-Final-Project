@@ -48,6 +48,11 @@
 	background-position: right center;
 }
 
+.btn-grad:focus {
+	background-image: none;
+	background-color: #a67a4a;
+}
+
 .btn-sec {
 	background-color: transparent;
 	border: 1px solid #c4c4c4;

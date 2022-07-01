@@ -121,7 +121,7 @@ export default function ProductList() {
 													</p>
 													<div className="rating">
 														<Rating
-															defaultValue={2.5}
+															defaultValue={item.average}
 															precision={0.5}
 															readOnly
 															size="small"

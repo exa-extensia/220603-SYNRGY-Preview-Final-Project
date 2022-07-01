@@ -16,7 +16,7 @@ export default function Error404() {
 					</p>
 					<a
 						href="/"
-						class="bg-cream px-6 py-2 text-sm font-semibold text-brown"
+						class="bg-cream px-6 py-2 text-sm font-semibold text-brown transition-all duration-500 ease-in-out hover:bg-brown hover:text-white"
 					>
 						Go home
 					</a>

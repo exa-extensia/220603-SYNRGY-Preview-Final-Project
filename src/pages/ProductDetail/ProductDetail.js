@@ -11,6 +11,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { FaLeaf } from "react-icons/fa";
 import Skeleton from "@mui/material/Skeleton";
 // import { getOneProduct } from "../../redux/product/productSlice";
+import { addProduct, inc, dec } from "../../redux/cart/cartSlice";
+
 import axios from "axios";
 
 export default function ProductDetail() {
@@ -31,7 +33,7 @@ export default function ProductDetail() {
 	// 	(state) => state.products
 	// );
 
-	// const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		scrollTop();
@@ -43,6 +45,7 @@ export default function ProductDetail() {
 				setLoading(false);
 				setOneProduct(response.data.data);
 				setMainImage(response.data.data.images);
+				setTotalPrice(response.data.data.variant[0].price);
 			})
 			.catch((error) => {
 				setLoading(false);
@@ -50,6 +53,28 @@ export default function ProductDetail() {
 				setError(true);
 			});
 	}, [params.id]);
+
+	const [quantity, setQuantity] = useState(1);
+	// const [totalPrice, setTotalPrice] = useState();
+
+	const quantityHandler = (type) => {
+		if (type === "dec") {
+			quantity > 1 && setQuantity(quantity - 1);
+		} else {
+			setQuantity(quantity + 1);
+		}
+		// setTotalPrice(totalPrice * quantity);
+	};
+
+	// const [quantity, setInitialQuantity] = useState(1);
+	const addToCartHandler = () => {
+		dispatch(addProduct(oneProduct.variant[0].id, quantity));
+	};
+
+	// const quantity = useSelector((state) => state.cart.quantity);
+	const [totalPrice, setTotalPrice] = useState();
+
+	// const incHandler
 
 	return (
 		<>
@@ -59,131 +84,173 @@ export default function ProductDetail() {
 					<div className="pd__breadcrumbs">
 						<Breadcrumb />
 					</div>
-					{loading && (
-						<Skeleton variant="rectangular" height={300} animation="wave" />
-					)}
-					{!loading && !error && (
-						<div className="pd__3cols">
-							<div className="pd__img">
-								<div className="img__main">
-									<img src={mainImage} alt="main img" />
-								</div>
-								<div className="img__others">
-									<div className="img__other">
-										<img
-											src={oneProduct.images}
-											alt="pd"
-											onClick={() => setMainImage(oneProduct.images)}
-										/>
-									</div>
-									<div className="img__other">
-										<img
-											src="https://source.unsplash.com/random/?cosmetic?sig=1"
-											alt="pd"
-											onClick={() =>
-												setMainImage(
-													"https://source.unsplash.com/random/?cosmetic?sig=1"
-												)
-											}
-										/>
-									</div>
-									<div className="img__other">
-										<img
-											src="https://source.unsplash.com/random/?cosmetic?sig=2"
-											alt="pd"
-											onClick={() =>
-												setMainImage(
-													"https://source.unsplash.com/random/?cosmetic?sig=2"
-												)
-											}
-										/>
-									</div>
-								</div>
-							</div>
-							<div className="h-3/12 col-span-4 aspect-[4/3]  sm:col-span-5 lg:col-span-6">
-								<h2 className="mb-3 text-xl lg:text-[24px]">
-									{oneProduct.name}
-								</h2>
-								<div
-									className={
-										oneProduct.isOrganic === true
-											? "mb-3 flex w-[130px] items-center  gap-2 rounded-lg bg-success py-1 px-2 text-xs text-white"
-											: "hidden"
-									}
-								>
-									<p>Organic Product</p>
-									<span>
-										<FaLeaf />
-									</span>
-								</div>
-								<p className="price mb-3 text-xl font-bold text-brown">
-									Rp{oneProduct.variant[0].price.toLocaleString("id-ID")}
-								</p>
-								<div className="pd__rating">
-									<Rating
-										defaultValue={2.5}
-										precision={0.5}
-										readOnly
-										size="small"
+					<div className="pd__3cols">
+						{loading && (
+							<>
+								<div className="pd__img">
+									<Skeleton
+										variant="rectangular"
+										height={300}
+										animation="wave"
 									/>
 								</div>
-								<div className="pd__variant">
-									<div className="variantA"></div>
-									<div className="variantB"></div>
+								<div className="h-3/12 col-span-4 aspect-[4/3]  sm:col-span-5 lg:col-span-6">
+									<Skeleton
+										variant="rectangular"
+										height={300}
+										animation="wave"
+									/>
 								</div>
-								<div className="pd__brand mb-10 mt-10 flex w-full items-center gap-4 rounded-lg bg-cream py-4 px-4 pt-3 lg:w-3/4 xl:w-2/4">
-									<div className="aspect-square h-12 overflow-hidden rounded-md">
-										<img
-											src="https://source.unsplash.com/random/?brand"
-											alt="brand"
+								<div className=" col-span-4 flex h-fit w-full flex-col   sm:col-span-5 sm:col-start-4 lg:col-span-3 lg:col-start-10">
+									<Skeleton
+										variant="rectangular"
+										height={300}
+										animation="wave"
+									/>
+								</div>
+							</>
+						)}
+						{!loading && !error && (
+							<>
+								<div className="pd__img">
+									<div className="img__main">
+										<img src={mainImage} alt="main img" />
+									</div>
+									<div className="img__others">
+										<div className="img__other">
+											<img
+												src={oneProduct.images}
+												alt="pd"
+												onClick={() => setMainImage(oneProduct.images)}
+											/>
+										</div>
+										<div className="img__other">
+											<img
+												src="https://source.unsplash.com/random/?cosmetic?sig=1"
+												alt="pd"
+												onClick={() =>
+													setMainImage(
+														"https://source.unsplash.com/random/?cosmetic?sig=1"
+													)
+												}
+											/>
+										</div>
+										<div className="img__other">
+											<img
+												src="https://source.unsplash.com/random/?cosmetic?sig=2"
+												alt="pd"
+												onClick={() =>
+													setMainImage(
+														"https://source.unsplash.com/random/?cosmetic?sig=2"
+													)
+												}
+											/>
+										</div>
+									</div>
+								</div>
+								<div className="h-3/12 col-span-4 aspect-[4/3]  sm:col-span-5 lg:col-span-6">
+									<h2 className="mb-3 text-xl lg:text-[24px]">
+										{oneProduct.name}
+									</h2>
+									<div
+										className={
+											oneProduct.isOrganic === true
+												? "mb-3 flex w-[130px] items-center  gap-2 rounded-lg bg-success py-1 px-2 text-xs text-white"
+												: "hidden"
+										}
+									>
+										<p>Organic Product</p>
+										<span>
+											<FaLeaf />
+										</span>
+									</div>
+									<p className="price mb-3 text-xl font-bold text-brown">
+										Rp{oneProduct.variant[0].price.toLocaleString("id-ID")}
+									</p>
+									<div className="pd__rating">
+										<Rating
+											defaultValue={oneProduct.average}
+											precision={0.5}
+											readOnly
+											size="small"
 										/>
 									</div>
-									<div>
-										<p className="text-lg font-bold uppercase text-black">
-											{oneProduct.brand.name}
+									<div className="pd__variant">
+										<div className="variantA"></div>
+										<div className="variantB"></div>
+									</div>
+									<div className="pd__brand mb-10 mt-10 flex w-full items-center gap-4 rounded-lg bg-cream py-4 px-4 pt-3 lg:w-3/4 xl:w-2/4">
+										<div className="aspect-square h-12 overflow-hidden rounded-md">
+											<img
+												src="https://source.unsplash.com/random/?brand"
+												alt="brand"
+											/>
+										</div>
+										<div>
+											<p className="text-lg font-bold uppercase text-black">
+												{oneProduct.brand.name}
+											</p>
+											<a href="#" className="text-[12px] text-brown underline">
+												Kunjungi Katalog Brand
+											</a>
+										</div>
+									</div>
+									<PDTab />
+								</div>
+								<div className="pd__input col-span-4 flex h-fit w-full flex-col bg-white p-5 sm:col-span-5 sm:col-start-4 lg:col-span-3 lg:col-start-10">
+									<div className="mb-7">
+										<p className="mb-3 text-lg font-bold">Ringkasan Belanja</p>
+										<div className="w-20 border-b-2 border-brown" />
+									</div>
+
+									<div className="mb-7">
+										<p className="mb-3 text-[16px] font-semibold">Jumlah</p>
+										<div className="input__jumlah flex items-center gap-6">
+											<div
+												className="flex aspect-square w-7 cursor-pointer items-center justify-center  rounded-full bg-cream text-brown transition-all duration-300 hover:bg-med-brown hover:text-white"
+												onClick={(e) => {
+													e.preventDefault();
+													quantityHandler("dec");
+												}}
+											>
+												<HiMinusSm />
+											</div>
+											<p className="font-bold text-brown">{quantity}</p>
+											<div
+												className="flex aspect-square w-7 cursor-pointer items-center justify-center  rounded-full bg-cream text-brown transition-all duration-300 hover:bg-med-brown hover:text-white"
+												onClick={(e) => {
+													e.preventDefault();
+													quantityHandler("inc");
+												}}
+											>
+												<HiPlusSm />
+											</div>
+										</div>
+									</div>
+									<div className="mb-7">
+										<p className="mb-3 text-[16px] font-semibold">Subtotal</p>
+										<p className="text-[20px] font-bold text-brown">
+											Rp
+											{(totalPrice * quantity).toLocaleString("id-ID")}
 										</p>
-										<a href="#" className="text-[12px] text-brown underline">
-											Kunjungi Katalog Brand
-										</a>
+									</div>
+									<div className="flex gap-4 lg:flex-col 2xl:flex-row">
+										<button
+											onClick={addToCartHandler}
+											className="btn-grad w-full rounded-full py-2 px-5 text-xs text-white "
+										>
+											Add to Cart
+										</button>
+
+										<button className="btn-sec w-full rounded-full py-2 px-5 text-xs">
+											<Link to={`/cart`}>Buy Now</Link>
+										</button>
 									</div>
 								</div>
-								<PDTab />
-							</div>
-							<div className="pd__input col-span-4 flex h-fit w-full flex-col bg-white p-5 sm:col-span-5 sm:col-start-4 lg:col-span-3 lg:col-start-10">
-								<div className="mb-7">
-									<p className="mb-3 text-lg font-bold">Ringkasan Belanja</p>
-									<div className="w-20 border-b-2 border-brown" />
-								</div>
-
-								<div className="mb-7">
-									<p className="mb-3 text-[16px] font-semibold">Jumlah</p>
-									<div className="input__jumlah flex items-center gap-6">
-										<div className="flex aspect-square w-7 items-center justify-center rounded-full  bg-cream text-brown">
-											<HiMinusSm />
-										</div>
-										<p className="font-bold text-brown">1</p>
-										<div className="flex aspect-square w-7 items-center justify-center rounded-full  bg-cream text-brown">
-											<HiPlusSm />
-										</div>
-									</div>
-								</div>
-								<div className="mb-7">
-									<p className="mb-3 text-[16px] font-semibold">Subtotal</p>
-									<p className="text-[20px] font-bold text-brown">Rp 75.000</p>
-								</div>
-								<div className="flex gap-4 lg:flex-col 2xl:flex-row">
-									<button className="btn-grad w-full rounded-full py-2 px-5 text-xs text-white">
-										Add to Cart
-									</button>
-
-									<button className="btn-sec w-full rounded-full py-2 px-5 text-xs">
-										<Link to={`/cart`}>Buy Now</Link>
-									</button>
-								</div>
-							</div>
-						</div>
-					)}
-					{!loading && error && <div>unexpected error</div>}
+							</>
+						)}
+						{!loading && error && <div>unexpected error</div>}
+					</div>
 				</div>
 			</section>
 			<Footer />

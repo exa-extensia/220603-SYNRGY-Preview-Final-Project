@@ -1,5 +1,7 @@
+import "./cartpage.css";
+
 import Navbar from "../../components/sections/_navbar/Navbar";
-import Breadcrumb from "../../components/atoms/breadcrumb/BC-CartPage";
+import Breadcrumb from "../../components/atoms/breadcrumb/Trial-breadcrumbs";
 import {
 	HiMinusSm,
 	HiPlusSm,
@@ -11,7 +13,19 @@ import {
 } from "react-icons/hi";
 import Footer from "../../components/sections/_footer/Footer";
 
+import { useEffect, useState } from "react";
+
 export default function CartPage() {
+	const [quantity, setQuantity] = useState(1);
+
+	const handleQuantity = (type) => {
+		if (type === "dec") {
+			quantity > 1 && setQuantity(quantity - 1);
+		} else {
+			setQuantity(quantity + 1);
+		}
+	};
+
 	return (
 		<>
 			<Navbar />
@@ -63,11 +77,11 @@ export default function CartPage() {
 											<p>Rp 75.000</p>
 										</div>
 										<div className="input__qty ">
-											<div>
+											<div onClick={() => handleQuantity("dec")}>
 												<HiMinusSm />
 											</div>
-											<p>2</p>
-											<div>
+											<p>{quantity}</p>
+											<div onClick={() => handleQuantity("inc")}>
 												<HiPlusSm />
 											</div>
 										</div>

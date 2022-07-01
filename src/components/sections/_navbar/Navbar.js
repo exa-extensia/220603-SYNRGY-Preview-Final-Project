@@ -1,6 +1,5 @@
 import LOTUS from "../../../assets/images/logos/mainlogo-lotus.png";
 import {
-	BsHandbag,
 	BsSearch,
 	BsPerson,
 	BsCaretDownFill,
@@ -12,6 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../../../redux/auth/authSlice";
 
 import { useState } from "react";
+import CartBadge from "../../atoms/CartBadge";
 
 export default function Navbar() {
 	let nav__links = [
@@ -50,8 +50,8 @@ export default function Navbar() {
 					{user ? (
 						<div className="nav__cart-profile relative">
 							<div className="nav__cart">
-								<Link to={`/trial-cart`}>
-									<BsHandbag size={20} />
+								<Link to={`/cart`}>
+									<CartBadge />
 								</Link>
 							</div>
 							<div className="nav__profile ">
@@ -119,7 +119,7 @@ export default function Navbar() {
 						<>
 							<div className="nav__cart--mobile">
 								<Link to={`/trial-cart`}>
-									<BsHandbag size={20} />
+									<CartBadge />
 								</Link>
 							</div>
 							<div className="dropdown__icon" onClick={handleClick}>
