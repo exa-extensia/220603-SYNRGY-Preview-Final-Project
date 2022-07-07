@@ -1,11 +1,7 @@
 import LOTUS from "../../../assets/images/logos/mainlogo-lotus.png";
-import {
-	BsSearch,
-	BsPerson,
-	BsCaretDownFill,
-	BsCaretUpFill,
-} from "react-icons/bs";
+import { BsSearch, BsCaretDownFill, BsCaretUpFill } from "react-icons/bs";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import Avatar from "@mui/material/Avatar";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../../../redux/auth/authSlice";
@@ -55,7 +51,11 @@ export default function Navbar() {
 								</Link>
 							</div>
 							<div className="nav__profile ">
-								<BsPerson size={20} />
+								<Avatar
+									alt="avatar"
+									src={user.avatar}
+									sx={{ width: 28, height: 28 }}
+								/>
 								<p>
 									Welcome,{" "}
 									<span className="font-bold text-brown">{user.name}</span> :)

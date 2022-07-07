@@ -10,6 +10,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FaLeaf } from "react-icons/fa";
 import Skeleton from "@mui/material/Skeleton";
+import { toast } from "react-toastify";
 // import { getOneProduct } from "../../redux/product/productSlice";
 import { addProduct, inc, dec } from "../../redux/cart/cartSlice";
 
@@ -34,6 +35,11 @@ export default function ProductDetail() {
 	// );
 
 	const dispatch = useDispatch();
+	const { user } = useSelector((state) => state.auth);
+
+	const needLogin = () => {
+		toast("Wah harus login dulu nih :)");
+	};
 
 	useEffect(() => {
 		scrollTop();
@@ -236,7 +242,7 @@ export default function ProductDetail() {
 									</div>
 									<div className="flex gap-4 lg:flex-col 2xl:flex-row">
 										<button
-											onClick={addToCartHandler}
+											onClick={user ? addToCartHandler : needLogin}
 											className="btn-grad w-full rounded-full py-2 px-5 text-xs text-white "
 										>
 											Add to Cart

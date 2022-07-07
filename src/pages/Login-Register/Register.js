@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { register, reset } from "../../redux/auth/authSlice";
+import { toast } from "react-toastify";
 
 export default function Register() {
 	const navigate = useNavigate();
@@ -22,7 +23,7 @@ export default function Register() {
 
 	useEffect(() => {
 		if (isError) {
-			alert(message);
+			toast(message);
 		}
 		if (isSuccess || user) {
 			navigate("/");
@@ -41,7 +42,7 @@ export default function Register() {
 		e.preventDefault();
 
 		if (password !== password2) {
-			alert("Passwords do not match");
+			toast("Eits, password harus sama~");
 		} else {
 			const userData = {
 				name,

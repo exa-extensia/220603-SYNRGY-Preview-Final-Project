@@ -69,7 +69,7 @@ export default function ProdukTrending() {
 						scrollbar={{
 							hide: true,
 						}}
-						className=" h-[340px]"
+						className=" h-[360px]"
 					>
 						{!isLoading &&
 							!isError &&

@@ -32,6 +32,16 @@
 	}
 }
 
+.toastify-custom-progress {
+	background: #d6ac68 !important;
+}
+
+.toastify-custom-div {
+	background: #a67a4a !important;
+	color: #fff !important;
+	font-family: Nunito;
+}
+
 .btn-grad {
 	background-image: linear-gradient(
 		to right,

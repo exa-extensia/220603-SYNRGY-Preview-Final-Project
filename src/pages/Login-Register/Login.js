@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login, reset } from "../../redux/auth/authSlice";
+import { toast } from "react-toastify";
 
 export default function Login() {
 	const navigate = useNavigate();
@@ -20,7 +21,7 @@ export default function Login() {
 
 	useEffect(() => {
 		if (isError) {
-			alert(message);
+			toast(message);
 		}
 
 		if (isSuccess || user) {
