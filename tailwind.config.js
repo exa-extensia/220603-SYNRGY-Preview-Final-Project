@@ -47,6 +47,10 @@ module.exports = {
 				"linear-cream":
 					"linear-gradient(89.55deg, #FFF9EE 0%, rgba(255, 240, 215, 0) 100%);",
 			},
+			screens: {
+				"3xl": "1600px",
+				"4xl": "2560px",
+			},
 		},
 	},
 	plugins: [],

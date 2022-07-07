@@ -69,7 +69,7 @@ export default function ProdukTrending() {
 						scrollbar={{
 							hide: true,
 						}}
-						className=" h-[360px]"
+						className=" h-[380px]"
 					>
 						{!isLoading &&
 							!isError &&
@@ -91,7 +91,7 @@ export default function ProdukTrending() {
 												</p>
 												<div className="rating">
 													<Rating
-														defaultValue={2.5}
+														defaultValue={item.average}
 														precision={0.5}
 														readOnly
 														size="small"

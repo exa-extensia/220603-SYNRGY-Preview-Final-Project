@@ -18,7 +18,7 @@ export default function Footer() {
 			<section className="flex w-full items-center justify-center bg-goldie">
 				<div className="container mx-4 flex flex-col sm:max-w-[688px] sm:flex-row sm:gap-8 lg:max-w-[864px] xl:max-w-[1200px]">
 					<div className="grid grid-cols-2 gap-10 py-10  sm:w-3/5 sm:grid-cols-3 sm:gap-2 ">
-						<div className="flex  flex-col gap-4 sm:row-span-2 ">
+						<div className="flex  flex-col gap-4 sm:row-span-2 lg:mx-auto ">
 							<p className="text-right text-base font-bold sm:text-left sm:text-sm lg:text-lg">
 								MENU
 							</p>
@@ -40,7 +40,7 @@ export default function Footer() {
 								</a>
 							</div>
 						</div>
-						<div className="flex  flex-col gap-4 ">
+						<div className="flex  flex-col gap-4 lg:mx-auto ">
 							<p className="text-left text-base font-bold sm:text-left sm:text-sm lg:text-lg">
 								PEMBAYARAN
 							</p>
@@ -63,7 +63,7 @@ export default function Footer() {
 								/>
 							</div>
 						</div>
-						<div className="flex  flex-col gap-4 sm:col-start-2 ">
+						<div className="flex  flex-col gap-4 sm:col-start-2 lg:mx-auto ">
 							<p className=" text-right text-base font-bold sm:text-left sm:text-sm lg:text-lg">
 								PENGIRIMAN
 							</p>
@@ -83,7 +83,7 @@ export default function Footer() {
 							</div>
 						</div>
 
-						<div className="flex  flex-col gap-4 sm:col-start-3 sm:row-span-2 sm:row-start-1">
+						<div className="flex  flex-col gap-4 sm:col-start-3 sm:row-span-2 sm:row-start-1 lg:mx-auto">
 							<p className=" text-left text-base font-bold sm:text-left sm:text-sm lg:text-lg">
 								CUSTOMER CARE
 							</p>
@@ -122,12 +122,12 @@ export default function Footer() {
 								backgroundRepeat: "no-repeat",
 							}}
 						>
-							<img src={google} alt="google" className="w-[70%]" />
+							<img src={google} alt="google" className="w-[50%]" />
 						</div>
 					</div>
 				</div>
 			</section>
-			<section className="font- bg-black py-6 text-center text-white lg:text-xl">
+			<section className="font- bg-black py-4 text-center text-white lg:text-xl">
 				<p>© Flambo. All rights reserved.</p>
 			</section>
 		</>

@@ -31,7 +31,7 @@
 }
 
 .pt__card {
-	@apply flex  h-[330px] flex-col overflow-hidden rounded-lg border border-med-gray   hover:cursor-pointer hover:border-2 hover:border-[#c09863] hover:bg-[#fcf5ea];
+	@apply flex  h-[350px] flex-col overflow-hidden rounded-lg border border-med-gray   hover:cursor-pointer hover:border-2 hover:border-[#c09863] hover:bg-[#fcf5ea];
 }
 
 .pt__card__img {
@@ -50,7 +50,7 @@
 	@apply text-[12px] font-light uppercase text-brown;
 }
 .pt__card__text .desc {
-	@apply px-2  text-[14px] text-black;
+	@apply px-2  text-[16px] text-black;
 }
 .pt__card__text .price {
 	@apply text-[16px] font-semibold text-black;
