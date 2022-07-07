@@ -1,5 +1,7 @@
+import "./cartpage.css";
+
 import Navbar from "../../components/sections/_navbar/Navbar";
-import Breadcrumb from "../../components/atoms/breadcrumb/BC-CartPage";
+import Breadcrumb from "../../components/atoms/breadcrumb/Trial-breadcrumbs";
 import {
 	HiMinusSm,
 	HiPlusSm,
@@ -7,11 +9,26 @@ import {
 	HiOutlineScissors,
 	HiOutlineTicket,
 	HiOutlineChevronRight,
+	HiCheck,
 } from "react-icons/hi";
-import Footer from "../../components/sections/footer/Footer";
+
 import { Link } from "react-router-dom";
 
+import Footer from "../../components/sections/_footer/Footer";
+
+import { useEffect, useState } from "react";
+
 export default function CartPage() {
+	const [quantity, setQuantity] = useState(1);
+
+	const handleQuantity = (type) => {
+		if (type === "dec") {
+			quantity > 1 && setQuantity(quantity - 1);
+		} else {
+			setQuantity(quantity + 1);
+		}
+	};
+
 	return (
 		<>
 			<Navbar />
@@ -20,7 +37,10 @@ export default function CartPage() {
 					<div className="cp__breadcrumbs">
 						<Breadcrumb />
 					</div>
-					<div className="cp__totalqty mt-10 mb-6 w-full bg-cream p-4 font-bold text-brown xl:px-8">
+					<div className="cp__totalqty mt-10 mb-6 flex w-full items-center gap-2 bg-cream p-4 font-bold text-brown xl:px-8">
+						<div className="text-brown">
+							<HiCheck />
+						</div>
 						<p>3 Produk Terpilih</p>
 					</div>
 					<div className="cp__2cols">
@@ -60,11 +80,11 @@ export default function CartPage() {
 											<p>Rp 75.000</p>
 										</div>
 										<div className="input__qty ">
-											<div>
+											<div onClick={() => handleQuantity("dec")}>
 												<HiMinusSm />
 											</div>
-											<p>2</p>
-											<div>
+											<p>{quantity}</p>
+											<div onClick={() => handleQuantity("inc")}>
 												<HiPlusSm />
 											</div>
 										</div>

@@ -17,9 +17,9 @@ export default function ProductListPagination({ page, handlePageClick }) {
 	return (
 		<div className="pagination">
 			<StyledPagination
-				count={page}
+				count={10}
 				shape="rounded"
-				onChange={handlePageClick}
+				// onChange={handlePageClick}
 			/>
 		</div>
 	);
