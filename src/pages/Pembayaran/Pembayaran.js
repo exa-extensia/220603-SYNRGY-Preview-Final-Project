@@ -2,7 +2,6 @@ import Navbar from "../../components/sections/_navbar/Navbar";
 import { Link } from "react-router-dom";
 import Footer from "../../components/sections/_footer/Footer";
 import "./Pembayaran.css";
-import { Dropdown } from "flowbite-react/lib/esm/components";
 
 export default function Pembayaran() {
 	return (
@@ -181,24 +180,11 @@ export default function Pembayaran() {
 								<div className="jasa-kurir mt-4 flex justify-evenly bg-blue-300 lg:justify-self-start">
 									<div className="lg:mr-[50%]">
 										<p className="font-bold">Pilih Jasa Kurir</p>
-										<div className="rounded-full bg-slate-200 px-7">
-											<Dropdown label="JNE" inline={true}>
-												<Dropdown.Item>JNE</Dropdown.Item>
-												<Dropdown.Item>Pos Indonesia</Dropdown.Item>
-												<Dropdown.Item>J&T</Dropdown.Item>
-												<Dropdown.Item>SiCepat</Dropdown.Item>
-											</Dropdown>
-										</div>
+										<div className="rounded-full bg-slate-200 px-7"></div>
 									</div>
 									<div className="">
 										<p className="font-bold">Jenis Pengiriman</p>
-										<div className="rounded-full bg-slate-200 px-6">
-											<Dropdown label="Reguler" inline={true}>
-												<Dropdown.Item>Reguler</Dropdown.Item>
-												<Dropdown.Item>COD</Dropdown.Item>
-												<Dropdown.Item>Cargo</Dropdown.Item>
-											</Dropdown>
-										</div>
+										<div className="rounded-full bg-slate-200 px-6"></div>
 									</div>
 								</div>
 							</div>
