@@ -33,7 +33,7 @@ export default function Breadcrumb() {
 							></path>
 						</svg>
 						<a
-							href="/productlist"
+							href="/cart"
 							class="ml-1 text-sm font-medium text-brown hover:cursor-pointer hover:font-bold  md:ml-2"
 						>
 							Cart
@@ -55,7 +55,7 @@ export default function Breadcrumb() {
 							></path>
 						</svg>
 						<a
-							href="/productlist"
+							href="/fitting"
 							class="ml-1 text-sm font-medium text-brown hover:cursor-pointer hover:font-bold  md:ml-2"
 						>
 							Fitting

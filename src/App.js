@@ -27,7 +27,7 @@ function App() {
 					<Route path="/productdetail/:id" element={<ProductDetail />} />
 					<Route element={<ProtectedRoute />}>
 						<Route path="/cart" element={<CartPage />} />
-						<Route path="/pembayaran" element={<Pembayaran />} />
+						<Route path="/fitting" element={<Pembayaran />} />
 					</Route>
 
 					<Route path="*" element={<Error404 />} />

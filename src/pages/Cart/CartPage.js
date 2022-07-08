@@ -249,7 +249,7 @@ export default function CartPage() {
 										<p className="font-bold">Rp 445.000</p>
 									</div>
 								</div>
-								<Link to={"/pembayaran"}>
+								<Link to={"/fitting"}>
 									<button className="btn-grad w-full rounded-full py-2 font-bold uppercase text-white">
 										Checkout
 									</button>
