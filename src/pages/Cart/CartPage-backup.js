@@ -1,7 +1,5 @@
-import "./trial-cart.css";
-
 import Navbar from "../../components/sections/_navbar/Navbar";
-import Breadcrumb from "./Trial-breadcrumbs";
+import Breadcrumb from "../../components/atoms/breadcrumb/BC-CartPage";
 import {
 	HiMinusSm,
 	HiPlusSm,
@@ -9,8 +7,9 @@ import {
 	HiOutlineScissors,
 	HiOutlineTicket,
 	HiOutlineChevronRight,
+	HiCheck,
 } from "react-icons/hi";
-import Footer from "../../components/sections/footer/Footer";
+import Footer from "../../components/sections/_footer/Footer";
 
 export default function CartPage() {
 	return (
@@ -21,7 +20,10 @@ export default function CartPage() {
 					<div className="cp__breadcrumbs">
 						<Breadcrumb />
 					</div>
-					<div className="cp__totalqty mt-10 mb-6 w-full bg-cream p-4 font-bold text-brown xl:px-8">
+					<div className="cp__totalqty mt-10 mb-6 flex w-full items-center gap-2 bg-cream p-4 font-bold text-brown xl:px-8">
+						<div className="text-brown">
+							<HiCheck />
+						</div>
 						<p>3 Produk Terpilih</p>
 					</div>
 					<div className="cp__2cols">

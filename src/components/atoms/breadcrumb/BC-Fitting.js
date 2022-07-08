@@ -33,10 +33,10 @@ export default function Breadcrumb() {
 							></path>
 						</svg>
 						<a
-							href="/productlist"
+							href="/cart"
 							class="ml-1 text-sm font-medium text-brown hover:cursor-pointer hover:font-bold  md:ml-2"
 						>
-							Product List
+							Cart
 						</a>
 					</div>
 				</li>
@@ -54,9 +54,7 @@ export default function Breadcrumb() {
 								clip-rule="evenodd"
 							></path>
 						</svg>
-						<span class="-2 ml-1 text-sm font-medium text-brown">
-							Product Detail
-						</span>
+						<span class="-2 ml-1 text-sm font-medium text-brown">Fitting</span>
 					</div>
 				</li>
 			</ol>

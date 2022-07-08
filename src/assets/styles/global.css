@@ -26,10 +26,25 @@
 		cursor: default;
 	}
 
+	html {
+		min-height: 100%;
+		position: relative;
+	}
+
 	body {
-		@apply top-0 left-0 m-0 overflow-x-hidden p-0 text-black;
+		@apply top-0 left-0 m-0 h-full overflow-x-hidden p-0 text-black;
 		box-sizing: border-box;
 	}
+}
+
+.toastify-custom-progress {
+	background: #d6ac68 !important;
+}
+
+.toastify-custom-div {
+	background: #a67a4a !important;
+	color: #fff !important;
+	font-family: Nunito;
 }
 
 .btn-grad {
@@ -46,6 +61,11 @@
 
 .btn-grad:hover {
 	background-position: right center;
+}
+
+.btn-grad:focus {
+	background-image: none;
+	background-color: #a67a4a;
 }
 
 .btn-sec {

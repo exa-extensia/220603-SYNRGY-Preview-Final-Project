@@ -1,12 +1,12 @@
 import "./trial-productdetail.css";
 
-import Breadcrumb from "./Trial-breadcrumbs";
+import Breadcrumb from "../../components/atoms/breadcrumb/Trial-breadcrumbs";
 import Navbar from "../../components/sections/_navbar/Navbar";
 import Rating from "@mui/material/Rating";
 import { HiMinusSm, HiPlusSm } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import PDTab from "../../components/blocks/pd-tabs/Tabs";
-import Footer from "../../components/sections/footer/Footer";
+import Footer from "../../components/sections/_footer/Footer";
 
 export default function ProductDetail() {
 	return (
