@@ -1,7 +1,7 @@
 import "./productlist.css";
 import Skeleton from "@mui/material/Skeleton";
 
-import Breadcrumb from "../../components/atoms/breadcrumb/Trial-breadcrumbs";
+import Breadcrumb from "../../components/atoms/breadcrumb/BC-ProductList";
 import Navbar from "../../components/sections/_navbar/Navbar";
 import Footer from "../../components/sections/_footer/Footer";
 

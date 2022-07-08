@@ -5,7 +5,7 @@ export default function Breadcrumb() {
 				<li class="inline-flex items-center">
 					<a
 						href="/"
-						class="inline-flex items-center text-sm font-medium text-brown hover:cursor-pointer hover:font-bold "
+						class="inline-flex items-center text-sm font-medium text-brown hover:cursor-pointer hover:font-bold"
 					>
 						<svg
 							class="mr-2 h-4 w-4"
@@ -34,9 +34,9 @@ export default function Breadcrumb() {
 						</svg>
 						<a
 							href="/productlist"
-							class="ml-1 text-sm font-medium text-brown hover:cursor-pointer hover:font-bold  md:ml-2"
+							class="ml-1 text-sm font-medium text-brown hover:cursor-pointer hover:font-bold md:ml-2"
 						>
-							Product List
+							User Profile
 						</a>
 					</div>
 				</li>
@@ -55,7 +55,7 @@ export default function Breadcrumb() {
 							></path>
 						</svg>
 						<span class="-2 ml-1 text-sm font-medium text-brown">
-							Product Detail
+							Order Details
 						</span>
 					</div>
 				</li>

@@ -1,15 +1,32 @@
 import Navbar from "../../components/sections/_navbar/Navbar";
 import { Link } from "react-router-dom";
 import Footer from "../../components/sections/_footer/Footer";
+import Breadcrumb from "../../components/atoms/breadcrumb/BC-Fitting";
 import "./Pembayaran.css";
 
+import { useEffect, useState } from "react";
+
 export default function Pembayaran() {
+	function scrollTop() {
+		window.scrollTo({
+			top: 0,
+			behavior: "smooth",
+		});
+	}
+
+	useEffect(() => {
+		scrollTop();
+	}, []);
+
 	return (
 		<>
 			<Navbar />
-			<section id="cartpage" className="mt-10">
+			<section id="cartpage">
 				<div className="cp__wrapper">
-					<div className="cp__2cols">
+					<div className="pd__breadcrumbs">
+						<Breadcrumb />
+					</div>
+					<div className="cp__2cols mt-10">
 						<div className="cp__product__card__wrapper">
 							<div className="cp__card">
 								<div className="cp__brand">
@@ -195,7 +212,7 @@ export default function Pembayaran() {
 									<p className="mb-3 text-lg font-bold">Ringkasan Belanja</p>
 									<div className="flex items-center">
 										<div className="w-20 border-b-2 border-brown"></div>
-										<div className="h-2 w-2 rounded-full bg-med-brown"></div>
+										<div className="h-2 w-2 rounded-full bg-brown"></div>
 									</div>
 								</div>
 								<div className="ringkasan__text mb-7 flex flex-col gap-2 text-xs lg:text-base">
