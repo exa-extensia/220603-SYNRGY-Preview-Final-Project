@@ -12,7 +12,6 @@ import ProductList from "./pages/ProductList/ProductList";
 import ProductDetail from "./pages/ProductDetail/ProductDetail";
 import CartPage from "./pages/Cart/CartPage";
 import Pembayaran from "./pages/Pembayaran/Pembayaran";
-import LR from "./pages/Login-Register/LR-mobile";
 
 function App() {
 	return (
@@ -23,7 +22,7 @@ function App() {
 
 					<Route path="/login" element={<Login />} />
 					<Route path="/register" element={<Register />} />
-					<Route path="/lr-mobile" element={<LR />} />
+
 					<Route path="/productlist" element={<ProductList />} />
 					<Route path="/productdetail/:id" element={<ProductDetail />} />
 					<Route element={<ProtectedRoute />}>

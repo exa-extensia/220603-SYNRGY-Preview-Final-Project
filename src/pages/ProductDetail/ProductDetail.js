@@ -206,7 +206,10 @@ export default function ProductDetail() {
 								<div className="pd__input col-span-4 flex h-fit w-full flex-col bg-white p-5 sm:col-span-5 sm:col-start-4 lg:col-span-3 lg:col-start-10">
 									<div className="mb-7">
 										<p className="mb-3 text-lg font-bold">Ringkasan Belanja</p>
-										<div className="w-20 border-b-2 border-brown" />
+										<div className="flex items-center">
+											<div className="w-20 border-b-2 border-med-brown" />
+											<div className="h-2 w-2 rounded-full bg-med-brown"></div>
+										</div>
 									</div>
 
 									<div className="mb-7">
@@ -247,10 +250,12 @@ export default function ProductDetail() {
 										>
 											Add to Cart
 										</button>
-
-										<button className="btn-sec w-full rounded-full py-2 px-5 text-xs">
-											<Link to={`/cart`}>Buy Now</Link>
-										</button>
+										<Link
+											to={`/cart`}
+											className="btn-sec w-full rounded-full py-2 px-5 text-xs"
+										>
+											<button>Buy Now</button>
+										</Link>
 									</div>
 								</div>
 							</>
