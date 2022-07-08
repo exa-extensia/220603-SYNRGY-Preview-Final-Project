@@ -181,7 +181,7 @@ export default function Login() {
 							Selamat Datang di Flambo!
 						</h1>
 						<p className="text-center text-sm">
-							Masukkan ke akunmu untuk mulai eksplorasi di Flambo
+							Masuk ke akunmu untuk mulai eksplorasi di Flambo
 						</p>
 					</div>
 					<form className="flex flex-col gap-4 py-2" onSubmit={onSubmit}>

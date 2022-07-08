@@ -118,7 +118,7 @@ export default function Navbar() {
 					{user ? (
 						<>
 							<div className="nav__cart--mobile">
-								<Link to={`/trial-cart`}>
+								<Link to={`/cart`}>
 									<CartBadge />
 								</Link>
 							</div>
@@ -133,6 +133,10 @@ export default function Navbar() {
 										</li>
 									</Link>
 								))}
+								<Link to={`/profile`}>
+									<li className="mobile__items">Profile</li>
+								</Link>
+
 								<li className="mobile__items" onClick={onLogout}>
 									Logout
 								</li>

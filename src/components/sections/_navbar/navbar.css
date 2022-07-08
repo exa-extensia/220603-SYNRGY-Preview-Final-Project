@@ -62,7 +62,7 @@ nav {
 }
 
 .nav__linkitems .item {
-	@apply transition-all duration-300 ease-in-out hover:cursor-pointer  hover:border-b-2 hover:border-med-brown active:font-bold active:text-med-brown;
+	@apply hover:cursor-pointer  hover:border-b-2 hover:border-med-brown active:font-bold active:text-med-brown;
 }
 
 .nav__searchbar__wrapper {
