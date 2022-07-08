@@ -13,6 +13,7 @@ import TrialProductList from "./pages/__TRIAL/Trial-productlist";
 import TrialProductDetail from "./pages/__TRIAL/Trial-productdetail";
 import TrialCart from "./pages/__TRIAL/Trial-cart";
 import Pembayaran from "./pages/Pembayaran/Pembayaran";
+import Artikel from "./pages/Artikel/Artikel";
 
 function App() {
 	return (
@@ -28,6 +29,7 @@ function App() {
 					<Route path="/login" element={<Login />} />
 					<Route path="/register" element={<Register />} />
 					<Route path="/pembayaran" element={<Pembayaran />} />
+					<Route path="/artikel" element={<Artikel />} />
 					<Route path="*" element={<Error404 />} />
 				</Route>
 			</Routes>
