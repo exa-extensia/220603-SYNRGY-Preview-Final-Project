@@ -1,0 +1,18 @@
+.ADDRESSPAGE-SUBJUDUL {
+	@apply mt-6 text-sm font-bold;
+}
+
+.LABELINPUT-GROUP {
+}
+
+.LABELINPUT-GROUP p {
+	@apply text-xs;
+}
+
+.ADDRESSPAGE-INPUT {
+	@apply w-full rounded-md border px-2 placeholder:text-xs;
+}
+
+input[type="checkbox"] {
+	accent-color: #ffedcd;
+}

@@ -12,6 +12,12 @@ import ProductList from "./pages/ProductList/ProductList";
 import ProductDetail from "./pages/ProductDetail/ProductDetail";
 import CartPage from "./pages/Cart/CartPage";
 import Pembayaran from "./pages/Pembayaran/Pembayaran";
+import Address from "./pages/ordering-Address/Address";
+import Shipping from "./pages/ordering-Shipping/Shipping";
+import PaymentOption from "./pages/ordering-Payment/PaymentOption";
+import FinishPayment from "./pages/ordering-FinishPayment/FinishPayment";
+import OrderDetails from "./pages/ordering-OrderDetails/OrderDetails";
+import UserProfile from "./pages/User Profile/UserProfile";
 
 function App() {
 	return (
@@ -27,7 +33,12 @@ function App() {
 					<Route path="/productdetail/:id" element={<ProductDetail />} />
 					<Route element={<ProtectedRoute />}>
 						<Route path="/cart" element={<CartPage />} />
-						<Route path="/fitting" element={<Pembayaran />} />
+						<Route path="/address" element={<Address />} />
+						<Route path="/shipping" element={<Shipping />} />
+						<Route path="/paymentoptions" element={<PaymentOption />} />
+						<Route path="/finishpayment" element={<FinishPayment />} />
+						<Route path="/orderdetails" element={<OrderDetails />} />
+						<Route path="/userprofile" element={<UserProfile />} />
 					</Route>
 
 					<Route path="*" element={<Error404 />} />

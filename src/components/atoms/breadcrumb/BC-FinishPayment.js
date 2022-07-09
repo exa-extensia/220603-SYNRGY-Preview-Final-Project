@@ -55,10 +55,32 @@ export default function Breadcrumb() {
 							></path>
 						</svg>
 						<a
-							href="/fitting"
+							href="/shipping"
 							class="ml-1 text-sm font-medium text-brown hover:cursor-pointer hover:font-bold  md:ml-2"
 						>
-							Fitting
+							Shipping
+						</a>
+					</div>
+				</li>
+				<li>
+					<div class="flex items-center">
+						<svg
+							class="h-6 w-6 text-brown"
+							fill="currentColor"
+							viewBox="0 0 20 20"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+								clip-rule="evenodd"
+							></path>
+						</svg>
+						<a
+							href="/paymentoptions"
+							class="ml-1 text-sm font-medium text-brown hover:cursor-pointer hover:font-bold  md:ml-2"
+						>
+							Payment Options
 						</a>
 					</div>
 				</li>
@@ -76,7 +98,9 @@ export default function Breadcrumb() {
 								clip-rule="evenodd"
 							></path>
 						</svg>
-						<span class="-2 ml-1 text-sm font-medium text-brown">Summary</span>
+						<span class="-2 ml-1 text-sm font-medium text-brown">
+							Finish Payment
+						</span>
 					</div>
 				</li>
 			</ol>

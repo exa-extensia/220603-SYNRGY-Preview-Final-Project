@@ -69,7 +69,7 @@ export default function Navbar() {
 								</div>
 								<div className={!nav ? "hidden" : "nav__profile__dropdown"}>
 									<li className="mobile__items" onClick={handleClose}>
-										Profile
+										<a href="/userprofile">Profile</a>
 									</li>
 									<li className="mobile__items" onClick={onLogout}>
 										Logout
@@ -134,7 +134,9 @@ export default function Navbar() {
 									</Link>
 								))}
 								<Link to={`/profile`}>
-									<li className="mobile__items">Profile</li>
+									<li className="mobile__items">
+										<a href="/userprofile">Profile</a>{" "}
+									</li>
 								</Link>
 
 								<li className="mobile__items" onClick={onLogout}>
