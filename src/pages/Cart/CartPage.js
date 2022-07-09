@@ -194,7 +194,7 @@ export default function CartPage() {
 							{/* DELETE -- CONTOH CARD BANYAK  */}
 						</div>
 						<div className="cp__output__card__wrapper">
-							<div className="cp__card__voucher">
+							{/* <div className="cp__card__voucher">
 								<div className="mb-7">
 									<p className="mb-3 text-lg font-bold">Voucher Diskon</p>
 									<div className="flex items-center">
@@ -226,7 +226,7 @@ export default function CartPage() {
 									</p>
 									<HiOutlineChevronRight color="#A67A4A" size={28} />
 								</div>
-							</div>
+							</div> */}
 							<div className="cp__card__ringkasan">
 								<div className="mb-7">
 									<p className="mb-3 text-lg font-bold">Ringkasan Belanja</p>
@@ -250,7 +250,7 @@ export default function CartPage() {
 									</div>
 								</div>
 								<Link to={"/shipping"}>
-									<button className="btn-grad w-full rounded-full py-2 font-bold uppercase text-white">
+									<button className="btn-grad w-full rounded-full py-2 font-bold  text-white">
 										Checkout
 									</button>
 								</Link>
