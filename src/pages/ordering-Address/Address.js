@@ -2,6 +2,7 @@ import "./address.css";
 import Navbar from "../../components/sections/_navbar/Navbar";
 import Footer from "../../components/sections/_footer/Footer";
 import Breadcrumb from "../../components/atoms/breadcrumb/BC-Address";
+import illst from "../../assets/images/addressform-illst.png";
 
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -106,7 +107,7 @@ export default function Address() {
 							</div>
 						</div>
 						<div className="DIV-COL2 col-span-4 flex flex-col justify-between lg:col-span-6 ">
-							<div className="aspect-video w-full bg-goldie"></div>
+							<img src={illst} alt="" />
 							<div className="relative h-10 w-full">
 								<button
 									onClick={() => navigate(-1)}

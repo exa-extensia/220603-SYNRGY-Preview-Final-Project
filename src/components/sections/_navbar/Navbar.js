@@ -133,11 +133,10 @@ export default function Navbar() {
 										</li>
 									</Link>
 								))}
-								<Link to={`/profile`}>
-									<li className="mobile__items">
-										<a href="/userprofile">Profile</a>{" "}
-									</li>
-								</Link>
+
+								<li className="mobile__items">
+									<a href="/userprofile">Profile</a>{" "}
+								</li>
 
 								<li className="mobile__items" onClick={onLogout}>
 									Logout

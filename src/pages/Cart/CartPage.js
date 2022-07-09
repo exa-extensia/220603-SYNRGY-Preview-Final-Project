@@ -11,6 +11,7 @@ import {
 	HiOutlineChevronRight,
 	HiCheck,
 } from "react-icons/hi";
+import illst from "../../assets/images/cart-illst.png";
 
 import { Link } from "react-router-dom";
 
@@ -255,6 +256,7 @@ export default function CartPage() {
 									</button>
 								</Link>
 							</div>
+							{/* <img src={illst} alt="" /> */}
 						</div>
 					</div>
 				</div>

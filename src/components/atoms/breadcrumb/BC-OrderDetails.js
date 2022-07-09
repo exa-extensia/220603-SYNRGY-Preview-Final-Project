@@ -33,7 +33,7 @@ export default function Breadcrumb() {
 							></path>
 						</svg>
 						<a
-							href="/profile"
+							href="/userprofile"
 							class="ml-1 text-sm font-medium text-brown hover:cursor-pointer hover:font-bold md:ml-2"
 						>
 							User Profile

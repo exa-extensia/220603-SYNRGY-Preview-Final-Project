@@ -6,6 +6,7 @@ import bca from "../../assets/icons/icon-bank/bca.png";
 import bni from "../../assets/icons/icon-bank/bni.png";
 import permata from "../../assets/icons/icon-bank/permata.png";
 import bri from "../../assets/icons/icon-bank/bri.png";
+import illst from "../../assets/images/payment-illst.png";
 
 import { HiCheck, HiOutlineCreditCard } from "react-icons/hi";
 
@@ -177,9 +178,10 @@ export default function PaymentOptions() {
 									onClick={() => navigate("/finishpayment")}
 									className="btn-grad absolute right-0 bottom-0 rounded-full py-2 px-5 text-xs text-white sm:text-base"
 								>
-									Pilih Pembayaran
+									Buat Pesanan
 								</button>
 							</div>
+							{/* <img src={illst} alt="" /> */}
 						</div>
 					</div>
 				</div>

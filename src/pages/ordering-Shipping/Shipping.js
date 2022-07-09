@@ -5,9 +5,10 @@ import Breadcrumb from "../../components/atoms/breadcrumb/BC-Shipping";
 import jne from "../../assets/icons/icon-pengiriman/jne.png";
 import pos from "../../assets/icons/icon-pengiriman/pos.png";
 import tiki from "../../assets/icons/icon-pengiriman/tiki.png";
+import illst from "../../assets/images/delivery-illst.png";
 
 import { TbMapSearch, TbTruckDelivery } from "react-icons/tb";
-import { HiCheck } from "react-icons/hi";
+import { HiCheck, HiLightningBolt, HiClock } from "react-icons/hi";
 
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -119,7 +120,7 @@ export default function Shipping() {
 											></img>
 										</label>
 									</form>
-									<div className="ORDERING-GENERAL-DIV my-6 w-full  sm:my-4 "></div>
+									{/* <div className="ORDERING-GENERAL-DIV my-6 w-full  sm:my-4 "></div> */}
 									<p className="mb-2 font-bold">Pilih Durasi Pengiriman</p>
 									<form
 										id="formDURASI"
@@ -128,21 +129,27 @@ export default function Shipping() {
 										<input type="radio" name="select" id="opt1" />
 										<input type="radio" name="select" id="opt2" />
 										<label htmlFor="opt1" className="CARD-DURASI opt1">
-											<p className=" text-sm font-bold">Regular Shipping</p>
-											<p className="text-xs text-grey">
-												Estimasi Pengiriman 3-5 hari kerja
-											</p>
+											<HiClock />
+											<div className="mt-2">
+												<p className=" text-sm font-bold">Regular Shipping</p>
+												<p className="text-xs text-grey">
+													Estimasi Pengiriman 3-5 hari kerja
+												</p>
+											</div>
 										</label>
 										<div className="ORDERING-GENERAL-DIV-V my-auto hidden h-10 sm:block"></div>
 										<label htmlFor="opt2" className="CARD-DURASI opt2">
-											<p className="text-sm font-bold">Same Day Shipping</p>
-											<p className="text-xs text-grey">
-												Pengiriman diterima pada hari yang sama
-											</p>
-											<p className="text-xs italic text-grey">
-												(Pembayaran yang diterima di atas jam 13:00 akan
-												diproses pada hari berikutnya)
-											</p>
+											<HiLightningBolt />
+											<div className="mt-2">
+												<p className="text-sm font-bold">Same Day Shipping</p>
+												<p className="text-xs text-grey">
+													Pengiriman diterima pada hari yang sama
+												</p>
+												<p className="text-xs italic text-grey">
+													(Pembayaran yang diterima di atas jam 13:00 akan
+													diproses pada hari berikutnya)
+												</p>
+											</div>
 										</label>
 									</form>
 								</div>
@@ -179,6 +186,7 @@ export default function Shipping() {
 									</div>
 								</div>
 							</div>
+
 							<div className="relative h-10 w-full">
 								<button
 									onClick={() => navigate("/paymentoptions")}
@@ -187,6 +195,7 @@ export default function Shipping() {
 									Pilih Pembayaran
 								</button>
 							</div>
+							{/* <img src={illst} alt="" /> */}
 						</div>
 					</div>
 				</div>
