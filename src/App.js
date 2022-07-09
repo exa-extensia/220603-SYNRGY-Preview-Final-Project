@@ -39,6 +39,8 @@ function App() {
 						<Route path="/finishpayment" element={<FinishPayment />} />
 						<Route path="/orderdetails" element={<OrderDetails />} />
 						<Route path="/userprofile" element={<UserProfile />} />
+
+						<Route path="/temp" element={<Pembayaran />} />
 					</Route>
 
 					<Route path="*" element={<Error404 />} />

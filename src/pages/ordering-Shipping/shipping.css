@@ -1,0 +1,42 @@
+.ORDERING-GENERAL-CARD {
+	@apply bg-white p-4 xl:p-6;
+	border: solid 1px rgb(166, 122, 74, 0.2);
+	border-radius: 2px;
+}
+
+.ORDERING-GENERAL-DIV {
+	border-bottom: solid 1px rgb(166, 122, 74, 0.2);
+}
+
+.ORDERING-GENERAL-DIV-V {
+	border-left: solid 1px rgb(166, 122, 74, 0.2);
+}
+
+.CARD-DURASI {
+	@apply w-full rounded-lg bg-white p-2 hover:cursor-pointer hover:bg-cream hover:text-brown  sm:p-4;
+}
+
+.CARD-DURASI p {
+	@apply hover:cursor-pointer;
+}
+
+input[type="radio"] {
+	display: none;
+}
+
+#opt1:checked:checked ~ .opt1,
+#opt2:checked:checked ~ .opt2 {
+	background-color: #fcf5ea;
+	color: #a67a4a;
+}
+
+.CARD-KURIR {
+	@apply flex w-full  rounded-lg bg-white p-2 hover:cursor-pointer hover:bg-cream hover:text-brown  sm:p-4;
+}
+
+#optKurir1:checked:checked ~ .optKurir1,
+#optKurir2:checked:checked ~ .optKurir2,
+#optKurir3:checked:checked ~ .optKurir3 {
+	background-color: #fcf5ea;
+	color: #a67a4a;
+}
