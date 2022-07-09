@@ -2,7 +2,7 @@ export default function Breadcrumb() {
 	return (
 		<div class="flex" aria-label="Breadcrumb">
 			<ol class="inline-flex items-center space-x-1 md:space-x-3">
-				<li class="inline-flex items-center">
+				<li class="hidden items-center sm:inline-flex">
 					<a
 						href="/"
 						class="inline-flex items-center text-sm font-medium text-brown hover:cursor-pointer hover:font-bold "
@@ -21,7 +21,7 @@ export default function Breadcrumb() {
 				<li>
 					<div class="flex items-center">
 						<svg
-							class="h-6 w-6 text-brown"
+							class="h-0 w-0 text-brown sm:h-6 sm:w-6"
 							fill="currentColor"
 							viewBox="0 0 20 20"
 							xmlns="http://www.w3.org/2000/svg"
@@ -78,7 +78,7 @@ export default function Breadcrumb() {
 						</svg>
 						<a
 							href="/paymentoptions"
-							class="ml-1 text-sm font-medium text-brown hover:cursor-pointer hover:font-bold  md:ml-2"
+							class="ml-1 w-[50px] text-sm font-medium text-brown hover:cursor-pointer hover:font-bold sm:w-[113px]  md:ml-2"
 						>
 							Payment Options
 						</a>
@@ -98,7 +98,7 @@ export default function Breadcrumb() {
 								clip-rule="evenodd"
 							></path>
 						</svg>
-						<span class="-2 ml-1 text-sm font-medium text-brown">
+						<span class="-2 ml-1 w-[50px] text-sm font-medium text-brown sm:w-[110px]">
 							Finish Payment
 						</span>
 					</div>
