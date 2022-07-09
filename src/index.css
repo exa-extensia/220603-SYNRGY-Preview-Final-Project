@@ -7,6 +7,10 @@
 @import "./pages/Home/home.css";
 @import "./pages/ProductDetail/productdetail.css";
 @import "./pages/Cart/cartpage.css";
+@import "./pages/ordering-Shipping/shipping.css";
+@import "./pages/ordering-Payment/payment.css";
+@import "./pages/ordering-FinishPayment/finishpayment.css";
+@import "./pages/ordering-OrderDetails/orderdetails.css";
 /* Components Sections  */
 @import "./components/sections/_navbar/navbar.css";
 @import "./components/sections/home-header/header.css";

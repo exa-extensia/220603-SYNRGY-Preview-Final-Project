@@ -1,7 +1,7 @@
 import Navbar from "../../components/sections/_navbar/Navbar";
 import { Link } from "react-router-dom";
 import Footer from "../../components/sections/_footer/Footer";
-import Breadcrumb from "../../components/atoms/breadcrumb/BC-Fitting";
+// import Breadcrumb from "../../components/atoms/breadcrumb/BC-Fitting";
 import "./Pembayaran.css";
 
 import { useEffect, useState } from "react";
@@ -23,9 +23,7 @@ export default function Pembayaran() {
 			<Navbar />
 			<section id="cartpage">
 				<div className="cp__wrapper">
-					<div className="pd__breadcrumbs">
-						<Breadcrumb />
-					</div>
+					<div className="pd__breadcrumbs">{/* <Breadcrumb /> */}</div>
 					<div className="cp__2cols mt-10">
 						<div className="cp__product__card__wrapper">
 							<div className="cp__card">
