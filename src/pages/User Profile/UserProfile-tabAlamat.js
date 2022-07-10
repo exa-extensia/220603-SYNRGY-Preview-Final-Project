@@ -1,16 +1,19 @@
 import illst from "../../assets/images/addressempty-illst.png";
 import { HiOutlineTrash } from "react-icons/hi";
+import { TbUser, TbPhone } from "react-icons/tb";
 
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function UserProfileAlamat() {
 	const navigate = useNavigate();
+	const { address, isLoading, isError, isSuccess, message } = useSelector(
+		(state) => state.address
+	);
 
 	return (
 		<>
-			<div className="ORDERING-GENERAL-CARD sm:flex ">
-				<div className="w-3/4">
-					<div className="label-group flex items-center gap-2">
+			{/* <div className="label-group flex items-center gap-2">
 						<p className="LABEL-ALAMAT text-sm font-semibold uppercase text-grey">
 							APARTEMEN
 						</p>{" "}
@@ -29,25 +32,63 @@ export default function UserProfileAlamat() {
 							No.112-116, Lebakgede, Kecamatan Coblong, Kota Bandung, Jawa Barat
 							40132
 						</p>
+					</div> */}
+			{address ? (
+				<div className="ORDERING-GENERAL-CARD w-full sm:flex ">
+					<div className="w-3/4">
+						<div className="label-group flex flex-row items-center gap-2">
+							<p className="LABEL-ALAMAT text-sm font-bold uppercase text-brown">
+								{address.label}
+							</p>{" "}
+							<div
+								className={`${
+									address.isDefault === true
+										? "rounded-xl  bg-cream py-1 px-2 text-xs text-brown"
+										: "rounded-xl  bg-cream py-1 px-2 text-xs text-brown"
+								} `}
+							>
+								<p>alamat utama</p>
+							</div>
+						</div>
+						<div className="content-group mt-1 ">
+							<p className="break-words text-sm font-extralight">
+								{address.addressDetail} - {address.cityId} {address.postalCode}
+							</p>
+							<div className="mt-2 flex flex-row items-center gap-4">
+								<div className="flex flex-row items-center gap-1">
+									<TbUser size={20} />
+									<p className="  font-bold">{address.receiver}</p>
+								</div>
+								<div className="flex flex-row items-center gap-1">
+									<TbPhone size={20} />
+									<p className="  font-bold">{address.phone}</p>
+								</div>
+							</div>
+						</div>
 					</div>
-				</div>
-				<div className="mt-4 sm:relative sm:mt-0 sm:w-1/4">
-					<div className="sm:absolute sm:top-0 sm:right-0">
-						<div className="cursor-pointer rounded-full bg-white p-1 text-danger hover:bg-danger hover:text-white">
-							<HiOutlineTrash />
+
+					<div className="mt-4 sm:relative sm:mt-0 sm:w-1/4">
+						<div className="sm:absolute sm:top-0 sm:right-0">
+							<div className="cursor-pointer rounded-full bg-white p-1 text-danger hover:bg-danger hover:text-white">
+								<HiOutlineTrash />
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<img src={illst} alt="" />
+			) : (
+				<div className="flex flex-col items-center justify-center">
+					<p className="mb-6 text-xl">Ayo daftarkan alamat mu! :)</p>
+					<img src={illst} alt="" />
+				</div>
+			)}
+
 			<div className="mt-8 flex w-full flex-col items-center justify-center">
 				{" "}
-				<p>Ayo daftarkan alamat mu!</p>
 				<button
 					onClick={() => navigate("/address")}
 					className="btn-grad w-full rounded-full py-2 px-5 text-sm font-bold text-white lg:w-4/12"
 				>
-					Tambah Alamat
+					Ubah Alamat
 				</button>
 			</div>
 		</>

@@ -2,16 +2,27 @@ import Navbar from "../../components/sections/_navbar/Navbar";
 import Footer from "../../components/sections/_footer/Footer";
 import Breadcrumb from "../../components/atoms/breadcrumb/BC-Shipping";
 
+import bca from "../../assets/icons/icon-bank/bca.png";
+import bni from "../../assets/icons/icon-bank/bni.png";
+import permata from "../../assets/icons/icon-bank/permata.png";
+import bri from "../../assets/icons/icon-bank/bri.png";
 import jne from "../../assets/icons/icon-pengiriman/jne.png";
 import pos from "../../assets/icons/icon-pengiriman/pos.png";
 import tiki from "../../assets/icons/icon-pengiriman/tiki.png";
 import illst from "../../assets/images/delivery-illst.png";
 
-import { TbMapSearch, TbTruckDelivery } from "react-icons/tb";
-import { HiCheck, HiLightningBolt, HiClock } from "react-icons/hi";
+import { TbMapSearch, TbTruckDelivery, TbUser, TbPhone } from "react-icons/tb";
+import {
+	HiCheck,
+	HiLightningBolt,
+	HiClock,
+	HiArrowNarrowRight,
+	HiOutlineCreditCard,
+} from "react-icons/hi";
 
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function Shipping() {
 	function scrollTop() {
@@ -26,6 +37,10 @@ export default function Shipping() {
 	}, []);
 
 	const navigate = useNavigate();
+
+	const { address, isLoading, isError, isSuccess, message } = useSelector(
+		(state) => state.address
+	);
 
 	return (
 		<>
@@ -46,9 +61,9 @@ export default function Shipping() {
 									<TbMapSearch size={30} className="text-brown" />
 									<h1 className="text-xl sm:col-span-2">Alamat Pengiriman</h1>
 								</div>
-								<div className="ORDERING-GENERAL-CARD sm:flex">
-									<div className="w-3/4">
-										<div className="label-group flex items-center gap-2">
+								<div className="ORDERING-GENERAL-CARD lg:flex">
+									<div className="w-full lg:w-3/4 ">
+										{/* <div className="label-group flex items-center gap-2">
 											<p className="LABEL-ALAMAT text-sm font-semibold uppercase text-grey">
 												APARTEMEN
 											</p>{" "}
@@ -71,10 +86,52 @@ export default function Shipping() {
 												Jawa Barat 40132Jl. Dipati Ukur No.112-116, Lebakgede,
 												Kecamatan Coblong, Kota Bandung, Jawa Barat 40132
 											</p>
-										</div>
+										</div> */}
+										{address ? (
+											<>
+												<div className="label-group flex flex-row items-center gap-2">
+													<p className="LABEL-ALAMAT text-sm font-bold uppercase text-brown">
+														{address.label}
+													</p>{" "}
+													<div
+														className={`${
+															address.isDefault === true
+																? "rounded-xl  bg-cream py-1 px-2 text-xs text-brown"
+																: "rounded-xl  bg-cream py-1 px-2 text-xs text-brown"
+														} `}
+													>
+														<p>alamat utama</p>
+													</div>
+												</div>
+												<div className="content-group mt-1 ">
+													<p className="break-words text-sm font-extralight">
+														{address.addressDetail} - {address.cityId}{" "}
+														{address.postalCode}
+													</p>
+													<div className="mt-2 flex flex-row items-center gap-4">
+														<div className="flex flex-row items-center gap-1">
+															<TbUser size={20} />
+															<p className="  font-bold">{address.receiver}</p>
+														</div>
+														<div className="flex flex-row items-center gap-1">
+															<TbPhone size={20} />
+															<p className="  font-bold">{address.phone}</p>
+														</div>
+													</div>
+												</div>
+											</>
+										) : (
+											<>
+												<HiArrowNarrowRight
+													size={30}
+													className="hidden sm:block"
+												/>
+												<p className="text-xl">Hayuk daftarkan alamatmu! :)</p>
+											</>
+										)}
 									</div>
-									<div className="mt-4 sm:relative sm:mt-0 sm:w-1/4">
-										<div className="sm:absolute sm:top-0 sm:right-0">
+									<div className="mt-4 lg:relative lg:mt-0 lg:w-1/4">
+										<div className="lg:absolute lg:top-0 lg:right-0">
 											<button
 												onClick={() => navigate("/address")}
 												className="btn-sec rounded-full py-1 px-2 text-xs"
@@ -154,6 +211,106 @@ export default function Shipping() {
 									</form>
 								</div>
 							</div>
+							<div className="BLOCK-BANK flex flex-col gap-2">
+								<div className=" flex items-center gap-2 ">
+									<HiOutlineCreditCard size={30} className="text-brown" />
+									<h1 className="text-xl sm:col-span-2">Pilih Pembayaran</h1>
+								</div>
+								<div className="ORDERING-GENERAL-CARD w-full ">
+									<p className="mb-2 font-bold">
+										Rekomendasi Metode Pembayaran
+									</p>
+									<form className="BANK-WRAPPER flex w-full flex-col">
+										<input type="radio" name="select" id="optBank1" />
+										<input type="radio" name="select" id="optBank2" />
+										<input type="radio" name="select" id="optBank3" />
+										<input type="radio" name="select" id="optBank4" />
+										<label
+											htmlFor="optBank1"
+											className="CARD-BANK optBank1 w-full"
+										>
+											<div className="CARD-BANK-WRAPPER flex w-full items-center justify-between ">
+												<div className="flex w-3/4 items-center gap-4 sm:gap-6">
+													<img
+														src={bca}
+														className="w-[50px] bg-center object-contain"
+													></img>
+													<p className="font-medium">BCA Virtual Account</p>
+												</div>
+												<div className="ml-auto flex items-center justify-between gap-2 text-brown">
+													<HiCheck size={15} />
+													<p className="max-w-[60px] text-xs">
+														Konfirmasi Otomatis
+													</p>
+												</div>
+											</div>
+										</label>
+										<div className="ORDERING-GENERAL-DIV my-6 w-full  sm:my-4 "></div>
+										<label
+											htmlFor="optBank2"
+											className="CARD-BANK optBank2 w-full"
+										>
+											<div className="CARD-BANK-WRAPPER flex w-full items-center justify-between ">
+												<div className="flex w-3/4 items-center gap-4 sm:gap-6">
+													<img
+														src={bni}
+														className="w-[50px] bg-center object-contain"
+													></img>
+													<p className="font-medium">BNI Virtual Account</p>
+												</div>
+												<div className="ml-auto flex items-center justify-between gap-2 text-brown">
+													<HiCheck size={15} />
+													<p className="max-w-[60px] text-xs">
+														Konfirmasi Otomatis
+													</p>
+												</div>
+											</div>
+										</label>
+										<div className="ORDERING-GENERAL-DIV my-6 w-full  sm:my-4 "></div>
+										<label
+											htmlFor="optBank3"
+											className="CARD-BANK optBank3 w-full"
+										>
+											<div className="CARD-BANK-WRAPPER flex w-full items-center justify-between ">
+												<div className="flex w-3/4 items-center gap-4 sm:gap-6">
+													<img
+														src={permata}
+														className="w-[50px] bg-center object-contain"
+													></img>
+													<p className="font-medium">Permata Virtual Account</p>
+												</div>
+												<div className="ml-auto flex items-center justify-between gap-2 text-brown">
+													<HiCheck size={15} />
+													<p className="max-w-[60px] text-xs">
+														Konfirmasi Otomatis
+													</p>
+												</div>
+											</div>
+										</label>
+										<div className="ORDERING-GENERAL-DIV my-6 w-full  sm:my-4 "></div>
+										<label
+											htmlFor="optBank4"
+											className="CARD-BANK optBank4 w-full"
+										>
+											<div className="CARD-BANK-WRAPPER flex w-full items-center justify-between ">
+												<div className="flex w-3/4 items-center gap-4 sm:gap-6">
+													<img
+														src={bri}
+														className="w-[50px] bg-center object-contain"
+													></img>
+													<p className="font-medium">BRI Virtual Account</p>
+												</div>
+												<div className="ml-auto flex items-center justify-between gap-2 text-brown">
+													<HiCheck size={15} />
+													<p className="max-w-[60px] text-xs">
+														Konfirmasi Otomatis
+													</p>
+												</div>
+											</div>
+										</label>
+									</form>
+								</div>
+							</div>
 						</div>
 
 						<div className="DIV-COL2 col-span-4  flex w-full flex-col gap-6  sm:col-span-3 lg:col-span-4 ">
@@ -189,10 +346,10 @@ export default function Shipping() {
 
 							<div className="relative h-10 w-full">
 								<button
-									onClick={() => navigate("/paymentoptions")}
+									onClick={() => navigate("/finishpayment")}
 									className="btn-grad absolute right-0 bottom-0 rounded-full py-2 px-5 text-xs text-white sm:text-base"
 								>
-									Pilih Pembayaran
+									Buat Pesanan
 								</button>
 							</div>
 							{/* <img src={illst} alt="" /> */}

@@ -54,7 +54,9 @@ export default function Breadcrumb() {
 								clip-rule="evenodd"
 							></path>
 						</svg>
-						<span class="-2 ml-1 text-sm font-medium text-brown">Shipping</span>
+						<span class="-2 ml-1 text-sm font-medium text-brown">
+							Place Order
+						</span>
 					</div>
 				</li>
 			</ol>

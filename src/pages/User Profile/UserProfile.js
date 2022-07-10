@@ -12,7 +12,7 @@ import UserProfileAlamat from "./UserProfile-tabAlamat";
 import UserProfilePesanan from "./UserProfile-tabPesanan";
 
 export default function UserProfile() {
-	const [tabs, setTabs] = useState("Daftar Alamat");
+	const [tabs, setTabs] = useState("Riwayat Pesanan");
 	const tabsHandler = (e) => {
 		setTabs(e.target.textContent);
 	};
@@ -35,6 +35,7 @@ export default function UserProfile() {
 	return (
 		<>
 			<Navbar />
+
 			<section
 				id="userprofile-page"
 				className="flex w-full items-center justify-center bg-[#FFFAF2]"

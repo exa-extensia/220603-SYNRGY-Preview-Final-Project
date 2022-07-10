@@ -1,7 +1,7 @@
 import illst from "../../assets/images/cart-illst.png";
 import { HiCheckCircle, HiXCircle } from "react-icons/hi";
 
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function UserProfilePesanan() {
 	const navigate = useNavigate();
@@ -17,7 +17,11 @@ export default function UserProfilePesanan() {
 				<div className="ORDER-LIST-COL4 border-r border-goldie p-2">Paid</div>
 				<div className="ORDER-LIST-COL5 p-2">Delivered</div>
 			</div>
-			<div className="ORDER-LIST-GENERAL-CARD ORDER-LIST-GRID w-full items-center xl:grid ">
+
+			<Link
+				to={"/orderdetails"}
+				className="ORDER-LIST-GENERAL-CARD ORDER-LIST-GRID w-full cursor-pointer items-center hover:bg-[#FFFAF2] xl:grid "
+			>
 				<div className="ORDER-LIST-COL1 border-goldie p-2 font-bold xl:border-r">
 					<div className="flex gap-2 xl:block">
 						<p className="xl:hidden">Order ID</p>
@@ -45,17 +49,16 @@ export default function UserProfilePesanan() {
 						<p className="xl:hidden">Delivered</p> <HiXCircle size={22} />
 					</div>
 				</div>
-			</div>
+			</Link>
 
-			<img src={illst} alt="" />
+			{/* <img src={illst} alt="" />
+			<p>Ayo mulai berbelanja di Flambo!</p> */}
 			<div className="mt-8 flex w-full flex-col items-center justify-center">
-				{" "}
-				<p>Ayo mulai berbelanja di Flambo!</p>
 				<button
 					onClick={() => navigate("/productlist")}
 					className="btn-grad w-full rounded-full py-2 px-5 text-sm font-bold text-white lg:w-4/12"
 				>
-					Mulai Belanja
+					Ayo Belanja :)
 				</button>
 			</div>
 		</>

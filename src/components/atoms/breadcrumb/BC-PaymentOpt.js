@@ -55,10 +55,10 @@ export default function Breadcrumb() {
 							></path>
 						</svg>
 						<a
-							href="/shipping"
+							href="/placeorder"
 							class="ml-1 text-sm font-medium text-brown hover:cursor-pointer hover:font-bold  md:ml-2"
 						>
-							Shipping
+							Place Order
 						</a>
 					</div>
 				</li>

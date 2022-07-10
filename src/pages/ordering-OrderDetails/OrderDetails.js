@@ -8,9 +8,11 @@ import permata from "../../assets/icons/icon-bank/permata.png";
 import bri from "../../assets/icons/icon-bank/bri.png";
 
 import { GiCardboardBoxClosed } from "react-icons/gi";
+import { TbUser, TbPhone } from "react-icons/tb";
 
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function PaymentOptions() {
 	function scrollTop() {
@@ -25,6 +27,9 @@ export default function PaymentOptions() {
 	}, []);
 
 	const navigate = useNavigate();
+	const { address, isLoading, isError, isSuccess, message } = useSelector(
+		(state) => state.address
+	);
 
 	return (
 		<>
@@ -55,29 +60,35 @@ export default function PaymentOptions() {
 								</div>
 								<div className="ORDERING-GENERAL-CARD sm:flex ">
 									<div className="w-3/4">
-										<div className="label-group flex items-center gap-2">
-											<p className="LABEL-ALAMAT text-sm font-semibold uppercase text-grey">
-												APARTEMEN
+										<div className="label-group flex flex-row items-center gap-2">
+											<p className="LABEL-ALAMAT text-sm font-bold uppercase text-brown">
+												{address.label}
 											</p>{" "}
 											<div
-												className={
-													"rounded-xl  bg-cream py-1 px-2 text-xs text-brown"
-												}
+												className={`${
+													address.isDefault === true
+														? "rounded-xl  bg-cream py-1 px-2 text-xs text-brown"
+														: "rounded-xl  bg-cream py-1 px-2 text-xs text-brown"
+												} `}
 											>
 												<p>alamat utama</p>
 											</div>
 										</div>
-										<div className="content-group mt-4 text-sm">
-											<p className="mb-2 font-bold">
-												Nama Penerima - 08119062237
+										<div className="content-group mt-1 ">
+											<p className="break-words text-sm font-extralight">
+												{address.addressDetail} - {address.cityId}{" "}
+												{address.postalCode}
 											</p>
-											<p className="">
-												Jl. Dipati Ukur No.112-116, Lebakgede, Kecamatan
-												Coblong, Kota Bandung, Jawa Barat 40132Jl. Dipati Ukur
-												No.112-116, Lebakgede, Kecamatan Coblong, Kota Bandung,
-												Jawa Barat 40132Jl. Dipati Ukur No.112-116, Lebakgede,
-												Kecamatan Coblong, Kota Bandung, Jawa Barat 40132
-											</p>
+											<div className="mt-2 flex flex-row items-center gap-4">
+												<div className="flex flex-row items-center gap-1">
+													<TbUser size={20} />
+													<p className="  font-bold">{address.receiver}</p>
+												</div>
+												<div className="flex flex-row items-center gap-1">
+													<TbPhone size={20} />
+													<p className="  font-bold">{address.phone}</p>
+												</div>
+											</div>
 										</div>
 									</div>
 									<div className="mt-4 sm:relative sm:mt-0 sm:w-1/4">
