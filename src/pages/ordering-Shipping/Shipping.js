@@ -2,6 +2,10 @@ import Navbar from "../../components/sections/_navbar/Navbar";
 import Footer from "../../components/sections/_footer/Footer";
 import Breadcrumb from "../../components/atoms/breadcrumb/BC-Shipping";
 
+import bca from "../../assets/icons/icon-bank/bca.png";
+import bni from "../../assets/icons/icon-bank/bni.png";
+import permata from "../../assets/icons/icon-bank/permata.png";
+import bri from "../../assets/icons/icon-bank/bri.png";
 import jne from "../../assets/icons/icon-pengiriman/jne.png";
 import pos from "../../assets/icons/icon-pengiriman/pos.png";
 import tiki from "../../assets/icons/icon-pengiriman/tiki.png";
@@ -13,6 +17,7 @@ import {
 	HiLightningBolt,
 	HiClock,
 	HiArrowNarrowRight,
+	HiOutlineCreditCard,
 } from "react-icons/hi";
 
 import { Link, useNavigate } from "react-router-dom";
@@ -99,7 +104,7 @@ export default function Shipping() {
 													</div>
 												</div>
 												<div className="content-group mt-1 ">
-													<p className="break-words text-sm">
+													<p className="break-words text-sm font-extralight">
 														{address.addressDetail} - {address.cityId}{" "}
 														{address.postalCode}
 													</p>
@@ -206,6 +211,106 @@ export default function Shipping() {
 									</form>
 								</div>
 							</div>
+							<div className="BLOCK-BANK flex flex-col gap-2">
+								<div className=" flex items-center gap-2 ">
+									<HiOutlineCreditCard size={30} className="text-brown" />
+									<h1 className="text-xl sm:col-span-2">Pilih Pembayaran</h1>
+								</div>
+								<div className="ORDERING-GENERAL-CARD w-full ">
+									<p className="mb-2 font-bold">
+										Rekomendasi Metode Pembayaran
+									</p>
+									<form className="BANK-WRAPPER flex w-full flex-col">
+										<input type="radio" name="select" id="optBank1" />
+										<input type="radio" name="select" id="optBank2" />
+										<input type="radio" name="select" id="optBank3" />
+										<input type="radio" name="select" id="optBank4" />
+										<label
+											htmlFor="optBank1"
+											className="CARD-BANK optBank1 w-full"
+										>
+											<div className="CARD-BANK-WRAPPER flex w-full items-center justify-between ">
+												<div className="flex w-3/4 items-center gap-4 sm:gap-6">
+													<img
+														src={bca}
+														className="w-[50px] bg-center object-contain"
+													></img>
+													<p className="font-medium">BCA Virtual Account</p>
+												</div>
+												<div className="ml-auto flex items-center justify-between gap-2 text-brown">
+													<HiCheck size={15} />
+													<p className="max-w-[60px] text-xs">
+														Konfirmasi Otomatis
+													</p>
+												</div>
+											</div>
+										</label>
+										<div className="ORDERING-GENERAL-DIV my-6 w-full  sm:my-4 "></div>
+										<label
+											htmlFor="optBank2"
+											className="CARD-BANK optBank2 w-full"
+										>
+											<div className="CARD-BANK-WRAPPER flex w-full items-center justify-between ">
+												<div className="flex w-3/4 items-center gap-4 sm:gap-6">
+													<img
+														src={bni}
+														className="w-[50px] bg-center object-contain"
+													></img>
+													<p className="font-medium">BNI Virtual Account</p>
+												</div>
+												<div className="ml-auto flex items-center justify-between gap-2 text-brown">
+													<HiCheck size={15} />
+													<p className="max-w-[60px] text-xs">
+														Konfirmasi Otomatis
+													</p>
+												</div>
+											</div>
+										</label>
+										<div className="ORDERING-GENERAL-DIV my-6 w-full  sm:my-4 "></div>
+										<label
+											htmlFor="optBank3"
+											className="CARD-BANK optBank3 w-full"
+										>
+											<div className="CARD-BANK-WRAPPER flex w-full items-center justify-between ">
+												<div className="flex w-3/4 items-center gap-4 sm:gap-6">
+													<img
+														src={permata}
+														className="w-[50px] bg-center object-contain"
+													></img>
+													<p className="font-medium">Permata Virtual Account</p>
+												</div>
+												<div className="ml-auto flex items-center justify-between gap-2 text-brown">
+													<HiCheck size={15} />
+													<p className="max-w-[60px] text-xs">
+														Konfirmasi Otomatis
+													</p>
+												</div>
+											</div>
+										</label>
+										<div className="ORDERING-GENERAL-DIV my-6 w-full  sm:my-4 "></div>
+										<label
+											htmlFor="optBank4"
+											className="CARD-BANK optBank4 w-full"
+										>
+											<div className="CARD-BANK-WRAPPER flex w-full items-center justify-between ">
+												<div className="flex w-3/4 items-center gap-4 sm:gap-6">
+													<img
+														src={bri}
+														className="w-[50px] bg-center object-contain"
+													></img>
+													<p className="font-medium">BRI Virtual Account</p>
+												</div>
+												<div className="ml-auto flex items-center justify-between gap-2 text-brown">
+													<HiCheck size={15} />
+													<p className="max-w-[60px] text-xs">
+														Konfirmasi Otomatis
+													</p>
+												</div>
+											</div>
+										</label>
+									</form>
+								</div>
+							</div>
 						</div>
 
 						<div className="DIV-COL2 col-span-4  flex w-full flex-col gap-6  sm:col-span-3 lg:col-span-4 ">
@@ -241,10 +346,10 @@ export default function Shipping() {
 
 							<div className="relative h-10 w-full">
 								<button
-									onClick={() => navigate("/paymentoptions")}
+									onClick={() => navigate("/finishpayment")}
 									className="btn-grad absolute right-0 bottom-0 rounded-full py-2 px-5 text-xs text-white sm:text-base"
 								>
-									Pilih Pembayaran
+									Buat Pesanan
 								</button>
 							</div>
 							{/* <img src={illst} alt="" /> */}

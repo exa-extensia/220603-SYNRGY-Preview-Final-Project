@@ -51,7 +51,7 @@ export default function UserProfileAlamat() {
 							</div>
 						</div>
 						<div className="content-group mt-1 ">
-							<p className="break-words text-sm">
+							<p className="break-words text-sm font-extralight">
 								{address.addressDetail} - {address.cityId} {address.postalCode}
 							</p>
 							<div className="mt-2 flex flex-row items-center gap-4">

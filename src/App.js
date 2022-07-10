@@ -39,13 +39,13 @@ function App() {
 					<Route element={<ProtectedRoute />}>
 						<Route path="/cart" element={<CartPage />} />
 						<Route path="/address" element={<Address />} />
-						<Route path="/shipping" element={<Shipping />} />
-						<Route path="/paymentoptions" element={<PaymentOption />} />
+						<Route path="/placeorder" element={<Shipping />} />
+						{/* <Route path="/paymentoptions" element={<PaymentOption />} /> */}
 						<Route path="/finishpayment" element={<FinishPayment />} />
 						<Route path="/orderdetails" element={<OrderDetails />} />
 						<Route path="/userprofile" element={<UserProfile />} />
 
-						<Route path="/temp" element={<Pembayaran />} />
+						{/* <Route path="/temp" element={<Pembayaran />} /> */}
 					</Route>
 
 					<Route path="*" element={<Error404 />} />
