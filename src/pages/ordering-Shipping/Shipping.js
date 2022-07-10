@@ -7,11 +7,17 @@ import pos from "../../assets/icons/icon-pengiriman/pos.png";
 import tiki from "../../assets/icons/icon-pengiriman/tiki.png";
 import illst from "../../assets/images/delivery-illst.png";
 
-import { TbMapSearch, TbTruckDelivery } from "react-icons/tb";
-import { HiCheck, HiLightningBolt, HiClock } from "react-icons/hi";
+import { TbMapSearch, TbTruckDelivery, TbUser, TbPhone } from "react-icons/tb";
+import {
+	HiCheck,
+	HiLightningBolt,
+	HiClock,
+	HiArrowNarrowRight,
+} from "react-icons/hi";
 
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function Shipping() {
 	function scrollTop() {
@@ -26,6 +32,10 @@ export default function Shipping() {
 	}, []);
 
 	const navigate = useNavigate();
+
+	const { address, isLoading, isError, isSuccess, message } = useSelector(
+		(state) => state.address
+	);
 
 	return (
 		<>
@@ -46,9 +56,9 @@ export default function Shipping() {
 									<TbMapSearch size={30} className="text-brown" />
 									<h1 className="text-xl sm:col-span-2">Alamat Pengiriman</h1>
 								</div>
-								<div className="ORDERING-GENERAL-CARD sm:flex">
-									<div className="w-3/4">
-										<div className="label-group flex items-center gap-2">
+								<div className="ORDERING-GENERAL-CARD lg:flex">
+									<div className="w-full lg:w-3/4 ">
+										{/* <div className="label-group flex items-center gap-2">
 											<p className="LABEL-ALAMAT text-sm font-semibold uppercase text-grey">
 												APARTEMEN
 											</p>{" "}
@@ -71,10 +81,52 @@ export default function Shipping() {
 												Jawa Barat 40132Jl. Dipati Ukur No.112-116, Lebakgede,
 												Kecamatan Coblong, Kota Bandung, Jawa Barat 40132
 											</p>
-										</div>
+										</div> */}
+										{address ? (
+											<>
+												<div className="label-group flex flex-row items-center gap-2">
+													<p className="LABEL-ALAMAT text-sm font-bold uppercase text-brown">
+														{address.label}
+													</p>{" "}
+													<div
+														className={`${
+															address.isDefault === true
+																? "rounded-xl  bg-cream py-1 px-2 text-xs text-brown"
+																: "rounded-xl  bg-cream py-1 px-2 text-xs text-brown"
+														} `}
+													>
+														<p>alamat utama</p>
+													</div>
+												</div>
+												<div className="content-group mt-1 ">
+													<p className="break-words text-sm">
+														{address.addressDetail} - {address.cityId}{" "}
+														{address.postalCode}
+													</p>
+													<div className="mt-2 flex flex-row items-center gap-4">
+														<div className="flex flex-row items-center gap-1">
+															<TbUser size={20} />
+															<p className="  font-bold">{address.receiver}</p>
+														</div>
+														<div className="flex flex-row items-center gap-1">
+															<TbPhone size={20} />
+															<p className="  font-bold">{address.phone}</p>
+														</div>
+													</div>
+												</div>
+											</>
+										) : (
+											<>
+												<HiArrowNarrowRight
+													size={30}
+													className="hidden sm:block"
+												/>
+												<p className="text-xl">Hayuk daftarkan alamatmu! :)</p>
+											</>
+										)}
 									</div>
-									<div className="mt-4 sm:relative sm:mt-0 sm:w-1/4">
-										<div className="sm:absolute sm:top-0 sm:right-0">
+									<div className="mt-4 lg:relative lg:mt-0 lg:w-1/4">
+										<div className="lg:absolute lg:top-0 lg:right-0">
 											<button
 												onClick={() => navigate("/address")}
 												className="btn-sec rounded-full py-1 px-2 text-xs"

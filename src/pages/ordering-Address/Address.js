@@ -4,11 +4,12 @@ import Footer from "../../components/sections/_footer/Footer";
 import Breadcrumb from "../../components/atoms/breadcrumb/BC-Address";
 import illst from "../../assets/images/addressform-illst.png";
 import Skeleton from "@mui/material/Skeleton";
+import { toast } from "react-toastify";
 
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { createAddress } from "../../redux/address/addressSlice";
+import { createAddress, reset } from "../../redux/address/addressSlice";
 
 export default function Address() {
 	function scrollTop() {
@@ -44,7 +45,19 @@ export default function Address() {
 		receiver,
 	} = formData;
 
-	const { user } = useSelector((state) => state.auth);
+	const { isLoading, isError, isSuccess, message } = useSelector(
+		(state) => state.address
+	);
+
+	useEffect(() => {
+		if (isError) {
+			toast(message);
+		}
+		if (isSuccess) {
+			navigate(-1);
+		}
+		dispatch(reset());
+	}, [isError, isSuccess, message, navigate, dispatch]);
 
 	const onChange = (e) => {
 		setFormData((prevState) => ({
@@ -55,7 +68,6 @@ export default function Address() {
 
 	const onSubmit = (e) => {
 		e.preventDefault();
-
 		const addressData = {
 			addressDetail,
 			cityId,
@@ -65,9 +77,7 @@ export default function Address() {
 			postalCode,
 			receiver,
 		};
-
 		dispatch(createAddress(addressData));
-		navigate(-1);
 	};
 
 	// const [Checked, setChecked] = useState(true);
@@ -91,11 +101,11 @@ export default function Address() {
 					<div className="cp__breadcrumbs mb-10">
 						<Breadcrumb />
 					</div>
-					<div className="DIV-2COLS grid grid-cols-4 gap-5 sm:grid-cols-8 lg:grid-cols-12 lg:gap-20">
-						<form
-							onSubmit={onSubmit}
-							className="DIV-COL1 col-span-4 grid grid-cols-1 sm:grid-cols-2 sm:gap-x-4 lg:col-span-6"
-						>
+					<form
+						onSubmit={onSubmit}
+						className="DIV-2COLS grid grid-cols-4 gap-5 sm:grid-cols-8 lg:grid-cols-12 lg:gap-20"
+					>
+						<div className="DIV-COL1 col-span-4 grid grid-cols-1 sm:grid-cols-2 sm:gap-x-4 lg:col-span-6">
 							<h1 className="text-2xl sm:col-span-2">Tambah Alamat Baru</h1>
 							<div className="mt-1 flex items-center sm:col-span-2">
 								<div className="w-20 border-b-2 border-med-brown" />
@@ -192,16 +202,27 @@ export default function Address() {
 											isDefault: e.target.checked,
 										}))
 									}
-									required
 								/>
 								<p className="text-base font-semibold text-brown">
 									gunakan sebagai alamat utama
 								</p>
 							</div>
-							<button className="btn-grad rounded-full py-2 px-5 text-xs text-white sm:w-40">
-								Tambah Alamat
-							</button>
-						</form>
+							{isLoading && (
+								<div className="mt-8 text-xs font-bold text-brown">
+									Working on it...!
+								</div>
+							)}
+							{isError && (
+								<div className="mt-8 text-xs text-danger">
+									Something went wrong
+								</div>
+							)}
+							{isSuccess && (
+								<div className="mt-8 text-xs text-success">
+									Success! Welcome!
+								</div>
+							)}
+						</div>
 						<div className="DIV-COL2 col-span-4 flex flex-col justify-between lg:col-span-6 ">
 							<div className="relative aspect-square overflow-hidden">
 								<div className="aspect-video w-full">
@@ -218,12 +239,12 @@ export default function Address() {
 								</div>
 							</div>
 							<div className="relative h-10 w-full">
-								{/* <button className="btn-grad absolute right-0 bottom-0 rounded-full py-2 px-5 text-xs text-white sm:w-40">
+								<button className="btn-grad absolute right-0 bottom-0 rounded-full py-2 px-5 text-xs text-white sm:w-40">
 									Tambah Alamat
-								</button> */}
+								</button>
 							</div>
 						</div>
-					</div>
+					</form>
 				</div>
 			</section>
 
