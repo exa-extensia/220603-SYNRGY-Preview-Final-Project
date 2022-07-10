@@ -26,6 +26,7 @@ export const getAllProducts = createAsyncThunk(
 	}
 );
 
+// MASIH GABISA!!!!!!!!!!!!!! :(((((((((((((((((
 export const getOneProduct = createAsyncThunk(
 	"product/getOneProduct",
 	async (params, thunkAPI) => {

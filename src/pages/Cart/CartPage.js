@@ -251,7 +251,7 @@ export default function CartPage() {
 									</div>
 								</div>
 								<Link to={"/shipping"}>
-									<button className="btn-grad w-full rounded-full py-2 font-bold  text-white">
+									<button className="btn-grad w-full rounded-full py-2   text-white">
 										Checkout
 									</button>
 								</Link>

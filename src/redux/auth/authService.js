@@ -22,6 +22,7 @@ const register = async ({ name, email, password }) => {
 		}
 	);
 
+	localStorage.setItem("token", JSON.stringify(response.data.data));
 	const decoded = jwt_decode(response.data.data.token);
 	console.log(">>>>>>>>", decoded);
 	localStorage.setItem("user", JSON.stringify(decoded));
@@ -35,7 +36,9 @@ const login = async ({ password, email }) => {
 
 	const decoded = jwt_decode(response.data.data.token);
 	console.log(">>>>>>>>", decoded);
+	console.log("NYARI TOKEN>>>>>>>>", response.data.data);
 	localStorage.setItem("user", JSON.stringify(decoded));
+	localStorage.setItem("token", JSON.stringify(response.data.data));
 
 	return decoded;
 };
@@ -43,6 +46,7 @@ const login = async ({ password, email }) => {
 // Logout user
 const logout = () => {
 	localStorage.removeItem("user");
+	localStorage.removeItem("token");
 };
 
 const authService = {

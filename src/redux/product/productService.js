@@ -12,6 +12,7 @@ const getAllProducts = async () => {
 	return response.data.data;
 };
 
+// MASIH GABISA!!!!!!!!!!!!!! :(((((((((((((((((
 const getOneProduct = async (params) => {
 	const response = await axios.get(`${API_URL}/${params.id}`);
 	console.log(response.data.data);
