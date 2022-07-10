@@ -1,12 +1,13 @@
 import Navbar from "../../components/sections/_navbar/Navbar";
 import Footer from "../../components/sections/_footer/Footer";
 import Breadcrumb from "../../components/atoms/breadcrumb/BC-FinishPayment";
+import Skeleton from "@mui/material/Skeleton";
 
 import bca from "../../assets/icons/icon-bank/bca.png";
 import bni from "../../assets/icons/icon-bank/bni.png";
 import permata from "../../assets/icons/icon-bank/permata.png";
 import bri from "../../assets/icons/icon-bank/bri.png";
-import illst from "../../assets/images/finish-illst.png";
+import illst from "../../assets/images/finish-illst-whitebg.png";
 
 import { HiOutlineQuestionMarkCircle } from "react-icons/hi";
 import { IoTicketSharp } from "react-icons/io5";
@@ -57,7 +58,18 @@ export default function PaymentOptions() {
 								</div>
 								<div className="ORDERING-GENERAL-CARD w-full ">
 									<div className="flex flex-col items-center justify-center">
-										<img src={illst} className="bg-center object-contain"></img>
+										<div className="h-[249px] w-[306px]">
+											<img
+												src={illst}
+												className="absolute z-10 bg-center object-contain"
+											></img>
+											<Skeleton
+												variant="rectangular"
+												animation="wave"
+												className="h-full w-full"
+											/>
+										</div>
+
 										<div className="BG-GRADIENT flex w-full items-center justify-center py-10  font-bold text-white sm:w-9/12 xl:px-8">
 											<p className=" text-center text-xl">
 												Bayar Sebelum 10 JULI 2022, 7:55 WIB

@@ -46,8 +46,12 @@ export default function PaymentOptions() {
 					<div className="DIV-2COLS grid grid-cols-4 gap-5 sm:grid-cols-8 lg:grid-cols-12 lg:gap-6">
 						<div className="DIV-COL1 col-span-4 flex w-full flex-col gap-6    sm:col-span-5 lg:col-span-8">
 							<div className="BLOCK-ALAMAT flex flex-col gap-2">
-								<div className=" flex items-center gap-2 ">
-									<h1 className="text-xl sm:col-span-2">Pengiriman</h1>
+								<div className="">
+									<h1 className="text-xl">Pengiriman</h1>
+									<div className="my-2 flex items-center">
+										<div className="w-20 border-b-2 border-med-brown" />
+										<div className="h-2 w-2 rounded-full bg-med-brown"></div>
+									</div>
 								</div>
 								<div className="ORDERING-GENERAL-CARD sm:flex ">
 									<div className="w-3/4">
@@ -86,8 +90,12 @@ export default function PaymentOptions() {
 								</div>
 							</div>
 							<div className="BLOCK-ALAMAT flex flex-col gap-2">
-								<div className=" flex items-center gap-2 ">
-									<h1 className="text-xl sm:col-span-2">Pembayaran</h1>
+								<div className="">
+									<h1 className="text-xl">Pembayaran</h1>
+									<div className="my-2 flex items-center">
+										<div className="w-20 border-b-2 border-med-brown" />
+										<div className="h-2 w-2 rounded-full bg-med-brown"></div>
+									</div>
 								</div>
 								<div className="ORDERING-GENERAL-CARD sm:flex ">
 									<div className="w-3/4">
@@ -108,8 +116,12 @@ export default function PaymentOptions() {
 								</div>
 							</div>
 							<div className="BLOCK-ALAMAT flex flex-col gap-2">
-								<div className=" flex items-center gap-2 ">
-									<h1 className="text-xl sm:col-span-2">Order Items</h1>
+								<div className="">
+									<h1 className="text-xl">Pesanan</h1>
+									<div className="my-2 flex items-center">
+										<div className="w-20 border-b-2 border-med-brown" />
+										<div className="h-2 w-2 rounded-full bg-med-brown"></div>
+									</div>
 								</div>
 								<div className="ORDERING-GENERAL-CARD ORDER-ITEM-LIST flex w-full flex-col gap-12 ">
 									<div className="ONE-BRAND-CARD">
@@ -249,7 +261,7 @@ export default function PaymentOptions() {
 						</div>
 
 						<div className="DIV-COL2 col-span-4  flex w-full flex-col gap-6  sm:col-span-3 lg:col-span-4 ">
-							<div className="cp__card__ringkasan">
+							<div className="cp__card__ringkasan mb-4">
 								<div className="mb-7">
 									<p className="mb-3 text-lg font-bold">Ringkasan Belanja</p>
 									<div className="flex items-center">

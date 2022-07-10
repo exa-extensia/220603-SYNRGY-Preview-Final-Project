@@ -102,21 +102,21 @@ export default function Shipping() {
 										<label htmlFor="optKurir1" className="CARD-KURIR optKurir1">
 											<img
 												src={jne}
-												className="m-auto h-[40px] bg-center object-contain sm:w-[50%]"
+												className="h-[40px] object-contain sm:m-auto sm:w-[50%] sm:bg-center"
 											></img>
 										</label>
 										<div className="ORDERING-GENERAL-DIV-V my-auto hidden h-10 sm:block"></div>
 										<label htmlFor="optKurir2" className="CARD-KURIR optKurir2">
 											<img
 												src={pos}
-												className="m-auto h-[40px] bg-center object-contain sm:w-[50%]"
+												className="h-[40px] object-contain sm:m-auto sm:w-[50%] sm:bg-center"
 											></img>
 										</label>
 										<div className="ORDERING-GENERAL-DIV-V my-auto hidden h-10 sm:block"></div>
 										<label htmlFor="optKurir3" className="CARD-KURIR optKurir3">
 											<img
 												src={tiki}
-												className="m-auto h-[40px] bg-center object-contain sm:w-[50%]"
+												className="h-[40px] object-contain sm:m-auto sm:w-[50%] sm:bg-center"
 											></img>
 										</label>
 									</form>

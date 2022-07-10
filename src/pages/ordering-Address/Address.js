@@ -3,6 +3,7 @@ import Navbar from "../../components/sections/_navbar/Navbar";
 import Footer from "../../components/sections/_footer/Footer";
 import Breadcrumb from "../../components/atoms/breadcrumb/BC-Address";
 import illst from "../../assets/images/addressform-illst.png";
+import Skeleton from "@mui/material/Skeleton";
 
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -118,7 +119,20 @@ export default function Address() {
 							</div>
 						</div>
 						<div className="DIV-COL2 col-span-4 flex flex-col justify-between lg:col-span-6 ">
-							<img src={illst} alt="alamat" />
+							<div className="relative aspect-square overflow-hidden">
+								<div className="aspect-video w-full">
+									<img
+										src={illst}
+										alt="alamat"
+										className="absolute z-10 object-contain"
+									/>
+									<Skeleton
+										variant="rectangular"
+										animation="wave"
+										className="h-full w-full"
+									/>
+								</div>
+							</div>
 							<div className="relative h-10 w-full">
 								<button
 									onClick={() => navigate(-1)}
