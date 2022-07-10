@@ -1,7 +1,6 @@
 .ORDERING-GENERAL-CARD {
 	@apply bg-white p-4 xl:p-6;
 	border: solid 1px rgb(166, 122, 74, 0.2);
-	border-radius: 2px;
 }
 
 .ORDERING-GENERAL-DIV {

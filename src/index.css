@@ -11,6 +11,7 @@
 @import "./pages/ordering-Payment/payment.css";
 @import "./pages/ordering-FinishPayment/finishpayment.css";
 @import "./pages/ordering-OrderDetails/orderdetails.css";
+@import "./pages/User Profile/userprofile.css";
 /* Components Sections  */
 @import "./components/sections/_navbar/navbar.css";
 @import "./components/sections/home-header/header.css";

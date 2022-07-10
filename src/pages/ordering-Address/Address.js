@@ -5,9 +5,20 @@ import Breadcrumb from "../../components/atoms/breadcrumb/BC-Address";
 import illst from "../../assets/images/addressform-illst.png";
 
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Address() {
+	function scrollTop() {
+		window.scrollTo({
+			top: 0,
+			behavior: "smooth",
+		});
+	}
+
+	useEffect(() => {
+		scrollTop();
+	}, []);
+
 	const [Checked, setChecked] = useState(true);
 
 	// const toggleCheckbox = (e) => {
@@ -107,7 +118,7 @@ export default function Address() {
 							</div>
 						</div>
 						<div className="DIV-COL2 col-span-4 flex flex-col justify-between lg:col-span-6 ">
-							<img src={illst} alt="" />
+							<img src={illst} alt="alamat" />
 							<div className="relative h-10 w-full">
 								<button
 									onClick={() => navigate(-1)}
