@@ -58,47 +58,55 @@ export default function PaymentOptions() {
 										<div className="h-2 w-2 rounded-full bg-med-brown"></div>
 									</div>
 								</div>
-								<div className="ORDERING-GENERAL-CARD sm:flex ">
-									<div className="w-3/4">
-										<div className="label-group flex flex-row items-center gap-2">
-											<p className="LABEL-ALAMAT text-sm font-bold uppercase text-brown">
-												{address.label}
-											</p>{" "}
-											<div
-												className={`${
-													address.isDefault === true
-														? "rounded-xl  bg-cream py-1 px-2 text-xs text-brown"
-														: "rounded-xl  bg-cream py-1 px-2 text-xs text-brown"
-												} `}
-											>
-												<p>alamat utama</p>
+								{address ? (
+									<div className="ORDERING-GENERAL-CARD sm:flex ">
+										<div className="w-3/4">
+											<div className="label-group flex flex-row items-center gap-2">
+												<p className="LABEL-ALAMAT text-sm font-bold uppercase text-brown">
+													{address.label}
+												</p>{" "}
+												<div
+													className={`${
+														address.isDefault === true
+															? "rounded-xl  bg-cream py-1 px-2 text-xs text-brown"
+															: "rounded-xl  bg-cream py-1 px-2 text-xs text-brown"
+													} `}
+												>
+													<p>alamat utama</p>
+												</div>
+											</div>
+											<div className="content-group mt-1 ">
+												<p className="break-words text-sm font-extralight">
+													{address.addressDetail} - {address.cityId}{" "}
+													{address.postalCode}
+												</p>
+												<div className="mt-2 flex flex-row items-center gap-4">
+													<div className="flex flex-row items-center gap-1">
+														<TbUser size={20} />
+														<p className="  font-bold">{address.receiver}</p>
+													</div>
+													<div className="flex flex-row items-center gap-1">
+														<TbPhone size={20} />
+														<p className="  font-bold">{address.phone}</p>
+													</div>
+												</div>
 											</div>
 										</div>
-										<div className="content-group mt-1 ">
-											<p className="break-words text-sm font-extralight">
-												{address.addressDetail} - {address.cityId}{" "}
-												{address.postalCode}
-											</p>
-											<div className="mt-2 flex flex-row items-center gap-4">
-												<div className="flex flex-row items-center gap-1">
-													<TbUser size={20} />
-													<p className="  font-bold">{address.receiver}</p>
-												</div>
-												<div className="flex flex-row items-center gap-1">
-													<TbPhone size={20} />
-													<p className="  font-bold">{address.phone}</p>
+										<div className="mt-4 sm:relative sm:mt-0 sm:w-1/4">
+											<div className="sm:absolute sm:top-0 sm:right-0">
+												<div className="rounded-full bg-danger py-1 px-2 text-xs text-white">
+													pending
 												</div>
 											</div>
 										</div>
 									</div>
-									<div className="mt-4 sm:relative sm:mt-0 sm:w-1/4">
-										<div className="sm:absolute sm:top-0 sm:right-0">
-											<div className="rounded-full bg-danger py-1 px-2 text-xs text-white">
-												pending
-											</div>
-										</div>
+								) : (
+									<div className="flex flex-col items-center justify-center">
+										<p className="mb-6 text-xl">
+											HAYO BLM MASUKIN ALAMAT YA!!!!!!!
+										</p>
 									</div>
-								</div>
+								)}
 							</div>
 							<div className="BLOCK-ALAMAT flex flex-col gap-2">
 								<div className="">
