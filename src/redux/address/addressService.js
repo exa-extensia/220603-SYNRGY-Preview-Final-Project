@@ -23,18 +23,37 @@ const CreateUserAddresss = async (
 			},
 		}
 	);
-	console.log(">>>> di service", response.data.data);
-
-	localStorage.setItem("address", JSON.stringify(response.data.data)); // bentuknya object {id: xx, user:{}, phone: x, receiver: xx, }
+	// console.log(">>>> di service", response.data.data);
+	// localStorage.setItem("address", JSON.stringify(response.data.data)); // bentuknya object {id: xx, user:{}, phone: x, receiver: xx, }
 	// localStorage.setItem("address", JSON.stringify([response.data.data]));
-
 	// localStorage["address"] = JSON.stringify(response.data.data);
+	return response.data.data;
+};
 
+const GetUserAddresss = async (token) => {
+	const response = await axios.get(`${API_URL}/q/user`, {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	});
+	return response.data.data;
+};
+
+const DeleteUserAddresss = async (id, token) => {
+	const response = await axios.delete(`${API_URL}/${id}`, {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	});
+
+	console.log(">>>>Delete Address Response", response.data.data);
 	return response.data.data;
 };
 
 const addressService = {
 	CreateUserAddresss,
+	GetUserAddresss,
+	DeleteUserAddresss,
 };
 
 export default addressService;

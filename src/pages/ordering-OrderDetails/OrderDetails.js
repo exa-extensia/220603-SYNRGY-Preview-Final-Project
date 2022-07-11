@@ -1,6 +1,7 @@
 import Navbar from "../../components/sections/_navbar/Navbar";
 import Footer from "../../components/sections/_footer/Footer";
 import Breadcrumb from "../../components/atoms/breadcrumb/BC-OrderDetails";
+import Skeleton from "@mui/material/Skeleton";
 
 import bca from "../../assets/icons/icon-bank/bca.png";
 import bni from "../../assets/icons/icon-bank/bni.png";
@@ -13,8 +14,11 @@ import { TbUser, TbPhone } from "react-icons/tb";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { getAddress } from "../../redux/address/addressSlice";
 
 export default function PaymentOptions() {
+	const dispatch = useDispatch();
+
 	function scrollTop() {
 		window.scrollTo({
 			top: 0,
@@ -24,7 +28,8 @@ export default function PaymentOptions() {
 
 	useEffect(() => {
 		scrollTop();
-	}, []);
+		dispatch(getAddress());
+	}, [dispatch]);
 
 	const navigate = useNavigate();
 	const { address, isLoading, isError, isSuccess, message } = useSelector(
@@ -58,16 +63,16 @@ export default function PaymentOptions() {
 										<div className="h-2 w-2 rounded-full bg-med-brown"></div>
 									</div>
 								</div>
-								{address ? (
+								{address.length > 0 ? (
 									<div className="ORDERING-GENERAL-CARD sm:flex ">
 										<div className="w-3/4">
 											<div className="label-group flex flex-row items-center gap-2">
 												<p className="LABEL-ALAMAT text-sm font-bold uppercase text-brown">
-													{address.label}
+													{address[0].label}
 												</p>{" "}
 												<div
 													className={`${
-														address.isDefault === true
+														address[0].isDefault === true
 															? "rounded-xl  bg-cream py-1 px-2 text-xs text-brown"
 															: "rounded-xl  bg-cream py-1 px-2 text-xs text-brown"
 													} `}
@@ -77,17 +82,17 @@ export default function PaymentOptions() {
 											</div>
 											<div className="content-group mt-1 ">
 												<p className="break-words text-sm font-extralight">
-													{address.addressDetail} - {address.cityId}{" "}
-													{address.postalCode}
+													{address[0].addressDetail} - {address[0].cityId}{" "}
+													{address[0].postalCode}
 												</p>
 												<div className="mt-2 flex flex-row items-center gap-4">
 													<div className="flex flex-row items-center gap-1">
 														<TbUser size={20} />
-														<p className="  font-bold">{address.receiver}</p>
+														<p className="  font-bold">{address[0].receiver}</p>
 													</div>
 													<div className="flex flex-row items-center gap-1">
 														<TbPhone size={20} />
-														<p className="  font-bold">{address.phone}</p>
+														<p className="  font-bold">{address[0].phone}</p>
 													</div>
 												</div>
 											</div>
@@ -107,6 +112,7 @@ export default function PaymentOptions() {
 										</p>
 									</div>
 								)}
+								{!isLoading && isError && <div>unexpected isError</div>}
 							</div>
 							<div className="BLOCK-ALAMAT flex flex-col gap-2">
 								<div className="">

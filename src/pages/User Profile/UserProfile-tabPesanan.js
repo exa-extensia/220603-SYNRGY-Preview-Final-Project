@@ -51,6 +51,72 @@ export default function UserProfilePesanan() {
 				</div>
 			</Link>
 
+			<Link
+				to={"/orderdetails"}
+				className="ORDER-LIST-GENERAL-CARD ORDER-LIST-GRID w-full cursor-pointer items-center hover:bg-[#FFFAF2] xl:grid "
+			>
+				<div className="ORDER-LIST-COL1 border-goldie p-2 font-bold xl:border-r">
+					<div className="flex gap-2 xl:block">
+						<p className="xl:hidden">Order ID</p>
+						<p>#88832976200383</p>
+					</div>
+				</div>
+				<div className="ORDER-LIST-COL2 border-goldie p-2 text-xs text-grey xl:border-r">
+					<div className="flex gap-2 xl:block">
+						<p className="xl:hidden">Tanggal</p> <p>10-07-22</p>
+					</div>
+				</div>
+				<div className="ORDER-LIST-COL3 border-goldie p-2 text-xs text-grey xl:border-r">
+					<div className="flex gap-2 xl:block">
+						{" "}
+						<p className="xl:hidden">Total</p> <p>Rp223.900.000</p>
+					</div>
+				</div>
+				<div className="ORDER-LIST-COL4 border-goldie p-2 text-success xl:border-r">
+					<div className="flex gap-2 xl:block">
+						<p className="xl:hidden">Paid</p> <HiCheckCircle size={22} />
+					</div>
+				</div>
+				<div className="ORDER-LIST-COL4 p-2  text-danger">
+					<div className="flex gap-2 xl:block">
+						<p className="xl:hidden">Delivered</p> <HiXCircle size={22} />
+					</div>
+				</div>
+			</Link>
+
+			<Link
+				to={"/orderdetails"}
+				className="ORDER-LIST-GENERAL-CARD ORDER-LIST-GRID w-full cursor-pointer items-center hover:bg-[#FFFAF2] xl:grid "
+			>
+				<div className="ORDER-LIST-COL1 border-goldie p-2 font-bold xl:border-r">
+					<div className="flex gap-2 xl:block">
+						<p className="xl:hidden">Order ID</p>
+						<p>#88832976200383</p>
+					</div>
+				</div>
+				<div className="ORDER-LIST-COL2 border-goldie p-2 text-xs text-grey xl:border-r">
+					<div className="flex gap-2 xl:block">
+						<p className="xl:hidden">Tanggal</p> <p>10-07-22</p>
+					</div>
+				</div>
+				<div className="ORDER-LIST-COL3 border-goldie p-2 text-xs text-grey xl:border-r">
+					<div className="flex gap-2 xl:block">
+						{" "}
+						<p className="xl:hidden">Total</p> <p>Rp223.900.000</p>
+					</div>
+				</div>
+				<div className="ORDER-LIST-COL4 border-goldie p-2 text-success xl:border-r">
+					<div className="flex gap-2 xl:block">
+						<p className="xl:hidden">Paid</p> <HiCheckCircle size={22} />
+					</div>
+				</div>
+				<div className="ORDER-LIST-COL4 p-2  text-danger">
+					<div className="flex gap-2 xl:block">
+						<p className="xl:hidden">Delivered</p> <HiXCircle size={22} />
+					</div>
+				</div>
+			</Link>
+
 			{/* <img src={illst} alt="" />
 			<p>Ayo mulai berbelanja di Flambo!</p> */}
 			<div className="mt-8 flex w-full flex-col items-center justify-center">

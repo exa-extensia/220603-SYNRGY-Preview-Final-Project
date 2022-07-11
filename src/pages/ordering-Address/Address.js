@@ -80,16 +80,6 @@ export default function Address() {
 		dispatch(createAddress(addressData));
 	};
 
-	// const [Checked, setChecked] = useState(true);
-	// const toggleCheckbox = (e) => {
-	//     e.preventDefault();
-	//     if (isChec) {
-	//       setChecked(true);
-	//     } else {
-	//       setChecked(false);
-	//     }
-	//   };
-
 	return (
 		<>
 			<Navbar />
