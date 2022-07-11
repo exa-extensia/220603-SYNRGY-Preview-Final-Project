@@ -7,7 +7,11 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 
-import { getAddress, deleteAddress } from "../../redux/address/addressSlice";
+import {
+	getAddress,
+	deleteAddress,
+	updateAddress,
+} from "../../redux/address/addressSlice";
 import { toast } from "react-toastify";
 
 export default function UserProfileAlamat() {
@@ -16,6 +20,12 @@ export default function UserProfileAlamat() {
 	const { address, isLoading, isError, isSuccess, message } = useSelector(
 		(state) => state.address
 	);
+
+	const newDefaultHandler = (e) => {
+		e.preventDefault();
+		const newDefault = true;
+		dispatch(updateAddress(newDefault));
+	};
 
 	useEffect(() => {
 		dispatch(getAddress());
@@ -58,7 +68,7 @@ export default function UserProfileAlamat() {
 									className={`${
 										address.isDefault === true
 											? "rounded-xl  bg-cream py-1 px-2 text-xs text-brown"
-											: "rounded-xl  bg-cream py-1 px-2 text-xs text-brown"
+											: "hidden"
 									} `}
 								>
 									<p>alamat utama</p>
@@ -83,6 +93,9 @@ export default function UserProfileAlamat() {
 						</div>
 
 						<div className="mt-4 sm:relative sm:mt-0 sm:w-1/4">
+							<button onClick={newDefaultHandler} className="text-xs">
+								set default
+							</button>
 							<div className="sm:absolute sm:top-0 sm:right-0">
 								<button
 									onClick={() => dispatch(deleteAddress(address.id))}

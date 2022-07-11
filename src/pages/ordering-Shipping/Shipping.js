@@ -47,6 +47,8 @@ export default function Shipping() {
 	const { address, isLoading, isError, isSuccess, message } = useSelector(
 		(state) => state.address
 	);
+	const addressDefault = address.find((e) => e.isDefault);
+	console.log(addressDefault);
 
 	return (
 		<>
@@ -93,17 +95,17 @@ export default function Shipping() {
 												Kecamatan Coblong, Kota Bandung, Jawa Barat 40132
 											</p>
 										</div> */}
-										{address.length > 0 ? (
+										{addressDefault ? (
 											<>
 												<div className="label-group flex flex-row items-center gap-2">
 													<p className="LABEL-ALAMAT text-sm font-bold uppercase text-brown">
-														{address[0].label}
+														{addressDefault.label}
 													</p>{" "}
 													<div
 														className={`${
-															address[0].isDefault === true
+															addressDefault
 																? "rounded-xl  bg-cream py-1 px-2 text-xs text-brown"
-																: "rounded-xl  bg-cream py-1 px-2 text-xs text-brown"
+																: "hidden"
 														} `}
 													>
 														<p>alamat utama</p>
@@ -111,19 +113,21 @@ export default function Shipping() {
 												</div>
 												<div className="content-group mt-1 ">
 													<p className="break-words text-sm font-extralight">
-														{address[0].addressDetail} - {address[0].cityId}{" "}
-														{address[0].postalCode}
+														{addressDefault.addressDefaultDetail} -{" "}
+														{addressDefault.cityId} {addressDefault.postalCode}
 													</p>
 													<div className="mt-2 flex flex-row items-center gap-4">
 														<div className="flex flex-row items-center gap-1">
 															<TbUser size={20} />
 															<p className="  font-bold">
-																{address[0].receiver}
+																{addressDefault.receiver}
 															</p>
 														</div>
 														<div className="flex flex-row items-center gap-1">
 															<TbPhone size={20} />
-															<p className="  font-bold">{address[0].phone}</p>
+															<p className="  font-bold">
+																{addressDefault.phone}
+															</p>
 														</div>
 													</div>
 												</div>

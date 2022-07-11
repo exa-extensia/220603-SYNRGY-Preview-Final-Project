@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import addressService from "./addressService";
 
+import { toast } from "react-toastify";
+
 // const address = JSON.parse(localStorage.getItem("address"));
 
 const initialState = {
@@ -54,9 +56,25 @@ export const deleteAddress = createAsyncThunk(
 	"address/delete",
 	async (id, thunkAPI) => {
 		try {
+			return await addressService.DeleteUserAddresss(id);
+		} catch (error) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString();
+			return thunkAPI.rejectWithValue(message);
+		}
+	}
+);
+
+export const updateAddress = createAsyncThunk(
+	"address/update",
+	async ({ isDefault }, thunkAPI) => {
+		try {
 			const token = JSON.parse(localStorage.getItem("token"));
-			console.log("TOKEN LOCAL STORAGE>>>>>>", token);
-			return await addressService.DeleteUserAddresss(id, token);
+			return await addressService.UpdateUserAddresss(isDefault, token);
 		} catch (error) {
 			const message =
 				(error.response &&
@@ -104,7 +122,7 @@ export const addressSlice = createSlice({
 			})
 			.addCase(getAddress.fulfilled, (state, action) => {
 				state.isLoading = false;
-				state.isSuccess = true;
+				// state.isSuccess = true;
 				state.address = action.payload;
 			})
 			.addCase(getAddress.rejected, (state, action) => {
@@ -117,14 +135,33 @@ export const addressSlice = createSlice({
 			})
 			.addCase(deleteAddress.fulfilled, (state, action) => {
 				state.isLoading = false;
-				state.isSuccess = true;
-				state.address = state.address.filter((e) => e.id !== action.payload);
+				// state.isSuccess = true;
+				console.log(">>>ACTION PAYLOAD DELETE", action.payload);
+				state.address = state.address.filter((e) => e.id !== action.payload.id);
 				// state.address = state.address.splice(
 				// 	state.address.findIndex((item) => item.id === action.payload),
 				// 	1
 				// );
 			})
 			.addCase(deleteAddress.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
+			})
+			.addCase(updateAddress.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(updateAddress.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isSuccess = true;
+				state.address.map((e) => {
+					if (e.id === action.payload.id) {
+						e.isDefault = action.payload;
+					}
+				});
+				toast("UPDATED tapi gatau handle state>>>", action.payload);
+			})
+			.addCase(updateAddress.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
 				state.message = action.payload;
