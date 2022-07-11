@@ -25,7 +25,7 @@ const CreateUserAddresss = async (
 	);
 	console.log(">>>> di service", response.data.data);
 
-	localStorage.setItem("address", JSON.stringify(response.data.data)); // bentuknya object {id: xx, user:{}, phone: x, receiver: xxx, }
+	localStorage.setItem("address", JSON.stringify(response.data.data)); // bentuknya object {id: xx, user:{}, phone: x, receiver: xx, }
 	// localStorage.setItem("address", JSON.stringify([response.data.data]));
 
 	// localStorage["address"] = JSON.stringify(response.data.data);
