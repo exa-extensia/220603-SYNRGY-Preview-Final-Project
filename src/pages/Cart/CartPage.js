@@ -256,7 +256,7 @@ export default function CartPage() {
 									</button>
 								</Link>
 							</div>
-							{/* <img src={illst} alt="" /> */}
+							{/* <img src={illst} alt="" />  */}
 						</div>
 					</div>
 				</div>
