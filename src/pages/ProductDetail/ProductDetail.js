@@ -11,39 +11,32 @@ import { useSelector, useDispatch } from "react-redux";
 import { FaLeaf } from "react-icons/fa";
 import Skeleton from "@mui/material/Skeleton";
 import { toast } from "react-toastify";
-// import { getOneProduct } from "../../redux/product/productSlice";
-import { addProduct, inc, dec } from "../../redux/cart/cartSlice";
+import { addToCart } from "../../redux/cart/cartSlice";
 
 import axios from "axios";
 
 export default function ProductDetail() {
+	const dispatch = useDispatch();
 	function scrollTop() {
 		window.scrollTo({
 			top: 0,
 			behavior: "smooth",
 		});
 	}
-
-	const params = useParams();
-	const [oneProduct, setOneProduct] = useState([]);
-	const [mainImage, setMainImage] = useState("");
-	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState(false);
-
-	// const { products, isLoading, isError, isSuccess, message } = useSelector(
-	// 	(state) => state.products
-	// );
-
-	const dispatch = useDispatch();
 	const { user } = useSelector((state) => state.auth);
-
 	const needLogin = () => {
 		toast("Wah harus login dulu nih :)");
 	};
 
+	const params = useParams();
+	const [oneProduct, setOneProduct] = useState([]);
+	const [mainImage, setMainImage] = useState("");
+	const [totalPrice, setTotalPrice] = useState();
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(false);
+
 	useEffect(() => {
 		scrollTop();
-		// dispatch(getOneProduct(params));
 		axios
 			.get(`https://cosmetic-b.herokuapp.com/api/v1/product/${params.id}`)
 			.then((response) => {
@@ -61,26 +54,23 @@ export default function ProductDetail() {
 	}, [params.id]);
 
 	const [quantity, setQuantity] = useState(1);
-	// const [totalPrice, setTotalPrice] = useState();
-
 	const quantityHandler = (type) => {
 		if (type === "dec") {
 			quantity > 1 && setQuantity(quantity - 1);
 		} else {
 			setQuantity(quantity + 1);
 		}
-		// setTotalPrice(totalPrice * quantity);
 	};
 
-	// const [quantity, setInitialQuantity] = useState(1);
-	const addToCartHandler = () => {
-		dispatch(addProduct(oneProduct.variant[0].id, quantity));
+	const addToCartHandler = (e) => {
+		e.preventDefault();
+		const itemData = {
+			quantity,
+			variantId: oneProduct.variant[0].id,
+			brandId: oneProduct.brand.id,
+		};
+		dispatch(addToCart(itemData));
 	};
-
-	// const quantity = useSelector((state) => state.cart.quantity);
-	const [totalPrice, setTotalPrice] = useState();
-
-	// const incHandler
 
 	return (
 		<>
@@ -250,12 +240,12 @@ export default function ProductDetail() {
 										>
 											Add to Cart
 										</button>
-										<Link
+										{/* <Link
 											to={`/cart`}
 											className="btn-sec w-full rounded-full py-2 px-5 text-xs"
 										>
 											<button>Buy Now</button>
-										</Link>
+										</Link> */}
 									</div>
 								</div>
 							</>
