@@ -21,6 +21,8 @@ export default function UserProfileAlamat() {
 		(state) => state.address
 	);
 
+	// const address = [];
+
 	const newDefaultHandler = (e) => {
 		e.preventDefault();
 		const newDefault = true;
@@ -53,7 +55,18 @@ export default function UserProfileAlamat() {
 							40132
 						</p>
 					</div> */}
-			{!isLoading && !isError && address.length > 0 ? (
+			{isLoading && (
+				<div key={address.id} className="my-2 w-full ">
+					<Skeleton
+						variant="rectangular"
+						height={300}
+						animation="wave"
+						className="w-full"
+					/>
+				</div>
+			)}
+			{!isLoading &&
+				address.length > 0 &&
 				address.map((address) => (
 					<div
 						key={address.id}
@@ -98,7 +111,15 @@ export default function UserProfileAlamat() {
 							</button>
 							<div className="sm:absolute sm:top-0 sm:right-0">
 								<button
-									onClick={() => dispatch(deleteAddress(address.id))}
+									onClick={(e) => {
+										dispatch(deleteAddress(address.id));
+										if (address.isDefault === true) {
+											toast("Woops, ganti alamat default dulu ya :)");
+										}
+										if (address.isDefault === false) {
+											window.location.reload();
+										}
+									}}
 									className="cursor-pointer rounded-full bg-white p-1 text-danger hover:bg-danger hover:text-white"
 								>
 									<HiOutlineTrash />
@@ -106,8 +127,8 @@ export default function UserProfileAlamat() {
 							</div>
 						</div>
 					</div>
-				))
-			) : (
+				))}
+			{!isLoading && address.length < 1 && (
 				<div className="flex flex-col items-center justify-center">
 					<p className="mb-6 text-xl">Ayo daftarkan alamat mu! :)</p>
 					<img src={illst} alt="" />

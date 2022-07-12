@@ -2,6 +2,7 @@ import Navbar from "../../components/sections/_navbar/Navbar";
 import Footer from "../../components/sections/_footer/Footer";
 import Breadcrumb from "../../components/atoms/breadcrumb/BC-Shipping";
 import Skeleton from "@mui/material/Skeleton";
+import { toast } from "react-toastify";
 
 import bca from "../../assets/icons/icon-bank/bca.png";
 import bni from "../../assets/icons/icon-bank/bni.png";
@@ -50,6 +51,14 @@ export default function Shipping() {
 	const addressDefault = address.find((e) => e.isDefault);
 	console.log(addressDefault);
 
+	const onBuatPesanan = () => {
+		if (addressDefault) {
+			navigate("/finishpayment");
+		} else {
+			toast("Harus atur alamat utama dulu nih!");
+		}
+	};
+
 	return (
 		<>
 			<Navbar />
@@ -71,43 +80,23 @@ export default function Shipping() {
 								</div>
 								<div className="ORDERING-GENERAL-CARD lg:flex">
 									<div className="w-full lg:w-3/4 ">
-										{/* <div className="label-group flex items-center gap-2">
-											<p className="LABEL-ALAMAT text-sm font-semibold uppercase text-grey">
-												APARTEMEN
-											</p>{" "}
-											<div
-												className={
-													"rounded-xl  bg-cream py-1 px-2 text-xs text-brown"
-												}
-											>
-												<p>alamat utama</p>
+										{isLoading && (
+											<div className=" w-full ">
+												<Skeleton
+													variant="rectangular"
+													height={100}
+													animation="wave"
+													className="w-full"
+												/>
 											</div>
-										</div>
-										<div className="content-group mt-4 text-sm">
-											<p className="mb-2 font-bold">
-												Nama Penerima - 08119062237
-											</p>
-											<p className="">
-												Jl. Dipati Ukur No.112-116, Lebakgede, Kecamatan
-												Coblong, Kota Bandung, Jawa Barat 40132Jl. Dipati Ukur
-												No.112-116, Lebakgede, Kecamatan Coblong, Kota Bandung,
-												Jawa Barat 40132Jl. Dipati Ukur No.112-116, Lebakgede,
-												Kecamatan Coblong, Kota Bandung, Jawa Barat 40132
-											</p>
-										</div> */}
-										{addressDefault ? (
+										)}
+										{!isLoading && !isError && addressDefault && (
 											<>
 												<div className="label-group flex flex-row items-center gap-2">
 													<p className="LABEL-ALAMAT text-sm font-bold uppercase text-brown">
 														{addressDefault.label}
 													</p>{" "}
-													<div
-														className={`${
-															addressDefault
-																? "rounded-xl  bg-cream py-1 px-2 text-xs text-brown"
-																: "hidden"
-														} `}
-													>
+													<div className="rounded-xl  bg-cream py-1 px-2 text-xs text-brown">
 														<p>alamat utama</p>
 													</div>
 												</div>
@@ -132,16 +121,25 @@ export default function Shipping() {
 													</div>
 												</div>
 											</>
-										) : (
+										)}
+										{!isLoading && !isError && !addressDefault && (
 											<>
 												<HiArrowNarrowRight
 													size={30}
-													className="hidden sm:block"
+													className="hidden text-brown sm:block"
 												/>
-												<p className="text-xl">Hayuk daftarkan alamatmu! :)</p>
+												<p className="text-md">
+													Hayuk daftarkan{" "}
+													<span className="text-xl font-bold text-danger">
+														alamat utama
+													</span>
+													mu! :)
+												</p>
 											</>
 										)}
-										{!isLoading && isError && <div>unexpected isError</div>}
+										{!isLoading &&
+											isError && <div>unexpected isError</div> &&
+											toast(message)}
 									</div>
 									<div className="mt-4 lg:relative lg:mt-0 lg:w-1/4">
 										<div className="lg:absolute lg:top-0 lg:right-0">
@@ -359,7 +357,7 @@ export default function Shipping() {
 
 							<div className="relative h-10 w-full">
 								<button
-									onClick={() => navigate("/finishpayment")}
+									onClick={onBuatPesanan}
 									className="btn-grad absolute right-0 bottom-0 rounded-full py-2 px-5 text-xs text-white sm:text-base"
 								>
 									Buat Pesanan

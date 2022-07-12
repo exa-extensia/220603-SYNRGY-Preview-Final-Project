@@ -194,7 +194,8 @@ export default function Address() {
 									}
 								/>
 								<p className="text-base font-semibold text-brown">
-									gunakan sebagai alamat utama
+									gunakan sebagai{" "}
+									<span className="font-bold text-danger">alamat utama</span>
 								</p>
 							</div>
 							{isLoading && (

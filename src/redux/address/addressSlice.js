@@ -133,15 +133,14 @@ export const addressSlice = createSlice({
 			.addCase(deleteAddress.pending, (state) => {
 				state.isLoading = true;
 			})
-			.addCase(deleteAddress.fulfilled, (state, action) => {
+			.addCase(deleteAddress.fulfilled, (state) => {
 				state.isLoading = false;
 				// state.isSuccess = true;
-				console.log(">>>ACTION PAYLOAD DELETE", action.payload);
-				state.address = state.address.filter((e) => e.id !== action.payload.id);
-				// state.address = state.address.splice(
-				// 	state.address.findIndex((item) => item.id === action.payload),
-				// 	1
-				// );
+				// console.log(">>>ACTION PAYLOAD DELETE", action.payload);
+				// state.address = state.address;
+				// state.address = state.address.filter((e) => e.id !== action.payload.id);
+				// state.address = state.address.map((e) => e);
+				toast("BERHASIL DIHAPUS :)");
 			})
 			.addCase(deleteAddress.rejected, (state, action) => {
 				state.isLoading = false;
