@@ -21,6 +21,7 @@ const cartSlice = createSlice({
 		// 		state.quantity -= 1;
 		// 	}
 		// },
+		// git init
 	},
 });
 
