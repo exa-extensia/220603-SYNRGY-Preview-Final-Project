@@ -229,8 +229,19 @@ export default function Address() {
 									/>
 								</div>
 							</div>
-							<div className="relative h-10 w-full">
+							{/* <div className="relative h-10 w-full">
 								<button className="btn-grad absolute right-0 bottom-0 rounded-full py-2 px-5 text-xs text-white sm:w-40">
+									Tambah Alamat
+								</button>
+							</div> */}
+							<div className="flex h-10 w-full items-center justify-center gap-2 xl:float-right xl:block xl:text-right  ">
+								<button
+									onClick={() => navigate(-1)}
+									className="btn-sec right-0 bottom-0 ml-0 rounded-full py-2 px-5  text-xs xl:ml-auto xl:mr-4 xl:text-base"
+								>
+									Kembali
+								</button>
+								<button className="btn-grad right-0 bottom-0 ml-0 rounded-full py-2 px-5 text-xs text-white xl:ml-auto xl:text-base">
 									Tambah Alamat
 								</button>
 							</div>
