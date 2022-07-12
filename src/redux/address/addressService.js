@@ -23,18 +23,48 @@ const CreateUserAddresss = async (
 			},
 		}
 	);
-	console.log(">>>> di service", response.data.data);
-
-	localStorage.setItem("address", JSON.stringify(response.data.data)); // bentuknya object {id: xx, user:{}, phone: x, receiver: xxxx, }
+	// console.log(">>>> di service", response.data.data);
+	// localStorage.setItem("address", JSON.stringify(response.data.data)); // bentuknya object {id: xx, user:{}, phone: x, receiver: xx, }
 	// localStorage.setItem("address", JSON.stringify([response.data.data]));
-
 	// localStorage["address"] = JSON.stringify(response.data.data);
+	return response.data.data;
+};
 
+const GetUserAddresss = async (token) => {
+	const response = await axios.get(`${API_URL}/q/user`, {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	});
+	return response.data.data;
+};
+
+const DeleteUserAddresss = async (id) => {
+	const response = await axios.post(`${API_URL}/delete/${id}`);
+
+	console.log(">>>>Delete Address Response", response.data.data);
+	return response.data.data;
+};
+
+const UpdateUserAddresss = async (isDefault, token) => {
+	const response = await axios.put(
+		`${API_URL}`,
+		{ isDefault: isDefault },
+		{
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		}
+	);
+	console.log(">>>>UPDATE Address Response", response.data.data);
 	return response.data.data;
 };
 
 const addressService = {
 	CreateUserAddresss,
+	GetUserAddresss,
+	DeleteUserAddresss,
+	UpdateUserAddresss,
 };
 
 export default addressService;

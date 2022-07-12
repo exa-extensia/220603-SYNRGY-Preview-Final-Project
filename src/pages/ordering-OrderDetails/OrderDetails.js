@@ -1,6 +1,7 @@
 import Navbar from "../../components/sections/_navbar/Navbar";
 import Footer from "../../components/sections/_footer/Footer";
 import Breadcrumb from "../../components/atoms/breadcrumb/BC-OrderDetails";
+import Skeleton from "@mui/material/Skeleton";
 
 import bca from "../../assets/icons/icon-bank/bca.png";
 import bni from "../../assets/icons/icon-bank/bni.png";
@@ -13,8 +14,11 @@ import { TbUser, TbPhone } from "react-icons/tb";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { getAddress } from "../../redux/address/addressSlice";
 
 export default function PaymentOptions() {
+	const dispatch = useDispatch();
+
 	function scrollTop() {
 		window.scrollTo({
 			top: 0,
@@ -24,12 +28,14 @@ export default function PaymentOptions() {
 
 	useEffect(() => {
 		scrollTop();
-	}, []);
+		dispatch(getAddress());
+	}, [dispatch]);
 
-	const navigate = useNavigate();
 	const { address, isLoading, isError, isSuccess, message } = useSelector(
 		(state) => state.address
 	);
+
+	const addressDefault = address.find((e) => e.isDefault);
 
 	return (
 		<>
@@ -58,18 +64,28 @@ export default function PaymentOptions() {
 										<div className="h-2 w-2 rounded-full bg-med-brown"></div>
 									</div>
 								</div>
-								{address ? (
+								{isLoading && (
+									<div className="ORDERING-GENERAL-CARD w-full ">
+										<Skeleton
+											variant="rectangular"
+											height={100}
+											animation="wave"
+											className="w-full"
+										/>
+									</div>
+								)}
+								{!isLoading && !isError && addressDefault && (
 									<div className="ORDERING-GENERAL-CARD sm:flex ">
 										<div className="w-3/4">
 											<div className="label-group flex flex-row items-center gap-2">
 												<p className="LABEL-ALAMAT text-sm font-bold uppercase text-brown">
-													{address.label}
+													{addressDefault.label}
 												</p>{" "}
 												<div
 													className={`${
-														address.isDefault === true
+														addressDefault.isDefault === true
 															? "rounded-xl  bg-cream py-1 px-2 text-xs text-brown"
-															: "rounded-xl  bg-cream py-1 px-2 text-xs text-brown"
+															: "hidden"
 													} `}
 												>
 													<p>alamat utama</p>
@@ -77,17 +93,21 @@ export default function PaymentOptions() {
 											</div>
 											<div className="content-group mt-1 ">
 												<p className="break-words text-sm font-extralight">
-													{address.addressDetail} - {address.cityId}{" "}
-													{address.postalCode}
+													{addressDefault.addressDetail} -{" "}
+													{addressDefault.cityId} {addressDefault.postalCode}
 												</p>
 												<div className="mt-2 flex flex-row items-center gap-4">
 													<div className="flex flex-row items-center gap-1">
 														<TbUser size={20} />
-														<p className="  font-bold">{address.receiver}</p>
+														<p className="  font-bold">
+															{addressDefault.receiver}
+														</p>
 													</div>
 													<div className="flex flex-row items-center gap-1">
 														<TbPhone size={20} />
-														<p className="  font-bold">{address.phone}</p>
+														<p className="  font-bold">
+															{addressDefault.phone}
+														</p>
 													</div>
 												</div>
 											</div>
@@ -100,11 +120,17 @@ export default function PaymentOptions() {
 											</div>
 										</div>
 									</div>
-								) : (
-									<div className="flex flex-col items-center justify-center">
+								)}
+								{!isLoading && !isError && !addressDefault && (
+									<div className="ORDERING-GENERAL-CARD flex flex-col items-center justify-center">
 										<p className="mb-6 text-xl">
-											HAYO BLM MASUKIN ALAMAT YA!!!!!!!
+											HAYO BLM MASUKIN ALAMAT YA!!!!!!! ga dikirim nih :(
 										</p>
+									</div>
+								)}
+								{!isLoading && isError && (
+									<div className="ORDERING-GENERAL-CARD">
+										unexpected isError: {message}
 									</div>
 								)}
 							</div>

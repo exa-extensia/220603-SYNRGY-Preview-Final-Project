@@ -47,7 +47,6 @@ const login = async ({ password, email }) => {
 const logout = () => {
 	localStorage.removeItem("user");
 	localStorage.removeItem("token");
-	localStorage.removeItem("address");
 };
 
 const authService = {

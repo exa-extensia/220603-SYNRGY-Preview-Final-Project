@@ -1,6 +1,8 @@
 import Navbar from "../../components/sections/_navbar/Navbar";
 import Footer from "../../components/sections/_footer/Footer";
 import Breadcrumb from "../../components/atoms/breadcrumb/BC-Shipping";
+import Skeleton from "@mui/material/Skeleton";
+import { toast } from "react-toastify";
 
 import bca from "../../assets/icons/icon-bank/bca.png";
 import bni from "../../assets/icons/icon-bank/bni.png";
@@ -24,6 +26,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
+import { getAddress } from "../../redux/address/addressSlice";
+
 export default function Shipping() {
 	function scrollTop() {
 		window.scrollTo({
@@ -32,15 +36,28 @@ export default function Shipping() {
 		});
 	}
 
+	const dispatch = useDispatch();
+
 	useEffect(() => {
 		scrollTop();
-	}, []);
+		dispatch(getAddress());
+	}, [dispatch]);
 
 	const navigate = useNavigate();
 
 	const { address, isLoading, isError, isSuccess, message } = useSelector(
 		(state) => state.address
 	);
+	const addressDefault = address.find((e) => e.isDefault);
+	console.log(addressDefault);
+
+	const onBuatPesanan = () => {
+		if (addressDefault) {
+			navigate("/finishpayment");
+		} else {
+			toast("Harus atur alamat utama dulu nih!");
+		}
+	};
 
 	return (
 		<>
@@ -63,72 +80,66 @@ export default function Shipping() {
 								</div>
 								<div className="ORDERING-GENERAL-CARD lg:flex">
 									<div className="w-full lg:w-3/4 ">
-										{/* <div className="label-group flex items-center gap-2">
-											<p className="LABEL-ALAMAT text-sm font-semibold uppercase text-grey">
-												APARTEMEN
-											</p>{" "}
-											<div
-												className={
-													"rounded-xl  bg-cream py-1 px-2 text-xs text-brown"
-												}
-											>
-												<p>alamat utama</p>
+										{isLoading && (
+											<div className=" w-full ">
+												<Skeleton
+													variant="rectangular"
+													height={100}
+													animation="wave"
+													className="w-full"
+												/>
 											</div>
-										</div>
-										<div className="content-group mt-4 text-sm">
-											<p className="mb-2 font-bold">
-												Nama Penerima - 08119062237
-											</p>
-											<p className="">
-												Jl. Dipati Ukur No.112-116, Lebakgede, Kecamatan
-												Coblong, Kota Bandung, Jawa Barat 40132Jl. Dipati Ukur
-												No.112-116, Lebakgede, Kecamatan Coblong, Kota Bandung,
-												Jawa Barat 40132Jl. Dipati Ukur No.112-116, Lebakgede,
-												Kecamatan Coblong, Kota Bandung, Jawa Barat 40132
-											</p>
-										</div> */}
-										{address ? (
+										)}
+										{!isLoading && !isError && addressDefault && (
 											<>
 												<div className="label-group flex flex-row items-center gap-2">
 													<p className="LABEL-ALAMAT text-sm font-bold uppercase text-brown">
-														{address.label}
+														{addressDefault.label}
 													</p>{" "}
-													<div
-														className={`${
-															address.isDefault === true
-																? "rounded-xl  bg-cream py-1 px-2 text-xs text-brown"
-																: "rounded-xl  bg-cream py-1 px-2 text-xs text-brown"
-														} `}
-													>
+													<div className="rounded-xl  bg-cream py-1 px-2 text-xs text-brown">
 														<p>alamat utama</p>
 													</div>
 												</div>
 												<div className="content-group mt-1 ">
 													<p className="break-words text-sm font-extralight">
-														{address.addressDetail} - {address.cityId}{" "}
-														{address.postalCode}
+														{addressDefault.addressDefaultDetail} -{" "}
+														{addressDefault.cityId} {addressDefault.postalCode}
 													</p>
 													<div className="mt-2 flex flex-row items-center gap-4">
 														<div className="flex flex-row items-center gap-1">
 															<TbUser size={20} />
-															<p className="  font-bold">{address.receiver}</p>
+															<p className="  font-bold">
+																{addressDefault.receiver}
+															</p>
 														</div>
 														<div className="flex flex-row items-center gap-1">
 															<TbPhone size={20} />
-															<p className="  font-bold">{address.phone}</p>
+															<p className="  font-bold">
+																{addressDefault.phone}
+															</p>
 														</div>
 													</div>
 												</div>
 											</>
-										) : (
+										)}
+										{!isLoading && !isError && !addressDefault && (
 											<>
 												<HiArrowNarrowRight
 													size={30}
-													className="hidden sm:block"
+													className="hidden text-brown sm:block"
 												/>
-												<p className="text-xl">Hayuk daftarkan alamatmu! :)</p>
+												<p className="text-md">
+													Hayuk daftarkan{" "}
+													<span className="text-xl font-bold text-danger">
+														alamat utama
+													</span>
+													mu! :)
+												</p>
 											</>
 										)}
+										{!isLoading &&
+											isError && <div>unexpected isError</div> &&
+											toast(message)}
 									</div>
 									<div className="mt-4 lg:relative lg:mt-0 lg:w-1/4">
 										<div className="lg:absolute lg:top-0 lg:right-0">
@@ -346,7 +357,7 @@ export default function Shipping() {
 
 							<div className="relative h-10 w-full">
 								<button
-									onClick={() => navigate("/finishpayment")}
+									onClick={onBuatPesanan}
 									className="btn-grad absolute right-0 bottom-0 rounded-full py-2 px-5 text-xs text-white sm:text-base"
 								>
 									Buat Pesanan
