@@ -3,35 +3,36 @@ import cartService from "./cartService";
 
 import { toast } from "react-toastify";
 
-const data = {
-	overview: {},
-	items: [
-		{
-			variant: {
-				quantity: 0,
-				price: 0,
-				product: {
-					brand: {},
-					images: [],
-					name: "",
-					id: "",
-				},
-				imageIndex: 0,
-				name: "",
-				id: "",
-			},
-			quantity: 0,
-			subTotal: 0,
-			id: {
-				cartId: "",
-				variantId: "",
-			},
-		},
-	],
-};
+// const data = {
+// 	overview: {},
+// 	items: [
+// 		{
+// 			variant: {
+// 				quantity: 0,
+// 				price: 0,
+// 				product: {
+// 					brand: {},
+// 					images: [],
+// 					name: "",
+// 					id: "",
+// 				},
+// 				imageIndex: 0,
+// 				name: "",
+// 				id: "",
+// 			},
+// 			quantity: 0,
+// 			subTotal: 0,
+// 			id: {
+// 				cartId: "",
+// 				variantId: "",
+// 			},
+// 		},
+// 	],
+// };
 
 const initialState = {
 	data: {},
+	cartBadge: {},
 	isError: false,
 	isSuccess: false,
 	isLoading: false,
@@ -104,7 +105,8 @@ export const cartSlice = createSlice({
 			.addCase(addToCart.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.isSuccess = true;
-				toast("action jalan");
+				toast("sudah dimasukkan ke keranjang!");
+				console.log(action.payload);
 
 				// const existingIndex = state.items.findIndex(
 				// 	(item) => item.id === action.payload.id
@@ -140,20 +142,21 @@ export const cartSlice = createSlice({
 				state.isLoading = false;
 				state.isError = true;
 				state.message = action.payload;
+			})
+			.addCase(getAllCart.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(getAllCart.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isSuccess = true;
+				state.data = action.payload;
+				console.log(action.payload);
+			})
+			.addCase(getAllCart.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
 			});
-		// .addCase(getAllCart.pending, (state) => {
-		// 	state.isLoading = true;
-		// })
-		// .addCase(getAllCart.fulfilled, (state, action) => {
-		// 	state.isLoading = false;
-		// 	state.isSuccess = true;
-		// 	state.address = action.payload;
-		// })
-		// .addCase(getAllCart.rejected, (state, action) => {
-		// 	state.isLoading = false;
-		// 	state.isError = true;
-		// 	state.message = action.payload;
-		// });
 	},
 });
 

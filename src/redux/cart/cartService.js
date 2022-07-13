@@ -2,7 +2,7 @@ import axios from "axios";
 
 const API_URL = "https://cosmetic-b.herokuapp.com/api/v1/carts";
 
-const AddToCart = async ({ quantity, variantId, brandId }, token) => {
+const AddToCart = async ({ quantity, variantId }, token) => {
 	const response = await axios.post(
 		`${API_URL}`,
 		{
@@ -15,7 +15,7 @@ const AddToCart = async ({ quantity, variantId, brandId }, token) => {
 			},
 		}
 	);
-	return { data: response.data.data, variantId, brandId };
+	return { data: response.data.data };
 };
 
 const GetAllCart = async (token) => {

@@ -67,7 +67,7 @@ export default function ProductDetail() {
 		const itemData = {
 			quantity,
 			variantId: oneProduct.variant[0].id,
-			brandId: oneProduct.brand.id,
+			// brandId: oneProduct.brand.id,
 		};
 		dispatch(addToCart(itemData));
 	};
