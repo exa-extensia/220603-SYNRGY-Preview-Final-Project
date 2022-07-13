@@ -10,6 +10,7 @@ import bri from "../../assets/icons/icon-bank/bri.png";
 
 import { GiCardboardBoxClosed } from "react-icons/gi";
 import { TbUser, TbPhone } from "react-icons/tb";
+import { HiOutlineQuestionMarkCircle } from "react-icons/hi";
 
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -329,11 +330,27 @@ export default function PaymentOptions() {
 									</div>
 								</div>
 							</div>
-							<div className="relative h-20 w-full">
-								<h1 className=" absolute right-0 bottom-0  py-2 px-5 text-right text-2xl text-med-brown">
-									Terima kasih telah berbelanja di Flambo!
-								</h1>
+
+							<h1 className="px-5 pt-3 text-2xl tracking-wide text-med-brown">
+								Terima kasih telah berbelanja di Flambo!
+							</h1>
+
+							<div className=" my-6 w-full border-b-2 border-[#d2a866]"></div>
+							<div className=" flex w-full gap-4">
+								<HiOutlineQuestionMarkCircle size={28} className="text-brown" />
+								<div className="flex flex-col gap-4">
+									<p className="font-bold">Punya pertanyaan seputar pesanan?</p>
+									<div>
+										<p className="font-bold text-brown">Email</p>
+										<p>cs@flambo.com</p>
+									</div>
+									<div>
+										<p className="font-bold text-brown">Whatsapp</p>
+										<p>+6282 3355 3778</p>
+									</div>
+								</div>
 							</div>
+
 							{/* <img src={illst} alt="" /> */}
 						</div>
 					</div>

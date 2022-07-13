@@ -31,6 +31,9 @@ export default function UserProfileAlamat() {
 
 	useEffect(() => {
 		dispatch(getAddress());
+		if (isError) {
+			toast(message);
+		}
 	}, [dispatch]);
 
 	return (
@@ -112,6 +115,7 @@ export default function UserProfileAlamat() {
 							<div className="sm:absolute sm:top-0 sm:right-0">
 								<button
 									onClick={(e) => {
+										toast("Alamat non-default akan dihapus!");
 										dispatch(deleteAddress(address.id));
 										if (address.isDefault === true) {
 											toast("Woops, ganti alamat default dulu ya :)");

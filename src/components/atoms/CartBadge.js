@@ -13,7 +13,8 @@ const StyledBadge = styled(Badge)({
 });
 
 export default function CartBadge() {
-	const quantity = useSelector((state) => state.cart.quantity);
+	const getItemsLength = useSelector((state) => state.cart.items);
+	const quantity = 0; // getItemsLength.length;
 
 	return (
 		<StyledBadge badgeContent={quantity}>

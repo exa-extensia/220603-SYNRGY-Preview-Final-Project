@@ -3,7 +3,7 @@ import axios from "axios";
 const API_URL = "https://cosmetic-b.herokuapp.com/api/v1/product";
 
 const getAllProducts = async () => {
-	const response = await axios.get(`${API_URL}/q/trending`);
+	const response = await axios.get(`${API_URL}`);
 	console.log(response.data.data);
 
 	if (response.data.data) {
