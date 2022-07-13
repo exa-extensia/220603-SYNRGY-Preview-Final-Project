@@ -71,6 +71,24 @@ export const getAllCart = createAsyncThunk("cart/get", async (thunkAPI) => {
 	}
 });
 
+export const deleteCart = createAsyncThunk(
+	"cart/delete",
+	async (id, thunkAPI) => {
+		try {
+			const token = JSON.parse(localStorage.getItem("token"));
+			return await cartService.DeleteCart(id, token);
+		} catch (error) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString();
+			return thunkAPI.rejectWithValue(message);
+		}
+	}
+);
+
 ///////////////////////////SLICE
 
 export const cartSlice = createSlice({
@@ -142,6 +160,7 @@ export const cartSlice = createSlice({
 				state.isLoading = false;
 				state.isError = true;
 				state.message = action.payload;
+				toast("oops ada error");
 			})
 			.addCase(getAllCart.pending, (state) => {
 				state.isLoading = true;
@@ -156,6 +175,20 @@ export const cartSlice = createSlice({
 				state.isLoading = false;
 				state.isError = true;
 				state.message = action.payload;
+			})
+			.addCase(deleteCart.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(deleteCart.fulfilled, (state) => {
+				state.isLoading = false;
+				state.isSuccess = true;
+				toast("BERHASIL DIHAPUS :)");
+			})
+			.addCase(deleteCart.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
+				toast("oops ada error");
 			});
 	},
 });

@@ -37,11 +37,11 @@
 }
 
 .cp__input {
-	@apply place-items-center;
 	display: grid;
 	grid-template-columns: 1.5fr 3fr 0.5fr;
 	grid-template-rows: auto, auto, auto;
 	grid-gap: 10px;
+	align-items: center;
 }
 
 .cp__input .input__img {
@@ -65,10 +65,6 @@
 
 .cp__input .input__qty div {
 	@apply flex aspect-square w-7 cursor-pointer items-center justify-center  rounded-full bg-cream text-brown transition-all duration-300 hover:bg-med-brown hover:text-white;
-}
-
-.cp__input .input__qty p {
-	@apply font-bold text-brown;
 }
 
 .cp__input .input__price {
