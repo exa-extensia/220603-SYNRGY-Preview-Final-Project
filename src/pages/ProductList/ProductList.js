@@ -79,13 +79,44 @@ export default function ProductList() {
 						<Breadcrumb />
 					</div>
 					<div className="pl__2cols">
-						<div className="pl__filter">Filter</div>
+						<div className="pl__filter p-6">
+							<div className="">
+								<h1 className="text-2xl tracking-wider">Filter</h1>
+								<div className="my-2 flex items-center">
+									<div className="w-20 border-b-2 border-white" />
+									<div className="h-2 w-2 rounded-full bg-white"></div>
+								</div>
+							</div>
+
+							<div className="mt-8 flex flex-col gap-2">
+								<div>Produk Semua</div>
+								<div>Produk Trending</div>
+								<div>Produk Organik</div>
+								<div className="my-2 w-full border-b border-white" />
+								<div>Brand </div>
+								<div className="ml-4 flex flex-col gap-2 text-xs font-extralight">
+									<div>KOCH, STOKES AND MANN </div>
+									<div>DENESIK, BEIER AND DENESIK </div>
+									<div>BALISTRERI, HUELS AND CARROLL</div>
+									<div>TREMBLAY, REINGER AND HELLER</div>
+									<div>WILLIAMSON AND SONS</div>
+								</div>
+								<div className="mt-2">Kategori </div>
+								<div className="ml-4 flex flex-col gap-2 text-xs font-extralight">
+									<div>KOCH, STOKES AND MANN </div>
+									<div>DENESIK, BEIER AND DENESIK </div>
+									<div>BALISTRERI, HUELS AND CARROLL</div>
+									<div>TREMBLAY, REINGER AND HELLER</div>
+									<div>WILLIAMSON AND SONS</div>
+								</div>
+							</div>
+						</div>
 						<div className="pl__main">
 							<div className="pl__main--header text-med-brown ">
-								<div className="pl__product-count ">
+								<div className="pl__brandcount ">
 									Jumlah Produk: {products.length}
 								</div>
-								<div className="pl__product-sort">Sort</div>
+								{/* <div className="pl__product-sort">Sort</div> */}
 							</div>
 							<div className="pl__main--list">
 								{isLoading &&
