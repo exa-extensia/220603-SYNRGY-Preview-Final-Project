@@ -109,9 +109,6 @@ export default function UserProfileAlamat() {
 						</div>
 
 						<div className="mt-4 sm:relative sm:mt-0 sm:w-1/4">
-							<button onClick={newDefaultHandler} className="text-xs">
-								set default
-							</button>
 							<div className="sm:absolute sm:top-0 sm:right-0">
 								<button
 									onClick={(e) => {

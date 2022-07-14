@@ -35,7 +35,7 @@ const initialState = {
 	cartBadge: localStorage.getItem("cartBadge")
 		? JSON.parse(localStorage.getItem("cartBadge"))
 		: 0,
-
+	addedVariantId: [""],
 	isError: false,
 	cartError: false,
 	isSuccess: false,
@@ -127,6 +127,9 @@ export const cartSlice = createSlice({
 			.addCase(addToCart.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.isSuccess = true;
+				// state.addedVariantId = action.payload.existingVariantId;
+				// console.log(">>>>>existing id", action.payload.existingVariantId);
+				// if (state.addedVariantId !== action.payload.existingVariantId) {}
 				toast("sudah dimasukkan ke keranjang!");
 				state.cartBadge += action.payload.quantity;
 				localStorage.setItem("cartBadge", JSON.stringify(state.cartBadge));
@@ -189,8 +192,10 @@ export const cartSlice = createSlice({
 				state.isLoading = false;
 				state.isSuccess = true;
 				toast("berhasil dihapus");
-				state.cartBadge -= action.payload.quantity;
-				localStorage.setItem("cartBadge", JSON.stringify(state.cartBadge));
+				if (state.cartBadge > 0) {
+					state.cartBadge -= action.payload.quantity;
+					localStorage.setItem("cartBadge", JSON.stringify(state.cartBadge));
+				}
 			})
 			.addCase(deleteCart.rejected, (state, action) => {
 				state.isLoading = false;

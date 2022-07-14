@@ -15,7 +15,8 @@ const AddToCart = async ({ quantity, variantId }, token) => {
 			},
 		}
 	);
-	return { data: response.data.data, quantity };
+	console.log(">>>>Added Cart Response", response.data.data);
+	return { data: response.data.data, quantity, existingVariantId: variantId };
 };
 
 const GetAllCart = async (token) => {

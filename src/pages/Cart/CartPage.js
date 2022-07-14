@@ -11,10 +11,10 @@ import {
 	HiOutlineChevronRight,
 	HiCheck,
 } from "react-icons/hi";
-import illst from "../../assets/images/cart-illst.png";
+import illst from "../../assets/images/cartempty-illst.svg";
 import Skeleton from "@mui/material/Skeleton";
 
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 import Footer from "../../components/sections/_footer/Footer";
 
@@ -28,6 +28,7 @@ import { toast } from "react-toastify";
 
 export default function CartPage() {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	function scrollTop() {
 		window.scrollTo({
 			top: 0,
@@ -83,16 +84,35 @@ export default function CartPage() {
 		<>
 			<Navbar />
 			<section id="cartpage">
-				{!isLoading && isError && <div>unexpected isError</div>}
 				<div className="cp__wrapper">
 					<div className="cp__breadcrumbs">
 						<Breadcrumb />
 					</div>
-					<div className="cp__totalqty mt-10 mb-6 flex w-full items-center gap-2 bg-cream p-4 font-bold text-brown xl:px-8">
-						<div className="text-brown">
-							<HiCheck size={25} />
+					{!isLoading && isError && (
+						<div>unexpected error masyaallah dev nya pusing</div>
+					)}
+					{!isLoading && !isError && items.length < 1 && (
+						<div className="flex flex-col items-center justify-center text-center">
+							<img src={illst} alt="cartkosong" className="my-6 sm:w-6/12" />
+							<p className="text-lg font-bold text-med-brown sm:text-2xl">
+								Keranjangmu masih kosong nih!
+							</p>
+							<p className="text-sm sm:text-base">
+								Silahkan tambahkan produkmu ke keranjang untuk proses pesananmu{" "}
+							</p>
 						</div>
-						<p>Jumlah Barang Terpilih: {quantityCartBadge}</p>
+					)}
+					<div
+						className={`${
+							isError || (!isLoading && !isError && items.length < 1)
+								? "hidden"
+								: "flex"
+						} mt-10 mb-6 w-full items-center gap-2 bg-cream p-4 font-bold text-brown xl:px-8`}
+					>
+						<div className="text-brown">
+							<HiCheck />
+						</div>
+						<p>{quantityCartBadge} Barang Terpilih!</p>
 					</div>
 					<div className="cp__2cols">
 						<div className="cp__product__card__wrapper">
@@ -104,11 +124,9 @@ export default function CartPage() {
 									className="w-full"
 								/>
 							)}
-							{!isLoading && isError && (
-								<div>unexpected error masyaallah dev nya pusing</div>
-							)}
 							{!isLoading &&
 								!isError &&
+								items.length > 0 &&
 								items?.map((i, indexLuar) => (
 									<div className="cp__card">
 										<div key={indexLuar} className="cp__brand">
@@ -155,8 +173,11 @@ export default function CartPage() {
 																>
 																	<HiMinusSm />
 																</div> */}
-																<p className="rounded-full bg-med-brown px-2 py-1 text-xs text-white">
-																	{v.quantity} barang
+																<p className="rounded-full bg-cream px-3 py-1 text-xs font-light text-med-brown">
+																	<span className="mr-1 text-sm font-bold">
+																		{v.quantity}
+																	</span>{" "}
+																	barang
 																</p>
 																{/* <div
 																	onClick={() => inputQuantityHandler("inc")}
@@ -214,37 +235,52 @@ export default function CartPage() {
 										className="w-full"
 									/>
 								)}
-								{!isLoading && !isError && (
-									<div className="cp__card__ringkasan">
-										<div className="mb-7">
-											<p className="mb-3 text-lg font-bold">
-												Ringkasan Belanja
-											</p>
-											<div className="flex items-center">
-												<div className="w-20 border-b-2 border-med-brown" />
-												<div className="h-2 w-2 rounded-full bg-med-brown"></div>
+								{!isLoading && !isError && items.length > 0 && (
+									<>
+										<div className="cp__card__ringkasan">
+											<div className="mb-7">
+												<p className="mb-3 text-lg font-bold">
+													Ringkasan Belanja
+												</p>
+												<div className="flex items-center">
+													<div className="w-20 border-b-2 border-med-brown" />
+													<div className="h-2 w-2 rounded-full bg-med-brown"></div>
+												</div>
 											</div>
+											<div className="ringkasan__text mb-7 flex flex-col gap-2 text-xs lg:text-base">
+												<div className="flex justify-between ">
+													<p>Total Belanja</p>
+													<p className="font-bold">Rp{overviewTotal}</p>
+												</div>
+												<div className="flex justify-between">
+													<p>Diskon</p>
+													<p className="font-bold">-</p>
+												</div>
+												<div className="flex justify-between">
+													<p>Jumlah Pembayaran</p>
+													<p className="font-bold">Rp{overviewTotal}</p>
+												</div>
+											</div>
+											{/* <Link to={"/placeorder"}>
+												<button className="btn-grad w-full rounded-full py-2   text-white">
+													Lanjutkan Pesanan
+												</button>
+											</Link> */}
 										</div>
-										<div className="ringkasan__text mb-7 flex flex-col gap-2 text-xs lg:text-base">
-											<div className="flex justify-between ">
-												<p>Total Belanja</p>
-												<p className="font-bold">Rp{overviewTotal}</p>
-											</div>
-											<div className="flex justify-between">
-												<p>Diskon</p>
-												<p className="font-bold">-</p>
-											</div>
-											<div className="flex justify-between">
-												<p>Jumlah Pembayaran</p>
-												<p className="font-bold">Rp{overviewTotal}</p>
-											</div>
+										<div className="relative h-10 w-full">
+											{/* <button
+												onClick={navigate("/placeorder")}
+												className="btn-grad absolute right-0 bottom-0 rounded-full py-2 px-5 text-xs text-white sm:text-base"
+											>
+												Lanjutkan Pesanan
+											</button> */}
+											<Link to={"/placeorder"}>
+												<button className="btn-grad absolute right-0 bottom-0 rounded-full py-2 px-5 text-xs text-white sm:text-base">
+													Lanjutkan Pesanan
+												</button>
+											</Link>
 										</div>
-										<Link to={"/placeorder"}>
-											<button className="btn-grad w-full rounded-full py-2   text-white">
-												Checkout
-											</button>
-										</Link>
-									</div>
+									</>
 								)}
 								{/* <img src={illst} alt="" />  */}
 							</div>
