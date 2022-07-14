@@ -2,7 +2,7 @@ import axios from "axios";
 
 const API_URL = "https://cosmetic-b.herokuapp.com/api/v1/carts";
 
-const AddToCart = async ({ quantity, variantId, brandId }, token) => {
+const AddToCart = async ({ quantity, variantId }, token) => {
 	const response = await axios.post(
 		`${API_URL}`,
 		{
@@ -15,7 +15,8 @@ const AddToCart = async ({ quantity, variantId, brandId }, token) => {
 			},
 		}
 	);
-	return { data: response.data.data, variantId, brandId };
+	console.log(">>>>Added Cart Response", response.data.data);
+	return { data: response.data.data, quantity, existingVariantId: variantId };
 };
 
 const GetAllCart = async (token) => {
@@ -27,9 +28,25 @@ const GetAllCart = async (token) => {
 	return response.data.data;
 };
 
+const DeleteCart = async ({ quantity, variantId }, token) => {
+	const response = await axios.post(
+		`${API_URL}/action/${variantId}?actionType=DELETE`,
+		null,
+		{
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		}
+	);
+
+	console.log(">>>>Delete Cart Response", response.data.data);
+	return { data: response.data.data, quantity };
+};
+
 const cartService = {
 	AddToCart,
 	GetAllCart,
+	DeleteCart,
 };
 
 export default cartService;

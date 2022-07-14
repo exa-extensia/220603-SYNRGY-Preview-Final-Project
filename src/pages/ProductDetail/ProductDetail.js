@@ -67,7 +67,7 @@ export default function ProductDetail() {
 		const itemData = {
 			quantity,
 			variantId: oneProduct.variant[0].id,
-			brandId: oneProduct.brand.id,
+			// brandId: oneProduct.brand.id,
 		};
 		dispatch(addToCart(itemData));
 	};
@@ -183,12 +183,10 @@ export default function ProductDetail() {
 											/>
 										</div>
 										<div>
+											<p className="text-[12px] text-brown">Brand</p>
 											<p className="text-lg font-bold uppercase text-black">
 												{oneProduct.brand.name}
 											</p>
-											<a href="#" className="text-[12px] text-brown underline">
-												Kunjungi Katalog Brand
-											</a>
 										</div>
 									</div>
 									<PDTab />

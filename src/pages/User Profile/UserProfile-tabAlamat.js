@@ -109,9 +109,6 @@ export default function UserProfileAlamat() {
 						</div>
 
 						<div className="mt-4 sm:relative sm:mt-0 sm:w-1/4">
-							<button onClick={newDefaultHandler} className="text-xs">
-								set default
-							</button>
 							<div className="sm:absolute sm:top-0 sm:right-0">
 								<button
 									onClick={(e) => {
@@ -135,7 +132,7 @@ export default function UserProfileAlamat() {
 			{!isLoading && address.length < 1 && (
 				<div className="flex flex-col items-center justify-center">
 					<p className="mb-6 text-xl">Ayo daftarkan alamat mu! :)</p>
-					<img src={illst} alt="" />
+					<img src={illst} alt="alamat" />
 				</div>
 			)}
 			{!isLoading && isError && toast(message)}

@@ -11,15 +11,24 @@ import {
 	HiOutlineChevronRight,
 	HiCheck,
 } from "react-icons/hi";
-import illst from "../../assets/images/cart-illst.png";
+import illst from "../../assets/images/cartempty-illst.svg";
+import Skeleton from "@mui/material/Skeleton";
 
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 import Footer from "../../components/sections/_footer/Footer";
 
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteCart, getAllCart } from "../../redux/cart/cartSlice";
+
+import axios from "axios";
+import currencyIDR from "../../utils/currencyIDR";
+import { toast } from "react-toastify";
 
 export default function CartPage() {
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	function scrollTop() {
 		window.scrollTo({
 			top: 0,
@@ -27,19 +36,49 @@ export default function CartPage() {
 		});
 	}
 
-	useEffect(() => {
-		scrollTop();
-	}, []);
-
-	const [quantity, setQuantity] = useState(1);
-
-	const handleQuantity = (type) => {
+	const [inputQuantity, setInputQuantity] = useState(1);
+	const inputQuantityHandler = (type) => {
 		if (type === "dec") {
-			quantity > 1 && setQuantity(quantity - 1);
+			inputQuantity > 1 && setInputQuantity(inputQuantity - 1);
 		} else {
-			setQuantity(quantity + 1);
+			setInputQuantity(inputQuantity + 1);
 		}
 	};
+	const [overview, setOverview] = useState({});
+	const [overviewTotal, setOverviewTotal] = useState(0);
+	const [items, setItems] = useState([]);
+	// const [variant, setVariant] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
+	const [isError, setIsError] = useState(false);
+	useEffect(() => {
+		scrollTop();
+		// dispatch(getAllCart());
+		// console.log("dispatch");
+		const token = JSON.parse(localStorage.getItem("token"));
+		axios
+			.get(`https://cosmetic-b.herokuapp.com/api/v1/carts`, {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			})
+			.then((response) => {
+				setIsLoading(false);
+				let data = response.data.data;
+				setOverview(data.overview);
+				setOverviewTotal(data.overview.total);
+				setItems(data.cartItems);
+				// setVariant(data.items.items);
+				console.log(data);
+			})
+			.catch((error) => {
+				setIsLoading(false);
+				console.log(error);
+				setIsError(true);
+			});
+	}, [dispatch]);
+
+	const { cartError, message } = useSelector((state) => state.cart);
+	const quantityCartBadge = useSelector((state) => state.cart.cartBadge);
 
 	return (
 		<>
@@ -49,214 +88,202 @@ export default function CartPage() {
 					<div className="cp__breadcrumbs">
 						<Breadcrumb />
 					</div>
-					<div className="cp__totalqty mt-10 mb-6 flex w-full items-center gap-2 bg-cream p-4 font-bold text-brown xl:px-8">
+					{!isLoading && isError && (
+						<div>unexpected error masyaallah dev nya pusing</div>
+					)}
+					{!isLoading && !isError && items.length < 1 && (
+						<div className="flex flex-col items-center justify-center text-center">
+							<img src={illst} alt="cartkosong" className="my-6 sm:w-6/12" />
+							<p className="text-lg font-bold text-med-brown sm:text-2xl">
+								Keranjangmu masih kosong nih!
+							</p>
+							<p className="text-sm sm:text-base">
+								Silahkan tambahkan produkmu ke keranjang untuk proses pesananmu{" "}
+							</p>
+						</div>
+					)}
+					<div
+						className={`${
+							isError || (!isLoading && !isError && items.length < 1)
+								? "hidden"
+								: "flex"
+						} mt-10 mb-6 w-full items-center gap-2 bg-cream p-4 font-bold text-brown xl:px-8`}
+					>
 						<div className="text-brown">
 							<HiCheck />
 						</div>
-						<p>3 Produk Terpilih</p>
+						<p>{quantityCartBadge} Barang Terpilih!</p>
 					</div>
 					<div className="cp__2cols">
 						<div className="cp__product__card__wrapper">
-							<div className="cp__card">
-								<div className="cp__brand">
-									<div className="hidden aspect-square h-12 overflow-hidden rounded-md sm:block">
-										<img
-											src="https://source.unsplash.com/random/?brand"
-											alt="brand"
-										/>
-									</div>
-									<div>
-										<p className="text-sm font-bold uppercase text-black sm:text-lg">
-											Scarlett
-										</p>
-										<a
-											href="#"
-											className="text-xs text-brown underline sm:text-[12px]"
-										>
-											Kunjungi Katalog Brand
-										</a>
-									</div>
-								</div>
-								<div className="my-4 border-b border-brown sm:my-6" />
-								<div className="cp__satubrand__input">
-									<div className="cp__input">
-										<div className="input__img">
-											<img
-												src="https://source.unsplash.com/random/?skincare"
-												alt="cp__product"
-											/>
-										</div>
-										<div className="input__text">
-											<p>Brightening Facial Wash – All Skin Type</p>
-											<p>100ml</p>
-											<p>Rp 75.000</p>
-										</div>
-										<div className="input__qty ">
-											<div onClick={() => handleQuantity("dec")}>
-												<HiMinusSm />
+							{isLoading && (
+								<Skeleton
+									variant="rectangular"
+									height={300}
+									animation="wave"
+									className="w-full"
+								/>
+							)}
+							{!isLoading &&
+								!isError &&
+								items.length > 0 &&
+								items?.map((i, indexLuar) => (
+									<div className="cp__card">
+										<div key={indexLuar} className="cp__brand">
+											<div className="hidden aspect-square h-12 overflow-hidden rounded-md sm:block">
+												<img src={i.banner} alt="brand" />
 											</div>
-											<p>{quantity}</p>
-											<div onClick={() => handleQuantity("inc")}>
-												<HiPlusSm />
-											</div>
-										</div>
-										<div className="input__price ">
-											<p>Rp 150.000</p>
-										</div>
-										<div className="input__del ">
-											<HiOutlineTrash />
-										</div>
-									</div>
-									{/* DELETE -- CONTOH COMPONENT  */}
-									<div className="cp__input">
-										<div className="input__img">
-											<img
-												src="https://source.unsplash.com/random/?skincare"
-												alt="cp__product"
-											/>
-										</div>
-										<div className="input__text">
-											<p>Brightening Facial Wash – All Skin Type</p>
-											<p>100ml</p>
-											<p>Rp 75.000</p>
-										</div>
-										<div className="input__qty ">
 											<div>
-												<HiMinusSm />
-											</div>
-											<p>2</p>
-											<div>
-												<HiPlusSm />
+												<p className="text-sm font-bold uppercase text-black sm:text-lg">
+													{i.brandName}
+												</p>
 											</div>
 										</div>
-										<div className="input__price ">
-											<p>Rp 150.000</p>
-										</div>
-										<div className="input__del ">
-											<HiOutlineTrash />
+										<div className="my-4 border-b border-brown sm:my-6" />
+										<div className="flex flex-col gap-4">
+											{isLoading && (
+												<Skeleton
+													variant="rectangular"
+													height={300}
+													animation="wave"
+													className="w-full"
+												/>
+											)}
+											{!isLoading && isError && (
+												<div>unexpected error masyaallah dev nya pusing</div>
+											)}
+											{!isLoading &&
+												!isError &&
+												i.items?.map((v, index) => (
+													<div key={index} className="cp__satubrand__input">
+														<div className="cp__input">
+															<div className="input__img">
+																<img
+																	src="https://source.unsplash.com/random/?skincare"
+																	alt="cp__product"
+																/>
+															</div>
+															<div className="input__text">
+																<p>{v.name}</p>
+																<p>Rp{v.price}</p>
+															</div>
+															<div className="input__qty ">
+																{/* <div
+																	onClick={() => inputQuantityHandler("dec")}
+																>
+																	<HiMinusSm />
+																</div> */}
+																<p className="rounded-full bg-cream px-3 py-1 text-xs font-light text-med-brown">
+																	<span className="mr-1 text-sm font-bold">
+																		{v.quantity}
+																	</span>{" "}
+																	barang
+																</p>
+																{/* <div
+																	onClick={() => inputQuantityHandler("inc")}
+																>
+																	<HiPlusSm />
+																</div> */}
+															</div>
+															<div className="input__price ">
+																<p>Rp{v.subTotal}</p>
+															</div>
+															<div className="col-start-3 row-start-1 justify-self-end  lg:col-start-5">
+																<button
+																	onClick={(e) => {
+																		e.preventDefault();
+																		const itemData = {
+																			quantity: v.quantity,
+																			variantId: v.variantId,
+																		};
+
+																		dispatch(deleteCart(itemData));
+
+																		if (!cartError) {
+																			const splash = i.items.splice(index, 1);
+																			console.log(">>>>>>splash", splash);
+																			console.log(">>>>>>length", items.length);
+																			if (i.items.length === 0) {
+																				items.splice(indexLuar, 1);
+																			}
+																			setOverviewTotal(
+																				overviewTotal - v.subTotal
+																			);
+
+																			// window.location.reload();
+																		}
+																	}}
+																	className="rounded-full bg-white p-1 text-danger hover:bg-danger hover:text-white"
+																>
+																	<HiOutlineTrash />
+																</button>
+															</div>
+														</div>
+													</div>
+												))}
 										</div>
 									</div>
-									{/* DELETE -- CONTOH COMPONENT  */}
-								</div>
-							</div>
-							{/* DELETE -- CONTOH CARD BANYAK  */}
-							<div className="cp__card">
-								<div className="cp__brand">
-									<div className="hidden aspect-square h-12 overflow-hidden rounded-md sm:block">
-										<img
-											src="https://source.unsplash.com/random/?brand"
-											alt="brand"
-										/>
-									</div>
-									<div>
-										<p className="text-sm font-bold uppercase text-black sm:text-lg">
-											Scarlett
-										</p>
-										<a
-											href="#"
-											className="text-xs text-brown underline sm:text-[12px]"
-										>
-											Kunjungi Katalog Brand
-										</a>
-									</div>
-								</div>
-								<div className="my-4 border-b border-brown sm:my-6" />
-								<div className="cp__satubrand__input">
-									<div className="cp__input">
-										<div className="input__img">
-											<img
-												src="https://source.unsplash.com/random/?skincare"
-												alt="cp__product"
-											/>
-										</div>
-										<div className="input__text">
-											<p>Brightening Facial Wash – All Skin Type</p>
-											<p>100ml</p>
-											<p>Rp 75.000</p>
-										</div>
-										<div className="input__qty ">
-											<div>
-												<HiMinusSm />
-											</div>
-											<p>2</p>
-											<div>
-												<HiPlusSm />
-											</div>
-										</div>
-										<div className="input__price ">
-											<p>Rp 150.000</p>
-										</div>
-										<div className="input__del ">
-											<HiOutlineTrash />
-										</div>
-									</div>
-								</div>
-							</div>
-							{/* DELETE -- CONTOH CARD BANYAK  */}
+								))}
 						</div>
 						<div className="cp__output__card__wrapper">
-							{/* <div className="cp__card__voucher">
-								<div className="mb-7">
-									<p className="mb-3 text-lg font-bold">Voucher Diskon</p>
-									<div className="flex items-center">
-										<div className="w-20 border-b-2 border-med-brown" />
-										<div className="h-2 w-2 rounded-full bg-med-brown"></div>
-									</div>
-								</div>
-								<p className="mb-2 text-sm">
-									Pilih dan masukkan voucher diskon untuk mendapatkan potongan
-									harga.
-								</p>
-								<div className="voucher__kode mb-2 flex items-center justify-between  border border-brown p-2">
-									<div className="flex flex-row items-center">
-										<HiOutlineScissors size={28} color="#A67A4A" />
-										<p className="ml-8 text-xs lg:text-base">
-											Masukan Kode Promo
-										</p>
-									</div>
-
-									<div className=" bg-brown py-1 px-2 font-semibold text-white">
-										Klaim
-									</div>
-								</div>
-
-								<div className="voucher__list mb-2 flex items-center gap-8 border border-brown p-2">
-									<HiOutlineTicket color="#A67A4A" size={28} />
-									<p className="w-56 text-xs lg:text-base">
-										Lihat voucher diskon yang tersedia untukmu
-									</p>
-									<HiOutlineChevronRight color="#A67A4A" size={28} />
-								</div>
-							</div> */}
-							<div className="cp__card__ringkasan">
-								<div className="mb-7">
-									<p className="mb-3 text-lg font-bold">Ringkasan Belanja</p>
-									<div className="flex items-center">
-										<div className="w-20 border-b-2 border-med-brown" />
-										<div className="h-2 w-2 rounded-full bg-med-brown"></div>
-									</div>
-								</div>
-								<div className="ringkasan__text mb-7 flex flex-col gap-2 text-xs lg:text-base">
-									<div className="flex justify-between ">
-										<p>Total Belanja</p>
-										<p className="font-bold">Rp 445.000</p>
-									</div>
-									<div className="flex justify-between">
-										<p>Diskon</p>
-										<p className="font-bold">-</p>
-									</div>
-									<div className="flex justify-between">
-										<p>Jumlah Pembayaran</p>
-										<p className="font-bold">Rp 445.000</p>
-									</div>
-								</div>
-								<Link to={"/placeorder"}>
-									<button className="btn-grad w-full rounded-full py-2   text-white">
-										Checkout
-									</button>
-								</Link>
+							<div className="cp__output__card__wrapper">
+								{isLoading && (
+									<Skeleton
+										variant="rectangular"
+										height={300}
+										animation="wave"
+										className="w-full"
+									/>
+								)}
+								{!isLoading && !isError && items.length > 0 && (
+									<>
+										<div className="cp__card__ringkasan">
+											<div className="mb-7">
+												<p className="mb-3 text-lg font-bold">
+													Ringkasan Belanja
+												</p>
+												<div className="flex items-center">
+													<div className="w-20 border-b-2 border-med-brown" />
+													<div className="h-2 w-2 rounded-full bg-med-brown"></div>
+												</div>
+											</div>
+											<div className="ringkasan__text mb-7 flex flex-col gap-2 text-xs lg:text-base">
+												<div className="flex justify-between ">
+													<p>Total Belanja</p>
+													<p className="font-bold">Rp{overviewTotal}</p>
+												</div>
+												<div className="flex justify-between">
+													<p>Diskon</p>
+													<p className="font-bold">-</p>
+												</div>
+												<div className="flex justify-between">
+													<p>Jumlah Pembayaran</p>
+													<p className="font-bold">Rp{overviewTotal}</p>
+												</div>
+											</div>
+											{/* <Link to={"/placeorder"}>
+												<button className="btn-grad w-full rounded-full py-2   text-white">
+													Lanjutkan Pesanan
+												</button>
+											</Link> */}
+										</div>
+										<div className="relative h-10 w-full">
+											{/* <button
+												onClick={navigate("/placeorder")}
+												className="btn-grad absolute right-0 bottom-0 rounded-full py-2 px-5 text-xs text-white sm:text-base"
+											>
+												Lanjutkan Pesanan
+											</button> */}
+											<Link to={"/placeorder"}>
+												<button className="btn-grad absolute right-0 bottom-0 rounded-full py-2 px-5 text-xs text-white sm:text-base">
+													Lanjutkan Pesanan
+												</button>
+											</Link>
+										</div>
+									</>
+								)}
+								{/* <img src={illst} alt="" />  */}
 							</div>
-							{/* <img src={illst} alt="" />  */}
 						</div>
 					</div>
 				</div>

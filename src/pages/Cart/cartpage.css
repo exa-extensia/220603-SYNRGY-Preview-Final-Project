@@ -41,6 +41,7 @@
 	grid-template-columns: 1.5fr 3fr 0.5fr;
 	grid-template-rows: auto, auto, auto;
 	grid-gap: 10px;
+	align-items: center;
 }
 
 .cp__input .input__img {
@@ -48,7 +49,6 @@
 }
 
 .cp__input .input__text {
-	@apply mb-4 lg:mb-0;
 }
 
 .cp__input .input__text p:nth-child(1) {
@@ -56,27 +56,19 @@
 }
 
 .cp__input .input__text p:nth-child(2) {
-	@apply my-1 text-xs font-semibold md:text-base;
-}
-
-.cp__input .input__text p:nth-child(3) {
 	@apply text-xs font-bold text-brown md:text-base;
 }
 
 .cp__input .input__qty {
-	@apply col-span-3 col-start-1 flex items-center gap-4 justify-self-center lg:col-span-1 lg:col-start-3 lg:self-start;
+	@apply col-span-3 col-start-1 my-auto flex items-center gap-4 justify-self-center lg:col-span-1 lg:col-start-3 lg:self-start;
 }
 
 .cp__input .input__qty div {
 	@apply flex aspect-square w-7 cursor-pointer items-center justify-center  rounded-full bg-cream text-brown transition-all duration-300 hover:bg-med-brown hover:text-white;
 }
 
-.cp__input .input__qty p {
-	@apply font-bold text-brown;
-}
-
 .cp__input .input__price {
-	@apply col-span-3 col-start-1 justify-self-center lg:col-span-1 lg:col-start-4 lg:self-start;
+	@apply col-span-3 col-start-1 my-auto justify-self-center lg:col-span-1 lg:col-start-4 lg:self-start;
 }
 
 .cp__input .input__price p {
