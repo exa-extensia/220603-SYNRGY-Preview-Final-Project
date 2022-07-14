@@ -15,7 +15,7 @@ const AddToCart = async ({ quantity, variantId }, token) => {
 			},
 		}
 	);
-	return { data: response.data.data };
+	return { data: response.data.data, quantity };
 };
 
 const GetAllCart = async (token) => {
@@ -27,9 +27,9 @@ const GetAllCart = async (token) => {
 	return response.data.data;
 };
 
-const DeleteCart = async (id, token) => {
+const DeleteCart = async ({ quantity, variantId }, token) => {
 	const response = await axios.post(
-		`${API_URL}/action/${id}?actionType=DELETE`,
+		`${API_URL}/action/${variantId}?actionType=DELETE`,
 		null,
 		{
 			headers: {
@@ -39,7 +39,7 @@ const DeleteCart = async (id, token) => {
 	);
 
 	console.log(">>>>Delete Cart Response", response.data.data);
-	return response.data.data;
+	return { data: response.data.data, quantity };
 };
 
 const cartService = {

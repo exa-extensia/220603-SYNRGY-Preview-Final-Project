@@ -32,8 +32,12 @@ import { toast } from "react-toastify";
 
 const initialState = {
 	data: {},
-	cartBadge: {},
+	cartBadge: localStorage.getItem("cartBadge")
+		? JSON.parse(localStorage.getItem("cartBadge"))
+		: 0,
+
 	isError: false,
+	cartError: false,
 	isSuccess: false,
 	isLoading: false,
 	message: "",
@@ -73,10 +77,10 @@ export const getAllCart = createAsyncThunk("cart/get", async (thunkAPI) => {
 
 export const deleteCart = createAsyncThunk(
 	"cart/delete",
-	async (id, thunkAPI) => {
+	async (data, thunkAPI) => {
 		try {
 			const token = JSON.parse(localStorage.getItem("token"));
-			return await cartService.DeleteCart(id, token);
+			return await cartService.DeleteCart(data, token);
 		} catch (error) {
 			const message =
 				(error.response &&
@@ -124,7 +128,9 @@ export const cartSlice = createSlice({
 				state.isLoading = false;
 				state.isSuccess = true;
 				toast("sudah dimasukkan ke keranjang!");
-				console.log(action.payload);
+				state.cartBadge += action.payload.quantity;
+				localStorage.setItem("cartBadge", JSON.stringify(state.cartBadge));
+				console.log(">>>>>BERHASIL MSK KERNJANG", action.payload);
 
 				// const existingIndex = state.items.findIndex(
 				// 	(item) => item.id === action.payload.id
@@ -179,14 +185,16 @@ export const cartSlice = createSlice({
 			.addCase(deleteCart.pending, (state) => {
 				state.isLoading = true;
 			})
-			.addCase(deleteCart.fulfilled, (state) => {
+			.addCase(deleteCart.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.isSuccess = true;
-				toast("BERHASIL DIHAPUS :)");
+				toast("berhasil dihapus");
+				state.cartBadge -= action.payload.quantity;
+				localStorage.setItem("cartBadge", JSON.stringify(state.cartBadge));
 			})
 			.addCase(deleteCart.rejected, (state, action) => {
 				state.isLoading = false;
-				state.isError = true;
+				state.cartError = true;
 				state.message = action.payload;
 				toast("oops ada error");
 			});

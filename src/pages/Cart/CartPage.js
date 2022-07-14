@@ -44,6 +44,7 @@ export default function CartPage() {
 		}
 	};
 	const [overview, setOverview] = useState({});
+	const [overviewTotal, setOverviewTotal] = useState(0);
 	const [items, setItems] = useState([]);
 	// const [variant, setVariant] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
@@ -63,7 +64,8 @@ export default function CartPage() {
 				setIsLoading(false);
 				let data = response.data.data;
 				setOverview(data.overview);
-				setItems(data.items);
+				setOverviewTotal(data.overview.total);
+				setItems(data.cartItems);
 				// setVariant(data.items.items);
 				console.log(data);
 			})
@@ -74,7 +76,8 @@ export default function CartPage() {
 			});
 	}, [dispatch]);
 
-	const { isSuccess, message } = useSelector((state) => state.cart);
+	const { cartError, message } = useSelector((state) => state.cart);
+	const quantityCartBadge = useSelector((state) => state.cart.cartBadge);
 
 	return (
 		<>
@@ -87,9 +90,9 @@ export default function CartPage() {
 					</div>
 					<div className="cp__totalqty mt-10 mb-6 flex w-full items-center gap-2 bg-cream p-4 font-bold text-brown xl:px-8">
 						<div className="text-brown">
-							<HiCheck />
+							<HiCheck size={25} />
 						</div>
-						<p>xx Produk Terpilih</p>
+						<p>Jumlah Barang Terpilih: {quantityCartBadge}</p>
 					</div>
 					<div className="cp__2cols">
 						<div className="cp__product__card__wrapper">
@@ -167,15 +170,24 @@ export default function CartPage() {
 															<div className="col-start-3 row-start-1 justify-self-end  lg:col-start-5">
 																<button
 																	onClick={(e) => {
-																		dispatch(deleteCart(v.variantId));
+																		e.preventDefault();
+																		const itemData = {
+																			quantity: v.quantity,
+																			variantId: v.variantId,
+																		};
 
-																		if (isSuccess) {
+																		dispatch(deleteCart(itemData));
+
+																		if (!cartError) {
 																			const splash = i.items.splice(index, 1);
 																			console.log(">>>>>>splash", splash);
 																			console.log(">>>>>>length", items.length);
 																			if (i.items.length === 0) {
 																				items.splice(indexLuar, 1);
 																			}
+																			setOverviewTotal(
+																				overviewTotal - v.subTotal
+																			);
 
 																			// window.location.reload();
 																		}
@@ -216,7 +228,7 @@ export default function CartPage() {
 										<div className="ringkasan__text mb-7 flex flex-col gap-2 text-xs lg:text-base">
 											<div className="flex justify-between ">
 												<p>Total Belanja</p>
-												<p className="font-bold">Rp{overview.total}</p>
+												<p className="font-bold">Rp{overviewTotal}</p>
 											</div>
 											<div className="flex justify-between">
 												<p>Diskon</p>
@@ -224,7 +236,7 @@ export default function CartPage() {
 											</div>
 											<div className="flex justify-between">
 												<p>Jumlah Pembayaran</p>
-												<p className="font-bold">Rp{overview.total}</p>
+												<p className="font-bold">Rp{overviewTotal}</p>
 											</div>
 										</div>
 										<Link to={"/placeorder"}>
