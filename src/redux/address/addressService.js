@@ -43,7 +43,7 @@ const DeleteUserAddresss = async (id) => {
 	const response = await axios.post(`${API_URL}/delete/${id}`);
 
 	console.log(">>>>Delete Address Response", response.data.data);
-	return response.data.data;
+	return { data: response.data.data, deletedAddressId: id };
 };
 
 const UpdateUserAddresss = async (isDefault, token) => {

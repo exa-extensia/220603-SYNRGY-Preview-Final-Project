@@ -78,23 +78,38 @@ export default function Shipping() {
 	const tabsCourierHandler = (e) => {
 		setCourier(e.target.id);
 	};
+
+	useEffect(() => {
+		if (duration) {
+			const dataKurir = dataDelivery.find((e) => e.courier === courier);
+
+			const dataCostByCourier = dataKurir.services.find(
+				(e) => e.serviceType === duration
+			);
+			console.log(">>>>>>>datacostbycourier>>>>>>>>", dataCostByCourier);
+			setDataOngkir(dataCostByCourier.cost);
+		}
+	}, [duration, courier]);
+
 	const tabsDurationHandler = (e) => {
 		if (!courier) {
 			toast("silahkan pilih kurir dahulu");
 		} else {
 			setDuration(e.target.id);
+			// console.log("duration>>>>>>>>", duration);
 			// parameter:
 			// dataDelivery.courier = JNE / POS / TIKI
 			// dataDelivery.services.serviceType = REGULAR / INSTANT
-			const dataKurir = dataDelivery.find((e) => e.dataDelivery.courier);
-			const dataDurasi = dataDelivery.find(
-				(e) => e.dataDelivery.services.serviceType
-			);
-
-			if (courier === dataKurir && duration === dataDurasi) {
-			}
-			const ongkir = (e) => e.dataDelivery.services.cost;
-			setDataOngkir();
+			// const dataKurir = dataDelivery.find((e) => e.courier === courier);
+			// const dataDurasi = dataDelivery.find(
+			// 	(e) => e.dataDelivery.services.serviceType === duration
+			// );
+			// const dataCostByCourier = dataKurir.services.find(
+			// 	(e) => e.serviceType === duration
+			// );
+			// console.log(">>>>>>>datacostbycourier>>>>>>>>", dataCostByCourier);
+			// const ongkir = dataCostByCourier.cost;
+			// setDataOngkir(ongkir);
 		}
 	};
 	const tabsBankHandler = (e) => {

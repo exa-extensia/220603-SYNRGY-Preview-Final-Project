@@ -70,19 +70,16 @@ export default function UserProfileAlamat() {
 			)}
 			{!isLoading &&
 				address.length > 0 &&
-				address.map((address) => (
-					<div
-						key={address.id}
-						className="ORDERING-GENERAL-CARD w-full sm:flex "
-					>
+				address?.map((a, index) => (
+					<div key={index} className="ORDERING-GENERAL-CARD w-full sm:flex ">
 						<div className="w-3/4">
 							<div className="label-group flex flex-row items-center gap-2">
 								<p className="LABEL-ALAMAT text-sm font-bold uppercase text-brown">
-									{address.label}
+									{a.label}
 								</p>{" "}
 								<div
 									className={`${
-										address.isDefault === true
+										a.isDefault === true
 											? "rounded-xl  bg-cream py-1 px-2 text-xs text-brown"
 											: "hidden"
 									} `}
@@ -92,17 +89,16 @@ export default function UserProfileAlamat() {
 							</div>
 							<div className="content-group mt-1 ">
 								<p className="break-words text-sm font-extralight">
-									{address.addressDetail} - {address.cityId}{" "}
-									{address.postalCode}
+									{a.aDetail} - {a.cityId} {a.postalCode}
 								</p>
 								<div className="mt-2 flex flex-row items-center gap-4">
 									<div className="flex flex-row items-center gap-1">
 										<TbUser size={20} />
-										<p className="  font-bold">{address.receiver}</p>
+										<p className="  font-bold">{a.receiver}</p>
 									</div>
 									<div className="flex flex-row items-center gap-1">
 										<TbPhone size={20} />
-										<p className="  font-bold">{address.phone}</p>
+										<p className="  font-bold">{a.phone}</p>
 									</div>
 								</div>
 							</div>
@@ -112,13 +108,11 @@ export default function UserProfileAlamat() {
 							<div className="sm:absolute sm:top-0 sm:right-0">
 								<button
 									onClick={(e) => {
-										toast("Alamat non-default akan dihapus!");
-										dispatch(deleteAddress(address.id));
-										if (address.isDefault === true) {
-											toast("Woops, ganti alamat default dulu ya :)");
-										}
-										if (address.isDefault === false) {
-											window.location.reload();
+										if (a.isDefault === true) {
+											toast("Woops, ganti alamat utama dulu ya :)");
+										} else {
+											dispatch(deleteAddress(a.id));
+											// window.location.reload();
 										}
 									}}
 									className="cursor-pointer rounded-full bg-white p-1 text-danger transition-all duration-300 ease-in-out hover:bg-danger hover:text-white"
