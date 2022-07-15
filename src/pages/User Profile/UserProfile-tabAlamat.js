@@ -23,11 +23,11 @@ export default function UserProfileAlamat() {
 
 	// const address = [];
 
-	const newDefaultHandler = (e) => {
-		e.preventDefault();
-		const newDefault = true;
-		dispatch(updateAddress(newDefault));
-	};
+	// const newDefaultHandler = (e) => {
+	// 	e.preventDefault();
+	// 	const newDefault = true;
+	// 	dispatch(updateAddress(newDefault));
+	// };
 
 	useEffect(() => {
 		dispatch(getAddress());

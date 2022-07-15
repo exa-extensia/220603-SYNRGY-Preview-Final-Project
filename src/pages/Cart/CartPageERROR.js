@@ -36,15 +36,16 @@ export default function CartPage() {
 		});
 	}
 
-	const [inputQuantity, setInputQuantity] = useState(1);
-	const inputQuantityHandler = (type) => {
-		if (type === "dec") {
-			inputQuantity > 1 && setInputQuantity(inputQuantity - 1);
-		} else {
-			setInputQuantity(inputQuantity + 1);
-		}
-	};
+	// const [inputQuantity, setInputQuantity] = useState(1);
+	// const inputQuantityHandler = (type) => {
+	// 	if (type === "dec") {
+	// 		inputQuantity > 1 && setInputQuantity(inputQuantity - 1);
+	// 	} else {
+	// 		setInputQuantity(inputQuantity + 1);
+	// 	}
+	// };
 	const [overview, setOverview] = useState({});
+	const [deleteSuccess, setDeleteSuccess] = useState(false);
 	const [overviewTotal, setOverviewTotal] = useState(0);
 	const [items, setItems] = useState([]);
 	// const [variant, setVariant] = useState([]);
@@ -68,7 +69,7 @@ export default function CartPage() {
 				setOverviewTotal(data.overview.total);
 				setItems(data.cartItems);
 				// setVariant(data.items.items);
-				console.log("GET ALL CART>>>>>>>", data);
+				console.log(data);
 			})
 			.catch((error) => {
 				setIsLoading(false);
@@ -78,7 +79,33 @@ export default function CartPage() {
 	}, [dispatch]);
 
 	const quantityCartBadge = useSelector((state) => state.cart.cartBadge);
-	const { cartError, message } = useSelector((state) => state.cart);
+
+	// const { cartError, message } = useSelector((state) => state.cart);
+	const deleteHandler = (e, variantId) => {
+		e.preventDefault();
+		const token = JSON.parse(localStorage.getItem("token"));
+		axios
+			.post(
+				`https://cosmetic-b.herokuapp.com/api/v1/carts/action/${variantId}?actionType=DELETE`,
+				null,
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				}
+			)
+			.then((response) => {
+				setIsLoading(false);
+				let dataDelete = response.data.data;
+				console.log(dataDelete);
+				setDeleteSuccess(true);
+			})
+			.catch((error) => {
+				setIsLoading(false);
+				console.log(error);
+				setIsError(true);
+			});
+	};
 
 	return (
 		<>
@@ -190,29 +217,20 @@ export default function CartPage() {
 															</div>
 															<div className="col-start-3 row-start-1 justify-self-end  lg:col-start-5">
 																<button
-																	onClick={(e) => {
-																		e.preventDefault();
-																		const itemData = {
+																	onClick={
+																		deleteHandler({
 																			quantity: v.quantity,
 																			variantId: v.variantId,
-																		};
+																		})
 
-																		dispatch(deleteCart(itemData));
-
-																		if (!cartError) {
-																			const splash = i.items.splice(index, 1);
-																			console.log(">>>>>>splash", splash);
-																			console.log(">>>>>>length", items.length);
-																			if (i.items.length === 0) {
-																				items.splice(indexLuar, 1);
-																			}
-																			setOverviewTotal(
-																				overviewTotal - v.subTotal
-																			);
-
-																			// window.location.reload();
-																		}
-																	}}
+																		// 													if (deleteSuccess) {
+																		// 														i.items.splice(index, 1);
+																		// if (i.items.length === 0) {
+																		// 	items.splice(indexLuar, 1);
+																		// }
+																		// setOverviewTotal(overviewTotal - v.subTotal);
+																		// 													}
+																	}
 																	className="rounded-full bg-white p-1 text-danger transition-all duration-300 ease-in-out hover:bg-danger hover:text-white"
 																>
 																	<HiOutlineTrash />

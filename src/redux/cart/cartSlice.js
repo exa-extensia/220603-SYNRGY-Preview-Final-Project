@@ -35,7 +35,6 @@ const initialState = {
 	cartBadge: localStorage.getItem("cartBadge")
 		? JSON.parse(localStorage.getItem("cartBadge"))
 		: 0,
-	addedVariantId: [""],
 	isError: false,
 	cartError: false,
 	isSuccess: false,
@@ -134,36 +133,6 @@ export const cartSlice = createSlice({
 				state.cartBadge += action.payload.quantity;
 				localStorage.setItem("cartBadge", JSON.stringify(state.cartBadge));
 				console.log(">>>>>BERHASIL MSK KERNJANG", action.payload);
-
-				// const existingIndex = state.items.findIndex(
-				// 	(item) => item.id === action.payload.id
-				// );
-				// if (existingIndex >= 0) {
-				// 	state.items[existingIndex] = {
-				// 		...state.items[existingIndex],
-				// 		quantity: state.items[existingIndex].quantity + 1,
-				// 	};
-				// 	toast("Increased product quantity");
-				// } else {
-				// 	let tempProductItem = { ...action.payload, quantity: 1 };
-				// 	state.items.push(tempProductItem);
-				// 	toast("Product added to cart");
-				// }
-
-				// const brandId = action.payload.brandId;
-				// console.log(action.payload);
-				// state.data = action.payload.data.;
-				// state.data.items[brandId] = {
-				// 	...state.data.items[brandId],
-				// };
-				// console.log(state.data.items[brandId]);
-
-				// const variantId = action.payload.variantId
-
-				// const existingVariantId = state.data.items.brandId.findIndex(
-				// 	(item) => item.id.variantId === action.payload.variantId
-				// );
-				// console.log(existingVariantId);
 			})
 			.addCase(addToCart.rejected, (state, action) => {
 				state.isLoading = false;

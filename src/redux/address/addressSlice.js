@@ -69,23 +69,23 @@ export const deleteAddress = createAsyncThunk(
 	}
 );
 
-export const updateAddress = createAsyncThunk(
-	"address/update",
-	async ({ isDefault }, thunkAPI) => {
-		try {
-			const token = JSON.parse(localStorage.getItem("token"));
-			return await addressService.UpdateUserAddresss(isDefault, token);
-		} catch (error) {
-			const message =
-				(error.response &&
-					error.response.data &&
-					error.response.data.message) ||
-				error.message ||
-				error.toString();
-			return thunkAPI.rejectWithValue(message);
-		}
-	}
-);
+// export const updateAddress = createAsyncThunk(
+// 	"address/update",
+// 	async ({ isDefault }, thunkAPI) => {
+// 		try {
+// 			const token = JSON.parse(localStorage.getItem("token"));
+// 			return await addressService.UpdateUserAddresss(isDefault, token);
+// 		} catch (error) {
+// 			const message =
+// 				(error.response &&
+// 					error.response.data &&
+// 					error.response.data.message) ||
+// 				error.message ||
+// 				error.toString();
+// 			return thunkAPI.rejectWithValue(message);
+// 		}
+// 	}
+// );
 
 ///////////////////////////SLICE
 
@@ -152,25 +152,25 @@ export const addressSlice = createSlice({
 				state.isLoading = false;
 				state.isError = true;
 				state.message = action.payload;
-			})
-			.addCase(updateAddress.pending, (state) => {
-				state.isLoading = true;
-			})
-			.addCase(updateAddress.fulfilled, (state, action) => {
-				state.isLoading = false;
-				state.isSuccess = true;
-				state.address.map((e) => {
-					if (e.id === action.payload.id) {
-						e.isDefault = action.payload;
-					}
-				});
-				toast("UPDATED tapi gatau handle state>>>", action.payload);
-			})
-			.addCase(updateAddress.rejected, (state, action) => {
-				state.isLoading = false;
-				state.isError = true;
-				state.message = action.payload;
 			});
+		// .addCase(updateAddress.pending, (state) => {
+		// 	state.isLoading = true;
+		// })
+		// .addCase(updateAddress.fulfilled, (state, action) => {
+		// 	state.isLoading = false;
+		// 	state.isSuccess = true;
+		// 	state.address.map((e) => {
+		// 		if (e.id === action.payload.id) {
+		// 			e.isDefault = action.payload;
+		// 		}
+		// 	});
+		// 	toast("UPDATED tapi gatau handle state>>>", action.payload);
+		// })
+		// .addCase(updateAddress.rejected, (state, action) => {
+		// 	state.isLoading = false;
+		// 	state.isError = true;
+		// 	state.message = action.payload;
+		// });
 	},
 });
 
