@@ -213,7 +213,7 @@ export default function CartPage() {
 																			// window.location.reload();
 																		}
 																	}}
-																	className="rounded-full bg-white p-1 text-danger hover:bg-danger hover:text-white"
+																	className="rounded-full bg-white p-1 text-danger transition-all duration-300 ease-in-out hover:bg-danger hover:text-white"
 																>
 																	<HiOutlineTrash />
 																</button>

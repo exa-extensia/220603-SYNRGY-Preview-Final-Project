@@ -121,7 +121,7 @@ export default function UserProfileAlamat() {
 											window.location.reload();
 										}
 									}}
-									className="cursor-pointer rounded-full bg-white p-1 text-danger hover:bg-danger hover:text-white"
+									className="cursor-pointer rounded-full bg-white p-1 text-danger transition-all duration-300 ease-in-out hover:bg-danger hover:text-white"
 								>
 									<HiOutlineTrash />
 								</button>

@@ -1,12 +1,3 @@
-.CARD-BANK {
-	@apply w-full rounded-lg bg-white p-4 hover:cursor-pointer
-     hover:bg-cream hover:text-brown sm:p-6;
-}
-
-.CARD-BANK p {
-	@apply hover:cursor-pointer;
-}
-
 #optBank1:checked:checked ~ .optBank1,
 #optBank2:checked:checked ~ .optBank2,
 #optBank3:checked:checked ~ .optBank3,

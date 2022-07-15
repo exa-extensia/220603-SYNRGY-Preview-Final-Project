@@ -156,7 +156,7 @@ export default function ProductList() {
 															needLogin();
 														}
 													}}
-													className="rounded-full border border-med-brown bg-white p-2 text-med-brown transition-all duration-300 hover:animate-bounce hover:bg-med-brown  hover:text-white"
+													className="rounded-full border border-med-brown bg-white p-1 text-med-brown transition-all duration-200 hover:animate-bounce hover:bg-med-brown  hover:text-white"
 												>
 													<BsCartPlus />
 												</button>

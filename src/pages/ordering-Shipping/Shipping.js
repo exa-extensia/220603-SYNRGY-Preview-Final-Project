@@ -26,9 +26,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
+import axios from "axios";
+import currencyIDR from "../../utils/currencyIDR";
+
 import { getAddress } from "../../redux/address/addressSlice";
 
 export default function Shipping() {
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	function scrollTop() {
 		window.scrollTo({
 			top: 0,
@@ -36,28 +41,91 @@ export default function Shipping() {
 		});
 	}
 
-	const dispatch = useDispatch();
-
-	useEffect(() => {
-		scrollTop();
-		dispatch(getAddress());
-	}, [dispatch]);
-
-	const navigate = useNavigate();
-
 	const { address, isLoading, isError, isSuccess, message } = useSelector(
 		(state) => state.address
 	);
 	const addressDefault = address.find((e) => e.isDefault);
-	console.log(addressDefault);
+	console.log("addressDefault>>>>", addressDefault);
+	const quantityCartBadge = useSelector((state) => state.cart.cartBadge);
 
 	const onBuatPesanan = () => {
-		if (addressDefault) {
+		if (addressDefault && courier && duration && bank) {
 			navigate("/finishpayment");
-		} else {
-			toast("Harus atur alamat utama dulu nih!");
+		}
+		if (!addressDefault) {
+			toast("Lengkapi alamat utama!");
+		}
+		if (!courier) {
+			toast("Lengkapi pilihan kurir!");
+		}
+		if (!duration) {
+			toast("Lengkapi pilihan durasi!");
+		}
+		if (!bank) {
+			toast("Lengkapi pilihan bank!");
 		}
 	};
+
+	const [courier, setCourier] = useState(""); // isi kurir pilihan
+	const [duration, setDuration] = useState(""); // isi durasi pilihan
+	const [bank, setBank] = useState(""); // isi bank pilihan
+	const [dataTotalBelanja, setDataTotalBelanja] = useState(0); // isi total sblm ongkir
+	const [dataDelivery, setDataDelivery] = useState([]); // isi data delivery : pilihan kurir & pilihan durasi
+	const [dataOngkir, setDataOngkir] = useState(0); // isi data ongkir hasil pilihan
+	const [checkoutLoading, setCheckoutLoading] = useState(true);
+	const [checkoutError, setCheckoutError] = useState(false);
+
+	const tabsCourierHandler = (e) => {
+		setCourier(e.target.id);
+	};
+	const tabsDurationHandler = (e) => {
+		if (!courier) {
+			toast("silahkan pilih kurir dahulu");
+		} else {
+			setDuration(e.target.id);
+			// parameter:
+			// dataDelivery.courier = JNE / POS / TIKI
+			// dataDelivery.services.serviceType = REGULAR / INSTANT
+			const dataKurir = dataDelivery.find((e) => e.dataDelivery.courier);
+			const dataDurasi = dataDelivery.find(
+				(e) => e.dataDelivery.services.serviceType
+			);
+
+			if (courier === dataKurir && duration === dataDurasi) {
+			}
+			const ongkir = (e) => e.dataDelivery.services.cost;
+			setDataOngkir();
+		}
+	};
+	const tabsBankHandler = (e) => {
+		setBank(e.target.id);
+	};
+
+	useEffect(() => {
+		scrollTop();
+		dispatch(getAddress());
+		const token = JSON.parse(localStorage.getItem("token"));
+		axios
+			.get(`https://cosmetic-b.herokuapp.com/api/v1/checkout`, {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			})
+			.then((response) => {
+				setCheckoutError(false);
+				setCheckoutLoading(false);
+				let data = response.data.data;
+				setDataDelivery(data.delivery);
+				setDataTotalBelanja(data.overview.total);
+				console.log("GET DATA CHECKOUT>>>>", data);
+			})
+			.catch((error) => {
+				toast("error mengambil data");
+				console.log(error);
+				setCheckoutError(true);
+				setCheckoutLoading(true);
+			});
+	}, [dispatch]);
 
 	return (
 		<>
@@ -160,66 +228,123 @@ export default function Shipping() {
 								</div>
 								<div className="ORDERING-GENERAL-CARD">
 									<p className="mb-2 font-bold">Pilih Kurir</p>
-									<form
-										id="formKURIR"
-										className="PILIH-KURIR flex flex-col gap-2 sm:flex-row"
-									>
-										<input type="radio" name="selectKurir" id="optKurir1" />
-										<input type="radio" name="selectKurir" id="optKurir2" />
-										<input type="radio" name="selectKurir" id="optKurir3" />
-										<label htmlFor="optKurir1" className="CARD-KURIR optKurir1">
+									<div className="PILIH-KURIR flex flex-col gap-2 sm:flex-row">
+										<div
+											id="JNE"
+											className={`CARD-KURIR ${
+												courier === "JNE" ? "bg-cream text-brown" : ""
+											}`}
+											onClick={tabsCourierHandler}
+										>
 											<img
+												id="JNE"
+												onClick={tabsCourierHandler}
 												src={jne}
 												className="h-[40px] object-contain sm:m-auto sm:w-[50%] sm:bg-center"
 											></img>
-										</label>
+										</div>
 										<div className="ORDERING-GENERAL-DIV-V my-auto hidden h-10 sm:block"></div>
-										<label htmlFor="optKurir2" className="CARD-KURIR optKurir2">
+										<div
+											id="POS"
+											className={`CARD-KURIR ${
+												courier === "POS" ? "bg-cream text-brown" : ""
+											}`}
+											onClick={tabsCourierHandler}
+										>
 											<img
+												id="POS"
+												onClick={tabsCourierHandler}
 												src={pos}
 												className="h-[40px] object-contain sm:m-auto sm:w-[50%] sm:bg-center"
 											></img>
-										</label>
+										</div>
 										<div className="ORDERING-GENERAL-DIV-V my-auto hidden h-10 sm:block"></div>
-										<label htmlFor="optKurir3" className="CARD-KURIR optKurir3">
+										<div
+											id="TIKI"
+											className={`CARD-KURIR ${
+												courier === "TIKI" ? "bg-cream text-brown" : ""
+											}`}
+											onClick={tabsCourierHandler}
+										>
 											<img
+												id="TIKI"
+												onClick={tabsCourierHandler}
 												src={tiki}
 												className="h-[40px] object-contain sm:m-auto sm:w-[50%] sm:bg-center"
 											></img>
-										</label>
-									</form>
+										</div>
+									</div>
 									{/* <div className="ORDERING-GENERAL-DIV my-6 w-full  sm:my-4 "></div> */}
 									<p className="mb-2 font-bold">Pilih Durasi Pengiriman</p>
-									<form
-										id="formDURASI"
-										className="PILIH-DURASI flex flex-col gap-2 sm:flex-row"
-									>
-										<input type="radio" name="select" id="opt1" />
-										<input type="radio" name="select" id="opt2" />
-										<label htmlFor="opt1" className="CARD-DURASI opt1">
+									<div className="PILIH-DURASI flex flex-col gap-2 sm:flex-row">
+										<div
+											id="REGULAR"
+											className={`CARD-DURASI ${
+												duration === "REGULAR" ? "bg-cream text-brown" : ""
+											}`}
+											onClick={tabsDurationHandler}
+										>
 											<HiClock />
-											<div className="mt-2">
-												<p className=" text-sm font-bold">Regular Shipping</p>
-												<p className="text-xs text-grey">
+											<div
+												id="REGULAR"
+												onClick={tabsDurationHandler}
+												className="mt-2"
+											>
+												<p
+													id="REGULAR"
+													onClick={tabsDurationHandler}
+													className=" text-sm font-bold"
+												>
+													Regular Shipping
+												</p>
+												<p
+													id="REGULAR"
+													onClick={tabsDurationHandler}
+													className="text-xs text-grey"
+												>
 													Estimasi Pengiriman 3-5 hari kerja
 												</p>
 											</div>
-										</label>
+										</div>
 										<div className="ORDERING-GENERAL-DIV-V my-auto hidden h-10 sm:block"></div>
-										<label htmlFor="opt2" className="CARD-DURASI opt2">
+										<div
+											id="INSTANT"
+											className={`CARD-DURASI ${
+												duration === "INSTANT" ? "bg-cream text-brown" : ""
+											}`}
+											onClick={tabsDurationHandler}
+										>
 											<HiLightningBolt />
-											<div className="mt-2">
-												<p className="text-sm font-bold">Same Day Shipping</p>
-												<p className="text-xs text-grey">
+											<div
+												id="INSTANT"
+												onClick={tabsDurationHandler}
+												className="mt-2"
+											>
+												<p
+													id="INSTANT"
+													onClick={tabsDurationHandler}
+													className="text-sm font-bold"
+												>
+													Same Day Shipping
+												</p>
+												<p
+													id="INSTANT"
+													onClick={tabsDurationHandler}
+													className="text-xs text-grey"
+												>
 													Pengiriman diterima pada hari yang sama
 												</p>
-												<p className="text-xs italic text-grey">
+												<p
+													id="INSTANT"
+													onClick={tabsDurationHandler}
+													className="text-xs italic text-grey"
+												>
 													(Pembayaran yang diterima di atas jam 13:00 akan
 													diproses pada hari berikutnya)
 												</p>
 											</div>
-										</label>
-									</form>
+										</div>
+									</div>
 								</div>
 							</div>
 							<div className="BLOCK-BANK flex flex-col gap-2">
@@ -231,95 +356,199 @@ export default function Shipping() {
 									<p className="mb-2 font-bold">
 										Rekomendasi Metode Pembayaran
 									</p>
-									<form className="BANK-WRAPPER flex w-full flex-col">
-										<input type="radio" name="select" id="optBank1" />
-										<input type="radio" name="select" id="optBank2" />
-										<input type="radio" name="select" id="optBank3" />
-										<input type="radio" name="select" id="optBank4" />
-										<label
-											htmlFor="optBank1"
-											className="CARD-BANK optBank1 w-full"
+									<div className="BANK-WRAPPER flex w-full flex-col">
+										<div
+											id="BCA"
+											onClick={tabsBankHandler}
+											className={`CARD-BANK w-full ${
+												bank === "BCA" ? "bg-cream text-brown" : ""
+											}`}
 										>
-											<div className="CARD-BANK-WRAPPER flex w-full items-center justify-between ">
-												<div className="flex w-3/4 items-center gap-4 sm:gap-6">
+											<div
+												id="BCA"
+												onClick={tabsBankHandler}
+												className="CARD-BANK-WRAPPER flex w-full items-center justify-between "
+											>
+												<div
+													id="BCA"
+													onClick={tabsBankHandler}
+													className="flex w-3/4 items-center gap-4 sm:gap-6"
+												>
 													<img
+														id="BCA"
+														onClick={tabsBankHandler}
 														src={bca}
 														className="w-[50px] bg-center object-contain"
 													></img>
-													<p className="font-medium">BCA Virtual Account</p>
+													<p
+														id="BCA"
+														onClick={tabsBankHandler}
+														className="font-medium"
+													>
+														BCA Virtual Account
+													</p>
 												</div>
-												<div className="ml-auto flex items-center justify-between gap-2 text-brown">
+												<div
+													id="BCA"
+													onClick={tabsBankHandler}
+													className="ml-auto flex items-center justify-between gap-2 text-brown"
+												>
 													<HiCheck size={15} />
-													<p className="max-w-[60px] text-xs">
+													<p
+														id="BCA"
+														onClick={tabsBankHandler}
+														className="max-w-[60px] text-xs"
+													>
 														Konfirmasi Otomatis
 													</p>
 												</div>
 											</div>
-										</label>
+										</div>
 										<div className="ORDERING-GENERAL-DIV my-6 w-full  sm:my-4 "></div>
-										<label
-											htmlFor="optBank2"
-											className="CARD-BANK optBank2 w-full"
+										<div
+											id="BNI"
+											onClick={tabsBankHandler}
+											className={`CARD-BANK w-full ${
+												bank === "BNI" ? "bg-cream text-brown" : ""
+											}`}
 										>
-											<div className="CARD-BANK-WRAPPER flex w-full items-center justify-between ">
-												<div className="flex w-3/4 items-center gap-4 sm:gap-6">
+											<div
+												id="BNI"
+												onClick={tabsBankHandler}
+												className="CARD-BANK-WRAPPER flex w-full items-center justify-between "
+											>
+												<div
+													id="BNI"
+													onClick={tabsBankHandler}
+													className="flex w-3/4 items-center gap-4 sm:gap-6"
+												>
 													<img
+														id="BNI"
+														onClick={tabsBankHandler}
 														src={bni}
 														className="w-[50px] bg-center object-contain"
 													></img>
-													<p className="font-medium">BNI Virtual Account</p>
+													<p
+														id="BNI"
+														onClick={tabsBankHandler}
+														className="font-medium"
+													>
+														BNI Virtual Account
+													</p>
 												</div>
-												<div className="ml-auto flex items-center justify-between gap-2 text-brown">
+												<div
+													id="BNI"
+													onClick={tabsBankHandler}
+													className="ml-auto flex items-center justify-between gap-2 text-brown"
+												>
 													<HiCheck size={15} />
-													<p className="max-w-[60px] text-xs">
+													<p
+														id="BNI"
+														onClick={tabsBankHandler}
+														className="max-w-[60px] text-xs"
+													>
 														Konfirmasi Otomatis
 													</p>
 												</div>
 											</div>
-										</label>
+										</div>
 										<div className="ORDERING-GENERAL-DIV my-6 w-full  sm:my-4 "></div>
-										<label
-											htmlFor="optBank3"
-											className="CARD-BANK optBank3 w-full"
+										<div
+											id="PERMATA"
+											onClick={tabsBankHandler}
+											className={`CARD-BANK w-full ${
+												bank === "PERMATA" ? "bg-cream text-brown" : ""
+											}`}
 										>
-											<div className="CARD-BANK-WRAPPER flex w-full items-center justify-between ">
-												<div className="flex w-3/4 items-center gap-4 sm:gap-6">
+											<div
+												id="PERMATA"
+												onClick={tabsBankHandler}
+												className="CARD-BANK-WRAPPER flex w-full items-center justify-between "
+											>
+												<div
+													id="PERMATA"
+													onClick={tabsBankHandler}
+													className="flex w-3/4 items-center gap-4 sm:gap-6"
+												>
 													<img
+														id="PERMATA"
+														onClick={tabsBankHandler}
 														src={permata}
 														className="w-[50px] bg-center object-contain"
 													></img>
-													<p className="font-medium">Permata Virtual Account</p>
+													<p
+														id="PERMATA"
+														onClick={tabsBankHandler}
+														className="font-medium"
+													>
+														Permata Virtual Account
+													</p>
 												</div>
-												<div className="ml-auto flex items-center justify-between gap-2 text-brown">
+												<div
+													id="PERMATA"
+													onClick={tabsBankHandler}
+													className="ml-auto flex items-center justify-between gap-2 text-brown"
+												>
 													<HiCheck size={15} />
-													<p className="max-w-[60px] text-xs">
+													<p
+														id="PERMATA"
+														onClick={tabsBankHandler}
+														className="max-w-[60px] text-xs"
+													>
 														Konfirmasi Otomatis
 													</p>
 												</div>
 											</div>
-										</label>
+										</div>
 										<div className="ORDERING-GENERAL-DIV my-6 w-full  sm:my-4 "></div>
-										<label
-											htmlFor="optBank4"
-											className="CARD-BANK optBank4 w-full"
+										<div
+											id="BRI"
+											onClick={tabsBankHandler}
+											className={`CARD-BANK w-full ${
+												bank === "BRI" ? "bg-cream text-brown" : ""
+											}`}
 										>
-											<div className="CARD-BANK-WRAPPER flex w-full items-center justify-between ">
-												<div className="flex w-3/4 items-center gap-4 sm:gap-6">
+											<div
+												id="BRI"
+												onClick={tabsBankHandler}
+												className="CARD-BANK-WRAPPER flex w-full items-center justify-between "
+											>
+												<div
+													id="BRI"
+													onClick={tabsBankHandler}
+													className="flex w-3/4 items-center gap-4 sm:gap-6"
+												>
 													<img
+														id="BRI"
+														onClick={tabsBankHandler}
 														src={bri}
 														className="w-[50px] bg-center object-contain"
 													></img>
-													<p className="font-medium">BRI Virtual Account</p>
+													<p
+														id="BRI"
+														onClick={tabsBankHandler}
+														className="font-medium"
+													>
+														BRI Virtual Account
+													</p>
 												</div>
-												<div className="ml-auto flex items-center justify-between gap-2 text-brown">
+												<div
+													id="BRI"
+													onClick={tabsBankHandler}
+													className="ml-auto flex items-center justify-between gap-2 text-brown"
+												>
 													<HiCheck size={15} />
-													<p className="max-w-[60px] text-xs">
+													<p
+														id="BRI"
+														onClick={tabsBankHandler}
+														className="max-w-[60px] text-xs"
+													>
 														Konfirmasi Otomatis
 													</p>
 												</div>
 											</div>
-										</label>
-									</form>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -329,7 +558,7 @@ export default function Shipping() {
 								<div className="text-brown">
 									<HiCheck />
 								</div>
-								<p>3 Produk Terpilih</p>
+								<p>{quantityCartBadge} Barang Terpilih!</p>
 							</div>
 							<div className="cp__card__ringkasan">
 								<div className="mb-7">
@@ -340,18 +569,45 @@ export default function Shipping() {
 									</div>
 								</div>
 								<div className="ringkasan__text mb-7 flex flex-col gap-2 text-xs lg:text-base">
-									<div className="flex justify-between ">
-										<p>Total Belanja</p>
-										<p className="font-bold">Rp 445.000</p>
-									</div>
-									<div className="flex justify-between">
-										<p>Diskon</p>
-										<p className="font-bold">-</p>
-									</div>
-									<div className="flex justify-between">
-										<p>Jumlah Pembayaran</p>
-										<p className="font-bold">Rp 445.000</p>
-									</div>
+									{checkoutLoading && (
+										<div className=" w-full ">
+											<Skeleton
+												variant="rectangular"
+												height={100}
+												animation="wave"
+												className="w-full"
+											/>
+										</div>
+									)}
+									{!checkoutLoading && (
+										<>
+											<div className="flex justify-between ">
+												<p>Total Belanja</p>
+												<p className="font-bold">
+													Rp{dataTotalBelanja.toLocaleString("id-ID")}
+												</p>
+											</div>
+											<div className="flex justify-between">
+												<p>Diskon</p>
+												<p className="font-bold">-</p>
+											</div>
+											<div className="flex justify-between text-med-brown">
+												<p>+ Ongkir</p>
+												<p className="font-bold">
+													Rp{dataOngkir.toLocaleString("id-ID")}
+												</p>
+											</div>
+											<div className="flex justify-between">
+												<p>Jumlah Pembayaran</p>
+												<p className="font-bold">
+													Rp
+													{(dataTotalBelanja + dataOngkir).toLocaleString(
+														"id-ID"
+													)}
+												</p>
+											</div>
+										</>
+									)}
 								</div>
 							</div>
 
