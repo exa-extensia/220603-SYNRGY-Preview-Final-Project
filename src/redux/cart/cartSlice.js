@@ -129,6 +129,7 @@ export const cartSlice = createSlice({
 				// state.addedVariantId = action.payload.existingVariantId;
 				// console.log(">>>>>existing id", action.payload.existingVariantId);
 				// if (state.addedVariantId !== action.payload.existingVariantId) {}
+				// test
 				toast("sudah dimasukkan ke keranjang!");
 				state.cartBadge += action.payload.quantity;
 				localStorage.setItem("cartBadge", JSON.stringify(state.cartBadge));
