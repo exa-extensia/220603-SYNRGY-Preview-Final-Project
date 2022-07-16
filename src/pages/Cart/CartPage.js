@@ -1,6 +1,7 @@
 import "./cartpage.css";
 
 import Navbar from "../../components/sections/_navbar/Navbar";
+import Footer from "../../components/sections/_footer/Footer";
 import Breadcrumb from "../../components/atoms/breadcrumb/BC-CartPage";
 import {
 	HiMinusSm,
@@ -13,18 +14,19 @@ import {
 } from "react-icons/hi";
 import illst from "../../assets/images/cartempty-illst.svg";
 import Skeleton from "@mui/material/Skeleton";
+import thousandSeparator from "../../utils/thousandSeparator";
+import { toast } from "react-toastify";
 
-import { Link, Navigate, useNavigate } from "react-router-dom";
-
-import Footer from "../../components/sections/_footer/Footer";
-
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteCart, getAllCart } from "../../redux/cart/cartSlice";
+import {
+	deleteCart,
+	getAllCart,
+	deleteCartBadge,
+} from "../../redux/cart/cartSlice";
 
 import axios from "axios";
-import currencyIDR from "../../utils/currencyIDR";
-import { toast } from "react-toastify";
 
 export default function CartPage() {
 	const dispatch = useDispatch();
@@ -47,13 +49,10 @@ export default function CartPage() {
 	const [overview, setOverview] = useState({});
 	const [overviewTotal, setOverviewTotal] = useState(0);
 	const [items, setItems] = useState([]);
-	// const [variant, setVariant] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [isError, setIsError] = useState(false);
 	useEffect(() => {
 		scrollTop();
-		// dispatch(getAllCart());
-		// console.log("dispatch");
 		const token = JSON.parse(localStorage.getItem("token"));
 		axios
 			.get(`https://cosmetic-b.herokuapp.com/api/v1/carts`, {
@@ -67,8 +66,7 @@ export default function CartPage() {
 				setOverview(data.overview);
 				setOverviewTotal(data.overview.total);
 				setItems(data.cartItems);
-				// setVariant(data.items.items);
-				console.log("GET ALL CART>>>>>>>", data);
+				console.log("get all cart in component>>>>>>>", data);
 			})
 			.catch((error) => {
 				setIsLoading(false);
@@ -78,7 +76,6 @@ export default function CartPage() {
 	}, [dispatch]);
 
 	const quantityCartBadge = useSelector((state) => state.cart.cartBadge);
-	const { cartError, message } = useSelector((state) => state.cart);
 
 	return (
 		<>
@@ -158,10 +155,7 @@ export default function CartPage() {
 													<div key={index} className="cp__satubrand__input">
 														<div className="cp__input">
 															<div className="input__img">
-																<img
-																	src="https://source.unsplash.com/random/?skincare"
-																	alt="cp__product"
-																/>
+																<img src={v.image} alt="cp__product" />
 															</div>
 															<div className="input__text">
 																<p>{v.name}</p>
@@ -196,22 +190,40 @@ export default function CartPage() {
 																			quantity: v.quantity,
 																			variantId: v.variantId,
 																		};
-
-																		dispatch(deleteCart(itemData));
-
-																		if (!cartError) {
-																			const splash = i.items.splice(index, 1);
-																			console.log(">>>>>>splash", splash);
-																			console.log(">>>>>>length", items.length);
-																			if (i.items.length === 0) {
-																				items.splice(indexLuar, 1);
-																			}
-																			setOverviewTotal(
-																				overviewTotal - v.subTotal
-																			);
-
-																			// window.location.reload();
-																		}
+																		const token = JSON.parse(
+																			localStorage.getItem("token")
+																		);
+																		axios
+																			.post(
+																				`https://cosmetic-b.herokuapp.com/api/v1/carts/action/${itemData.variantId}?actionType=DELETE`,
+																				null,
+																				{
+																					headers: {
+																						Authorization: `Bearer ${token}`,
+																					},
+																				}
+																			)
+																			.then((response) => {
+																				setIsLoading(false);
+																				let dataDelete = response.data.data;
+																				console.log(dataDelete);
+																				setOverviewTotal(
+																					overviewTotal - v.subTotal
+																				);
+																				dispatch(
+																					deleteCartBadge(itemData.quantity)
+																				);
+																				i.items.splice(index, 1);
+																				if (i.items.length === 0) {
+																					items.splice(indexLuar, 1);
+																				}
+																				toast("berhasil dihapus");
+																			})
+																			.catch((error) => {
+																				setIsLoading(false);
+																				console.log(error);
+																				setIsError(true);
+																			});
 																	}}
 																	className="rounded-full bg-white p-1 text-danger transition-all duration-300 ease-in-out hover:bg-danger hover:text-white"
 																>
@@ -261,19 +273,8 @@ export default function CartPage() {
 													<p className="font-bold">Rp{overviewTotal}</p>
 												</div>
 											</div>
-											{/* <Link to={"/placeorder"}>
-												<button className="btn-grad w-full rounded-full py-2   text-white">
-													Lanjutkan Pesanan
-												</button>
-											</Link> */}
 										</div>
 										<div className="relative h-10 w-full">
-											{/* <button
-												onClick={navigate("/placeorder")}
-												className="btn-grad absolute right-0 bottom-0 rounded-full py-2 px-5 text-xs text-white sm:text-base"
-											>
-												Lanjutkan Pesanan
-											</button> */}
 											<Link to={"/placeorder"}>
 												<button className="btn-grad absolute right-0 bottom-0 rounded-full py-2 px-5 text-xs text-white sm:text-base">
 													Lanjutkan Pesanan
@@ -282,7 +283,6 @@ export default function CartPage() {
 										</div>
 									</>
 								)}
-								{/* <img src={illst} alt="" />  */}
 							</div>
 						</div>
 					</div>
