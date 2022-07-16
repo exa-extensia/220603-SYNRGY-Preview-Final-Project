@@ -96,20 +96,6 @@ export default function Shipping() {
 			toast("silahkan pilih kurir dahulu");
 		} else {
 			setDuration(e.target.id);
-			// console.log("duration>>>>>>>>", duration);
-			// parameter:
-			// dataDelivery.courier = JNE / POS / TIKI
-			// dataDelivery.services.serviceType = REGULAR / INSTANT
-			// const dataKurir = dataDelivery.find((e) => e.courier === courier);
-			// const dataDurasi = dataDelivery.find(
-			// 	(e) => e.dataDelivery.services.serviceType === duration
-			// );
-			// const dataCostByCourier = dataKurir.services.find(
-			// 	(e) => e.serviceType === duration
-			// );
-			// console.log(">>>>>>>datacostbycourier>>>>>>>>", dataCostByCourier);
-			// const ongkir = dataCostByCourier.cost;
-			// setDataOngkir(ongkir);
 		}
 	};
 	const tabsBankHandler = (e) => {
