@@ -43,10 +43,34 @@ const DeleteCart = async ({ quantity, variantId }, token) => {
 	return { data: response.data.data, quantity };
 };
 
+const PlaceOrder = async (
+	{ bank, delivery, deliveryService, paymentType },
+	token
+) => {
+	const response = await axios.post(
+		"https://cosmetic-b.herokuapp.com/api/v1/checkout",
+		{
+			bank: bank,
+			delivery: delivery,
+			deliveryService: deliveryService,
+			paymentType: paymentType,
+		},
+		{
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		}
+	);
+
+	console.log(">>>>Post Checkout Response", response.data.data);
+	return { data: response.data.data };
+};
+
 const cartService = {
 	AddToCart,
 	GetAllCart,
 	DeleteCart,
+	PlaceOrder,
 };
 
 export default cartService;

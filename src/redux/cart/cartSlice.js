@@ -8,6 +8,13 @@ const initialState = {
 	cartBadge: localStorage.getItem("cartBadge")
 		? JSON.parse(localStorage.getItem("cartBadge"))
 		: 0,
+	statusBuatPesanan: {
+		responseBuatPesanan: {},
+		buatPesananSuccess: false,
+		buatPesananLoading: false,
+		buatPesananError: false,
+		buatpesananmessage: "",
+	},
 	isError: false,
 	cartError: false,
 	isSuccess: false,
@@ -64,6 +71,24 @@ export const getAllCart = createAsyncThunk("cart/get", async (thunkAPI) => {
 // 		}
 // 	}
 // );
+
+export const placeOrder = createAsyncThunk(
+	"checkout/placeorder",
+	async (data, thunkAPI) => {
+		try {
+			const token = JSON.parse(localStorage.getItem("token"));
+			return await cartService.PlaceOrder(data, token);
+		} catch (error) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString();
+			return thunkAPI.rejectWithValue(message);
+		}
+	}
+);
 
 ///////////////////////////SLICE
 
@@ -149,6 +174,7 @@ export const cartSlice = createSlice({
 				);
 				if (state.cartBadge !== totalQty) {
 					state.cartBadge = totalQty;
+					localStorage.setItem("cartBadge", JSON.stringify(totalQty));
 				}
 				console.log(">>>>>GET ALL action payload", action.payload);
 			})
@@ -156,25 +182,42 @@ export const cartSlice = createSlice({
 				state.isLoading = false;
 				state.isError = true;
 				state.message = action.payload;
+			})
+			// .addCase(deleteCart.pending, (state) => {
+			// 	state.isLoading = true;
+			// })
+			// .addCase(deleteCart.fulfilled, (state, action) => {
+			// 	state.isLoading = false;
+			// 	state.isSuccess = true;
+			// 	toast("berhasil dihapus");
+			// 	if (state.cartBadge > 0) {
+			// 		state.cartBadge -= action.payload.quantity;
+			// 		localStorage.setItem("cartBadge", JSON.stringify(state.cartBadge));
+			// 	}
+			// })
+			// .addCase(deleteCart.rejected, (state, action) => {
+			// 	state.isLoading = false;
+			// 	state.cartError = true;
+			// 	state.message = action.payload;
+			// 	toast("oops ada error");
+			// })
+			.addCase(placeOrder.pending, (state) => {
+				state.statusBuatPesanan.buatPesananLoading = true;
+				toast("sedang membuat pesanan!");
+			})
+			.addCase(placeOrder.fulfilled, (state, action) => {
+				state.cartBadge = 0;
+				state.statusBuatPesanan.buatPesananLoading = false;
+				state.statusBuatPesanan.buatPesananSuccess = true;
+				state.statusBuatPesanan.responseBuatPesanan = action.payload;
+
+				console.log(">>>>>Post Checkout action payload", action.payload);
+			})
+			.addCase(placeOrder.rejected, (state, action) => {
+				state.statusBuatPesanan.buatPesananLoading = false;
+				state.statusBuatPesanan.buatPesananError = true;
+				state.statusBuatPesanan.buatpesananmessage = action.payload;
 			});
-		// .addCase(deleteCart.pending, (state) => {
-		// 	state.isLoading = true;
-		// })
-		// .addCase(deleteCart.fulfilled, (state, action) => {
-		// 	state.isLoading = false;
-		// 	state.isSuccess = true;
-		// 	toast("berhasil dihapus");
-		// 	if (state.cartBadge > 0) {
-		// 		state.cartBadge -= action.payload.quantity;
-		// 		localStorage.setItem("cartBadge", JSON.stringify(state.cartBadge));
-		// 	}
-		// })
-		// .addCase(deleteCart.rejected, (state, action) => {
-		// 	state.isLoading = false;
-		// 	state.cartError = true;
-		// 	state.message = action.payload;
-		// 	toast("oops ada error");
-		// });
 	},
 });
 
