@@ -45,18 +45,18 @@
 }
 
 .cp__input .input__img {
-	@apply aspect-square w-full overflow-hidden rounded-md;
+	@apply aspect-square overflow-hidden rounded-md sm:w-full;
 }
 
 .cp__input .input__text {
 }
 
 .cp__input .input__text p:nth-child(1) {
-	@apply text-xs font-bold md:text-base;
+	@apply text-sm font-bold sm:text-base;
 }
 
 .cp__input .input__text p:nth-child(2) {
-	@apply text-xs font-bold text-brown md:text-base;
+	@apply text-sm font-bold text-brown sm:text-base;
 }
 
 .cp__input .input__qty {

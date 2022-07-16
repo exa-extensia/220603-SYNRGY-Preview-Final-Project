@@ -19,14 +19,14 @@ const AddToCart = async ({ quantity, variantId }, token) => {
 	return { data: response.data.data, quantity, existingVariantId: variantId };
 };
 
-const GetAllCart = async (token) => {
-	const response = await axios.get(`${API_URL}`, {
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
-	});
-	return response.data.data;
-};
+// const GetAllCart = async (token) => {
+// 	const response = await axios.get(`${API_URL}`, {
+// 		headers: {
+// 			Authorization: `Bearer ${token}`,
+// 		},
+// 	});
+// 	return response.data.data;
+// };
 
 const DeleteCart = async ({ quantity, variantId }, token) => {
 	const response = await axios.post(
@@ -45,7 +45,7 @@ const DeleteCart = async ({ quantity, variantId }, token) => {
 
 const cartService = {
 	AddToCart,
-	GetAllCart,
+	// GetAllCart,
 	DeleteCart,
 };
 

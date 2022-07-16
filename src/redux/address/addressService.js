@@ -43,28 +43,28 @@ const DeleteUserAddresss = async (id) => {
 	const response = await axios.post(`${API_URL}/delete/${id}`);
 
 	console.log(">>>>Delete Address Response", response.data.data);
-	return response.data.data;
+	return { data: response.data.data, deletedAddressId: id };
 };
 
-const UpdateUserAddresss = async (isDefault, token) => {
-	const response = await axios.put(
-		`${API_URL}`,
-		{ isDefault: isDefault },
-		{
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
-		}
-	);
-	console.log(">>>>UPDATE Address Response", response.data.data);
-	return response.data.data;
-};
+// const UpdateUserAddresss = async (isDefault, token) => {
+// 	const response = await axios.put(
+// 		`${API_URL}`,
+// 		{ isDefault: isDefault },
+// 		{
+// 			headers: {
+// 				Authorization: `Bearer ${token}`,
+// 			},
+// 		}
+// 	);
+// 	console.log(">>>>UPDATE Address Response", response.data.data);
+// 	return response.data.data;
+// };
 
 const addressService = {
 	CreateUserAddresss,
 	GetUserAddresss,
 	DeleteUserAddresss,
-	UpdateUserAddresss,
+	// UpdateUserAddresss,
 };
 
 export default addressService;
