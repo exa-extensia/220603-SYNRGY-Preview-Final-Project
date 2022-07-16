@@ -33,19 +33,19 @@ export const addToCart = createAsyncThunk(
 	}
 );
 
-// export const getAllCart = createAsyncThunk("cart/get", async (thunkAPI) => {
-// 	try {
-// 		const token = JSON.parse(localStorage.getItem("token"));
+export const getAllCart = createAsyncThunk("cart/get", async (thunkAPI) => {
+	try {
+		const token = JSON.parse(localStorage.getItem("token"));
 
-// 		return await cartService.GetAllCart(token);
-// 	} catch (error) {
-// 		const message =
-// 			(error.response && error.response.data && error.response.data.message) ||
-// 			error.message ||
-// 			error.toString();
-// 		return thunkAPI.rejectWithValue(message);
-// 	}
-// });
+		return await cartService.GetAllCart(token);
+	} catch (error) {
+		const message =
+			(error.response && error.response.data && error.response.data.message) ||
+			error.message ||
+			error.toString();
+		return thunkAPI.rejectWithValue(message);
+	}
+});
 
 // export const deleteCart = createAsyncThunk(
 // 	"cart/delete",
@@ -130,21 +130,33 @@ export const cartSlice = createSlice({
 				state.isError = true;
 				state.message = action.payload;
 				toast("oops ada error");
+			})
+			.addCase(getAllCart.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(getAllCart.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isSuccess = true;
+				state.data = action.payload;
+				const dataCartItems = action.payload.cartItems;
+				const everyItems = dataCartItems.reduce(
+					(prev, curr) => [...prev, ...curr.items],
+					[]
+				);
+				const totalQty = everyItems.reduce(
+					(prev, curr) => prev + curr.quantity,
+					0
+				);
+				if (state.cartBadge !== totalQty) {
+					state.cartBadge = totalQty;
+				}
+				console.log(">>>>>GET ALL action payload", action.payload);
+			})
+			.addCase(getAllCart.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
 			});
-		// .addCase(getAllCart.pending, (state) => {
-		// 	state.isLoading = true;
-		// })
-		// .addCase(getAllCart.fulfilled, (state, action) => {
-		// 	state.isLoading = false;
-		// 	state.isSuccess = true;
-		// 	state.data = action.payload;
-		// 	console.log(action.payload);
-		// })
-		// .addCase(getAllCart.rejected, (state, action) => {
-		// 	state.isLoading = false;
-		// 	state.isError = true;
-		// 	state.message = action.payload;
-		// })
 		// .addCase(deleteCart.pending, (state) => {
 		// 	state.isLoading = true;
 		// })
