@@ -19,7 +19,7 @@ import { FaLeaf } from "react-icons/fa";
 import { BsCartPlus } from "react-icons/bs";
 import Rating from "@mui/material/Rating";
 
-export default function ProductList() {
+export default function ProductOrganic() {
 	function scrollTop() {
 		window.scrollTo({
 			top: 0,
@@ -35,7 +35,8 @@ export default function ProductList() {
 	const { products, isLoading, isError, isSuccess, message } = useSelector(
 		(state) => state.products
 	);
-
+	const organicTrue = products.filter((e) => e.isOrganic === true);
+	console.log("organikkkkkkk", organicTrue);
 	const dispatch = useDispatch();
 	const { user } = useSelector((state) => state.auth);
 	const needLogin = () => {
@@ -91,15 +92,15 @@ export default function ProductList() {
 						<div className="pl__main">
 							<div className="pl__main--header text-med-brown ">
 								<h1 className="pl__brandcount text-2xl tracking-wider  ">
-									Produk Semua
+									Produk Organik
 								</h1>
 								<div className="pl__product-sort">
-									Jumlah Produk: {products.length}
+									Jumlah Produk: {organicTrue.length}
 								</div>
 							</div>
 							<div className="pl__main--list">
 								{isLoading &&
-									products.map(() => (
+									organicTrue.map(() => (
 										<>
 											<Skeleton
 												variant="rectangular"
@@ -110,7 +111,7 @@ export default function ProductList() {
 									))}
 								{!isLoading &&
 									!isError &&
-									products.map((item) => (
+									organicTrue.map((item) => (
 										<div className="relative">
 											<div className="absolute top-0 right-0 z-10 -translate-x-3 translate-y-3">
 												<button

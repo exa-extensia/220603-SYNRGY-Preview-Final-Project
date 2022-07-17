@@ -23,19 +23,19 @@ export default function Footer() {
 								MENU
 							</p>
 							<div className=" flex  flex-col place-items-end gap-2 sm:place-items-start sm:gap-1">
-								<a href="#" className="text-xs lg:text-base">
+								<a href="/" className="text-xs lg:text-base">
 									Home
 								</a>
-								<a href="#" className="text-xs lg:text-base">
+								<a href="/productlist" className="text-xs lg:text-base">
 									Kategori
 								</a>
-								<a href="#" className="text-xs lg:text-base">
+								<a href="/producttrending" className="text-xs lg:text-base">
 									Produk Trending
 								</a>
-								<a href="#" className="text-xs lg:text-base">
+								<a href="/beautyfeed" className="text-xs lg:text-base">
 									Beauty Feed
 								</a>
-								<a href="#" className="text-xs lg:text-base">
+								<a href="/productorganic" className="text-xs lg:text-base">
 									Produk Organik
 								</a>
 							</div>
