@@ -30,6 +30,7 @@ import axios from "axios";
 import currencyIDR from "../../utils/currencyIDR";
 
 import { getAddress } from "../../redux/address/addressSlice";
+import { placeOrder } from "../../redux/cart/cartSlice";
 
 export default function Shipping() {
 	const dispatch = useDispatch();
@@ -47,10 +48,22 @@ export default function Shipping() {
 	const addressDefault = address.find((e) => e.isDefault);
 	console.log("addressDefault>>>>", addressDefault);
 	const quantityCartBadge = useSelector((state) => state.cart.cartBadge);
+	const {
+		buatPesananError,
+		buatPesananSuccess,
+		buatPesananLoading,
+		buatpesananmessage,
+	} = useSelector((state) => state.cart.statusBuatPesanan);
 
 	const onBuatPesanan = () => {
 		if (addressDefault && courier && duration && bank) {
-			navigate("/finishpayment");
+			const checkoutData = {
+				bank: bank,
+				delivery: courier,
+				deliveryService: duration,
+				paymentType: "BANK_TRANSFER",
+			};
+			dispatch(placeOrder(checkoutData));
 		}
 		if (!addressDefault) {
 			toast("Lengkapi alamat utama!");
@@ -103,6 +116,15 @@ export default function Shipping() {
 	};
 
 	useEffect(() => {
+		if (buatPesananError) {
+			toast(buatpesananmessage);
+		}
+		if (buatPesananSuccess) {
+			navigate("/finishpayment");
+		}
+	}, [dispatch, buatPesananError, buatPesananSuccess]);
+
+	useEffect(() => {
 		scrollTop();
 		dispatch(getAddress());
 		const token = JSON.parse(localStorage.getItem("token"));
@@ -121,12 +143,13 @@ export default function Shipping() {
 				console.log("GET DATA CHECKOUT>>>>", data);
 			})
 			.catch((error) => {
-				toast("error mengambil data");
+				toast("tidak ada produk dalam keranjang");
 				console.log(error);
 				setCheckoutError(true);
 				setCheckoutLoading(true);
+				navigate("/cart");
 			});
-	}, [dispatch]);
+	}, []);
 
 	return (
 		<>
@@ -620,6 +643,11 @@ export default function Shipping() {
 									Buat Pesanan
 								</button>
 							</div>
+							{buatPesananLoading && (
+								<div className="text-right text-xs font-bold text-brown">
+									Sedang membuat pesanan...!
+								</div>
+							)}
 							{/* <img src={illst} alt="" /> */}
 						</div>
 					</div>

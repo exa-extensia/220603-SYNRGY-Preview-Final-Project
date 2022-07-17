@@ -195,6 +195,9 @@ export default function Register() {
 						</div>
 					</div>
 				</div>
+				<div className="relative -z-10 hidden items-center justify-center xl:flex">
+					<p>Loading background image & video...</p>
+				</div>
 			</section>
 			<section className="MOBILE container absolute h-full w-full sm:grid sm:grid-cols-2 xl:hidden">
 				<div className="lrbg top-0  sm:col-start-2 sm:row-start-1">

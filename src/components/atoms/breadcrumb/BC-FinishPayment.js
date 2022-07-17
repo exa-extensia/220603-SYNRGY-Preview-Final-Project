@@ -32,12 +32,9 @@ export default function Breadcrumb() {
 								clip-rule="evenodd"
 							></path>
 						</svg>
-						<a
-							href="/cart"
-							class="ml-1 text-sm font-medium text-brown hover:cursor-pointer hover:font-bold  md:ml-2"
-						>
+						<span class="ml-1 text-sm font-medium text-brown   md:ml-2">
 							Cart
-						</a>
+						</span>
 					</div>
 				</li>
 				<li>
@@ -54,12 +51,9 @@ export default function Breadcrumb() {
 								clip-rule="evenodd"
 							></path>
 						</svg>
-						<a
-							href="/placeorder"
-							class="ml-1 text-sm font-medium text-brown hover:cursor-pointer hover:font-bold  md:ml-2"
-						>
+						<span class="ml-1 text-sm font-medium text-brown   md:ml-2">
 							Place Order
-						</a>
+						</span>
 					</div>
 				</li>
 

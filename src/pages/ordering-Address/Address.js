@@ -19,10 +19,6 @@ export default function Address() {
 		});
 	}
 
-	useEffect(() => {
-		scrollTop();
-	}, []);
-
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
@@ -50,6 +46,7 @@ export default function Address() {
 	);
 
 	useEffect(() => {
+		scrollTop();
 		if (isError) {
 			toast(message);
 		}
@@ -200,7 +197,7 @@ export default function Address() {
 							</div>
 							{isLoading && (
 								<div className="mt-8 text-xs font-bold text-brown">
-									Working on it...!
+									Sedang membuat alamat...!
 								</div>
 							)}
 							{isError && (
