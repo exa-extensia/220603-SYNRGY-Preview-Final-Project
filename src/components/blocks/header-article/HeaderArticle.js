@@ -26,15 +26,17 @@ export default function HeaderArticle() {
 			{article.map((data, i) => {
 				return (
 					<ol key={i} >
-						<li className="flex">
-							<img src={data.photo} className="w-[30%] h-[20%]" />
-							<div className="p-4 w-[60%] h-[20%]">
-								<p className="text-xs">{data.date}</p>
-								<h6 className="font-bold tracking-tight text-gray-900 dark:text-white truncate">
-									{data.title}
-								</h6>
-							</div>
-						</li>
+						<Link to={`/articledetail/${data.id}`}>
+							<li className="flex my-3 cursor-pointer">
+								<img src={data.photo} className="w-[30%] h-[20%]" />
+								<div className="p-4 w-[60%] h-[20%]">
+									<p className="text-xs">{data.date}</p>
+									<h6 className="font-bold tracking-tight text-gray-900 truncate">
+										{data.title}
+									</h6>
+								</div>
+							</li>
+						</Link>
 					</ol>
 				)
 			})}

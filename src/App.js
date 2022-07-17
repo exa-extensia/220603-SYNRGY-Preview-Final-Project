@@ -21,6 +21,8 @@ import PaymentOption from "./pages/ordering-Payment/PaymentOption";
 import FinishPayment from "./pages/ordering-FinishPayment/FinishPayment";
 import OrderDetails from "./pages/ordering-OrderDetails/OrderDetails";
 import UserProfile from "./pages/User Profile/UserProfile";
+import BeautyFeed from "./pages/beautyFeed/BeautyFeed";
+import DetailArticle from "./pages/detail-article/Detail-article";
 
 function App() {
 	return (
@@ -36,6 +38,7 @@ function App() {
 
 					<Route path="/productlist" element={<ProductList />} />
 					<Route path="/productdetail/:id" element={<ProductDetail />} />
+					<Route path="/articledetail/:id" element={<DetailArticle />} />
 					<Route element={<ProtectedRoute />}>
 						<Route path="/cart" element={<CartPage />} />
 						<Route path="/address" element={<Address />} />
@@ -44,6 +47,7 @@ function App() {
 						<Route path="/finishpayment" element={<FinishPayment />} />
 						<Route path="/orderdetails" element={<OrderDetails />} />
 						<Route path="/userprofile" element={<UserProfile />} />
+						<Route path="/feed" element={<BeautyFeed />} />
 
 						{/* <Route path="/temp" element={<Pembayaran />} /> */}
 					</Route>
