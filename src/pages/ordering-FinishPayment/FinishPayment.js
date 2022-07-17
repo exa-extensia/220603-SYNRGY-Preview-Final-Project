@@ -13,21 +13,77 @@ import { HiOutlineQuestionMarkCircle } from "react-icons/hi";
 import { IoTicketSharp } from "react-icons/io5";
 
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 export default function PaymentOptions() {
+	const navigate = useNavigate();
+	const [time, setTime] = useState("");
+	const [amount, setAmount] = useState(0);
+	const [orderID, setOrderID] = useState("");
+	const data = useSelector((state) => state.cart.statusBuatPesanan);
+	console.log("ini data", data.responseBuatPesanan);
+
+	useEffect(() => {
+		scrollTop();
+		if (
+			Object.keys(data.responseBuatPesanan).length === 0 &&
+			data.responseBuatPesanan.constructor === Object
+		) {
+			toast("oops, info pesanan silahkan lihat profil");
+			navigate("/userprofile");
+		} else {
+			const { transaction_time, gross_amount, va_numbers, order_id } =
+				data.responseBuatPesanan.data;
+			setTime(transaction_time);
+			setAmount(gross_amount);
+			setOrderID(order_id);
+		}
+	}, [data]);
+
+	// const [bank, setBank] = useState("");
+	// if (va_numbers.bank === "bca") {
+	// 	setBank("bca");
+	// }
+	// if (va_numbers.bank === "bni") {
+	// 	setBank("bni");
+	// }
+	// if (va_numbers.bank === "permata") {
+	// 	setBank("permata");
+	// }
+	// if (va_numbers.bank === "bri") {
+	// 	setBank("bri");
+	// }
+
+	const [countdown, setCountdown] = useState([23, 59, 59]);
+	const [hour, min, sec] = countdown;
+	const d = new Date(`${time}`);
+	const deadline = d.getTime();
+	const countdownCondition = useCallback(() => {
+		let selisih = deadline - Date.now();
+		console.log("iniiiiiiii", selisih);
+		let sec = Math.floor((selisih / 1000) % 60);
+		let min = Math.floor((selisih / 1000 / 60) % 60);
+		let hour = Math.floor((selisih / 1000 / 60 / 60) % 24);
+
+		return [hour, min, sec];
+	}, [deadline]);
+
+	useEffect(() => {
+		let intervalId = setInterval(() => {
+			setCountdown(countdownCondition());
+		}, 1000);
+
+		return () => clearInterval(intervalId);
+	}, [countdownCondition, setCountdown]);
+
 	function scrollTop() {
 		window.scrollTo({
 			top: 0,
 			behavior: "smooth",
 		});
 	}
-
-	useEffect(() => {
-		scrollTop();
-	}, []);
-
-	const navigate = useNavigate();
 
 	return (
 		<>
@@ -70,9 +126,18 @@ export default function PaymentOptions() {
 											/>
 										</div>
 
-										<div className="BG-GRADIENT flex w-full items-center justify-center py-10  font-bold text-white sm:w-9/12 xl:px-8">
-											<p className=" text-center text-xl">
-												Bayar Sebelum 10 JULI 2022, 7:55 WIB
+										<div className="BG-GRADIENT flex w-full flex-col items-center justify-center py-4   sm:w-9/12 xl:px-8">
+											<p className="px-4 text-center text-lg font-bold uppercase tracking-wider text-white">
+												pesanan dibuat pada
+											</p>
+											<p className="px-4 text-center text-lg font-bold text-white">
+												{time}
+											</p>
+											<p className="mt-4 px-4 text-center text-xs text-white">
+												tuntaskan pembayaran dalam
+											</p>
+											<p className="px-4 text-center text-xs text-white">
+												{hour} jam {min} menit {sec} detik
 											</p>
 										</div>
 									</div>
@@ -81,19 +146,41 @@ export default function PaymentOptions() {
 											<p className="mt-6 text-lg font-bold uppercase text-grey">
 												Transfer Ke
 											</p>
-											<img
-												src={bca}
-												className="my-3 w-[150px] bg-center object-contain"
-											></img>
-											<p className="text-lg font-bold">Virtual Account</p>
-											<p className="text-2xl font-bold">36894994820</p>
+											{/* {va_numbers.bank === "bca" && (
+												<img
+													src={bca}
+													className="my-3 w-[150px] bg-center object-contain"
+												></img>
+											)}
+											{va_numbers.bank === "bni" && (
+												<img
+													src={bni}
+													className="my-3 w-[150px] bg-center object-contain"
+												></img>
+											)}
+											{va_numbers.bank === "bri" && (
+												<img
+													src={bri}
+													className="my-3 w-[150px] bg-center object-contain"
+												></img>
+											)}
+											{va_numbers.bank === "permata" && (
+												<img
+													src={permata}
+													className="my-3 w-[150px] bg-center object-contain"
+												></img>
+											)} */}
+											{/* <p className="text-lg font-bold">Virtual Account</p>
+											<p className="text-2xl font-bold">
+												{va_numbers.va_number}
+											</p> */}
 										</div>
 										<div className="my-6 w-6/12 border-b-2 border-[#d2a866]  sm:my-4 "></div>
 										<div className="TRANSFER-JUMLAH flex flex-col items-center justify-center">
 											<p className="text-center text-lg font-bold uppercase text-grey">
 												Jumlah yang Harus Dibayar
 											</p>
-											<p className="mt-3 text-2xl font-bold">Rp2.989.000</p>
+											<p className="mt-3 text-2xl font-bold">Rp{amount}</p>
 										</div>
 									</div>
 								</div>
@@ -106,7 +193,7 @@ export default function PaymentOptions() {
 									<IoTicketSharp size={40} className="mb-3" />
 								</div>
 								<p>Nomor Pesanan</p>
-								<p className="font-bold">PSDF293832KSN</p>
+								<p className="text-center font-bold">{orderID}</p>
 							</div>
 							<div className="flex gap-4">
 								<HiOutlineQuestionMarkCircle size={28} className="text-brown" />
@@ -125,10 +212,10 @@ export default function PaymentOptions() {
 							<div className=" w-full border-b-2 border-[#d2a866]"></div>
 							<div className="flex h-10 w-full items-center justify-center gap-2 xl:float-right xl:block xl:text-right  ">
 								<button
-									onClick={() => navigate("/orderdetails")}
+									onClick={() => navigate("/userprofile")}
 									className="btn-sec right-0 bottom-0 ml-0 rounded-full py-2 px-5  text-xs xl:ml-auto xl:mr-4 xl:text-base"
 								>
-									Cek Status Order
+									Cek Riwayat Pesanan
 								</button>
 								<button
 									onClick={() => navigate("/")}
