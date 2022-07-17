@@ -27,6 +27,7 @@ import {
 } from "../../redux/cart/cartSlice";
 
 import axios from "axios";
+import currencyIDR from "../../utils/currencyIDR";
 
 export default function CartPage() {
 	const dispatch = useDispatch();
@@ -160,7 +161,7 @@ export default function CartPage() {
 															</div>
 															<div className="input__text">
 																<p>{v.name}</p>
-																<p>Rp{v.price}</p>
+																<p>{currencyIDR(v.price)}</p>
 															</div>
 															<div className="input__qty ">
 																{/* <div
