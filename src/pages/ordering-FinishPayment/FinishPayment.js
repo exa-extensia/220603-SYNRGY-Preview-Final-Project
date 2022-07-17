@@ -23,8 +23,10 @@ export default function PaymentOptions() {
 	const [time, setTime] = useState("");
 	const [amount, setAmount] = useState(0);
 	const [orderID, setOrderID] = useState("");
+	const [bank, setBank] = useState("");
+	const [vaNumber, setVaNumber] = useState("");
 	const data = useSelector((state) => state.cart.statusBuatPesanan);
-	// console.log("ini data", data.responseBuatPesanan);
+	console.log("data pesanan di komponen ", data.responseBuatPesanan);
 
 	useEffect(() => {
 		scrollTop();
@@ -35,34 +37,33 @@ export default function PaymentOptions() {
 			toast("info pesanan silahkan lihat di profil mu");
 			navigate("/userprofile");
 		} else {
-			const { transaction_time, gross_amount, va_numbers, order_id } =
+			const { expiryTime, bankName, grossAmount, orderId, vaNumber } =
 				data.responseBuatPesanan.data;
-			setTime(transaction_time);
-			setAmount(gross_amount);
-			setOrderID(order_id);
+			setTime(expiryTime);
+			setAmount(grossAmount);
+			setOrderID(orderId);
+			setVaNumber(vaNumber);
+			if (bankName === "bca") {
+				setBank("bca");
+			}
+			if (bankName === "bni") {
+				setBank("bni");
+			}
+			if (bankName === "permata") {
+				setBank("permata");
+			}
+			if (bankName === "bri") {
+				setBank("bri");
+			}
 		}
 	}, [data]);
-
-	// const [bank, setBank] = useState("");
-	// if (va_numbers.bank === "bca") {
-	// 	setBank("bca");
-	// }
-	// if (va_numbers.bank === "bni") {
-	// 	setBank("bni");
-	// }
-	// if (va_numbers.bank === "permata") {
-	// 	setBank("permata");
-	// }
-	// if (va_numbers.bank === "bri") {
-	// 	setBank("bri");
-	// }
 
 	const TWO_HRS_IN_MS = 2 * 60 * 60 * 1000;
 	const NOW_IN_MS = new Date().getTime();
 	const DEADLINE = TWO_HRS_IN_MS + NOW_IN_MS;
 
-	const useCountdown = (DEADLINE) => {
-		const countDownDate = new Date(DEADLINE).getTime();
+	const useCountdown = (time) => {
+		const countDownDate = new Date(time).getTime();
 
 		const [countDown, setCountDown] = useState(
 			countDownDate - new Date().getTime()
@@ -94,7 +95,7 @@ export default function PaymentOptions() {
 		[DEADLINE]
 	);
 
-	const [hour, min, sec] = useCountdown(DEADLINE);
+	const [hour, min, sec] = useCountdown(time);
 
 	function scrollTop() {
 		window.scrollTo({
@@ -164,34 +165,32 @@ export default function PaymentOptions() {
 											<p className="mt-6 text-lg font-bold uppercase text-grey">
 												Transfer Ke
 											</p>
-											{/* {va_numbers.bank === "bca" && (
+											{bank === "bca" && (
 												<img
 													src={bca}
 													className="my-3 w-[150px] bg-center object-contain"
 												></img>
 											)}
-											{va_numbers.bank === "bni" && (
+											{bank === "bni" && (
 												<img
 													src={bni}
 													className="my-3 w-[150px] bg-center object-contain"
 												></img>
 											)}
-											{va_numbers.bank === "bri" && (
+											{bank === "bri" && (
 												<img
 													src={bri}
 													className="my-3 w-[150px] bg-center object-contain"
 												></img>
 											)}
-											{va_numbers.bank === "permata" && (
+											{bank === "permata" && (
 												<img
 													src={permata}
 													className="my-3 w-[150px] bg-center object-contain"
 												></img>
-											)} */}
-											{/* <p className="text-lg font-bold">Virtual Account</p>
-											<p className="text-2xl font-bold">
-												{va_numbers.va_number}
-											</p> */}
+											)}
+											<p className="text-lg font-bold">Virtual Account</p>
+											<p className="text-2xl font-bold">{vaNumber}</p>
 										</div>
 										<div className="my-6 w-6/12 border-b-2 border-[#d2a866]  sm:my-4 "></div>
 										<div className="TRANSFER-JUMLAH flex flex-col items-center justify-center">

@@ -12,9 +12,8 @@ const getAllProducts = async () => {
 	return response.data.data;
 };
 
-// MASIH GABISA!!!!!!!!!!!!!! :(((((((((((((((((
-const getOneProduct = async (params) => {
-	const response = await axios.get(`${API_URL}/${params.id}`);
+const getTrendingProducts = async () => {
+	const response = await axios.get(`${API_URL}/q/trending`);
 	console.log(response.data.data);
 
 	if (response.data.data) {
@@ -23,9 +22,21 @@ const getOneProduct = async (params) => {
 	return response.data.data;
 };
 
+// MASIH GABISA!!!!!!!!!!!!!! :(((((((((((((((((
+// const getOneProduct = async (params) => {
+// 	const response = await axios.get(`${API_URL}/${params.id}`);
+// 	console.log(response.data.data);
+
+// 	if (response.data.data) {
+// 	}
+
+// 	return response.data.data;
+// };
+
 const productService = {
 	getAllProducts,
-	getOneProduct,
+	getTrendingProducts,
+	// getOneProduct,
 };
 
 export default productService;
