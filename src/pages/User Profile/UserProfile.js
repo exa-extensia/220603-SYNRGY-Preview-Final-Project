@@ -50,8 +50,8 @@ export default function UserProfile() {
 							<div className="BLOCK-ALAMAT flex flex-col gap-2">
 								<div className="cp__card w-full ">
 									<h1 className="mb-8 text-2xl">Halo!</h1>
-									<div className="flex flex-col gap-4">
-										<div className="flex items-center gap-4">
+									<div className="flex w-full flex-col gap-4">
+										<div className="flex w-full items-center gap-4">
 											<div className="PROFILE-AVATAR">
 												<Avatar
 													alt="avatar"
@@ -59,8 +59,8 @@ export default function UserProfile() {
 													sx={{ width: 60, height: 60 }}
 												/>
 											</div>
-											<div className="PROFILE-TITE">
-												<p className="text-xl font-bold text-brown">
+											<div className="PROFILE-TITE w-full">
+												<p className="w-10/12 break-words text-xl font-bold text-brown">
 													{user.name}
 												</p>
 												<p className="text-base">{user.email}</p>

@@ -23,7 +23,7 @@
 }
 
 .pl__main--header {
-	@apply flex h-[50px]  w-full items-center justify-between border-b border-solid border-med-brown;
+	@apply flex  w-full  items-center justify-between border-b border-solid border-med-brown pb-3 pt-6;
 }
 
 .pl__main--list {
