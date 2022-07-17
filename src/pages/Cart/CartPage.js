@@ -182,7 +182,7 @@ export default function CartPage() {
 																</div> */}
 															</div>
 															<div className="input__price ">
-																<p>Rp{v.subTotal}</p>
+																<p>{currencyIDR(v.subTotal)}</p>
 															</div>
 															<div className="col-start-3 row-start-1 justify-self-end  lg:col-start-5">
 																<button
@@ -264,7 +264,9 @@ export default function CartPage() {
 											<div className="ringkasan__text mb-7 flex flex-col gap-2 text-xs lg:text-base">
 												<div className="flex justify-between ">
 													<p>Total Belanja</p>
-													<p className="font-bold">Rp{overviewTotal}</p>
+													<p className="font-bold">
+														{currencyIDR(overviewTotal)}
+													</p>
 												</div>
 												<div className="flex justify-between">
 													<p>Diskon</p>
@@ -272,7 +274,9 @@ export default function CartPage() {
 												</div>
 												<div className="flex justify-between">
 													<p>Jumlah Pembayaran</p>
-													<p className="font-bold">Rp{overviewTotal}</p>
+													<p className="font-bold">
+														{currencyIDR(overviewTotal)}
+													</p>
 												</div>
 											</div>
 										</div>

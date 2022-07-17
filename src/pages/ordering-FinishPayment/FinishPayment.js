@@ -16,6 +16,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import currencyIDR from "../../utils/currencyIDR";
 
 export default function PaymentOptions() {
 	const navigate = useNavigate();
@@ -23,7 +24,7 @@ export default function PaymentOptions() {
 	const [amount, setAmount] = useState(0);
 	const [orderID, setOrderID] = useState("");
 	const data = useSelector((state) => state.cart.statusBuatPesanan);
-	console.log("ini data", data.responseBuatPesanan);
+	// console.log("ini data", data.responseBuatPesanan);
 
 	useEffect(() => {
 		scrollTop();
@@ -31,7 +32,7 @@ export default function PaymentOptions() {
 			Object.keys(data.responseBuatPesanan).length === 0 &&
 			data.responseBuatPesanan.constructor === Object
 		) {
-			toast("oops, info pesanan silahkan lihat profil");
+			toast("info pesanan silahkan lihat di profil mu");
 			navigate("/userprofile");
 		} else {
 			const { transaction_time, gross_amount, va_numbers, order_id } =
@@ -56,27 +57,44 @@ export default function PaymentOptions() {
 	// 	setBank("bri");
 	// }
 
-	const [countdown, setCountdown] = useState([23, 59, 59]);
-	const [hour, min, sec] = countdown;
-	const d = new Date(`${time}`);
-	const deadline = d.getTime();
-	const countdownCondition = useCallback(() => {
-		let selisih = deadline - Date.now();
-		console.log("iniiiiiiii", selisih);
-		let sec = Math.floor((selisih / 1000) % 60);
-		let min = Math.floor((selisih / 1000 / 60) % 60);
-		let hour = Math.floor((selisih / 1000 / 60 / 60) % 24);
+	const TWO_HRS_IN_MS = 2 * 60 * 60 * 1000;
+	const NOW_IN_MS = new Date().getTime();
+	const DEADLINE = TWO_HRS_IN_MS + NOW_IN_MS;
 
-		return [hour, min, sec];
-	}, [deadline]);
+	const useCountdown = (DEADLINE) => {
+		const countDownDate = new Date(DEADLINE).getTime();
 
-	useEffect(() => {
-		let intervalId = setInterval(() => {
-			setCountdown(countdownCondition());
-		}, 1000);
+		const [countDown, setCountDown] = useState(
+			countDownDate - new Date().getTime()
+		);
 
-		return () => clearInterval(intervalId);
-	}, [countdownCondition, setCountdown]);
+		useEffect(() => {
+			const interval = setInterval(() => {
+				setCountDown(countDownDate - new Date().getTime());
+			}, 1000);
+
+			return () => clearInterval(interval);
+		}, [countDownDate]);
+
+		return getReturnValues(countDown);
+	};
+
+	const getReturnValues = useCallback(
+		(countDown) => {
+			// calculate time left
+
+			const hour = Math.floor(
+				(countDown % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+			);
+			const min = Math.floor((countDown % (1000 * 60 * 60)) / (1000 * 60));
+			const sec = Math.floor((countDown % (1000 * 60)) / 1000);
+
+			return [hour, min, sec];
+		},
+		[DEADLINE]
+	);
+
+	const [hour, min, sec] = useCountdown(DEADLINE);
 
 	function scrollTop() {
 		window.scrollTo({
@@ -180,7 +198,9 @@ export default function PaymentOptions() {
 											<p className="text-center text-lg font-bold uppercase text-grey">
 												Jumlah yang Harus Dibayar
 											</p>
-											<p className="mt-3 text-2xl font-bold">Rp{amount}</p>
+											<p className="mt-3 text-2xl font-bold">
+												{currencyIDR(amount)}
+											</p>
 										</div>
 									</div>
 								</div>

@@ -207,6 +207,7 @@ export const cartSlice = createSlice({
 			})
 			.addCase(placeOrder.fulfilled, (state, action) => {
 				state.cartBadge = 0;
+				localStorage.setItem("cartBadge", JSON.stringify(state.cartBadge));
 				state.statusBuatPesanan.buatPesananLoading = false;
 				state.statusBuatPesanan.buatPesananSuccess = true;
 				state.statusBuatPesanan.responseBuatPesanan = action.payload;
