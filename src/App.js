@@ -29,6 +29,7 @@ function App() {
 
 					<Route path="/login" element={<Login />} />
 					<Route path="/register" element={<Register />} />
+					<Route path="/beautyfeed" element={<BeautyFeed />} />
 
 					<Route path="/productlist" element={<ProductList />} />
 					<Route path="/producttrending" element={<ProductTrending />} />
@@ -43,9 +44,6 @@ function App() {
 						<Route path="/finishpayment" element={<FinishPayment />} />
 						<Route path="/orderdetails" element={<OrderDetails />} />
 						<Route path="/userprofile" element={<UserProfile />} />
-						<Route path="/beautyfeed" element={<BeautyFeed />} />
-
-						{/* <Route path="/temp" element={<Pembayaran />} /> */}
 					</Route>
 
 					<Route path="*" element={<Error404 />} />
