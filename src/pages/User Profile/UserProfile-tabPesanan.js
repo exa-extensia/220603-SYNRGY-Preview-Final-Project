@@ -116,9 +116,11 @@ export default function UserProfilePesanan() {
 					</div>
 				</div>
 			</Link>
+			{/* <div className="flex flex-col items-center justify-center">
+				<p className="mb-6 text-xl">Ayo mulai berbelanja di Flambo! :)</p>
+				<img src={illst} alt="order kosng" />
+			</div> */}
 
-			{/* <img src={illst} alt="" />
-			<p>Ayo mulai berbelanja di Flambo!</p> */}
 			<div className="mt-8 flex w-full flex-col items-center justify-center">
 				<button
 					onClick={() => navigate("/productlist")}
