@@ -11,22 +11,22 @@
 }
 
 #kategoriproduk .product__item:nth-child(odd) {
-	@apply mb-4 aspect-square overflow-hidden rounded-lg sm:aspect-square;
+	@apply mb-4 aspect-square overflow-hidden rounded-lg sm:aspect-[3/4];
 }
 
 #kategoriproduk .product__item:nth-child(even) {
-	@apply mb-4 aspect-square overflow-hidden rounded-lg sm:aspect-video;
+	@apply mb-4 aspect-square overflow-hidden rounded-lg sm:aspect-square;
 }
 #kategoriproduk .product__item:nth-child(6) {
-	@apply mb-4 aspect-square overflow-hidden rounded-lg sm:aspect-square;
+	@apply mb-4 aspect-square overflow-hidden rounded-lg sm:aspect-[3/4];
 }
 
 #kategoriproduk .product__item:nth-child(2) {
-	@apply mb-4 aspect-square overflow-hidden rounded-lg sm:aspect-square;
+	@apply mb-4 aspect-square overflow-hidden rounded-lg sm:aspect-[3/4];
 }
 
 #kategoriproduk .product__item:nth-child(3) {
-	@apply mb-4 aspect-square overflow-hidden rounded-lg sm:aspect-video;
+	@apply mb-4 aspect-square overflow-hidden rounded-lg sm:aspect-square;
 }
 
 #kategoriproduk button {
