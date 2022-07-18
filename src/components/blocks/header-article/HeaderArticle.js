@@ -19,21 +19,21 @@ export default function HeaderArticle() {
 
 	return <>
 		<div className="header__article overflow-hidden">
-			<div className="flex">
+			<div className="flex justify-between m-4">
 				<h1>Artikel Terbaru</h1>
-				<button className="h-5"><Link to={"/artikel"}>Lihat Semua</Link></button>
+				<button className="border border-slate-400 rounded-full px-1 text-sm"><Link to={"/feed"}>Lihat Semua</Link></button>
 			</div>
 			{article.map((data, i) => {
 				return (
-					<ol key={i} >
+					<ol key={i} className="ml-2">
 						<Link to={`/articledetail/${data.id}`}>
 							<li className="flex my-3 cursor-pointer">
-								<img src={data.photo} className="w-[30%] h-[20%]" />
+								<img src={data.photo} className="w-[30%] h-[20%] rounded-lg" />
 								<div className="p-4 w-[60%] h-[20%]">
-									<p className="text-xs">{data.date}</p>
 									<h6 className="font-bold tracking-tight text-gray-900 truncate">
 										{data.title}
 									</h6>
+									<p className="text-xs cursor-pointer">{data.date}</p>
 								</div>
 							</li>
 						</Link>

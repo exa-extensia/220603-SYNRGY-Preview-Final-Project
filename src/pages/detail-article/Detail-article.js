@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "../../components/sections/_navbar/Navbar";
 import ProdukTrending from "../../components/sections/home-produktrending/ProdukTrending";
+import Breadcrumb from "../../components/atoms/breadcrumb/BC-DetailArticle";
 
 export default function DetailArticle() {
     const params = useParams()
@@ -23,6 +24,7 @@ export default function DetailArticle() {
     return (
         <>
             <Navbar />
+            <Breadcrumb />
             <div>
                 {oneArticle ?
                     <div className="hero container max-w-screen-lg mx-auto pb-10">

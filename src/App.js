@@ -48,6 +48,7 @@ function App() {
 						<Route path="/orderdetails" element={<OrderDetails />} />
 						<Route path="/userprofile" element={<UserProfile />} />
 						<Route path="/feed" element={<BeautyFeed />} />
+						<Route path="/!#" element={<BeautyFeed />} />
 
 						{/* <Route path="/temp" element={<Pembayaran />} /> */}
 					</Route>
