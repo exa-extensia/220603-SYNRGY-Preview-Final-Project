@@ -82,8 +82,6 @@ export default function PaymentOptions() {
 
 	const getReturnValues = useCallback(
 		(countDown) => {
-			// calculate time left
-
 			const hour = Math.floor(
 				(countDown % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
 			);
