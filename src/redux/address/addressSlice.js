@@ -104,6 +104,7 @@ export const addressSlice = createSlice({
 		builder
 			.addCase(createAddress.pending, (state) => {
 				state.isLoading = true;
+				toast("sedang membuat alamat!");
 			})
 			.addCase(createAddress.fulfilled, (state, action) => {
 				state.isLoading = false;

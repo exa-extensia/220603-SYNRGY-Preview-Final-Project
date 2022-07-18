@@ -12,11 +12,11 @@ import CartBadge from "../../atoms/CartBadge";
 export default function Navbar() {
 	let nav__links = [
 		{ name: "Home", url: "/" },
-		{ name: "Kategori", url: "/kategori" },
-		{ name: "Produk Trending", url: "/productlist" },
-		{ name: "Brands", url: "/brands" },
-		{ name: "Beauty Feed", url: "/feed" },
-		{ name: "Produk Organik", url: "/organik" },
+		{ name: "Kategori", url: "/productlist" },
+		{ name: "Produk Trending", url: "/producttrending" },
+		{ name: "Brands", url: "/productlist" },
+		{ name: "Beauty Feed", url: "/beautyfeed" },
+		{ name: "Produk Organik", url: "/productorganic" },
 	];
 
 	const [nav, setNav] = useState(false);

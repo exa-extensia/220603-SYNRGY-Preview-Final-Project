@@ -12,14 +12,14 @@ import { useNavigate, Link } from "react-router-dom";
 import Pagination from "../../components/atoms/Trial-pagination";
 import { toast } from "react-toastify";
 
-import { getAllProducts } from "../../redux/product/productSlice";
+import { getTrendingProducts } from "../../redux/product/productSlice";
 import { addToCart } from "../../redux/cart/cartSlice";
 
 import { FaLeaf } from "react-icons/fa";
 import { BsCartPlus } from "react-icons/bs";
 import Rating from "@mui/material/Rating";
 
-export default function ProductList() {
+export default function ProductTrending() {
 	function scrollTop() {
 		window.scrollTo({
 			top: 0,
@@ -32,9 +32,13 @@ export default function ProductList() {
 	const [perPage] = useState(18);
 	const [offset, setOffset] = useState(1);
 
-	const { products, isLoading, isError, isSuccess, message } = useSelector(
-		(state) => state.products
-	);
+	const {
+		trendingproducts,
+		isTrendingLoading,
+		isTrendingError,
+		isTrendingSuccess,
+		trendingmessage,
+	} = useSelector((state) => state.products);
 
 	const dispatch = useDispatch();
 	const { user } = useSelector((state) => state.auth);
@@ -44,7 +48,7 @@ export default function ProductList() {
 
 	useEffect(() => {
 		scrollTop();
-		dispatch(getAllProducts());
+		dispatch(getTrendingProducts());
 		// const slice = products.slice(offset - 1, offset - 1 + perPage);
 		// // For displaying Data
 		// const postData = getPostData(slice);
@@ -91,15 +95,15 @@ export default function ProductList() {
 						<div className="pl__main">
 							<div className="pl__main--header text-med-brown ">
 								<h1 className="pl__brandcount text-2xl tracking-wider  ">
-									Produk Semua
+									Produk Trending
 								</h1>
 								<div className="pl__product-sort">
-									Jumlah Produk: {products.length}
+									Jumlah Produk: {trendingproducts.length}
 								</div>
 							</div>
 							<div className="pl__main--list">
-								{isLoading &&
-									products.map(() => (
+								{isTrendingLoading &&
+									trendingproducts.map(() => (
 										<>
 											<Skeleton
 												variant="rectangular"
@@ -108,9 +112,9 @@ export default function ProductList() {
 											/>
 										</>
 									))}
-								{!isLoading &&
-									!isError &&
-									products.map((item) => (
+								{!isTrendingLoading &&
+									!isTrendingError &&
+									trendingproducts.map((item) => (
 										<div className="relative">
 											<div className="absolute top-0 right-0 z-10 -translate-x-3 translate-y-3">
 												<button
@@ -176,11 +180,13 @@ export default function ProductList() {
 											</Link>
 										</div>
 									))}
-								{!isLoading && isError && <div>unexpected isError</div>}
+								{!isTrendingLoading && isTrendingError && (
+									<div>unexpected error</div>
+								)}
 							</div>
-							<div className="pl__main--bottom">
+							{/* <div className="pl__main--bottom">
 								<Pagination page={page} handlePageClick={handlePageClick} />
-							</div>
+							</div> */}
 						</div>
 					</div>
 				</div>
