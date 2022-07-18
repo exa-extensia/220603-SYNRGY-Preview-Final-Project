@@ -43,7 +43,7 @@ export default function Kategori() {
 	return (
 		<section id="kategoriproduk">
 			<div className="pt__wrapper">
-				<div className="pt__top">
+				<div className="pt__top pb-6">
 					<h3>Kategori Produk</h3>
 				</div>
 				<Link to={"/productlist"}>
@@ -58,7 +58,7 @@ export default function Kategori() {
 								<img
 									src={item.img}
 									alt="pt"
-									className="group-hover:scale- -z-10 transition-all duration-500 ease-in-out group-hover:brightness-50"
+									className="group-hover:scale- -z-10 transition-all duration-500 ease-in-out group-hover:scale-105 group-hover:brightness-50"
 								/>
 							</div>
 						))}
