@@ -144,7 +144,7 @@ export default function PaymentOptions() {
 									Order Details #{data.id}
 								</h1>
 								<p className="text-sm">
-									{convertDate(orderDate).toLocaleString("en-GB")}
+									{convertDate(data.date).toLocaleString("en-GB")}
 								</p>
 							</div>
 						)}
@@ -213,19 +213,19 @@ export default function PaymentOptions() {
 												{courier === "JNE" && (
 													<img
 														src={jne}
-														className="w-[40px] bg-center object-contain"
+														className="w-[60px] bg-center object-contain"
 													></img>
 												)}
 												{courier === "POS" && (
 													<img
 														src={pos}
-														className="w-[40px] bg-center object-contain"
+														className="w-[60px] bg-center object-contain"
 													></img>
 												)}
 												{courier === "TIKI" && (
 													<img
 														src={tiki}
-														className="w-[40px] bg-center object-contain"
+														className="w-[60px] bg-center object-contain"
 													></img>
 												)}
 											</div>
@@ -233,22 +233,22 @@ export default function PaymentOptions() {
 										<div className="mt-4 sm:relative sm:mt-0 sm:w-1/4">
 											<div className="sm:absolute sm:top-0 sm:right-0">
 												{statusAntar === "dibatalkan" && (
-													<div className="rounded-full bg-danger py-1 px-2 text-xs text-white">
+													<div className="rounded-full bg-danger py-1 px-2 text-center text-xs text-white">
 														dibatalkan
 													</div>
 												)}
 												{statusAntar === "pending" && (
-													<div className="rounded-full bg-danger py-1 px-2 text-xs text-white">
+													<div className="rounded-full bg-danger py-1 px-2 text-xs text-white sm:text-center">
 														menunggu terbayar
 													</div>
 												)}
 												{statusAntar === "diantar" && (
-													<div className="rounded-full bg-warning py-1 px-2 text-xs text-white">
+													<div className="rounded-full bg-warning py-1 px-2 text-xs text-white sm:text-center">
 														pesanan diantar
 													</div>
 												)}
 												{statusAntar === "selesai" && (
-													<div className="rounded-full bg-success py-1 px-2 text-xs text-white">
+													<div className="rounded-full bg-success py-1 px-2 text-xs text-white sm:text-center">
 														pesanan selesai
 													</div>
 												)}
@@ -321,17 +321,17 @@ export default function PaymentOptions() {
 										<div className="mt-4 sm:relative sm:mt-0 sm:w-1/4">
 											<div className="sm:absolute sm:top-0 sm:right-0">
 												{statusBayar === "pending" && (
-													<div className="rounded-full bg-warning py-1 px-2 text-xs text-white">
+													<div className="rounded-full bg-warning py-1 px-2 text-xs text-white sm:text-center">
 														menunggu pembayaran
 													</div>
 												)}
 												{statusBayar === "sukses" && (
-													<div className="rounded-full bg-success py-1 px-2 text-xs text-white">
+													<div className="rounded-full bg-success py-1 px-2 text-xs text-white sm:text-center">
 														pembayaran sukses
 													</div>
 												)}
 												{statusBayar === "dibatalkan" && (
-													<div className="rounded-full bg-danger py-1 px-2 text-xs text-white">
+													<div className="rounded-full bg-danger py-1 px-2 text-xs text-white sm:text-center">
 														dibatalkan
 													</div>
 												)}
@@ -368,7 +368,11 @@ export default function PaymentOptions() {
 											<div className="ONE-BRAND-CARD">
 												<div key={indexLuar} className="cp__brand">
 													<div className="hidden aspect-square h-12 overflow-hidden rounded-md sm:block">
-														<img src={i.banner} alt="brand" />
+														<img
+															src={i.banner}
+															alt="brand"
+															className="h-full w-full bg-cover bg-center bg-no-repeat object-cover"
+														/>
 													</div>
 													<div>
 														<p className="text-sm font-bold uppercase text-black sm:text-lg">
@@ -382,7 +386,11 @@ export default function PaymentOptions() {
 														<div key={index} className="cp__satubrand__input">
 															<div className="cp__input">
 																<div className="input__img">
-																	<img src={v.image} alt="cp__product" />
+																	<img
+																		src={v.image}
+																		alt="cp__product"
+																		className="h-full w-full bg-cover bg-center bg-no-repeat object-cover"
+																	/>
 																</div>
 																<div className="input__text">
 																	<p>{v.name}</p>

@@ -75,10 +75,10 @@ export default function UserProfile() {
 										</div>
 										<>
 											<div
-												className={`flex w-full cursor-pointer items-center gap-3 rounded-full bg-goldie px-4 py-3 font-semibold text-black transition-all duration-300 ease-in-out hover:bg-brown hover:text-white ${
+												className={`flex w-full cursor-pointer items-center gap-3 rounded-full  px-4 py-3 font-semibold  transition-all duration-300 ease-in-out hover:bg-brown hover:text-white ${
 													tabs === "Daftar Alamat"
 														? "bg-black text-white"
-														: "bg-goldie font-semibold text-black"
+														: "bg-goldie  text-black"
 												}`}
 												onClick={tabsHandler}
 											>
@@ -86,10 +86,10 @@ export default function UserProfile() {
 												Daftar Alamat
 											</div>
 											<div
-												className={`flex w-full cursor-pointer items-center gap-3 rounded-full bg-goldie px-4 py-3 font-semibold text-black transition-all duration-300 ease-in-out hover:bg-brown hover:text-white ${
+												className={`flex w-full cursor-pointer items-center gap-3 rounded-full  px-4 py-3 font-semibold  transition-all duration-300 ease-in-out hover:bg-brown hover:text-white ${
 													tabs === "Riwayat Pesanan"
 														? "bg-black text-white"
-														: "bg-goldie font-semibold text-black"
+														: "bg-goldie  text-black"
 												}`}
 												onClick={tabsHandler}
 											>
