@@ -14,7 +14,6 @@ import {
 } from "react-icons/hi";
 import illst from "../../assets/images/cartempty-illst.svg";
 import Skeleton from "@mui/material/Skeleton";
-import thousandSeparator from "../../utils/thousandSeparator";
 import { toast } from "react-toastify";
 
 import { Link, useNavigate } from "react-router-dom";
@@ -92,7 +91,20 @@ export default function CartPage() {
 					)}
 					{!isLoading && !isError && items.length < 1 && (
 						<div className="flex flex-col items-center justify-center text-center">
-							<img src={illst} alt="cartkosong" className="my-6 sm:w-6/12" />
+							<div className="relative my-6 aspect-video w-[300px] overflow-hidden sm:w-[600px]">
+								<div className="grid w-full">
+									<img
+										src={illst}
+										alt="cartkosong"
+										className="absolute z-10 m-auto bg-center bg-no-repeat object-contain"
+									/>
+									<Skeleton
+										variant="rectangular"
+										animation="wave"
+										className="m-auto h-[100px] w-[100px] sm:h-[300px] sm:w-[300px]"
+									/>
+								</div>
+							</div>
 							<p className="text-lg font-bold text-med-brown sm:text-2xl">
 								Keranjangmu masih kosong nih!
 							</p>

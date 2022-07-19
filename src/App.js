@@ -38,7 +38,7 @@ function App() {
 						<Route path="/address" element={<Address />} />
 						<Route path="/placeorder" element={<Shipping />} />
 						<Route path="/finishpayment" element={<FinishPayment />} />
-						<Route path="/orderdetails" element={<OrderDetails />} />
+						<Route path="/orderdetails/:id" element={<OrderDetails />} />
 						<Route path="/userprofile" element={<UserProfile />} />
 					</Route>
 

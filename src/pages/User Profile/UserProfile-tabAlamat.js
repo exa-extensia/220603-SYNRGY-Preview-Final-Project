@@ -38,26 +38,6 @@ export default function UserProfileAlamat() {
 
 	return (
 		<>
-			{/* <div className="label-group flex items-center gap-2">
-						<p className="LABEL-ALAMAT text-sm font-semibold uppercase text-grey">
-							APARTEMEN
-						</p>{" "}
-						<div
-							className={"rounded-xl  bg-cream py-1 px-2 text-xs text-brown"}
-						>
-							<p>alamat utama</p>
-						</div>
-					</div>
-					<div className="content-group mt-4 text-sm">
-						<p className="mb-2 font-bold">Nama Penerima - 08119062237</p>
-						<p className="">
-							Jl. Dipati Ukur No.112-116, Lebakgede, Kecamatan Coblong, Kota
-							Bandung, Jawa Barat 40132Jl. Dipati Ukur No.112-116, Lebakgede,
-							Kecamatan Coblong, Kota Bandung, Jawa Barat 40132Jl. Dipati Ukur
-							No.112-116, Lebakgede, Kecamatan Coblong, Kota Bandung, Jawa Barat
-							40132
-						</p>
-					</div> */}
 			{isLoading && (
 				<div key={address.id} className="my-2 w-full ">
 					<Skeleton

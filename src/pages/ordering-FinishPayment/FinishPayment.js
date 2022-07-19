@@ -17,10 +17,11 @@ import { useEffect, useState, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import currencyIDR from "../../utils/currencyIDR";
+import convertDate from "../../utils/convertDate";
 
 export default function PaymentOptions() {
 	const navigate = useNavigate();
-	const [time, setTime] = useState("");
+	const [expTime, setExpTime] = useState(0);
 	const [amount, setAmount] = useState(0);
 	const [orderID, setOrderID] = useState("");
 	const [bank, setBank] = useState("");
@@ -39,7 +40,7 @@ export default function PaymentOptions() {
 		} else {
 			const { expiryTime, bankName, grossAmount, orderId, vaNumber } =
 				data.responseBuatPesanan.data;
-			setTime(expiryTime);
+			setExpTime(expiryTime);
 			setAmount(grossAmount);
 			setOrderID(orderId);
 			setVaNumber(vaNumber);
@@ -58,42 +59,26 @@ export default function PaymentOptions() {
 		}
 	}, [data]);
 
-	const TWO_HRS_IN_MS = 2 * 60 * 60 * 1000;
 	const NOW_IN_MS = new Date().getTime();
-	const DEADLINE = TWO_HRS_IN_MS + NOW_IN_MS;
+	const DEADLINE = expTime - NOW_IN_MS;
+	const [countdown, setCountdown] = useState([23, 59, 59]);
+	const [hour, min, sec] = countdown;
 
-	const useCountdown = (time) => {
-		const countDownDate = new Date(time).getTime();
+	const calculateCountdown = useCallback(() => {
+		let sec = Math.floor((DEADLINE / 1000) % 60);
+		let min = Math.floor((DEADLINE / 1000 / 60) % 60);
+		let hour = Math.floor((DEADLINE / 1000 / 60 / 60) % 24);
 
-		const [countDown, setCountDown] = useState(
-			countDownDate - new Date().getTime()
-		);
+		return [hour, min, sec];
+	}, [DEADLINE]);
 
-		useEffect(() => {
-			const interval = setInterval(() => {
-				setCountDown(countDownDate - new Date().getTime());
-			}, 1000);
+	useEffect(() => {
+		let interval = setInterval(() => {
+			setCountdown(calculateCountdown());
+		}, 1000);
 
-			return () => clearInterval(interval);
-		}, [countDownDate]);
-
-		return getReturnValues(countDown);
-	};
-
-	const getReturnValues = useCallback(
-		(countDown) => {
-			const hour = Math.floor(
-				(countDown % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-			);
-			const min = Math.floor((countDown % (1000 * 60 * 60)) / (1000 * 60));
-			const sec = Math.floor((countDown % (1000 * 60)) / 1000);
-
-			return [hour, min, sec];
-		},
-		[DEADLINE]
-	);
-
-	const [hour, min, sec] = useCountdown(time);
+		return () => clearInterval(interval);
+	}, [calculateCountdown, setCountdown]);
 
 	function scrollTop() {
 		window.scrollTo({
@@ -144,17 +129,11 @@ export default function PaymentOptions() {
 										</div>
 
 										<div className="BG-GRADIENT flex w-full flex-col items-center justify-center py-4   sm:w-9/12 xl:px-8">
-											<p className="px-4 text-center text-lg font-bold uppercase tracking-wider text-white">
-												pesanan dibuat pada
-											</p>
-											<p className="px-4 text-center text-lg font-bold text-white">
-												{time}
-											</p>
-											<p className="mt-4 px-4 text-center text-xs text-white">
+											<p className="px-4 text-center text-sm tracking-wider text-white">
 												tuntaskan pembayaran dalam
 											</p>
-											<p className="px-4 text-center text-xs text-white">
-												{hour} jam {min} menit {sec} detik
+											<p className="px-4 text-center text-lg font-bold text-white">
+												1 hari {hour} jam {min} menit {sec} detik
 											</p>
 										</div>
 									</div>
