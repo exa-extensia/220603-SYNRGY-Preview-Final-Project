@@ -2,3 +2,13 @@
 	@apply h-[224px] w-11/12 rounded-lg  bg-white sm:h-[256px] sm:w-4/12 xl:h-[320px] 2xl:h-[384px];
 	box-shadow: 6px 10px 20px rgba(0, 0, 0, 0.3);
 }
+
+.header__article p {
+	@apply cursor-pointer;
+}
+
+.TEXTBREAK {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

@@ -29,13 +29,14 @@ function App() {
 
 					<Route path="/login" element={<Login />} />
 					<Route path="/register" element={<Register />} />
+
 					<Route path="/beautyfeed" element={<BeautyFeed />} />
+					<Route path="/articledetail/:id" element={<DetailArticle />} />
 
 					<Route path="/productlist" element={<ProductList />} />
 					<Route path="/producttrending" element={<ProductTrending />} />
 					<Route path="/productorganic" element={<ProductOrganic />} />
 					<Route path="/productdetail/:id" element={<ProductDetail />} />
-					<Route path="/articledetail/:id" element={<DetailArticle />} />
 
 					<Route element={<ProtectedRoute />}>
 						<Route path="/cart" element={<CartPage />} />
