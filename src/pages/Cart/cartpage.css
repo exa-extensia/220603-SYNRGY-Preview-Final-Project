@@ -1,0 +1,104 @@
+#cartpage {
+	@apply flex w-full items-center justify-center;
+}
+
+#cartpage img {
+	@apply h-full w-full bg-cover bg-center bg-no-repeat object-cover;
+}
+
+.cp__wrapper {
+	@apply container mx-4 mb-10 sm:max-w-[688px] lg:max-w-[864px] xl:max-w-[1200px];
+}
+
+.cp__breadcrumbs {
+	@apply pt-[20px];
+}
+
+.cp__2cols {
+	@apply grid grid-cols-4 gap-5 sm:grid-cols-8 lg:grid-cols-12 lg:gap-6;
+}
+
+.cp__product__card__wrapper {
+	@apply col-span-4 flex w-full flex-col gap-6    sm:col-span-5 lg:col-span-8;
+}
+
+.cp__card {
+	@apply bg-white p-4 xl:p-8;
+	box-shadow: 0px 4px 20px 5px rgba(181, 181, 181, 0.25);
+	border-radius: 8px;
+}
+
+.cp__brand {
+	@apply flex w-full items-center gap-4;
+}
+
+.cp__satubrand__input {
+	@apply flex flex-col gap-4;
+}
+
+.cp__input {
+	display: grid;
+	grid-template-columns: 1.5fr 3fr 0.5fr;
+	grid-template-rows: auto, auto, auto;
+	grid-gap: 10px;
+	align-items: center;
+}
+
+.cp__input .input__img {
+	@apply aspect-square overflow-hidden rounded-md sm:w-full;
+}
+
+.cp__input .input__text {
+}
+
+.cp__input .input__text p:nth-child(1) {
+	@apply text-sm font-bold sm:text-base;
+}
+
+.cp__input .input__text p:nth-child(2) {
+	@apply text-sm font-bold text-brown sm:text-base;
+}
+
+.cp__input .input__qty {
+	@apply col-span-3 col-start-1 my-auto flex items-center gap-4 justify-self-center lg:col-span-1 lg:col-start-3 lg:self-start;
+}
+
+.cp__input .input__qty div {
+	@apply flex aspect-square w-7 cursor-pointer items-center justify-center  rounded-full bg-cream text-brown transition-all duration-300 hover:bg-med-brown hover:text-white;
+}
+
+.cp__input .input__price {
+	@apply col-span-3 col-start-1 my-auto justify-self-center lg:col-span-1 lg:col-start-4 lg:self-start;
+}
+
+.cp__input .input__price p {
+	@apply font-bold;
+}
+
+.cp__input .input__del {
+	@apply col-start-3 row-start-1 cursor-pointer justify-self-end text-brown hover:text-danger lg:col-start-5;
+}
+
+@media only screen and (min-width: 1024px) {
+	.cp__input {
+		grid-template-columns: 1fr 3fr 1.5fr 1.5fr 0.5fr;
+		grid-template-rows: auto;
+		grid-gap: 10px;
+	}
+}
+
+.cp__output__card__wrapper {
+	@apply col-span-4  flex w-full flex-col gap-6  sm:col-span-3 lg:col-span-4;
+}
+
+.cp__card__voucher {
+	@apply bg-white p-4 xl:p-8;
+	box-shadow: 0px 4px 20px 5px rgba(181, 181, 181, 0.25);
+	border-radius: 8px;
+}
+
+.cp__card__ringkasan {
+	@apply bg-white p-4 xl:p-8;
+	box-shadow: 0px 4px 20px 5px rgba(181, 181, 181, 0.25);
+	border-radius: 8px;
+}

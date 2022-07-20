@@ -1,0 +1,12 @@
+.ORDER-LIST-GRID {
+	grid-template-columns: 3fr 1fr 1.5fr 1fr 1fr;
+}
+
+.ORDER-LIST-GRID p {
+	@apply cursor-pointer;
+}
+
+.ORDER-LIST-GENERAL-CARD {
+	@apply p-2;
+	border: solid 1px rgb(166, 122, 74, 0.2);
+}
