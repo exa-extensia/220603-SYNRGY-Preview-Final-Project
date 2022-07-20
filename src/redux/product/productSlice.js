@@ -15,20 +15,21 @@ const initialState = {
 };
 
 export const getAllProducts = createAsyncThunk(
-	"product/getAllProducts",
-	async (thunkAPI) => {
-		try {
-			return await productService.getAllProducts();
-		} catch (error) {
-			const message =
-				(error.response &&
-					error.response.data &&
-					error.response.data.message) ||
-				error.message ||
-				error.toString();
-			return thunkAPI.rejectWithValue(message);
-		}
-	}
+    "product/getAllProducts",
+    async (data, { rejectWithValue }) => {
+		const { page, size } = data;
+        try {
+            return await productService.getAllProducts(page, size);
+        } catch (error) {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+            return rejectWithValue(message);
+        }
+    }
 );
 
 export const getTrendingProducts = createAsyncThunk(
