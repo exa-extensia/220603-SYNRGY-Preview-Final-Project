@@ -13,13 +13,13 @@ const StyledPagination = styled(Pagination)({
 	},
 });
 
-export default function ProductListPagination({ page, handlePageClick }) {
+export default function ProductListPagination({ size, handlePageClick }) {
 	return (
 		<div className="pagination">
 			<StyledPagination
-				count={10}
+				count={size}
 				shape="rounded"
-				// onChange={handlePageClick}
+				onChange={handlePageClick}
 			/>
 		</div>
 	);
