@@ -23,6 +23,7 @@ import {
 	deleteCart,
 	getAllCart,
 	deleteCartBadge,
+	reset,
 } from "../../redux/cart/cartSlice";
 
 import axios from "axios";
@@ -53,6 +54,7 @@ export default function CartPage() {
 	const [isError, setIsError] = useState(false);
 	useEffect(() => {
 		scrollTop();
+		dispatch(reset());
 		const token = JSON.parse(localStorage.getItem("token"));
 		axios
 			.get(`https://cosmetic-b.herokuapp.com/api/v1/carts`, {

@@ -143,9 +143,7 @@ export default function PaymentOptions() {
 								<h1 className="text-lg font-bold sm:text-3xl">
 									Order Details #{data.id}
 								</h1>
-								<p className="text-sm">
-									{convertDate(data.date).toLocaleString("en-GB")}
-								</p>
+								<p className="text-sm">{convertDate(data.date)}</p>
 							</div>
 						)}
 						{!loading && error && <p>wah error nih pusing dev-nya TT___TT</p>}
@@ -314,7 +312,7 @@ export default function PaymentOptions() {
 											<div className="flex items-center gap-2 text-med-brown">
 												<p className="text-sm">*Bayar sebelum:</p>
 												<p className="font-semibold">
-													{convertDate(paymentExp).toLocaleString("en-GB")}
+													{convertDate(paymentExp)}
 												</p>
 											</div>
 										</div>

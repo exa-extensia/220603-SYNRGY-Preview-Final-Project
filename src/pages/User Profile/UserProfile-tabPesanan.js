@@ -90,7 +90,7 @@ export default function UserProfilePesanan() {
 							<div className="ORDER-LIST-COL2 border-goldie p-2 text-xs text-grey xl:border-r">
 								<div className="flex gap-2 xl:block">
 									<p className="xl:hidden">Tanggal</p>{" "}
-									<p>{convertDate(l.date).toLocaleString("en-GB")}</p>
+									<p>{convertDate(l.date)}</p>
 								</div>
 							</div>
 							<div className="ORDER-LIST-COL3 border-goldie p-2 text-xs text-grey xl:border-r">
