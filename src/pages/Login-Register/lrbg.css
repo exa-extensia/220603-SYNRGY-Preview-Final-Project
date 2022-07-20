@@ -1,3 +1,16 @@
 .lrbg {
 	background: linear-gradient(89.49deg, #ffffff 0.14%, #f6e8d1 99.26%);
 }
+
+.BTN-GGL {
+	background-color: transparent;
+	border: 1px solid #c4c4c4;
+	text-align: center;
+
+	transition: all 0.8s ease;
+}
+
+.BTN-GGL:hover {
+	box-shadow: inset 288px 0 0 0 #515151;
+	/* background-color: white; */
+}

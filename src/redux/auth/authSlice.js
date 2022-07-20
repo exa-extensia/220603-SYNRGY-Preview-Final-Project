@@ -45,9 +45,23 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
 	}
 });
 
+// Auth google
+export const authGoogleThunk = createAsyncThunk("auth/google", async (tokenId, thunkAPI) => {
+	try {
+		console.log('id token slice', tokenId)
+		return await authService.authGoogle(tokenId);
+	} catch (error) {
+		const message =
+			(error.response && error.response.data && error.response.data.message) ||
+			error.message ||
+			error.toString();
+		return thunkAPI.rejectWithValue(message);
+	}
+});
+
 // Logout user
 export const logout = createAsyncThunk("auth/logout", async () => {
-	await authService.logout();
+	authService.logout();
 });
 
 //////////// REDUX SLICE
@@ -92,6 +106,23 @@ export const authSlice = createSlice({
 				toast("Selamat datang kembali! :)");
 			})
 			.addCase(login.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
+				state.user = null;
+			})
+			// auth google
+			.addCase(authGoogleThunk.pending, (state) => {
+				state.isLoading = true;
+				toast("Kami sedang memproses kedatanganmu...");
+			})
+			.addCase(authGoogleThunk.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isSuccess = true;
+				state.user = action.payload;
+				toast("Selamat datang kembali! :)");
+			})
+			.addCase(authGoogleThunk.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
 				state.message = action.payload;

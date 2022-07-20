@@ -43,6 +43,16 @@ const login = async ({ password, email }) => {
 	return decoded;
 };
 
+const authGoogle = async (tokenId) => {
+    const response = await axios.post(`${API_URL}/oauth2`, { token: tokenId });
+	const token = response.data.data.token;
+    const decoded = jwt_decode(token);
+    localStorage.setItem("user", JSON.stringify(decoded));
+    localStorage.setItem("token", JSON.stringify(token));
+
+    return decoded;
+};
+
 // Logout user
 const logout = () => {
 	localStorage.removeItem("user");
@@ -53,6 +63,7 @@ const authService = {
 	register,
 	logout,
 	login,
+	authGoogle
 };
 
 export default authService;

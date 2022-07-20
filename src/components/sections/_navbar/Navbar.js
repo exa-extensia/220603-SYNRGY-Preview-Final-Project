@@ -8,6 +8,7 @@ import { logout, reset } from "../../../redux/auth/authSlice";
 
 import { useState } from "react";
 import CartBadge from "../../atoms/CartBadge";
+import useOAuth from "../../../hooks/oauth.hooks";
 
 export default function Navbar() {
 	let nav__links = [
@@ -18,16 +19,22 @@ export default function Navbar() {
 		{ name: "Beauty Feed", url: "/beautyfeed" },
 		{ name: "Produk Organik", url: "/productorganic" },
 	];
-
+	
 	const [nav, setNav] = useState(false);
 	const handleClick = () => setNav(!nav);
 	const handleClose = () => setNav(!nav);
-
+	
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const { user } = useSelector((state) => state.auth);
 
+	const { action: signOut } = useOAuth("logout", { onSuccess: (_) => {}});
+	
 	const onLogout = () => {
+		const data = JSON.parse(localStorage.getItem("user"));
+        if (data.iss === "auth0") {
+            signOut();
+        }
 		dispatch(logout());
 		dispatch(reset());
 		navigate("/");
@@ -44,7 +51,7 @@ export default function Navbar() {
 						</div>
 					</Link>
 					{user ? (
-						<div className="nav__cart-profile relative">
+						<div className="relative nav__cart-profile">
 							<div className="nav__cart">
 								<Link to={`/cart`}>
 									<CartBadge />
@@ -83,7 +90,7 @@ export default function Navbar() {
 								<button className="nav__btn btn-sec">Login</button>
 							</Link>
 							<Link to={`/register`}>
-								<button className="nav__btn btn-grad text-white">
+								<button className="text-white nav__btn btn-grad">
 									Register
 								</button>
 							</Link>
@@ -149,7 +156,7 @@ export default function Navbar() {
 								<button className="nav__btn btn-sec">Login</button>
 							</Link>
 							<Link to={`/register`}>
-								<button className="nav__btn btn-grad hidden text-white sm:block">
+								<button className="hidden text-white nav__btn btn-grad sm:block">
 									Register
 								</button>
 							</Link>
