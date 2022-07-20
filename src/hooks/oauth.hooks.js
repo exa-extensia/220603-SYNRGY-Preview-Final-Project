@@ -1,4 +1,5 @@
-import { useGoogleLogin, useGoogleLogout } from "react-google-login";
+import { useGoogleLogin, useGoogleLogout } from "@leecheuk/react-google-login";
+
 
 /**
  * @param {'login' | 'logout'} type 

@@ -1,10 +1,11 @@
 {
-  "name": "cosmetic-fe-tim-b",
+  "name": "cosmetic-fe-tim-b", 
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
+    "@leecheuk/react-google-login": "^5.4.0",
     "@mui/lab": "^5.0.0-alpha.84",
     "@mui/material": "^5.8.2",
     "@reduxjs/toolkit": "^1.8.2",
@@ -15,7 +16,6 @@
     "jwt-decode": "^3.1.2",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
-    "react-google-login": "^5.2.2",
     "react-helmet": "^6.1.0",
     "react-icons": "^4.4.0",
     "react-redux": "^8.0.2",
