@@ -204,7 +204,7 @@ export default function BeautyFeed() {
 											<>
 												<Link
 													to={`/articledetail/${article.id}`}
-													className="flex flex-row items-center gap-3"
+													className="flex flex-row items-center gap-3 hover:bg-cream"
 													key={i}
 												>
 													<div className="aspect-video w-1/3 overflow-hidden rounded-md bg-cream">
@@ -273,7 +273,7 @@ export default function BeautyFeed() {
 								<Link
 									to={`/articledetail/${article.id}`}
 									key={i}
-									className="flex w-full flex-col rounded-xl"
+									className="flex w-full flex-col rounded-xl transition-all duration-300 ease-in-out hover:-translate-y-2"
 								>
 									<div className="aspect-video w-full overflow-hidden rounded-xl">
 										<img

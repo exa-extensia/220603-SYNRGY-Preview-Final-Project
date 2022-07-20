@@ -101,7 +101,7 @@ export default function HeaderArticle() {
 					<div className="ARTICLEWRAPPER grid h-3/4 grid-rows-4 gap-2 2xl:h-5/6">
 						<Link
 							to={`/articledetail/${article[1].id}`}
-							className="flex flex-row items-center gap-3"
+							className="flex flex-row items-center gap-3 transition-all duration-150 ease-in-out hover:bg-cream"
 						>
 							<div className="aspect-video h-full overflow-hidden rounded-md bg-cream">
 								<img
@@ -123,7 +123,7 @@ export default function HeaderArticle() {
 
 						<Link
 							to={`/articledetail/${article[2].id}`}
-							className="flex flex-row items-center gap-3"
+							className="flex flex-row items-center gap-3 transition-all duration-150 ease-in-out hover:bg-cream"
 						>
 							<div className="aspect-video h-full overflow-hidden rounded-md bg-cream">
 								<img
@@ -145,7 +145,7 @@ export default function HeaderArticle() {
 
 						<Link
 							to={`/articledetail/${article[3].id}`}
-							className="flex flex-row items-center gap-3"
+							className="flex flex-row items-center gap-3 transition-all duration-150 ease-in-out hover:bg-cream"
 						>
 							<div className="aspect-video h-full overflow-hidden rounded-md bg-cream">
 								<img
@@ -167,7 +167,7 @@ export default function HeaderArticle() {
 
 						<Link
 							to={`/articledetail/${article[4].id}`}
-							className="flex flex-row items-center gap-3"
+							className="flex flex-row items-center gap-3 transition-all duration-150 ease-in-out hover:bg-cream"
 						>
 							<div className="aspect-video h-full overflow-hidden rounded-md bg-cream">
 								<img
