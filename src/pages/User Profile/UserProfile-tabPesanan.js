@@ -6,9 +6,9 @@ import {
 } from "react-icons/hi";
 
 import { Link, useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
+
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+
 import Skeleton from "@mui/material/Skeleton";
 
 import axios from "axios";
@@ -18,12 +18,10 @@ import currencyIDR from "../../utils/currencyIDR";
 export default function UserProfilePesanan() {
 	const navigate = useNavigate();
 	const [dataList, setDataList] = useState([]);
-	const [statusAntar, setStatusAntar] = useState("");
-	const [statusBayar, setStatusBayar] = useState("");
+
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(false);
 
-	console.log("statusantar>>>>>>", statusAntar);
 	useEffect(() => {
 		const token = JSON.parse(localStorage.getItem("token"));
 		axios

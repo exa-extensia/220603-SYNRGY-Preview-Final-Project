@@ -17,6 +17,8 @@ import Shipping from "./pages/ordering-Shipping/Shipping";
 import FinishPayment from "./pages/ordering-FinishPayment/FinishPayment";
 import OrderDetails from "./pages/ordering-OrderDetails/OrderDetails";
 import UserProfile from "./pages/User Profile/UserProfile";
+import BeautyFeed from "./pages/beautyFeed/BeautyFeed";
+import DetailArticle from "./pages/detail-article/Detail-article";
 
 function App() {
 	return (
@@ -27,6 +29,9 @@ function App() {
 
 					<Route path="/login" element={<Login />} />
 					<Route path="/register" element={<Register />} />
+
+					<Route path="/beautyfeed" element={<BeautyFeed />} />
+					<Route path="/articledetail/:id" element={<DetailArticle />} />
 
 					<Route path="/productlist" element={<ProductList />} />
 					<Route path="/producttrending" element={<ProductTrending />} />
