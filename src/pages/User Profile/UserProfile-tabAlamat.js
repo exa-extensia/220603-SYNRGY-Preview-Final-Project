@@ -7,11 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 
-import {
-	getAddress,
-	deleteAddress,
-	updateAddress,
-} from "../../redux/address/addressSlice";
+import { getAddress, deleteUI } from "../../redux/address/addressSlice";
 import { toast } from "react-toastify";
 
 export default function UserProfileAlamat() {
@@ -20,7 +16,7 @@ export default function UserProfileAlamat() {
 	const { address, isLoading, isError, isSuccess, message } = useSelector(
 		(state) => state.address
 	);
-
+	const addressDefault = address.find((e) => e.isDefault);
 	// const address = [];
 
 	// const newDefaultHandler = (e) => {
@@ -39,7 +35,7 @@ export default function UserProfileAlamat() {
 	return (
 		<>
 			{isLoading && (
-				<div key={address.id} className="my-2 w-full ">
+				<div className="my-2 w-full ">
 					<Skeleton
 						variant="rectangular"
 						height={300}
@@ -48,50 +44,49 @@ export default function UserProfileAlamat() {
 					/>
 				</div>
 			)}
-			{!isLoading &&
-				address.length > 0 &&
-				address?.map((a, index) => (
-					<div key={index} className="ORDERING-GENERAL-CARD w-full sm:flex ">
-						<div className="w-3/4">
-							<div className="label-group flex flex-row items-center gap-2">
-								<p className="LABEL-ALAMAT text-sm font-bold uppercase text-brown">
-									{a.label}
-								</p>{" "}
-								<div
-									className={`${
-										a.isDefault === true
-											? "rounded-xl  bg-cream py-1 px-2 text-xs text-brown"
-											: "hidden"
-									} `}
-								>
-									<p>alamat utama</p>
-								</div>
+			{!isLoading && addressDefault && (
+				<div className="ORDERING-GENERAL-CARD w-full sm:flex ">
+					<div className="w-3/4">
+						<div className="label-group flex flex-row items-center gap-2">
+							<p className="LABEL-ALAMAT text-sm font-bold uppercase text-brown">
+								{addressDefault.label}
+							</p>{" "}
+							<div
+								className={`${
+									addressDefault.isDefault === true
+										? "rounded-xl  bg-cream py-1 px-2 text-xs text-brown"
+										: "hidden"
+								} `}
+							>
+								<p>alamat utama</p>
 							</div>
-							<div className="content-group mt-1 ">
-								<p className="break-words text-sm font-extralight">
-									{a.aDetail} - {a.cityId} {a.postalCode}
-								</p>
-								<div className="mt-2 flex flex-row items-center gap-4">
-									<div className="flex flex-row items-center gap-1">
-										<TbUser size={20} />
-										<p className="  font-bold">{a.receiver}</p>
-									</div>
-									<div className="flex flex-row items-center gap-1">
-										<TbPhone size={20} />
-										<p className="  font-bold">{a.phone}</p>
-									</div>
+						</div>
+						<div className="content-group mt-1 ">
+							<p className="break-words text-sm font-extralight">
+								{addressDefault.aDetail} - {addressDefault.cityId}{" "}
+								{addressDefault.postalCode}
+							</p>
+							<div className="mt-2 flex flex-row items-center gap-4">
+								<div className="flex flex-row items-center gap-1">
+									<TbUser size={20} />
+									<p className="  font-bold">{addressDefault.receiver}</p>
+								</div>
+								<div className="flex flex-row items-center gap-1">
+									<TbPhone size={20} />
+									<p className="  font-bold">{addressDefault.phone}</p>
 								</div>
 							</div>
 						</div>
+					</div>
 
-						<div className="mt-4 sm:relative sm:mt-0 sm:w-1/4">
+					{/* <div className="mt-4 sm:relative sm:mt-0 sm:w-1/4">
 							<div className="sm:absolute sm:top-0 sm:right-0">
 								<button
 									onClick={(e) => {
 										if (a.isDefault === true) {
 											toast("Woops, ganti alamat utama dulu ya :)");
 										} else {
-											dispatch(deleteAddress(a.id));
+											dispatch(deleteUI(a.id));
 											// window.location.reload();
 										}
 									}}
@@ -100,9 +95,9 @@ export default function UserProfileAlamat() {
 									<HiOutlineTrash />
 								</button>
 							</div>
-						</div>
-					</div>
-				))}
+						</div> */}
+				</div>
+			)}
 			{!isLoading && address.length < 1 && (
 				<div className="flex flex-col items-center justify-center">
 					<p className="mb-6 text-xl">Ayo daftarkan alamat mu! :)</p>

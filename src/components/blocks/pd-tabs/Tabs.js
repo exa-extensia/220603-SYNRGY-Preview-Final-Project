@@ -32,13 +32,6 @@ TabPanel.propTypes = {
 	value: PropTypes.number.isRequired,
 };
 
-function a11yProps(index) {
-	return {
-		id: `simple-tab-${index}`,
-		"aria-controls": `simple-tabpanel-${index}`,
-	};
-}
-
 export default function BasicTabs() {
 	const [value, setValue] = React.useState(0);
 
@@ -71,9 +64,8 @@ export default function BasicTabs() {
 			<TabPanel value={value} index={0}>
 				<ol>
 					<li>
-						Di dalam Scarlett Whitening Facial Wash terdapat kandungan
-						Glutathione, Vitamin E, Rose Petals dan Aloe Vera yang sangat bagus
-						untuk :
+						Di dalam produk ini terdapat kandungan Glutathione, Vitamin E, Rose
+						Petals dan Aloe Vera yang sangat bagus untuk :
 					</li>
 					<li>1. Membantu mencerahkan wajah.</li>
 					<li>2. Membantu menutrisi serta mengecilkan pori-pori di wajah.</li>

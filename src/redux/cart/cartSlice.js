@@ -110,10 +110,14 @@ export const cartSlice = createSlice({
 		// 	}
 		// },
 		reset: (state) => {
-			state.isLoading = false;
-			state.isSuccess = false;
-			state.isError = false;
-			state.message = "";
+			// state.isLoading = false;
+			// state.isSuccess = false;
+			// state.isError = false;
+			// state.message = "";
+			state.statusBuatPesanan.responseBuatPesanan = {};
+			state.statusBuatPesanan.buatPesananSuccess = false;
+			state.statusBuatPesanan.buatPesananLoading = false;
+			state.statusBuatPesanan.buatPesananError = false;
 		},
 		deleteCartBadge: (state, action) => {
 			if (state.cartBadge > 0) {
@@ -148,6 +152,7 @@ export const cartSlice = createSlice({
 				console.log(">>>>>After Add Cart Total Qty", cartTotalQty);
 				state.cartBadge = cartTotalQty;
 				localStorage.setItem("cartBadge", JSON.stringify(cartTotalQty));
+
 				toast("sudah dimasukkan ke keranjang!");
 			})
 			.addCase(addToCart.rejected, (state, action) => {
@@ -162,6 +167,7 @@ export const cartSlice = createSlice({
 			.addCase(getAllCart.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.isSuccess = true;
+
 				state.data = action.payload;
 				const dataCartItems = action.payload.cartItems;
 				const everyItems = dataCartItems.reduce(
