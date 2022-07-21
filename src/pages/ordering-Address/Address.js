@@ -68,7 +68,7 @@ export default function Address() {
 		const addressData = {
 			addressDetail,
 			cityId,
-			isDefault,
+			isDefault: true,
 			label,
 			phone,
 			postalCode,
@@ -180,7 +180,7 @@ export default function Address() {
 								/>
 							</div>
 							<div className="LABELINPUT-GROUP mt-6 flex flex-row items-center gap-3 sm:col-span-2">
-								<input
+								{/* <input
 									type="checkbox"
 									className="hover:cursor-pointer"
 									onChange={(e) =>
@@ -189,9 +189,9 @@ export default function Address() {
 											isDefault: e.target.checked,
 										}))
 									}
-								/>
+								/> */}
 								<p className="text-base font-semibold text-brown">
-									gunakan sebagai{" "}
+									alamat akan digunakan sebagai{" "}
 									<span className="font-bold text-danger">alamat utama</span>
 								</p>
 							</div>
@@ -239,7 +239,7 @@ export default function Address() {
 									Kembali
 								</button>
 								<button className="btn-grad right-0 bottom-0 ml-0 rounded-full py-2 px-5 text-xs text-white xl:ml-auto xl:text-base">
-									Tambah Alamat
+									Ubah Alamat
 								</button>
 							</div>
 						</div>

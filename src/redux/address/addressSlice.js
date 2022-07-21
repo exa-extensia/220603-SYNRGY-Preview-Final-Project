@@ -52,22 +52,22 @@ export const getAddress = createAsyncThunk("address/get", async (thunkAPI) => {
 	}
 });
 
-export const deleteAddress = createAsyncThunk(
-	"address/delete",
-	async (data, thunkAPI) => {
-		try {
-			return await addressService.DeleteUserAddresss(data);
-		} catch (error) {
-			const message =
-				(error.response &&
-					error.response.data &&
-					error.response.data.message) ||
-				error.message ||
-				error.toString();
-			return thunkAPI.rejectWithValue(message);
-		}
-	}
-);
+// export const deleteAddress = createAsyncThunk(
+// 	"address/delete",
+// 	async (data, thunkAPI) => {
+// 		try {
+// 			return await addressService.DeleteUserAddresss(data);
+// 		} catch (error) {
+// 			const message =
+// 				(error.response &&
+// 					error.response.data &&
+// 					error.response.data.message) ||
+// 				error.message ||
+// 				error.toString();
+// 			return thunkAPI.rejectWithValue(message);
+// 		}
+// 	}
+// );
 
 // export const updateAddress = createAsyncThunk(
 // 	"address/update",
@@ -98,6 +98,13 @@ export const addressSlice = createSlice({
 			state.isSuccess = false;
 			state.isError = false;
 			state.message = "";
+		},
+		deleteUI: (state, action) => {
+			state.isLoading = false;
+			console.log("deleted address id>>>>>", action.payload); // deletedAddressId
+			toast("alamat berhasil dihapus");
+			const arraybaru = state.address.slice();
+			state.address = arraybaru.filter((e) => e.id !== action.payload);
 		},
 	},
 	extraReducers: (builder) => {
@@ -130,30 +137,25 @@ export const addressSlice = createSlice({
 				state.isLoading = false;
 				state.isError = true;
 				state.message = action.payload;
-			})
-			.addCase(deleteAddress.pending, (state) => {
-				state.isLoading = true;
-			})
-			.addCase(deleteAddress.fulfilled, (state, action) => {
-				state.isLoading = false;
-				// state.isSuccess = true;
-				// console.log(">>>ACTION PAYLOAD DELETE", action.payload);
-				// state.address = state.address;
-				// state.address = state.address.filter((e) => e.id !== action.payload.id);
-				// state.address = state.address.map((e) => e);
-				toast("alamat berhasil dihapus");
-				console.log(action.payload); // isi data & deletedAddressId
-
-				const arraybaru = state.address.slice();
-				state.address = arraybaru.filter(
-					(e) => e.id !== action.payload.deletedAddressId
-				);
-			})
-			.addCase(deleteAddress.rejected, (state, action) => {
-				state.isLoading = false;
-				state.isError = true;
-				state.message = action.payload;
 			});
+		// .addCase(deleteAddress.pending, (state) => {
+		// 	state.isLoading = true;
+		// })
+		// .addCase(deleteAddress.fulfilled, (state, action) => {
+		// 	state.isLoading = false;
+		// 	toast("alamat berhasil dihapus");
+		// 	console.log(action.payload); // isi data & deletedAddressId
+
+		// 	const arraybaru = state.address.slice();
+		// 	state.address = arraybaru.filter(
+		// 		(e) => e.id !== action.payload.deletedAddressId
+		// 	);
+		// })
+		// .addCase(deleteAddress.rejected, (state, action) => {
+		// 	state.isLoading = false;
+		// 	state.isError = true;
+		// 	state.message = action.payload;
+		// });
 		// .addCase(updateAddress.pending, (state) => {
 		// 	state.isLoading = true;
 		// })
@@ -175,5 +177,5 @@ export const addressSlice = createSlice({
 	},
 });
 
-export const { reset } = addressSlice.actions;
+export const { reset, deleteUI } = addressSlice.actions;
 export default addressSlice.reducer;

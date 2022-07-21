@@ -37,7 +37,6 @@ export default function PaymentOptions() {
 	}
 
 	const [orderItems, setOrderItems] = useState([]);
-	const [orderAddress, setOrderAddress] = useState({});
 	const [paymentExp, setPaymentExp] = useState();
 	const [orderDate, setOrderDate] = useState();
 	const [vaNumber, setVaNumber] = useState("");
@@ -51,7 +50,7 @@ export default function PaymentOptions() {
 
 	useEffect(() => {
 		scrollTop();
-
+		dispatch(getAddress());
 		axios
 			.get(`https://cosmetic-b.herokuapp.com/api/v1/order/${params.id}`)
 			.then((response) => {
@@ -59,7 +58,6 @@ export default function PaymentOptions() {
 				setLoading(false);
 				setData(response.data.data);
 				setOrderItems(response.data.data.orderItems);
-				setOrderAddress(response.data.data.address);
 				setVaNumber(response.data.data.payment.vaNumber);
 				setPaymentExp(response.data.data.payment.expiryTime);
 				setOrderDate(response.data.data.payment.transactionTime);
@@ -112,6 +110,11 @@ export default function PaymentOptions() {
 			});
 	}, [dispatch, params.id]);
 
+	const { address, isLoading, isError, isSuccess, message } = useSelector(
+		(state) => state.address
+	);
+	const addressDefault = address.find((e) => e.isDefault);
+
 	const everyItems = orderItems.reduce(
 		(prev, curr) => [...prev, ...curr.items],
 		[]
@@ -158,7 +161,7 @@ export default function PaymentOptions() {
 										<div className="h-2 w-2 rounded-full bg-med-brown"></div>
 									</div>
 								</div>
-								{loading && (
+								{isLoading && (
 									<div className="ORDERING-GENERAL-CARD w-full ">
 										<Skeleton
 											variant="rectangular"
@@ -168,16 +171,16 @@ export default function PaymentOptions() {
 										/>
 									</div>
 								)}
-								{!loading && !error && orderAddress && (
+								{!isLoading && !isError && addressDefault && (
 									<div className="ORDERING-GENERAL-CARD sm:flex ">
 										<div className="w-3/4">
 											<div className="label-group flex flex-row items-center gap-2">
 												<p className="LABEL-ALAMAT text-sm font-bold uppercase text-brown">
-													{orderAddress.label}
+													{addressDefault.label}
 												</p>{" "}
 												<div
 													className={`${
-														orderAddress.isDefault === true
+														addressDefault.isDefault === true
 															? "rounded-xl  bg-cream py-1 px-2 text-xs text-brown"
 															: "hidden"
 													} `}
@@ -187,19 +190,21 @@ export default function PaymentOptions() {
 											</div>
 											<div className="content-group mt-1 ">
 												<p className="break-words text-sm font-extralight">
-													{orderAddress.addressDetail} - {orderAddress.cityId}{" "}
-													{orderAddress.postalCode}
+													{addressDefault.addressDetail} -{" "}
+													{addressDefault.cityId} {addressDefault.postalCode}
 												</p>
 												<div className="mt-2 flex flex-row items-center gap-4">
 													<div className="flex flex-row items-center gap-1">
 														<TbUser size={20} />
 														<p className="  font-bold">
-															{orderAddress.receiver}
+															{addressDefault.receiver}
 														</p>
 													</div>
 													<div className="flex flex-row items-center gap-1">
 														<TbPhone size={20} />
-														<p className="  font-bold">{orderAddress.phone}</p>
+														<p className="  font-bold">
+															{addressDefault.phone}
+														</p>
 													</div>
 												</div>
 											</div>
@@ -208,19 +213,28 @@ export default function PaymentOptions() {
 												<p className="text-sm text-med-brown">
 													*Pengiriman dengan kurir:
 												</p>
-												{courier === "JNE" && (
+												{loading && (
+													<Skeleton
+														variant="rectangular"
+														height={30}
+														width={80}
+														animation="wave"
+														className="w-full"
+													/>
+												)}
+												{!loading && courier === "JNE" && (
 													<img
 														src={jne}
 														className="w-[60px] bg-center object-contain"
 													></img>
 												)}
-												{courier === "POS" && (
+												{!loading && courier === "POS" && (
 													<img
 														src={pos}
 														className="w-[60px] bg-center object-contain"
 													></img>
 												)}
-												{courier === "TIKI" && (
+												{!loading && courier === "TIKI" && (
 													<img
 														src={tiki}
 														className="w-[60px] bg-center object-contain"
@@ -230,22 +244,31 @@ export default function PaymentOptions() {
 										</div>
 										<div className="mt-4 sm:relative sm:mt-0 sm:w-1/4">
 											<div className="sm:absolute sm:top-0 sm:right-0">
-												{statusAntar === "dibatalkan" && (
+												{loading && (
+													<Skeleton
+														variant="rectangular"
+														height={30}
+														width={100}
+														animation="wave"
+														className="w-full"
+													/>
+												)}
+												{!loading && statusAntar === "dibatalkan" && (
 													<div className="rounded-full bg-danger py-1 px-2 text-center text-xs text-white">
 														dibatalkan
 													</div>
 												)}
-												{statusAntar === "pending" && (
+												{!loading && statusAntar === "pending" && (
 													<div className="rounded-full bg-danger py-1 px-2 text-xs text-white sm:text-center">
 														menunggu terbayar
 													</div>
 												)}
-												{statusAntar === "diantar" && (
+												{!loading && statusAntar === "diantar" && (
 													<div className="rounded-full bg-warning py-1 px-2 text-xs text-white sm:text-center">
 														pesanan diantar
 													</div>
 												)}
-												{statusAntar === "selesai" && (
+												{!loading && statusAntar === "selesai" && (
 													<div className="rounded-full bg-success py-1 px-2 text-xs text-white sm:text-center">
 														pesanan selesai
 													</div>
