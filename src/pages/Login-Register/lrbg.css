@@ -4,13 +4,12 @@
 
 .BTN-GGL {
 	background-color: transparent;
-	border: 1px solid #c4c4c4;
 	text-align: center;
 
 	transition: all 0.8s ease;
 }
 
 .BTN-GGL:hover {
-	box-shadow: inset 288px 0 0 0 #515151;
+	box-shadow: inset 288px 0 0 0.09px #515151;
 	/* background-color: white; */
 }

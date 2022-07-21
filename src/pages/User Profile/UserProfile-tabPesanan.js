@@ -76,89 +76,87 @@ export default function UserProfilePesanan() {
 					<>
 						<Link
 							to={`/orderdetails/${l.id}`}
+							key={index}
 							className="ORDER-LIST-GENERAL-CARD ORDER-LIST-GRID w-full cursor-pointer items-center hover:bg-[#FFFAF2] xl:grid "
 						>
-							<div
-								key={index}
-								className="ORDER-LIST-COL1 border-goldie p-2 font-bold xl:border-r"
-							>
-								<div className="flex gap-2 xl:block">
+							<div className="ORDER-LIST-COL1 grid border-goldie p-2 font-bold xl:h-full xl:border-r">
+								<div className="flex gap-2 xl:my-auto xl:block">
 									<p className="xl:hidden">Order ID</p>
 									<p>#{l.id}</p>
 								</div>
 							</div>
-							<div className="ORDER-LIST-COL2 border-goldie p-2 text-xs text-grey xl:border-r">
-								<div className="flex gap-2 xl:block">
+							<div className="ORDER-LIST-COL2 grid border-goldie p-2 text-xs text-grey xl:h-full xl:border-r">
+								<div className="flex gap-2 xl:my-auto xl:block">
 									<p className="xl:hidden">Tanggal</p>{" "}
 									<p>{convertDate(l.date)}</p>
 								</div>
 							</div>
-							<div className="ORDER-LIST-COL3 border-goldie p-2 text-xs text-grey xl:border-r">
-								<div className="flex gap-2 xl:block">
+							<div className="ORDER-LIST-COL3 grid border-goldie p-2 text-xs  text-grey xl:h-full xl:border-r">
+								<div className="flex gap-2 xl:my-auto xl:block">
 									{" "}
 									<p className="xl:hidden">Total</p>{" "}
 									<p>{currencyIDR(l.total)} </p>
 								</div>
 							</div>
-							<div className="ORDER-LIST-COL4 border-goldie p-2 text-success xl:border-r">
+							<div className="ORDER-LIST-COL4 grid border-goldie p-2 xl:h-full  xl:border-r">
 								{l.status === "CANCELED" && (
-									<div className="flex gap-2 text-danger xl:block">
+									<div className="flex gap-2 text-danger xl:my-auto xl:block">
 										<p className="xl:hidden">pembayaran dibatalkan</p>{" "}
 										<HiXCircle size={22} />
 									</div>
 								)}
 								{l.status === "WAITING_FOR_PAYMENT" && (
-									<div className="flex gap-2 text-warning xl:block">
+									<div className="flex gap-2 text-warning xl:my-auto xl:block">
 										<p className="xl:hidden">pembayaran ditunggu</p>{" "}
 										<HiDotsCircleHorizontal size={22} />
 									</div>
 								)}
 								{l.status === "PAID" && (
-									<div className="flex gap-2 text-success xl:block">
+									<div className="flex gap-2 text-success xl:my-auto xl:block">
 										<p className="xl:hidden">pembayaran selesai</p>{" "}
 										<HiCheckCircle size={22} />
 									</div>
 								)}
 								{l.status === "ON_DELIVERY" && (
-									<div className="flex gap-2 text-success xl:block">
+									<div className="flex gap-2 text-success xl:my-auto xl:block">
 										<p className="xl:hidden">pembayaran selesai</p>{" "}
 										<HiCheckCircle size={22} />
 									</div>
 								)}
 								{l.status === "DELIVERED" && (
-									<div className="flex gap-2 text-success xl:block">
+									<div className="flex gap-2 text-success xl:my-auto xl:block">
 										<p className="xl:hidden">pembayaran selesai</p>{" "}
 										<HiCheckCircle size={22} />
 									</div>
 								)}
 							</div>
-							<div className="ORDER-LIST-COL4 p-2">
+							<div className="ORDER-LIST-COL4 grid p-2 xl:h-full">
 								{l.status === "CANCELED" && (
-									<div className="flex gap-2 text-danger xl:block">
+									<div className="flex gap-2 text-danger xl:my-auto xl:block">
 										<p className="xl:hidden">pengantaran dibatalkan</p>{" "}
 										<HiXCircle size={22} />
 									</div>
 								)}
 								{l.status === "WAITING_FOR_PAYMENT" && (
-									<div className="flex gap-2 text-danger xl:block">
+									<div className="flex gap-2 text-danger xl:my-auto xl:block">
 										<p className="xl:hidden">pengantaran menunggu dibayar</p>{" "}
 										<HiXCircle size={22} />
 									</div>
 								)}
 								{l.status === "PAID" && (
-									<div className="flex gap-2 text-warning xl:block">
+									<div className="flex gap-2 text-warning xl:my-auto xl:block">
 										<p className="xl:hidden">pengantaran berlangsung</p>{" "}
 										<HiDotsCircleHorizontal size={22} />
 									</div>
 								)}
 								{l.status === "ON_DELIVERY" && (
-									<div className="flex gap-2 text-warning xl:block">
+									<div className="flex gap-2 text-warning xl:my-auto xl:block">
 										<p className="xl:hidden">pengantaran berlangsung</p>{" "}
 										<HiDotsCircleHorizontal size={22} />
 									</div>
 								)}
 								{l.status === "DELIVERED" && (
-									<div className="flex gap-2 text-success xl:block">
+									<div className="flex gap-2 text-success xl:my-auto xl:block">
 										<p className="xl:hidden">pengantaran selesai</p>{" "}
 										<HiCheckCircle size={22} />
 									</div>
