@@ -6,17 +6,21 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { StyledEngineProvider } from "@mui/material";
 import { Provider } from "react-redux";
-import { store } from "./redux/store";
+import { store, persistor } from "./redux/store";
+
+import { PersistGate } from "redux-persist/integration/react";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 	<React.StrictMode>
 		<Provider store={store}>
-			<BrowserRouter>
-				<StyledEngineProvider injectFirst>
-					<App />
-				</StyledEngineProvider>
-			</BrowserRouter>
+			<PersistGate loading={<div>loading...</div>} persistor={persistor}>
+				<BrowserRouter>
+					<StyledEngineProvider injectFirst>
+						<App />
+					</StyledEngineProvider>
+				</BrowserRouter>
+			</PersistGate>
 		</Provider>
 	</React.StrictMode>
 );

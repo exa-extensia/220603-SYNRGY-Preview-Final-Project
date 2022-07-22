@@ -44,7 +44,7 @@ const DeleteCart = async ({ quantity, variantId }, token) => {
 };
 
 const PlaceOrder = async (
-	{ bank, delivery, deliveryService, paymentType },
+	{ bank, delivery, deliveryService, paymentType, voucherId },
 	token
 ) => {
 	const response = await axios.post(
@@ -54,6 +54,7 @@ const PlaceOrder = async (
 			delivery: delivery,
 			deliveryService: deliveryService,
 			paymentType: paymentType,
+			voucherId: voucherId,
 		},
 		{
 			headers: {

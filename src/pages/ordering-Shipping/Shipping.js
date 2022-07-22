@@ -55,14 +55,27 @@ export default function Shipping() {
 		buatpesananmessage,
 	} = useSelector((state) => state.cart.statusBuatPesanan);
 
+	// const statusBuatPesanan = useSelector(
+	// 	(state) => state.cart.statusBuatPesanan
+	// );
+	// console.log("STATUS BUAT PESANAN >>>", statusBuatPesanan);
+	// const buatPesananError = statusBuatPesanan.buatPesananError;
+	// const buatPesananSuccess = statusBuatPesanan.buatPesananSuccess;
+	// const buatPesananLoading = statusBuatPesanan.buatPesananLoading;
+	// const buatpesananmessage = statusBuatPesanan.buatpesananmessage;
+
+	const dataVoucher = useSelector((state) => state.cart.selectedVoucher);
+
 	const onBuatPesanan = () => {
-		if (addressDefault && courier && duration && bank) {
+		if (addressDefault && courier && duration && bank && dataVoucher.id) {
 			const checkoutData = {
 				bank: bank,
 				delivery: courier,
 				deliveryService: duration,
 				paymentType: "BANK_TRANSFER",
+				voucherId: [dataVoucher.id],
 			};
+			console.log("Checkout Data>>>>", checkoutData);
 			dispatch(placeOrder(checkoutData));
 		}
 		if (!addressDefault) {
@@ -151,6 +164,9 @@ export default function Shipping() {
 			});
 	}, []);
 
+	const potongan = dataTotalBelanja * (dataVoucher.discount / 100);
+	const finalHarga = dataTotalBelanja - potongan;
+
 	return (
 		<>
 			<Navbar />
@@ -194,7 +210,7 @@ export default function Shipping() {
 												</div>
 												<div className="content-group mt-1 ">
 													<p className="break-words text-sm font-extralight">
-														{addressDefault.addressDefaultDetail} -{" "}
+														{addressDefault.addressDetail} -{" "}
 														{addressDefault.cityId} {addressDefault.postalCode}
 													</p>
 													<div className="mt-2 flex flex-row items-center gap-4">
@@ -608,26 +624,23 @@ export default function Shipping() {
 											<div className="flex justify-between ">
 												<p>Total Belanja</p>
 												<p className="font-bold">
-													Rp{dataTotalBelanja.toLocaleString("id-ID")}
+													{currencyIDR(dataTotalBelanja)}
 												</p>
 											</div>
 											<div className="flex justify-between">
 												<p>Diskon</p>
-												<p className="font-bold">-</p>
+												<p className="font-bold">
+													-{potongan ? currencyIDR(potongan) : ""}
+												</p>
 											</div>
 											<div className="flex justify-between text-med-brown">
 												<p>+ Ongkir</p>
-												<p className="font-bold">
-													Rp{dataOngkir.toLocaleString("id-ID")}
-												</p>
+												<p className="font-bold">{currencyIDR(dataOngkir)}</p>
 											</div>
 											<div className="flex justify-between">
 												<p>Jumlah Pembayaran</p>
 												<p className="font-bold">
-													Rp
-													{(dataTotalBelanja + dataOngkir).toLocaleString(
-														"id-ID"
-													)}
+													{currencyIDR(finalHarga + dataOngkir)}
 												</p>
 											</div>
 										</>

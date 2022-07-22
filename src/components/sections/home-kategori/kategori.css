@@ -10,23 +10,40 @@
 	@apply flex items-center justify-center;
 }
 
-#kategoriproduk .product__item:nth-child(odd) {
-	@apply mb-4 aspect-square overflow-hidden rounded-lg sm:aspect-[3/4];
-}
-
-#kategoriproduk .product__item:nth-child(even) {
-	@apply mb-4 aspect-square overflow-hidden rounded-lg sm:aspect-square;
-}
-#kategoriproduk .product__item:nth-child(6) {
+#kategoriproduk .product__item:nth-child(1) {
 	@apply mb-4 aspect-square overflow-hidden rounded-lg sm:aspect-[3/4];
 }
 
 #kategoriproduk .product__item:nth-child(2) {
-	@apply mb-4 aspect-square overflow-hidden rounded-lg sm:aspect-[3/4];
+	@apply mb-4 aspect-square overflow-hidden rounded-lg sm:aspect-square;
 }
 
 #kategoriproduk .product__item:nth-child(3) {
+	@apply mb-4 aspect-square overflow-hidden rounded-lg sm:aspect-[3/4];
+}
+
+#kategoriproduk .product__item:nth-child(4) {
 	@apply mb-4 aspect-square overflow-hidden rounded-lg sm:aspect-square;
+}
+
+#kategoriproduk .product__item:nth-child(5) {
+	@apply mb-4 aspect-square overflow-hidden rounded-lg sm:aspect-[3/5];
+}
+
+#kategoriproduk .product__item:nth-child(6) {
+	@apply mb-4 aspect-square overflow-hidden rounded-lg sm:aspect-square;
+}
+
+#kategoriproduk .product__item:nth-child(7) {
+	@apply mb-4 aspect-square overflow-hidden rounded-lg sm:aspect-[3/4];
+}
+
+#kategoriproduk .product__item:nth-child(8) {
+	@apply mb-4 aspect-square overflow-hidden rounded-lg sm:aspect-square;
+}
+
+#kategoriproduk .product__item:nth-child(9) {
+	@apply mb-4 aspect-square overflow-hidden rounded-lg sm:aspect-[3/4];
 }
 
 #kategoriproduk button {

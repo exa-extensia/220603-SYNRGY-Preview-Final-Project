@@ -5,15 +5,17 @@ import { toast } from "react-toastify";
 
 const initialState = {
 	data: {},
-	cartBadge: localStorage.getItem("cartBadge")
-		? JSON.parse(localStorage.getItem("cartBadge"))
-		: 0,
+	cartBadge: 0,
 	statusBuatPesanan: {
 		responseBuatPesanan: {},
 		buatPesananSuccess: false,
 		buatPesananLoading: false,
 		buatPesananError: false,
 		buatpesananmessage: "",
+	},
+	selectedVoucher: {
+		id: "",
+		discount: 0,
 	},
 	isError: false,
 	cartError: false,
@@ -96,35 +98,26 @@ export const cartSlice = createSlice({
 	name: "cart",
 	initialState,
 	reducers: {
-		// addProduct: (state, action) => {
-		// 	state.quantity += 1;
-		// 	state.products.push(action.payload);
-		// 	state.total += action.payload.price * action.payload.quantity;
+		// reset: (state) => {
+		// 	state.isLoading = false;
+		// 	state.isSuccess = false;
+		// 	state.isError = false;
+		// 	state.message = "";
+		// 	state.statusBuatPesanan.responseBuatPesanan = {};
+		// 	state.statusBuatPesanan.buatPesananSuccess = false;
+		// 	state.statusBuatPesanan.buatPesananLoading = false;
+		// 	state.statusBuatPesanan.buatPesananError = false;
 		// },
-		// inc: (state) => {
-		// 	state.quantity += 1;
-		// },
-		// dec: (state) => {
-		// 	if (state.quantity > 0) {
-		// 		state.quantity -= 1;
-		// 	}
-		// },
-		reset: (state) => {
-			// state.isLoading = false;
-			// state.isSuccess = false;
-			// state.isError = false;
-			// state.message = "";
-			state.statusBuatPesanan.responseBuatPesanan = {};
-			state.statusBuatPesanan.buatPesananSuccess = false;
-			state.statusBuatPesanan.buatPesananLoading = false;
-			state.statusBuatPesanan.buatPesananError = false;
-		},
 		deleteCartBadge: (state, action) => {
 			if (state.cartBadge > 0) {
 				state.cartBadge -= action.payload;
-				localStorage.setItem("cartBadge", JSON.stringify(state.cartBadge));
+				// localStorage.setItem("cartBadge", JSON.stringify(state.cartBadge));
 				console.log(">>>>>After Delete Cart Total Qty", state.cartBadge);
 			}
+		},
+		selectVoucher: (state, action) => {
+			state.selectedVoucher.id = action.payload.id;
+			state.selectedVoucher.discount = action.payload.discount;
 		},
 	},
 	extraReducers: (builder) => {
@@ -135,12 +128,6 @@ export const cartSlice = createSlice({
 			.addCase(addToCart.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.isSuccess = true;
-				// state.addedVariantId = action.payload.existingVariantId;
-				// console.log(">>>>>existing id", action.payload.existingVariantId);
-				// if (state.addedVariantId !== action.payload.existingVariantId) {}
-				// test
-				// state.cartBadge += action.payload.quantity;
-				// localStorage.setItem("cartBadge", JSON.stringify(state.cartBadge));
 				console.log(
 					">>>>>BERHASIL MSK KERNJANG action payload",
 					action.payload
@@ -151,8 +138,7 @@ export const cartSlice = createSlice({
 				}, 0);
 				console.log(">>>>>After Add Cart Total Qty", cartTotalQty);
 				state.cartBadge = cartTotalQty;
-				localStorage.setItem("cartBadge", JSON.stringify(cartTotalQty));
-
+				// localStorage.setItem("cartBadge", JSON.stringify(cartTotalQty));
 				toast("sudah dimasukkan ke keranjang!");
 			})
 			.addCase(addToCart.rejected, (state, action) => {
@@ -180,40 +166,26 @@ export const cartSlice = createSlice({
 				);
 				if (state.cartBadge !== totalQty) {
 					state.cartBadge = totalQty;
-					localStorage.setItem("cartBadge", JSON.stringify(totalQty));
+					// localStorage.setItem("cartBadge", JSON.stringify(totalQty));
 				}
 				console.log(">>>>>GET ALL action payload", action.payload);
+
+				state.statusBuatPesanan.buatPesananLoading = false;
+				state.statusBuatPesanan.buatPesananError = false;
+				state.statusBuatPesanan.buatPesananSuccess = false;
 			})
 			.addCase(getAllCart.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
 				state.message = action.payload;
 			})
-			// .addCase(deleteCart.pending, (state) => {
-			// 	state.isLoading = true;
-			// })
-			// .addCase(deleteCart.fulfilled, (state, action) => {
-			// 	state.isLoading = false;
-			// 	state.isSuccess = true;
-			// 	toast("berhasil dihapus");
-			// 	if (state.cartBadge > 0) {
-			// 		state.cartBadge -= action.payload.quantity;
-			// 		localStorage.setItem("cartBadge", JSON.stringify(state.cartBadge));
-			// 	}
-			// })
-			// .addCase(deleteCart.rejected, (state, action) => {
-			// 	state.isLoading = false;
-			// 	state.cartError = true;
-			// 	state.message = action.payload;
-			// 	toast("oops ada error");
-			// })
 			.addCase(placeOrder.pending, (state) => {
 				state.statusBuatPesanan.buatPesananLoading = true;
 				toast("sedang membuat pesanan!");
 			})
 			.addCase(placeOrder.fulfilled, (state, action) => {
 				state.cartBadge = 0;
-				localStorage.setItem("cartBadge", JSON.stringify(state.cartBadge));
+				// localStorage.setItem("cartBadge", JSON.stringify(state.cartBadge));
 				state.statusBuatPesanan.buatPesananLoading = false;
 				state.statusBuatPesanan.buatPesananSuccess = true;
 				state.statusBuatPesanan.responseBuatPesanan = action.payload;
@@ -228,5 +200,5 @@ export const cartSlice = createSlice({
 	},
 });
 
-export const { reset, deleteCartBadge } = cartSlice.actions;
+export const { reset, deleteCartBadge, selectVoucher } = cartSlice.actions;
 export default cartSlice.reducer;

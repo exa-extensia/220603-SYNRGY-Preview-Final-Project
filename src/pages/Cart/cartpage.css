@@ -45,22 +45,23 @@
 }
 
 .cp__input .input__img {
-	@apply aspect-square overflow-hidden rounded-md sm:w-full;
+	@apply aspect-square cursor-pointer overflow-hidden rounded-md sm:w-full;
 }
 
 .cp__input .input__text {
+	@apply cursor-pointer;
 }
 
 .cp__input .input__text p:nth-child(1) {
-	@apply text-sm font-bold sm:text-base;
+	@apply cursor-pointer text-sm font-bold sm:text-base;
 }
 
 .cp__input .input__text p:nth-child(2) {
-	@apply text-sm font-bold text-brown sm:text-base;
+	@apply cursor-pointer text-sm font-bold text-brown sm:text-base;
 }
 
 .cp__input .input__qty {
-	@apply col-span-3 col-start-1 my-auto flex items-center gap-4 justify-self-center lg:col-span-1 lg:col-start-3 lg:self-start;
+	@apply col-span-3 col-start-1 my-auto flex cursor-pointer items-center gap-4 justify-self-center lg:col-span-1 lg:col-start-3 lg:self-start;
 }
 
 .cp__input .input__qty div {
@@ -68,11 +69,11 @@
 }
 
 .cp__input .input__price {
-	@apply col-span-3 col-start-1 my-auto justify-self-center lg:col-span-1 lg:col-start-4 lg:self-start;
+	@apply col-span-3 col-start-1 my-auto cursor-pointer justify-self-center lg:col-span-1 lg:col-start-4 lg:self-start;
 }
 
 .cp__input .input__price p {
-	@apply font-bold;
+	@apply cursor-pointer font-bold;
 }
 
 .cp__input .input__del {
@@ -92,13 +93,32 @@
 }
 
 .cp__card__voucher {
-	@apply bg-white p-4 xl:p-8;
+	@apply p-4 xl:p-8;
 	box-shadow: 0px 4px 20px 5px rgba(181, 181, 181, 0.25);
 	border-radius: 8px;
+	background: radial-gradient(
+		76.23% 127.7% at 91.09% 132.79%,
+		#e4c085 40%,
+		#bc925f 100%
+	);
 }
 
 .cp__card__ringkasan {
 	@apply bg-white p-4 xl:p-8;
 	box-shadow: 0px 4px 20px 5px rgba(181, 181, 181, 0.25);
 	border-radius: 8px;
+}
+
+.VOUCHER-SELECTED {
+	box-shadow: inset 0 0 0 0 #fff;
+	cursor: pointer;
+}
+
+.VOUCHER-SELECTED:hover {
+	box-shadow: inset 500px 0 0 0 #fff;
+	cursor: pointer;
+}
+
+.VOUCHER-SELECTED * {
+	cursor: pointer;
 }
