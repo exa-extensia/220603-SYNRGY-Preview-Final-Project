@@ -48,30 +48,34 @@ export default function Shipping() {
 	const addressDefault = address.find((e) => e.isDefault);
 	console.log("addressDefault>>>>", addressDefault);
 	const quantityCartBadge = useSelector((state) => state.cart.cartBadge);
-	// const {
-	// 	buatPesananError,
-	// 	buatPesananSuccess,
-	// 	buatPesananLoading,
-	// 	buatpesananmessage,
-	// } = useSelector((state) => state.cart.statusBuatPesanan);
+	const {
+		buatPesananError,
+		buatPesananSuccess,
+		buatPesananLoading,
+		buatpesananmessage,
+	} = useSelector((state) => state.cart.statusBuatPesanan);
 
-	const statusBuatPesanan = useSelector(
-		(state) => state.cart.statusBuatPesanan
-	);
-	console.log("STATUS BUAT PESANAN >>>", statusBuatPesanan);
-	const buatPesananError = statusBuatPesanan.buatPesananError;
-	const buatPesananSuccess = statusBuatPesanan.buatPesananSuccess;
-	const buatPesananLoading = statusBuatPesanan.buatPesananLoading;
-	const buatpesananmessage = statusBuatPesanan.buatpesananmessage;
+	// const statusBuatPesanan = useSelector(
+	// 	(state) => state.cart.statusBuatPesanan
+	// );
+	// console.log("STATUS BUAT PESANAN >>>", statusBuatPesanan);
+	// const buatPesananError = statusBuatPesanan.buatPesananError;
+	// const buatPesananSuccess = statusBuatPesanan.buatPesananSuccess;
+	// const buatPesananLoading = statusBuatPesanan.buatPesananLoading;
+	// const buatpesananmessage = statusBuatPesanan.buatpesananmessage;
+
+	const dataVoucher = useSelector((state) => state.cart.selectedVoucher);
 
 	const onBuatPesanan = () => {
-		if (addressDefault && courier && duration && bank) {
+		if (addressDefault && courier && duration && bank && dataVoucher.id) {
 			const checkoutData = {
 				bank: bank,
 				delivery: courier,
 				deliveryService: duration,
 				paymentType: "BANK_TRANSFER",
+				voucherId: [dataVoucher.id],
 			};
+			console.log("Checkout Data>>>>", checkoutData);
 			dispatch(placeOrder(checkoutData));
 		}
 		if (!addressDefault) {
@@ -159,6 +163,9 @@ export default function Shipping() {
 				navigate("/cart");
 			});
 	}, []);
+
+	const potongan = dataTotalBelanja * (dataVoucher.discount / 100);
+	const finalHarga = dataTotalBelanja - potongan;
 
 	return (
 		<>
@@ -617,26 +624,23 @@ export default function Shipping() {
 											<div className="flex justify-between ">
 												<p>Total Belanja</p>
 												<p className="font-bold">
-													Rp{dataTotalBelanja.toLocaleString("id-ID")}
+													{currencyIDR(dataTotalBelanja)}
 												</p>
 											</div>
 											<div className="flex justify-between">
 												<p>Diskon</p>
-												<p className="font-bold">-</p>
+												<p className="font-bold">
+													-{potongan ? currencyIDR(potongan) : ""}
+												</p>
 											</div>
 											<div className="flex justify-between text-med-brown">
 												<p>+ Ongkir</p>
-												<p className="font-bold">
-													Rp{dataOngkir.toLocaleString("id-ID")}
-												</p>
+												<p className="font-bold">{currencyIDR(dataOngkir)}</p>
 											</div>
 											<div className="flex justify-between">
 												<p>Jumlah Pembayaran</p>
 												<p className="font-bold">
-													Rp
-													{(dataTotalBelanja + dataOngkir).toLocaleString(
-														"id-ID"
-													)}
+													{currencyIDR(finalHarga + dataOngkir)}
 												</p>
 											</div>
 										</>

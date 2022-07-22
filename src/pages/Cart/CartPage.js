@@ -24,6 +24,7 @@ import {
 	deleteCart,
 	getAllCart,
 	deleteCartBadge,
+	selectVoucher,
 } from "../../redux/cart/cartSlice";
 
 import axios from "axios";
@@ -111,20 +112,36 @@ export default function CartPage() {
 
 	const [voucher52, setVoucher52] = useState({});
 	const [voucher68, setVoucher68] = useState({});
-	const [sendSelectedID, setSendSelectedID] = useState("");
+	const [sendSelectedVoucher, setSendSelectedVoucher] = useState();
+	const [discount, setDiscount] = useState(0);
 	const [voucherID, setVoucherID] = useState("");
 	const tabsVoucherHandler = (e) => {
-		setVoucherID(e.target.id);
+		if (overviewTotal >= 100000) {
+			setVoucherID(e.target.id);
+		} else {
+			toast("wah penuhi dulu minimal belanjanya :)");
+		}
 	};
 
 	useEffect(() => {
 		if (voucherID === "52") {
-			setSendSelectedID(voucher52.id);
+			setSendSelectedVoucher(voucher52);
+			setDiscount(voucher52.discount);
 		}
 		if (voucherID === "68") {
-			setSendSelectedID(voucher68.id);
+			setSendSelectedVoucher(voucher68);
+			setDiscount(voucher68.discount);
 		}
-	}, [voucherID]);
+		if (overviewTotal < 100000) {
+			setVoucherID("");
+			setSendSelectedVoucher();
+			setDiscount(0);
+			toast("voucher belum dipakai");
+		}
+	}, [voucherID, overviewTotal]);
+
+	const potongan = overviewTotal * (discount / 100);
+	const finalHarga = overviewTotal - potongan;
 
 	return (
 		<>
@@ -405,19 +422,24 @@ export default function CartPage() {
 												</div>
 												<div className="flex justify-between">
 													<p>Diskon</p>
-													<p className="font-bold">-</p>
+													<p className="font-bold">
+														-{potongan ? currencyIDR(potongan) : ""}
+													</p>
 												</div>
 												<div className="flex justify-between">
 													<p>Jumlah Pembayaran</p>
-													<p className="font-bold">
-														{currencyIDR(overviewTotal)}
-													</p>
+													<p className="font-bold">{currencyIDR(finalHarga)}</p>
 												</div>
 											</div>
 										</div>
 										<div className="relative h-10 w-full">
 											<Link to={"/placeorder"}>
-												<button className="btn-grad absolute right-0 bottom-0 rounded-full py-2 px-5 text-xs text-white sm:text-base">
+												<button
+													onClick={() =>
+														dispatch(selectVoucher(sendSelectedVoucher))
+													}
+													className="btn-grad absolute right-0 bottom-0 rounded-full py-2 px-5 text-xs text-white sm:text-base"
+												>
 													Lanjutkan Pesanan
 												</button>
 											</Link>

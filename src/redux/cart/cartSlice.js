@@ -13,8 +13,10 @@ const initialState = {
 		buatPesananError: false,
 		buatpesananmessage: "",
 	},
-	selectedVoucherID: "",
-	selectedVoucherDisc: 0,
+	selectedVoucher: {
+		id: "",
+		discount: 0,
+	},
 	isError: false,
 	cartError: false,
 	isSuccess: false,
@@ -113,7 +115,10 @@ export const cartSlice = createSlice({
 				console.log(">>>>>After Delete Cart Total Qty", state.cartBadge);
 			}
 		},
-		selectVoucher: (state, action) => {},
+		selectVoucher: (state, action) => {
+			state.selectedVoucher.id = action.payload.id;
+			state.selectedVoucher.discount = action.payload.discount;
+		},
 	},
 	extraReducers: (builder) => {
 		builder
@@ -195,5 +200,5 @@ export const cartSlice = createSlice({
 	},
 });
 
-export const { reset, deleteCartBadge } = cartSlice.actions;
+export const { reset, deleteCartBadge, selectVoucher } = cartSlice.actions;
 export default cartSlice.reducer;
