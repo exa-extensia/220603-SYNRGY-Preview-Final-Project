@@ -26,7 +26,7 @@ const rootReducer = combineReducers({
 	auth: authReducer,
 	cart: cartReducer,
 	products: productReducer,
-	addess: addressReducer,
+	address: addressReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -48,12 +48,21 @@ export default function Shipping() {
 	const addressDefault = address.find((e) => e.isDefault);
 	console.log("addressDefault>>>>", addressDefault);
 	const quantityCartBadge = useSelector((state) => state.cart.cartBadge);
-	const {
-		buatPesananError,
-		buatPesananSuccess,
-		buatPesananLoading,
-		buatpesananmessage,
-	} = useSelector((state) => state.cart.statusBuatPesanan);
+	// const {
+	// 	buatPesananError,
+	// 	buatPesananSuccess,
+	// 	buatPesananLoading,
+	// 	buatpesananmessage,
+	// } = useSelector((state) => state.cart.statusBuatPesanan);
+
+	const statusBuatPesanan = useSelector(
+		(state) => state.cart.statusBuatPesanan
+	);
+	console.log("STATUS BUAT PESANAN >>>", statusBuatPesanan);
+	const buatPesananError = statusBuatPesanan.buatPesananError;
+	const buatPesananSuccess = statusBuatPesanan.buatPesananSuccess;
+	const buatPesananLoading = statusBuatPesanan.buatPesananLoading;
+	const buatpesananmessage = statusBuatPesanan.buatpesananmessage;
 
 	const onBuatPesanan = () => {
 		if (addressDefault && courier && duration && bank) {
@@ -194,7 +203,7 @@ export default function Shipping() {
 												</div>
 												<div className="content-group mt-1 ">
 													<p className="break-words text-sm font-extralight">
-														{addressDefault.addressDefaultDetail} -{" "}
+														{addressDefault.addressDetail} -{" "}
 														{addressDefault.cityId} {addressDefault.postalCode}
 													</p>
 													<div className="mt-2 flex flex-row items-center gap-4">

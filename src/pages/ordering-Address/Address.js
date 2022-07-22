@@ -93,7 +93,7 @@ export default function Address() {
 						className="DIV-2COLS grid grid-cols-4 gap-5 sm:grid-cols-8 lg:grid-cols-12 lg:gap-20"
 					>
 						<div className="DIV-COL1 col-span-4 grid grid-cols-1 sm:grid-cols-2 sm:gap-x-4 lg:col-span-6">
-							<h1 className="text-2xl sm:col-span-2">Tambah Alamat Baru</h1>
+							<h1 className="text-2xl sm:col-span-2">Aturan Alamat</h1>
 							<div className="mt-1 flex items-center sm:col-span-2">
 								<div className="w-20 border-b-2 border-med-brown" />
 								<div className="h-2 w-2 rounded-full bg-med-brown"></div>
