@@ -12,6 +12,7 @@ import {
 	HiOutlineChevronRight,
 	HiCheck,
 } from "react-icons/hi";
+import { TbDiscount2 } from "react-icons/tb";
 import illst from "../../assets/images/cartempty-illst.svg";
 import Skeleton from "@mui/material/Skeleton";
 import { toast } from "react-toastify";
@@ -76,9 +77,56 @@ export default function CartPage() {
 				console.log(error);
 				setIsError(true);
 			});
+		axios
+			.get(
+				`https://cosmetic-b.herokuapp.com/api/v1/promo/8bfe05d8-a738-41b8-adf3-e852072dfa38`
+			)
+			.then((response) => {
+				setIsLoading(false);
+				let data52 = response.data.data;
+				setVoucher52(data52);
+				console.log("voucher 52 in component>>>>>>>", data52);
+			})
+			.catch((error) => {
+				setIsLoading(false);
+				console.log(error);
+				setIsError(true);
+			});
+		axios
+			.get(
+				`https://cosmetic-b.herokuapp.com/api/v1/promo/5ad43473-1a9a-415c-892a-527e12cddc9c`
+			)
+			.then((response) => {
+				setIsLoading(false);
+				let data68 = response.data.data;
+				setVoucher68(data68);
+				console.log("voucher 68 in component>>>>>>>", data68);
+			})
+			.catch((error) => {
+				setIsLoading(false);
+				console.log(error);
+				setIsError(true);
+			});
 	}, [dispatch]);
 
 	const quantityCartBadge = useSelector((state) => state.cart.cartBadge);
+
+	const [voucher52, setVoucher52] = useState({});
+	const [voucher68, setVoucher68] = useState({});
+	const [sendSelectedID, setSendSelectedID] = useState("");
+	const [voucherID, setVoucherID] = useState("");
+	const tabsVoucherHandler = (e) => {
+		setVoucherID(e.target.id);
+	};
+
+	useEffect(() => {
+		if (voucherID === "52") {
+			setSendSelectedID(voucher52.id);
+		}
+		if (voucherID === "68") {
+			setSendSelectedID(voucher68.id);
+		}
+	}, [voucherID]);
 
 	return (
 		<>
@@ -168,7 +216,11 @@ export default function CartPage() {
 											{!isLoading &&
 												!isError &&
 												i.items?.map((v, index) => (
-													<div key={index} className="cp__satubrand__input">
+													<Link
+														to={`/productdetail/${v.productId}`}
+														key={index}
+														className="cp__satubrand__input cursor-pointer transition-all duration-200 ease-in-out hover:rounded-md hover:bg-soft-gray"
+													>
 														<div className="cp__input">
 															<div className="input__img">
 																<img src={v.image} alt="cp__product" />
@@ -178,22 +230,12 @@ export default function CartPage() {
 																<p>{currencyIDR(v.price)}</p>
 															</div>
 															<div className="input__qty ">
-																{/* <div
-																	onClick={() => inputQuantityHandler("dec")}
-																>
-																	<HiMinusSm />
-																</div> */}
-																<p className="rounded-full bg-cream px-3 py-1 text-xs font-light text-med-brown">
-																	<span className="mr-1 text-sm font-bold">
+																<p className="cursor-pointer rounded-full bg-cream px-3 py-1 text-xs font-light text-med-brown">
+																	<span className="mr-1 cursor-pointer text-sm font-bold">
 																		{v.quantity}
 																	</span>{" "}
 																	barang
 																</p>
-																{/* <div
-																	onClick={() => inputQuantityHandler("inc")}
-																>
-																	<HiPlusSm />
-																</div> */}
 															</div>
 															<div className="input__price ">
 																<p>{currencyIDR(v.subTotal)}</p>
@@ -247,7 +289,7 @@ export default function CartPage() {
 																</button>
 															</div>
 														</div>
-													</div>
+													</Link>
 												))}
 										</div>
 									</div>
@@ -265,6 +307,87 @@ export default function CartPage() {
 								)}
 								{!isLoading && !isError && items.length > 0 && (
 									<>
+										<div className="cp__card__voucher">
+											<div className="mb-7">
+												<p className="mb-3 text-lg font-bold text-white">
+													Voucher Diskon
+												</p>
+												<div className="flex items-center">
+													<div className="w-20 border-b-2 border-white" />
+													<div className="h-2 w-2 rounded-full bg-white"></div>
+												</div>
+											</div>
+											<p className="mb-2 text-sm text-white">
+												Pilih dan masukkan voucher diskon untuk mendapatkan
+												potongan harga.
+											</p>
+											<div
+												id="52"
+												onClick={tabsVoucherHandler}
+												className={`voucher__kode VOUCHER-SELECTED group mb-2 flex  items-center justify-between border border-white p-2 transition-all duration-700 ease-in-out ${
+													voucherID === "52" ? "bg-white" : ""
+												}`}
+											>
+												<div
+													id="52"
+													onClick={tabsVoucherHandler}
+													className={`flex flex-row items-center transition-all duration-700 ease-in-out group-hover:text-med-brown ${
+														voucherID === "52" ? "text-med-brown" : "text-white"
+													}`}
+												>
+													<TbDiscount2 size={28} />
+													<div id="52" onClick={tabsVoucherHandler}>
+														<p
+															id="52"
+															onClick={tabsVoucherHandler}
+															className="ml-8 text-xs font-bold lg:text-base"
+														>
+															Potongan 52%
+														</p>
+														<p
+															id="52"
+															onClick={tabsVoucherHandler}
+															className="ml-8 text-xs"
+														>
+															Minimum pembelian Rp 100.000,00
+														</p>
+													</div>
+												</div>
+											</div>
+											<div
+												id="68"
+												onClick={tabsVoucherHandler}
+												className={`voucher__kode VOUCHER-SELECTED group mb-2 flex  items-center justify-between border border-white p-2 transition-all duration-700 ease-in-out ${
+													voucherID === "68" ? "bg-white" : ""
+												}`}
+											>
+												<div
+													id="68"
+													onClick={tabsVoucherHandler}
+													className={`flex flex-row items-center transition-all duration-700 ease-in-out group-hover:text-med-brown ${
+														voucherID === "68" ? "text-med-brown" : "text-white"
+													}`}
+												>
+													<TbDiscount2 size={28} />
+													<div id="68" onClick={tabsVoucherHandler}>
+														<p
+															id="68"
+															onClick={tabsVoucherHandler}
+															className="ml-8 text-xs font-bold lg:text-base"
+														>
+															Potongan 68%
+														</p>
+														<p
+															id="68"
+															onClick={tabsVoucherHandler}
+															className="ml-8 text-xs"
+														>
+															Minimum pembelian Rp 100.000,00
+														</p>
+													</div>
+												</div>
+											</div>
+										</div>
 										<div className="cp__card__ringkasan">
 											<div className="mb-7">
 												<p className="mb-3 text-lg font-bold">
