@@ -11,7 +11,6 @@ import bri from "../../assets/icons/icon-bank/bri.png";
 import jne from "../../assets/icons/icon-pengiriman/jne.png";
 import pos from "../../assets/icons/icon-pengiriman/pos.png";
 import tiki from "../../assets/icons/icon-pengiriman/tiki.png";
-import illst from "../../assets/images/delivery-illst.png";
 
 import { TbMapSearch, TbTruckDelivery, TbUser, TbPhone } from "react-icons/tb";
 import {
@@ -67,7 +66,7 @@ export default function Shipping() {
 	const dataVoucher = useSelector((state) => state.cart.selectedVoucher);
 
 	const onBuatPesanan = () => {
-		if (addressDefault && courier && duration && bank && dataVoucher.id) {
+		if (addressDefault && courier && duration && bank) {
 			const checkoutData = {
 				bank: bank,
 				delivery: courier,
@@ -634,8 +633,8 @@ export default function Shipping() {
 												</p>
 											</div>
 											<div className="flex justify-between text-med-brown">
-												<p>+ Ongkir</p>
-												<p className="font-bold">{currencyIDR(dataOngkir)}</p>
+												<p>*Ongkir</p>
+												<p className="font-bold">+{currencyIDR(dataOngkir)}</p>
 											</div>
 											<div className="flex justify-between">
 												<p>Jumlah Pembayaran</p>
@@ -661,7 +660,6 @@ export default function Shipping() {
 									Sedang membuat pesanan...!
 								</div>
 							)}
-							{/* <img src={illst} alt="" /> */}
 						</div>
 					</div>
 				</div>

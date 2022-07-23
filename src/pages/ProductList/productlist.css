@@ -27,7 +27,7 @@
 }
 
 .pl__main--list {
-	@apply grid h-[1200px] w-full grid-cols-2 gap-4  p-4 lg:grid-cols-4;
+	@apply grid w-full grid-cols-2 gap-4 p-4  lg:min-h-[1200px] lg:grid-cols-4;
 }
 
 #productlist .pt__card {

@@ -14,7 +14,7 @@ const initialState = {
 		buatpesananmessage: "",
 	},
 	selectedVoucher: {
-		id: "",
+		id: null,
 		discount: 0,
 	},
 	isError: false,
@@ -173,6 +173,8 @@ export const cartSlice = createSlice({
 				state.statusBuatPesanan.buatPesananLoading = false;
 				state.statusBuatPesanan.buatPesananError = false;
 				state.statusBuatPesanan.buatPesananSuccess = false;
+				state.selectedVoucher.id = null;
+				state.selectedVoucher.discount = 0;
 			})
 			.addCase(getAllCart.rejected, (state, action) => {
 				state.isLoading = false;

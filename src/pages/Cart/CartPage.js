@@ -132,11 +132,11 @@ export default function CartPage() {
 			setSendSelectedVoucher(voucher68);
 			setDiscount(voucher68.discount);
 		}
-		if (overviewTotal < 100000) {
+		if (overviewTotal && overviewTotal < 100000) {
 			setVoucherID("");
 			setSendSelectedVoucher();
 			setDiscount(0);
-			toast("voucher belum dipakai");
+			toast("penuhi minimal untuk pakai voucher!");
 		}
 	}, [voucherID, overviewTotal]);
 
