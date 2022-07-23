@@ -473,13 +473,11 @@ export default function PaymentOptions() {
 													{currencyIDR(totalSubTotal)}
 												</p>
 											</div>
-											<div className="flex justify-between">
-												<p>Diskon</p>
-												<p className="font-bold">-</p>
-											</div>
-											<div className="flex justify-between text-med-brown">
-												<p>+ Ongkir</p>
-												<p className="font-bold">
+											<div className="flex items-end justify-between text-med-brown">
+												<p>
+													* Diskon <br />& Ongkir
+												</p>
+												<p className="text-right font-bold">
 													{currencyIDR(data.total - totalSubTotal)}
 												</p>
 											</div>

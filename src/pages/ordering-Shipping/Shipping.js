@@ -634,8 +634,8 @@ export default function Shipping() {
 												</p>
 											</div>
 											<div className="flex justify-between text-med-brown">
-												<p>+ Ongkir</p>
-												<p className="font-bold">{currencyIDR(dataOngkir)}</p>
+												<p>*Ongkir</p>
+												<p className="font-bold">+{currencyIDR(dataOngkir)}</p>
 											</div>
 											<div className="flex justify-between">
 												<p>Jumlah Pembayaran</p>
