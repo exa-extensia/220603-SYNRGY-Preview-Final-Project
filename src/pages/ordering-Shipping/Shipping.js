@@ -67,7 +67,7 @@ export default function Shipping() {
 	const dataVoucher = useSelector((state) => state.cart.selectedVoucher);
 
 	const onBuatPesanan = () => {
-		if (addressDefault && courier && duration && bank && dataVoucher.id) {
+		if (addressDefault && courier && duration && bank) {
 			const checkoutData = {
 				bank: bank,
 				delivery: courier,
