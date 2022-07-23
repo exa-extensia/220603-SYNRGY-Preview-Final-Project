@@ -2,7 +2,7 @@ import "./address.css";
 import Navbar from "../../components/sections/_navbar/Navbar";
 import Footer from "../../components/sections/_footer/Footer";
 import Breadcrumb from "../../components/atoms/breadcrumb/BC-Address";
-import illst from "../../assets/images/addressform-illst.png";
+import illst from "../../assets/images/addressform-illst.svg";
 import Skeleton from "@mui/material/Skeleton";
 import { toast } from "react-toastify";
 

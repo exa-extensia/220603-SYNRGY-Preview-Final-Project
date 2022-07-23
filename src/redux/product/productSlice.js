@@ -3,6 +3,7 @@ import productService from "./productService";
 
 const initialState = {
 	products: [],
+	organicproducts: [],
 	isError: false,
 	isSuccess: false,
 	isLoading: false,
@@ -15,21 +16,21 @@ const initialState = {
 };
 
 export const getAllProducts = createAsyncThunk(
-    "product/getAllProducts",
-    async (data, { rejectWithValue }) => {
+	"product/getAllProducts",
+	async (data, { rejectWithValue }) => {
 		const { page, size } = data;
-        try {
-            return await productService.getAllProducts(page, size);
-        } catch (error) {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
-            return rejectWithValue(message);
-        }
-    }
+		try {
+			return await productService.getAllProducts(page, size);
+		} catch (error) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString();
+			return rejectWithValue(message);
+		}
+	}
 );
 
 export const getTrendingProducts = createAsyncThunk(
@@ -82,12 +83,17 @@ export const productSlice = createSlice({
 				state.isLoading = false;
 				state.isSuccess = true;
 				state.products = action.payload;
+				const arrayProducts = action.payload.products;
+				state.organicproducts = arrayProducts.filter(
+					(e) => e.isOrganic === true
+				);
 			})
 			.addCase(getAllProducts.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
 				state.message = action.payload;
 				state.products = null;
+				console.log("error get all products>>>>", action.payload);
 			})
 			.addCase(getTrendingProducts.pending, (state) => {
 				state.isTrendingLoading = true;

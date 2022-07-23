@@ -27,56 +27,27 @@ export default function ProductOrganic() {
 		});
 	}
 
-	const [publishdata, setPublishData] = useState([]);
-	const [page, setPage] = useState(0);
-	const [perPage] = useState(18);
-	const [offset, setOffset] = useState(1);
-
-	const { products, isLoading, isError, isSuccess, message } = useSelector(
+	const { isLoading, isError, isSuccess, message } = useSelector(
 		(state) => state.products
 	);
-	const organicTrue = products.filter((e) => e.isOrganic === true);
-	console.log("organikkkkkkk", organicTrue);
+	const organicTrue = useSelector((state) => state.products.organicproducts);
+
 	const dispatch = useDispatch();
 	const { user } = useSelector((state) => state.auth);
 	const needLogin = () => {
 		toast("Wah harus login dulu nih :)");
 	};
 
+	const PAGE_SIZE = 40;
+	const [page, setPage] = useState(0);
+
 	useEffect(() => {
 		scrollTop();
-		dispatch(getAllProducts());
-		// const slice = products.slice(offset - 1, offset - 1 + perPage);
-		// // For displaying Data
-		// const postData = getPostData(slice);
-		// // Using Hooks to set value
-		// setPublishData(postData);
-		// setPage(Math.ceil(products.length / perPage));
-		// console.log("DATA LENGTH >>>", products.length);
-		// console.log("PAGE COUNT >>>", page);
-	}, [dispatch]);
+		dispatch(getAllProducts({ page, size: PAGE_SIZE }));
+	}, [page]);
 
-	// const getPostData = () => {
-	// 	return products.map((e) => (
-	// 		<Link to={`/detail/${e.variant.id}`}>
-	// 			<div key={e.variant.id} className="card__onecard col-span-1">
-	// 				<div className="card__img">
-	// 					<img src={e.images[0]} alt="err" />
-	// 					<img src={e.variant} alt="err" />
-	// 				</div>
-	// 				<div className="card__category font-bold">{e.brand.name}</div>
-	// 				<div className="card__title">{e.variant[0].id}</div>
-	// 				<div className="card__title">{e.name}</div>
-	// 				<div className="card__price">Rp{e.quantity} </div>
-	// 			</div>
-	// 		</Link>
-	// 	));
-	// };
-
-	const handlePageClick = (e) => {
-		const selectedPage = e.selected;
-		console.log(selectedPage);
-		setOffset(selectedPage + 1);
+	const handlePageClick = (e, val) => {
+		setPage(val - 1);
 	};
 
 	return (
@@ -95,12 +66,12 @@ export default function ProductOrganic() {
 									Produk Organik
 								</h1>
 								<div className="pl__product-sort">
-									Jumlah Produk: {organicTrue.length}
+									Jumlah Produk: {organicTrue?.length}
 								</div>
 							</div>
 							<div className="pl__main--list">
 								{isLoading &&
-									organicTrue.map(() => (
+									organicTrue?.map(() => (
 										<>
 											<Skeleton
 												variant="rectangular"
@@ -111,7 +82,7 @@ export default function ProductOrganic() {
 									))}
 								{!isLoading &&
 									!isError &&
-									organicTrue.map((item) => (
+									organicTrue?.map((item) => (
 										<div className="relative">
 											<div className="absolute top-0 right-0 z-10 -translate-x-3 translate-y-3">
 												<button
@@ -180,7 +151,10 @@ export default function ProductOrganic() {
 								{!isLoading && isError && <div>unexpected isError</div>}
 							</div>
 							<div className="pl__main--bottom">
-								<Pagination page={page} handlePageClick={handlePageClick} />
+								{/* <Pagination
+									size={products.numberOfPages}
+									handlePageClick={handlePageClick}
+								/> */}
 							</div>
 						</div>
 					</div>

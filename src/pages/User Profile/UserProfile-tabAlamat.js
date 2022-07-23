@@ -1,4 +1,4 @@
-import illst from "../../assets/images/addressempty-illst.png";
+import illst from "../../assets/images/addressempty-illst.svg";
 import { HiOutlineTrash } from "react-icons/hi";
 import { TbUser, TbPhone } from "react-icons/tb";
 import Skeleton from "@mui/material/Skeleton";

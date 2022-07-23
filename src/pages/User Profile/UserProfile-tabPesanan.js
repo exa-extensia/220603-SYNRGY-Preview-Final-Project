@@ -1,4 +1,4 @@
-import illst from "../../assets/images/cart-illst.png";
+import illst from "../../assets/images/cart-illst.svg";
 import {
 	HiCheckCircle,
 	HiXCircle,

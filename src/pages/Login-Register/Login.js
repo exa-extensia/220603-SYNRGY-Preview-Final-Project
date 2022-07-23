@@ -108,7 +108,7 @@ export default function Login() {
 										<div className="BTN_WRAPPER BTN-GGL group mx-auto flex w-3/4 cursor-pointer items-center justify-center gap-2 rounded-full border border-med-brown p-2 hover:border-white xl:my-4 4xl:my-6 4xl:w-1/2">
 											<FcGoogle />
 											<p className="cursor-pointer text-xs text-med-brown group-hover:text-white 4xl:text-lg">
-												Daftar dengan akun Google
+												Masuk dengan akun Google
 											</p>
 										</div>
 										<div className="STYLED-HR mx-auto w-1/4">
@@ -215,6 +215,27 @@ export default function Login() {
 						<p className="text-center text-sm">
 							Masuk ke akunmu untuk mulai eksplorasi di Flambo
 						</p>
+					</div>
+					<div
+						className="GOOGLE_AUTH flex flex-col"
+						onClick={(e) => {
+							e.preventDefault();
+							action();
+						}}
+					>
+						<div className="BTN_WRAPPER BTN-GGL group mx-auto flex w-1/2 cursor-pointer items-center justify-center gap-2 rounded-full border border-med-brown p-2 hover:border-white">
+							<FcGoogle />
+							<p className="cursor-pointer text-xs text-med-brown group-hover:text-white">
+								Masuk dengan akun Google
+							</p>
+						</div>
+					</div>
+					<div className="my-8 mx-auto flex w-3/4 flex-row items-center">
+						<hr className="inline w-full" />
+						<p className=" inline bg-white px-2 text-xs font-light tracking-wider text-grey">
+							atau
+						</p>
+						<hr className="inline w-full" />
 					</div>
 					<form className="flex flex-col gap-4 py-2" onSubmit={onSubmit}>
 						<div className="form-group">

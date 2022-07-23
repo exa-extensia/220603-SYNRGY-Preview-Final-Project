@@ -2,39 +2,49 @@ import Box from "@mui/material/Box";
 import Masonry from "@mui/lab/Masonry";
 import { Link, useNavigate } from "react-router-dom";
 
+import img1 from "../../../assets/images/kategori/1.jpg";
+import img2 from "../../../assets/images/kategori/2.jpg";
+import img3 from "../../../assets/images/kategori/3.jpg";
+import img4 from "../../../assets/images/kategori/4.jpg";
+import img5 from "../../../assets/images/kategori/5.jpg";
+import img6 from "../../../assets/images/kategori/6.jpg";
+import img7 from "../../../assets/images/kategori/7.jpg";
+import img8 from "../../../assets/images/kategori/8.jpg";
+import img9 from "../../../assets/images/kategori/9.jpg";
+
 let product = [
 	{
-		name: "skincare",
-		img: "https://source.unsplash.com/random/?skincare?sig=1",
+		name: "toner",
+		img: img1,
 	},
 	{
 		name: "cleanser",
-		img: "https://source.unsplash.com/random/?skincare?sig=2",
+		img: img2,
+	},
+	{
+		name: "moisturizer",
+		img: img3,
+	},
+	{
+		name: "bundle set",
+		img: img4,
+	},
+	{
+		name: "skincare",
+		img: img5,
+	},
+	{ name: "kosmetik", img: img6 },
+	{
+		name: "produk organik",
+		img: img7,
 	},
 	{
 		name: "produk pria",
-		img: "https://source.unsplash.com/random/?skincare?sig=3",
+		img: img8,
 	},
 	{
-		name: "make up",
-		img: "https://source.unsplash.com/random/?skincare?sig=4",
-	},
-	{
-		name: "produk organik",
-		img: "https://source.unsplash.com/random/?skincare?sig=5",
-	},
-	{ name: "Toner", img: "https://source.unsplash.com/random/?skincare?sig=6" },
-	{
-		name: "Bundle Set",
-		img: "https://source.unsplash.com/random/?skincare?sig=7",
-	},
-	{
-		name: "Moisturizer",
-		img: "https://source.unsplash.com/random/?skincare?sig=8",
-	},
-	{
-		name: "Foundation",
-		img: "https://source.unsplash.com/random/?skincare?sig=9",
+		name: "facial wash",
+		img: img9,
 	},
 ];
 

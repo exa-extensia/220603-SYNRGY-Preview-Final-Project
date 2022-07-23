@@ -4,6 +4,7 @@ const API_URL = "https://cosmetic-b.herokuapp.com/api/v1/product";
 
 const getAllProducts = async (page = 1, size = 10) => {
 	const { data } = await axios.get(`${API_URL}/p?page=${page}&size=${size}`);
+	console.log("DATA GET ALL PRODUCT DI SERVICE", data);
 	return data.data;
 };
 

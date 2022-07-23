@@ -183,9 +183,9 @@ export default function BeautyFeed() {
 								</div>
 								<div className="ARTICLEWRAPPER grid-rows-7 mt-3  grid gap-3">
 									{!loading && error && <p>error</p>}
-									{loading &&
-										article.slice(0, 5).map((article, i) => (
-											<div className="flex flex-row items-center gap-3" key={i}>
+									{loading && (
+										<>
+											<div className="flex flex-row items-center gap-3">
 												<Skeleton
 													variant="rectangular"
 													className="h-[80px] w-1/4"
@@ -197,7 +197,56 @@ export default function BeautyFeed() {
 													animation="wave"
 												/>
 											</div>
-										))}
+											<div className="flex flex-row items-center gap-3">
+												<Skeleton
+													variant="rectangular"
+													className="h-[80px] w-1/4"
+													animation="wave"
+												/>
+												<Skeleton
+													variant="rectangular"
+													className="h-[80px] w-3/4"
+													animation="wave"
+												/>
+											</div>
+											<div className="flex flex-row items-center gap-3">
+												<Skeleton
+													variant="rectangular"
+													className="h-[80px] w-1/4"
+													animation="wave"
+												/>
+												<Skeleton
+													variant="rectangular"
+													className="h-[80px] w-3/4"
+													animation="wave"
+												/>
+											</div>
+											<div className="flex flex-row items-center gap-3">
+												<Skeleton
+													variant="rectangular"
+													className="h-[80px] w-1/4"
+													animation="wave"
+												/>
+												<Skeleton
+													variant="rectangular"
+													className="h-[80px] w-3/4"
+													animation="wave"
+												/>
+											</div>
+											<div className="flex flex-row items-center gap-3">
+												<Skeleton
+													variant="rectangular"
+													className="h-[80px] w-1/4"
+													animation="wave"
+												/>
+												<Skeleton
+													variant="rectangular"
+													className="h-[80px] w-3/4"
+													animation="wave"
+												/>
+											</div>
+										</>
+									)}
 									{!loading &&
 										!error &&
 										article.slice(0, 7).map((article, i) => (
@@ -247,9 +296,9 @@ export default function BeautyFeed() {
 					</div>
 					<div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
 						{!loading && error && <p>error</p>}
-						{loading &&
-							article.slice(0, 6).map((article, i) => (
-								<div className="flex w-full flex-col items-start gap-3" key={i}>
+						{loading && (
+							<>
+								<div className="flex w-full flex-col items-start gap-3">
 									<Skeleton
 										variant="rectangular"
 										className="h-[200px] w-full"
@@ -266,7 +315,42 @@ export default function BeautyFeed() {
 										animation="wave"
 									/>
 								</div>
-							))}
+								<div className="flex w-full flex-col items-start gap-3">
+									<Skeleton
+										variant="rectangular"
+										className="h-[200px] w-full"
+										animation="wave"
+									/>
+									<Skeleton
+										variant="rectangular"
+										className="h-[10px] w-3/4"
+										animation="wave"
+									/>
+									<Skeleton
+										variant="rectangular"
+										className="h-[10px] w-3/4"
+										animation="wave"
+									/>
+								</div>
+								<div className="flex w-full flex-col items-start gap-3">
+									<Skeleton
+										variant="rectangular"
+										className="h-[200px] w-full"
+										animation="wave"
+									/>
+									<Skeleton
+										variant="rectangular"
+										className="h-[10px] w-3/4"
+										animation="wave"
+									/>
+									<Skeleton
+										variant="rectangular"
+										className="h-[10px] w-3/4"
+										animation="wave"
+									/>
+								</div>
+							</>
+						)}
 						{!loading &&
 							!error &&
 							article?.slice(0, 6).map((article, i) => (
