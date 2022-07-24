@@ -77,29 +77,12 @@ export default function CartPage() {
 				setIsError(true);
 			});
 		axios
-			.get(
-				`https://cosmetic-b.herokuapp.com/api/v1/promo/8bfe05d8-a738-41b8-adf3-e852072dfa38`
-			)
+			.get(`https://cosmetic-b.herokuapp.com/api/v1/promo`)
 			.then((response) => {
 				setIsLoading(false);
-				let data52 = response.data.data;
-				setVoucher52(data52);
-				console.log("voucher 52 in component>>>>>>>", data52);
-			})
-			.catch((error) => {
-				setIsLoading(false);
-				console.log(error);
-				setIsError(true);
-			});
-		axios
-			.get(
-				`https://cosmetic-b.herokuapp.com/api/v1/promo/5ad43473-1a9a-415c-892a-527e12cddc9c`
-			)
-			.then((response) => {
-				setIsLoading(false);
-				let data68 = response.data.data;
-				setVoucher68(data68);
-				console.log("voucher 68 in component>>>>>>>", data68);
+				let data = response.data.data;
+				setVoucherA(data[0]);
+				setVoucherB(data[1]);
 			})
 			.catch((error) => {
 				setIsLoading(false);
@@ -110,8 +93,13 @@ export default function CartPage() {
 
 	const quantityCartBadge = useSelector((state) => state.cart.cartBadge);
 
-	const [voucher52, setVoucher52] = useState({});
-	const [voucher68, setVoucher68] = useState({});
+	const [voucherA, setVoucherA] = useState({});
+	const [voucherB, setVoucherB] = useState({});
+
+	console.log("voucher A in component>>>>>>>", voucherA);
+	console.log("voucher B in component>>>>>>>", voucherB);
+
+	const [listVoucher, setListVoucher] = useState([]);
 	const [sendSelectedVoucher, setSendSelectedVoucher] = useState();
 	const [discount, setDiscount] = useState(0);
 	const [voucherID, setVoucherID] = useState("");
@@ -124,13 +112,13 @@ export default function CartPage() {
 	};
 
 	useEffect(() => {
-		if (voucherID === "52") {
-			setSendSelectedVoucher(voucher52);
-			setDiscount(voucher52.discount);
+		if (voucherID === "A") {
+			setSendSelectedVoucher(voucherA);
+			setDiscount(voucherA.discount);
 		}
-		if (voucherID === "68") {
-			setSendSelectedVoucher(voucher68);
-			setDiscount(voucher68.discount);
+		if (voucherID === "B") {
+			setSendSelectedVoucher(voucherB);
+			setDiscount(voucherB.discount);
 		}
 		if (overviewTotal && overviewTotal < 100000) {
 			setVoucherID("");
@@ -337,30 +325,30 @@ export default function CartPage() {
 												harga dan ongkir di akhir :)
 											</p>
 											<div
-												id="52"
+												id="A"
 												onClick={tabsVoucherHandler}
 												className={`voucher__kode VOUCHER-SELECTED group mb-2 flex  items-center justify-between border border-white p-2 transition-all duration-700 ease-in-out ${
-													voucherID === "52" ? "bg-white" : ""
+													voucherID === "A" ? "bg-white" : ""
 												}`}
 											>
 												<div
-													id="52"
+													id="A"
 													onClick={tabsVoucherHandler}
 													className={`flex flex-row items-center transition-all duration-700 ease-in-out group-hover:text-med-brown ${
-														voucherID === "52" ? "text-med-brown" : "text-white"
+														voucherID === "A" ? "text-med-brown" : "text-white"
 													}`}
 												>
 													<TbDiscount2 size={28} />
-													<div id="52" onClick={tabsVoucherHandler}>
+													<div id="A" onClick={tabsVoucherHandler}>
 														<p
-															id="52"
+															id="A"
 															onClick={tabsVoucherHandler}
 															className="ml-8 text-xs font-bold lg:text-base"
 														>
-															Potongan 52%
+															Potongan {voucherA.discount}%
 														</p>
 														<p
-															id="52"
+															id="A"
 															onClick={tabsVoucherHandler}
 															className="ml-8 text-xs"
 														>
@@ -370,30 +358,30 @@ export default function CartPage() {
 												</div>
 											</div>
 											<div
-												id="68"
+												id="B"
 												onClick={tabsVoucherHandler}
 												className={`voucher__kode VOUCHER-SELECTED group mb-2 flex  items-center justify-between border border-white p-2 transition-all duration-700 ease-in-out ${
-													voucherID === "68" ? "bg-white" : ""
+													voucherID === "B" ? "bg-white" : ""
 												}`}
 											>
 												<div
-													id="68"
+													id="B"
 													onClick={tabsVoucherHandler}
 													className={`flex flex-row items-center transition-all duration-700 ease-in-out group-hover:text-med-brown ${
-														voucherID === "68" ? "text-med-brown" : "text-white"
+														voucherID === "B" ? "text-med-brown" : "text-white"
 													}`}
 												>
 													<TbDiscount2 size={28} />
-													<div id="68" onClick={tabsVoucherHandler}>
+													<div id="B" onClick={tabsVoucherHandler}>
 														<p
-															id="68"
+															id="B"
 															onClick={tabsVoucherHandler}
 															className="ml-8 text-xs font-bold lg:text-base"
 														>
-															Potongan 68%
+															Potongan {voucherB.discount}%
 														</p>
 														<p
-															id="68"
+															id="B"
 															onClick={tabsVoucherHandler}
 															className="ml-8 text-xs"
 														>

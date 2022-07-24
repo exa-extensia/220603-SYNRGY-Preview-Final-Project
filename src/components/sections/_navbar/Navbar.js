@@ -15,10 +15,10 @@ export default function Navbar() {
 		{ name: "Home", url: "/" },
 		{ name: "Kategori", url: "/productlist" },
 		{ name: "Produk Trending", url: "/producttrending" },
-		{
-			name: "Brands",
-			url: "/productbrand/314f7728-d4cb-4f21-b9f4-512d83b048e3",
-		},
+		// {
+		// 	name: "Brands",
+		// 	url: "/productbrand/314f7728-d4cb-4f21-b9f4-512d83b048e3",
+		// },
 		{ name: "Beauty Feed", url: "/beautyfeed" },
 		{ name: "Produk Organik", url: "/productorganic" },
 	];

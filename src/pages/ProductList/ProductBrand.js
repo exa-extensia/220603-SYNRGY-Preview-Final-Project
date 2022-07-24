@@ -149,7 +149,7 @@ export default function ProductBrand() {
 															{item.name}
 														</p>
 														<p className="price hover:cursor-pointer">
-															Rp20.000
+															RpXX.XXX
 														</p>
 														<div className="rating">
 															<Rating

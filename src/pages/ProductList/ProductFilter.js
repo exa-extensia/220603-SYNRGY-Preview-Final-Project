@@ -22,6 +22,9 @@ export default function ProductFilter() {
 				setError(true);
 			});
 	}, []);
+
+	const [dropdownOpen, setDropdownOpen] = useState(false);
+
 	return (
 		<div className="pl__filter p-6">
 			<div className="">
