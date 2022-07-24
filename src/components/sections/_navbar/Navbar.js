@@ -15,26 +15,29 @@ export default function Navbar() {
 		{ name: "Home", url: "/" },
 		{ name: "Kategori", url: "/productlist" },
 		{ name: "Produk Trending", url: "/producttrending" },
-		{ name: "Brands", url: "/productlist" },
+		{
+			name: "Brands",
+			url: "/productbrand/314f7728-d4cb-4f21-b9f4-512d83b048e3",
+		},
 		{ name: "Beauty Feed", url: "/beautyfeed" },
 		{ name: "Produk Organik", url: "/productorganic" },
 	];
-	
+
 	const [nav, setNav] = useState(false);
 	const handleClick = () => setNav(!nav);
 	const handleClose = () => setNav(!nav);
-	
+
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const { user } = useSelector((state) => state.auth);
 
-	const { action: signOut } = useOAuth("logout", { onSuccess: (_) => {}});
-	
+	const { action: signOut } = useOAuth("logout", { onSuccess: (_) => {} });
+
 	const onLogout = () => {
 		const data = JSON.parse(localStorage.getItem("user"));
-        if (data.iss === "auth0") {
-            signOut();
-        }
+		if (data.iss === "auth0") {
+			signOut();
+		}
 		dispatch(logout());
 		dispatch(reset());
 		navigate("/");
@@ -51,7 +54,7 @@ export default function Navbar() {
 						</div>
 					</Link>
 					{user ? (
-						<div className="relative nav__cart-profile">
+						<div className="nav__cart-profile relative">
 							<div className="nav__cart">
 								<Link to={`/cart`}>
 									<CartBadge />
@@ -90,7 +93,7 @@ export default function Navbar() {
 								<button className="nav__btn btn-sec">Login</button>
 							</Link>
 							<Link to={`/register`}>
-								<button className="text-white nav__btn btn-grad">
+								<button className="nav__btn btn-grad text-white">
 									Register
 								</button>
 							</Link>
@@ -156,7 +159,7 @@ export default function Navbar() {
 								<button className="nav__btn btn-sec">Login</button>
 							</Link>
 							<Link to={`/register`}>
-								<button className="hidden text-white nav__btn btn-grad sm:block">
+								<button className="nav__btn btn-grad hidden text-white sm:block">
 									Register
 								</button>
 							</Link>

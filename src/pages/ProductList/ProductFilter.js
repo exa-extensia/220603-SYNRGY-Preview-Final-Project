@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
 
 import axios from "axios";
 import { CircularProgress } from "@mui/material";
@@ -60,10 +61,14 @@ export default function ProductFilter() {
 					)}
 					{!loading &&
 						!error &&
-						brand.map((b) => (
-							<div className="cursor-pointer uppercase transition-all duration-150 ease-in-out  hover:tracking-wider">
+						brand.map((b, i) => (
+							<Link
+								key={i}
+								to={`/productbrand/${b.id}`}
+								className="cursor-pointer uppercase transition-all duration-150 ease-in-out  hover:tracking-wider"
+							>
 								{b.name}
-							</div>
+							</Link>
 						))}
 					{!loading && error && <div>error :(</div>}
 				</div>
