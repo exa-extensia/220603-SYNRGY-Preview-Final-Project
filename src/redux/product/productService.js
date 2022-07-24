@@ -2,9 +2,20 @@ import axios from "axios";
 
 const API_URL = "https://cosmetic-b.herokuapp.com/api/v1/product";
 
-const getAllProducts = async (page = 1, size = 10) => {
+const getAllProducts = async (page = 0, size = 10) => {
 	const { data } = await axios.get(`${API_URL}/p?page=${page}&size=${size}`);
 	console.log("DATA GET ALL PRODUCT DI SERVICE", data);
+	return data.data;
+};
+
+const getAllProductsFilter = async ({page = 0, size = 10, isOrganic = false, highestPrice = null, lowPrice = null}) => {
+	const priceQuery = `${lowPrice !== null && "&lowPrice=" + lowPrice}${
+        highestPrice !== null && "&highestPrice=" + highestPrice
+    }`;
+	const query = `${isOrganic && "&isOrganic=" + isOrganic}`; 
+	const { data } = await axios.get(
+        `${API_URL}/filter?page=${page}&size=${size}${query}`
+    );
 	return data.data;
 };
 
@@ -15,6 +26,12 @@ const getTrendingProducts = async () => {
 	if (response.data.data) {
 	}
 
+	return response.data.data;
+};
+
+const searchProduct = async (keyword) => {
+	const response = await axios.get(`${API_URL}/search?keyword=${keyword}`);
+	console.log(response.data.data);
 	return response.data.data;
 };
 
@@ -30,9 +47,11 @@ const getTrendingProducts = async () => {
 // };
 
 const productService = {
-	getAllProducts,
-	getTrendingProducts,
-	// getOneProduct,
+    getAllProducts,
+	getAllProductsFilter,
+    getTrendingProducts,
+    searchProduct,
+    // getOneProduct,
 };
 
 export default productService;

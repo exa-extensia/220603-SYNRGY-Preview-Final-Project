@@ -5,8 +5,7 @@ import { HiLocationMarker, HiClipboardList } from "react-icons/hi";
 
 import Avatar from "@mui/material/Avatar";
 
-import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import UserProfileAlamat from "./UserProfile-tabAlamat";
 import UserProfilePesanan from "./UserProfile-tabPesanan";
@@ -16,9 +15,6 @@ export default function UserProfile() {
 	const tabsHandler = (e) => {
 		setTabs(e.target.textContent);
 	};
-
-	const navigate = useNavigate();
-	const dispatch = useDispatch();
 	const { user } = useSelector((state) => state.auth);
 
 	function scrollTop() {

@@ -8,11 +8,11 @@ import ProductFilter from "./ProductFilter";
 
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Pagination from "../../components/atoms/Trial-pagination";
 import { toast } from "react-toastify";
 
-import { getAllProducts } from "../../redux/product/productSlice";
+import { getFilteredProducts } from "../../redux/product/productSlice";
 import { addToCart } from "../../redux/cart/cartSlice";
 
 import { FaLeaf } from "react-icons/fa";
@@ -27,23 +27,21 @@ export default function ProductOrganic() {
 		});
 	}
 
-	const { isLoading, isError, isSuccess, message } = useSelector(
+	const PAGE_SIZE = 12;
+	const [page, setPage] = useState(0);
+
+	const { products, isLoading, isError, isSuccess, message } = useSelector(
 		(state) => state.products
 	);
-	const organicTrue = useSelector((state) => state.products.organicproducts);
-
 	const dispatch = useDispatch();
 	const { user } = useSelector((state) => state.auth);
 	const needLogin = () => {
 		toast("Wah harus login dulu nih :)");
 	};
 
-	const PAGE_SIZE = 40;
-	const [page, setPage] = useState(0);
-
 	useEffect(() => {
 		scrollTop();
-		dispatch(getAllProducts({ page, size: PAGE_SIZE }));
+		dispatch(getFilteredProducts({ page, size: PAGE_SIZE, isOrganic: true }));
 	}, [page]);
 
 	const handlePageClick = (e, val) => {
@@ -62,16 +60,18 @@ export default function ProductOrganic() {
 						<ProductFilter />
 						<div className="pl__main">
 							<div className="pl__main--header text-med-brown ">
-								<h1 className="pl__brandcount text-2xl tracking-wider  ">
+								<h1 className="pl__brandcount text-2xl tracking-wider ">
 									Produk Organik
 								</h1>
 								<div className="pl__product-sort">
-									Jumlah Produk: {organicTrue?.length}
+									Jumlah Produk:{" "}
+									{products.products && products?.products.length}
 								</div>
 							</div>
 							<div className="pl__main--list">
 								{isLoading &&
-									organicTrue?.map(() => (
+									products.products &&
+									products?.products.map(() => (
 										<>
 											<Skeleton
 												variant="rectangular"
@@ -82,7 +82,8 @@ export default function ProductOrganic() {
 									))}
 								{!isLoading &&
 									!isError &&
-									organicTrue?.map((item) => (
+									products.products &&
+									products?.products.map((item) => (
 										<div className="relative">
 											<div className="absolute top-0 right-0 z-10 -translate-x-3 translate-y-3">
 												<button
@@ -98,7 +99,7 @@ export default function ProductOrganic() {
 															needLogin();
 														}
 													}}
-													className="rounded-full border border-med-brown bg-white p-1 text-med-brown transition-all duration-200 hover:animate-bounce hover:bg-med-brown  hover:text-white"
+													className="rounded-full border border-med-brown bg-white p-1 text-med-brown transition-all duration-200 hover:animate-bounce hover:bg-med-brown hover:text-white"
 												>
 													<BsCartPlus />
 												</button>
@@ -119,7 +120,8 @@ export default function ProductOrganic() {
 															{item.name}
 														</p>
 														<p className="price hover:cursor-pointer">
-															Rp{item.variant[0].price.toLocaleString("id-ID")}
+															Rp
+															{item.variant[0].price.toLocaleString("id-ID")}
 														</p>
 														<div className="rating">
 															<Rating
@@ -151,10 +153,10 @@ export default function ProductOrganic() {
 								{!isLoading && isError && <div>unexpected isError</div>}
 							</div>
 							<div className="pl__main--bottom">
-								{/* <Pagination
+								<Pagination
 									size={products.numberOfPages}
 									handlePageClick={handlePageClick}
-								/> */}
+								/>
 							</div>
 						</div>
 					</div>

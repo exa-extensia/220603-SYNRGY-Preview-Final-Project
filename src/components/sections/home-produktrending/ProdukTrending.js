@@ -1,12 +1,9 @@
 import Rating from "@mui/material/Rating";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
-import {
-	getAllProducts,
-	getTrendingProducts,
-} from "../../../redux/product/productSlice";
+import { getTrendingProducts } from "../../../redux/product/productSlice";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Scrollbar, Autoplay, Mousewheel } from "swiper";
@@ -40,12 +37,11 @@ export default function ProdukTrending() {
 					</Link>
 				</div>
 				<div className="pt__bttm">
-					{isTrendingLoading &&
-						trendingproducts.map(() => (
-							<>
-								<Skeleton variant="rectangular" height={100} animation="wave" />
-							</>
-						))}
+					{isTrendingLoading && (
+						<>
+							<Skeleton variant="rectangular" height={300} animation="wave" />
+						</>
+					)}
 					<Swiper
 						slidesPerView={2}
 						spaceBetween={10}
@@ -80,9 +76,9 @@ export default function ProdukTrending() {
 					>
 						{!isTrendingLoading &&
 							!isTrendingError &&
-							trendingproducts.map((item) => (
-								<SwiperSlide>
-									<Link to={`/productdetail/${item.id}`}>
+							trendingproducts.map((item, i) => (
+								<SwiperSlide key={i}>
+									<Link key={i} to={`/productdetail/${item.id}`}>
 										<div
 											className="pt__card relative flex flex-col items-center"
 											key={item.id}
