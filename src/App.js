@@ -19,6 +19,7 @@ import OrderDetails from "./pages/ordering-OrderDetails/OrderDetails";
 import UserProfile from "./pages/User Profile/UserProfile";
 import BeautyFeed from "./pages/beautyFeed/BeautyFeed";
 import DetailArticle from "./pages/detail-article/Detail-article";
+import ProductReview from "./pages/ProductDetail-Review/ProductReview";
 
 function App() {
 	return (
@@ -44,6 +45,7 @@ function App() {
 						<Route path="/placeorder" element={<Shipping />} />
 						<Route path="/finishpayment" element={<FinishPayment />} />
 						<Route path="/orderdetails/:id" element={<OrderDetails />} />
+						<Route path="/productreview/:id" element={<ProductReview />} />
 						<Route path="/userprofile" element={<UserProfile />} />
 					</Route>
 

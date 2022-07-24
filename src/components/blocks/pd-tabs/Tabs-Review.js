@@ -98,7 +98,7 @@ export default function BasicTabs() {
 
 	return (
 		<>
-			<div className="flex w-full flex-col items-center justify-center bg-cream py-6">
+			<div className="mb-6 flex w-full flex-col items-center justify-center bg-cream py-6">
 				<p className="text-sm">4 dari 5 pengguna merekomendasikan produk ini</p>
 				<div className="mt-4 flex flex-row justify-between gap-8">
 					<div className="flex flex-col gap-2">

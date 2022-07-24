@@ -102,6 +102,9 @@ export default function Address() {
 							<div className="LABELINPUT-GROUP mt-6 sm:col-span-2">
 								<p>Label Alamat</p>
 								<input
+									onKeyPress={(e) => {
+										e.key === "Enter" && e.preventDefault();
+									}}
 									type="text"
 									className="ADDRESSPAGE-INPUT"
 									placeholder="contoh: alamat rumah / kantor"
@@ -117,6 +120,9 @@ export default function Address() {
 							<div className="LABELINPUT-GROUP mt-2">
 								<p>Nama Penerima</p>
 								<input
+									onKeyPress={(e) => {
+										e.key === "Enter" && e.preventDefault();
+									}}
 									type="text"
 									className="ADDRESSPAGE-INPUT "
 									placeholder="contoh: nama pemesan / penerima"
@@ -129,6 +135,9 @@ export default function Address() {
 							<div className="LABELINPUT-GROUP mt-2">
 								<p>Nomor HP</p>
 								<input
+									onKeyPress={(e) => {
+										e.key === "Enter" && e.preventDefault();
+									}}
 									type="number"
 									className="ADDRESSPAGE-INPUT "
 									placeholder="contoh: 08997647999"
@@ -145,6 +154,9 @@ export default function Address() {
 							<div className="LABELINPUT-GROUP mt-2 sm:col-span-2">
 								<p>Alamat</p>
 								<textarea
+									onKeyPress={(e) => {
+										e.key === "Enter" && e.preventDefault();
+									}}
 									type="text"
 									className="ADDRESSPAGE-INPUT resize-none p-2"
 									rows={4}
@@ -158,6 +170,9 @@ export default function Address() {
 							<div className="LABELINPUT-GROUP sm:col-span-2">
 								<p>Kota</p>
 								<input
+									onKeyPress={(e) => {
+										e.key === "Enter" && e.preventDefault();
+									}}
 									type="text"
 									className="ADDRESSPAGE-INPUT "
 									placeholder="contoh: Balikpapan"
@@ -170,6 +185,9 @@ export default function Address() {
 							<div className="LABELINPUT-GROUP mt-2">
 								<p>Kode Pos</p>
 								<input
+									onKeyPress={(e) => {
+										e.key === "Enter" && e.preventDefault();
+									}}
 									type="number"
 									className="ADDRESSPAGE-INPUT "
 									placeholder="contoh: 16674"

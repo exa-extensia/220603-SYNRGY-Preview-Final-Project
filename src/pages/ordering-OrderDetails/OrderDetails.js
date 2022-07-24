@@ -15,7 +15,11 @@ import currencyIDR from "../../utils/currencyIDR";
 
 import { GiCardboardBoxClosed } from "react-icons/gi";
 import { TbUser, TbPhone } from "react-icons/tb";
-import { HiOutlineQuestionMarkCircle, HiCheck } from "react-icons/hi";
+import {
+	HiOutlineQuestionMarkCircle,
+	HiCheck,
+	HiPencilAlt,
+} from "react-icons/hi";
 
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -254,7 +258,7 @@ export default function PaymentOptions() {
 													/>
 												)}
 												{!loading && statusAntar === "dibatalkan" && (
-													<div className="rounded-full bg-danger py-1 px-2 text-center text-xs text-white">
+													<div className="rounded-full bg-danger py-1 px-2 text-xs text-white sm:text-center">
 														dibatalkan
 													</div>
 												)}
@@ -385,6 +389,12 @@ export default function PaymentOptions() {
 
 								{!loading && !error && (
 									<div className="ORDERING-GENERAL-CARD ORDER-ITEM-LIST flex w-full flex-col gap-12 ">
+										<p className="-mb-4 flex flex-row items-center gap-2 font-semibold text-med-brown">
+											*Klik produk untuk meninggalkan penilaian!{" "}
+											<span>
+												<HiPencilAlt />
+											</span>
+										</p>
 										{orderItems?.map((i, indexLuar) => (
 											<div className="ONE-BRAND-CARD">
 												<div key={indexLuar} className="cp__brand">
@@ -404,7 +414,11 @@ export default function PaymentOptions() {
 												<div className="my-4 border-b border-brown sm:my-6" />
 												<div className="flex flex-col gap-4">
 													{i.items?.map((v, index) => (
-														<div key={index} className="cp__satubrand__input">
+														<Link
+															to={`/productreview/${v.productId}`}
+															key={index}
+															className="cp__satubrand__input cursor-pointer transition-all duration-200 ease-in-out hover:rounded-md hover:bg-cream"
+														>
 															<div className="cp__input">
 																<div className="input__img">
 																	<img
@@ -418,7 +432,7 @@ export default function PaymentOptions() {
 																	<p>{currencyIDR(v.price)}</p>
 																</div>
 																<div className="input__qty ">
-																	<p className="rounded-full bg-cream px-3 py-1 text-xs font-light text-med-brown">
+																	<p className="cursor-pointer rounded-full bg-cream px-3 py-1 text-xs font-light text-med-brown">
 																		<span className="mr-1 text-sm font-bold">
 																			{v.quantity}
 																		</span>{" "}
@@ -428,8 +442,13 @@ export default function PaymentOptions() {
 																<div className="input__price ">
 																	<p>{currencyIDR(v.subTotal)}</p>
 																</div>
+																<div className="col-start-3 row-start-1 justify-self-end  lg:col-start-5">
+																	<button className="mr-3 rounded-full p-1 text-med-brown">
+																		<HiPencilAlt />
+																	</button>
+																</div>
 															</div>
-														</div>
+														</Link>
 													))}
 												</div>
 											</div>
@@ -481,6 +500,7 @@ export default function PaymentOptions() {
 													{currencyIDR(data.total - totalSubTotal)}
 												</p>
 											</div>
+											<hr className="my-2" />
 											<div className="flex justify-between">
 												<p>Jumlah Pembayaran</p>
 												<p className="font-bold">{currencyIDR(data.total)}</p>
