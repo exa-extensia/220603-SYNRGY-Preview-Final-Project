@@ -314,7 +314,7 @@ export default function Shipping() {
 										</div>
 									</div>
 									{/* <div className="ORDERING-GENERAL-DIV my-6 w-full  sm:my-4 "></div> */}
-									<p className="mb-2 font-bold">Pilih Durasi Pengiriman</p>
+									<p className="mb-2 mt-6 font-bold">Pilih Durasi Pengiriman</p>
 									<div className="PILIH-DURASI flex flex-col gap-2 sm:flex-row">
 										<div
 											id="REGULAR"
