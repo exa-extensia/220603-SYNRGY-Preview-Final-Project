@@ -1,5 +1,3 @@
-import Box from "@mui/material/Box";
-import Masonry from "@mui/lab/Masonry";
 import { Link, useNavigate } from "react-router-dom";
 
 import img1 from "../../../assets/images/kategori/1.jpg";
@@ -58,8 +56,11 @@ export default function Kategori() {
 				</div>
 				<Link to={"/productlist"}>
 					<div className="columns-3">
-						{product.map((item) => (
-							<div className="product__item group relative cursor-pointer">
+						{product.map((item, i) => (
+							<div
+								key={i}
+								className="product__item group relative cursor-pointer"
+							>
 								<div className="kategoriname absolute bottom-0 z-10 flex h-[10px] w-9/12 translate-x-[20%] -translate-y-[20%] bg-cream transition-all duration-200 ease-in-out group-hover:bg-black sm:h-[60px]">
 									<p className="m-auto cursor-pointer text-center text-[8px] font-bold uppercase text-brown group-hover:text-white  sm:text-sm lg:text-base">
 										{item.name}

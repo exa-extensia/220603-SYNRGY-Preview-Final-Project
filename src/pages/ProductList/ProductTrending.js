@@ -27,11 +27,6 @@ export default function ProductTrending() {
 		});
 	}
 
-	const [publishdata, setPublishData] = useState([]);
-	const [page, setPage] = useState(0);
-	const [perPage] = useState(18);
-	const [offset, setOffset] = useState(1);
-
 	const {
 		trendingproducts,
 		isTrendingLoading,
@@ -49,38 +44,7 @@ export default function ProductTrending() {
 	useEffect(() => {
 		scrollTop();
 		dispatch(getTrendingProducts());
-		// const slice = products.slice(offset - 1, offset - 1 + perPage);
-		// // For displaying Data
-		// const postData = getPostData(slice);
-		// // Using Hooks to set value
-		// setPublishData(postData);
-		// setPage(Math.ceil(products.length / perPage));
-		// console.log("DATA LENGTH >>>", products.length);
-		// console.log("PAGE COUNT >>>", page);
 	}, [dispatch]);
-
-	// const getPostData = () => {
-	// 	return products.map((e) => (
-	// 		<Link to={`/detail/${e.variant.id}`}>
-	// 			<div key={e.variant.id} className="card__onecard col-span-1">
-	// 				<div className="card__img">
-	// 					<img src={e.images[0]} alt="err" />
-	// 					<img src={e.variant} alt="err" />
-	// 				</div>
-	// 				<div className="card__category font-bold">{e.brand.name}</div>
-	// 				<div className="card__title">{e.variant[0].id}</div>
-	// 				<div className="card__title">{e.name}</div>
-	// 				<div className="card__price">Rp{e.quantity} </div>
-	// 			</div>
-	// 		</Link>
-	// 	));
-	// };
-
-	const handlePageClick = (e) => {
-		const selectedPage = e.selected;
-		console.log(selectedPage);
-		setOffset(selectedPage + 1);
-	};
 
 	return (
 		<>
@@ -184,9 +148,6 @@ export default function ProductTrending() {
 									<div>unexpected error</div>
 								)}
 							</div>
-							{/* <div className="pl__main--bottom">
-								<Pagination page={page} handlePageClick={handlePageClick} />
-							</div> */}
 						</div>
 					</div>
 				</div>

@@ -120,6 +120,7 @@ export default function PaymentOptions() {
 											<img
 												src={illst}
 												className="absolute z-10 bg-center object-contain"
+												alt="finish payment"
 											></img>
 											<Skeleton
 												variant="rectangular"
@@ -146,24 +147,28 @@ export default function PaymentOptions() {
 												<img
 													src={bca}
 													className="my-3 w-[150px] bg-center object-contain"
+													alt="finish payment"
 												></img>
 											)}
 											{bank === "bni" && (
 												<img
 													src={bni}
 													className="my-3 w-[150px] bg-center object-contain"
+													alt="finish payment"
 												></img>
 											)}
 											{bank === "bri" && (
 												<img
 													src={bri}
 													className="my-3 w-[150px] bg-center object-contain"
+													alt="finish payment"
 												></img>
 											)}
 											{bank === "permata" && (
 												<img
 													src={permata}
 													className="my-3 w-[150px] bg-center object-contain"
+													alt="finish payment"
 												></img>
 											)}
 											<p className="text-lg font-bold">Virtual Account</p>

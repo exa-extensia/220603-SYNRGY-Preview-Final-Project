@@ -15,10 +15,10 @@ export default function Navbar() {
 		{ name: "Home", url: "/" },
 		{ name: "Kategori", url: "/productlist" },
 		{ name: "Produk Trending", url: "/producttrending" },
-		{
-			name: "Brands",
-			url: "/productbrand/314f7728-d4cb-4f21-b9f4-512d83b048e3",
-		},
+		// {
+		// 	name: "Brands",
+		// 	url: "/productbrand/314f7728-d4cb-4f21-b9f4-512d83b048e3",
+		// },
 		{ name: "Beauty Feed", url: "/beautyfeed" },
 		{ name: "Produk Organik", url: "/productorganic" },
 	];
@@ -108,8 +108,8 @@ export default function Navbar() {
 				<hr className="hidden sm:block" />
 				<div className="nav__wrapper_bttm">
 					<div className="nav__linkitems">
-						{nav__links.map((item) => (
-							<Link to={item.url}>
+						{nav__links.map((item, i) => (
+							<Link key={i} to={item.url}>
 								<li className="item">{item.name}</li>
 							</Link>
 						))}
@@ -141,8 +141,8 @@ export default function Navbar() {
 								{!nav ? <AiOutlineMenu /> : <AiOutlineClose />}
 							</div>
 							<div className={!nav ? "hidden" : "nav__mobile__dropdown"}>
-								{nav__links.map((item) => (
-									<Link to={item.url}>
+								{nav__links.map((item, i) => (
+									<Link key={i} to={item.url}>
 										<li className="mobile__items" onClick={handleClose}>
 											{item.name}
 										</li>

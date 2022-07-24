@@ -21,7 +21,7 @@ import {
 	HiPencilAlt,
 } from "react-icons/hi";
 
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAddress } from "../../redux/address/addressSlice";
@@ -230,18 +230,21 @@ export default function PaymentOptions() {
 													<img
 														src={jne}
 														className="w-[60px] bg-center object-contain"
+														alt="order details"
 													></img>
 												)}
 												{!loading && courier === "POS" && (
 													<img
 														src={pos}
 														className="w-[60px] bg-center object-contain"
+														alt="order details"
 													></img>
 												)}
 												{!loading && courier === "TIKI" && (
 													<img
 														src={tiki}
 														className="w-[60px] bg-center object-contain"
+														alt="order details"
 													></img>
 												)}
 											</div>
@@ -313,24 +316,28 @@ export default function PaymentOptions() {
 												<img
 													src={bca}
 													className="my-3 w-[150px] bg-center object-contain"
+													alt="order details"
 												></img>
 											)}
 											{bank === "bni" && (
 												<img
 													src={bni}
 													className="my-3 w-[150px] bg-center object-contain"
+													alt="order details"
 												></img>
 											)}
 											{bank === "bri" && (
 												<img
 													src={bri}
 													className="my-3 w-[150px] bg-center object-contain"
+													alt="order details"
 												></img>
 											)}
 											{bank === "permata" && (
 												<img
 													src={permata}
 													className="my-3 w-[150px] bg-center object-contain"
+													alt="order details"
 												></img>
 											)}
 											<p className="text-lg font-bold">Virtual Account</p>
@@ -529,8 +536,6 @@ export default function PaymentOptions() {
 									</div>
 								</div>
 							</div>
-
-							{/* <img src={illst} alt="" /> */}
 						</div>
 					</div>
 				</div>

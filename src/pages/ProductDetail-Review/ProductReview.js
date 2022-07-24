@@ -6,7 +6,6 @@ import { HiOutlineQuestionMarkCircle } from "react-icons/hi";
 import Footer from "../../components/sections/_footer/Footer";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { FaLeaf } from "react-icons/fa";
 import Skeleton from "@mui/material/Skeleton";
 import { toast } from "react-toastify";
@@ -20,7 +19,6 @@ import axios from "axios";
 
 export default function ProductReview() {
 	const navigate = useNavigate();
-	const dispatch = useDispatch();
 	function scrollTop() {
 		window.scrollTo({
 			top: 0,
@@ -38,8 +36,8 @@ export default function ProductReview() {
 	const [ratingQuality, setRatingQuality] = useState(0);
 	const [ratingPackaging, setRatingPackaging] = useState(0);
 	const [ratingPrice, setRatingPrice] = useState(0);
-	const [recommendation, setRecommendation] = useState("");
 	const [comment, setComment] = useState("");
+	const [recommendation, setRecommendation] = useState("");
 
 	const tabsRecommendationHandler = (e) => {
 		setRecommendation(e.target.id);

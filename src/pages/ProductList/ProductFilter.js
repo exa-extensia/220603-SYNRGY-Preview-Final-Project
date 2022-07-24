@@ -22,6 +22,7 @@ export default function ProductFilter() {
 				setError(true);
 			});
 	}, []);
+
 	return (
 		<div className="pl__filter p-6">
 			<div className="">
