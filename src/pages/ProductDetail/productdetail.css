@@ -51,3 +51,18 @@
 .pd_input2 {
 	/* @apply h-3/12 col-span-4 aspect-[4/3] bg-cream sm:col-span-5 sm:col-start-4 lg:col-span-3 lg:col-start-10; */
 }
+
+.HOVER-BRAND {
+	box-shadow: inset 0 0 0 0 #ffedcd;
+	cursor: pointer;
+	transition: all 0.8s ease;
+}
+
+.HOVER-BRAND:hover {
+	box-shadow: inset 500px 0 0 0 #ffedcd;
+	cursor: pointer;
+}
+
+.HOVER-BRAND * {
+	cursor: pointer;
+}

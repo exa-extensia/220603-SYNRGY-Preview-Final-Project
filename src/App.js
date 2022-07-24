@@ -19,6 +19,7 @@ import OrderDetails from "./pages/ordering-OrderDetails/OrderDetails";
 import UserProfile from "./pages/User Profile/UserProfile";
 import BeautyFeed from "./pages/beautyFeed/BeautyFeed";
 import DetailArticle from "./pages/detail-article/Detail-article";
+import ProductBrand from "./pages/ProductList/ProductBrand";
 
 function App() {
 	return (
@@ -36,6 +37,7 @@ function App() {
 					<Route path="/productlist" element={<ProductList />} />
 					<Route path="/producttrending" element={<ProductTrending />} />
 					<Route path="/productorganic" element={<ProductOrganic />} />
+					<Route path="/productbrand/:id" element={<ProductBrand />} />
 					<Route path="/productdetail/:id" element={<ProductDetail />} />
 
 					<Route element={<ProtectedRoute />}>

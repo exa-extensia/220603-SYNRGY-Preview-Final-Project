@@ -185,7 +185,10 @@ export default function ProductDetail() {
 											</span>
 										</p>
 									</div>
-									<div className="pd__brand mt-10 mb-10 flex w-full items-center gap-4 rounded-lg bg-cream px-4 py-4 pt-3 lg:w-3/4 xl:w-2/4">
+									<Link
+										to={`/productbrand/${oneProduct.brand.id}`}
+										className="HOVER-BRAND pd__brand mt-10 mb-10 flex w-full items-center gap-4 rounded-lg bg-cream px-4 py-4 pt-3 lg:w-3/4 xl:w-2/4"
+									>
 										<div className="aspect-square h-12 overflow-hidden rounded-md">
 											<img
 												src={oneProduct.brand.banner}
@@ -199,7 +202,7 @@ export default function ProductDetail() {
 												{oneProduct.brand.name}
 											</p>
 										</div>
-									</div>
+									</Link>
 									<PDTab />
 									<ReviewTab />
 								</div>
