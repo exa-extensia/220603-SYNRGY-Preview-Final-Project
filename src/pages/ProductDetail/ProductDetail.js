@@ -145,7 +145,7 @@ export default function ProductDetail() {
 								</div>
 								<div className="h-3/12 col-span-4 aspect-[4/3] sm:col-span-5 lg:col-span-6">
 									<h2 className="mb-3 text-xl lg:text-[24px]">
-										{oneProduct.name}
+										{oneProduct.variant[0].name}
 									</h2>
 									<div
 										className={
