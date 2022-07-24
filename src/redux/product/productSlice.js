@@ -33,6 +33,23 @@ export const getAllProducts = createAsyncThunk(
 	}
 );
 
+export const getFilteredProducts = createAsyncThunk(
+    "product/getAllProductsFilter",
+    async (data, { rejectWithValue }) => {
+        try {
+            return await productService.getAllProductsFilter(data);
+        } catch (error) {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+            return rejectWithValue(message);
+        }
+    }
+);
+
 export const getTrendingProducts = createAsyncThunk(
 	"product/getTrendingProducts",
 	async (thunkAPI) => {
@@ -48,6 +65,23 @@ export const getTrendingProducts = createAsyncThunk(
 			return thunkAPI.rejectWithValue(message);
 		}
 	}
+);
+
+export const getSearchProduct = createAsyncThunk(
+    "product/getSearchProduct",
+    async (keyword, thunkAPI) => {
+        try {
+            return await productService.searchProduct(keyword);
+        } catch (error) {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
 );
 
 // MASIH GABISA!!!!!!!!!!!!!! :(((((((((((((((((
@@ -94,6 +128,20 @@ export const productSlice = createSlice({
 				state.message = action.payload;
 				state.products = null;
 				console.log("error get all products>>>>", action.payload);
+			})
+			.addCase(getFilteredProducts.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(getFilteredProducts.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isSuccess = true;
+				state.products = action.payload;
+			})
+			.addCase(getFilteredProducts.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
+				state.products = null;
 			})
 			.addCase(getTrendingProducts.pending, (state) => {
 				state.isTrendingLoading = true;

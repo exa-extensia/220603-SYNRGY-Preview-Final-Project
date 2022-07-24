@@ -43,6 +43,11 @@ export default function Navbar() {
 		navigate("/");
 	};
 
+	const onSearchProduct = (keyword) => {
+		console.log('ini keyword', keyword);
+		// dispatch(logout());
+	}
+
 	return (
 		<nav>
 			<div className="nav__wrapper">
