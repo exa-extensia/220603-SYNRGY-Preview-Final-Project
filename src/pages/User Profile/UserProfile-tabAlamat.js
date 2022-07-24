@@ -1,13 +1,12 @@
 import illst from "../../assets/images/addressempty-illst.svg";
-import { HiOutlineTrash } from "react-icons/hi";
 import { TbUser, TbPhone } from "react-icons/tb";
 import Skeleton from "@mui/material/Skeleton";
 
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
-import { getAddress, deleteUI } from "../../redux/address/addressSlice";
+import { getAddress } from "../../redux/address/addressSlice";
 import { toast } from "react-toastify";
 
 export default function UserProfileAlamat() {
@@ -17,20 +16,13 @@ export default function UserProfileAlamat() {
 		(state) => state.address
 	);
 	const addressDefault = address.find((e) => e.isDefault);
-	// const address = [];
-
-	// const newDefaultHandler = (e) => {
-	// 	e.preventDefault();
-	// 	const newDefault = true;
-	// 	dispatch(updateAddress(newDefault));
-	// };
 
 	useEffect(() => {
 		dispatch(getAddress());
 		if (isError) {
 			toast(message);
 		}
-	}, [dispatch]);
+	}, [dispatch, isError, message]);
 
 	return (
 		<>
@@ -78,24 +70,6 @@ export default function UserProfileAlamat() {
 							</div>
 						</div>
 					</div>
-
-					{/* <div className="mt-4 sm:relative sm:mt-0 sm:w-1/4">
-							<div className="sm:absolute sm:top-0 sm:right-0">
-								<button
-									onClick={(e) => {
-										if (a.isDefault === true) {
-											toast("Woops, ganti alamat utama dulu ya :)");
-										} else {
-											dispatch(deleteUI(a.id));
-											// window.location.reload();
-										}
-									}}
-									className="cursor-pointer rounded-full bg-white p-1 text-danger transition-all duration-300 ease-in-out hover:bg-danger hover:text-white"
-								>
-									<HiOutlineTrash />
-								</button>
-							</div>
-						</div> */}
 				</div>
 			)}
 			{!isLoading && address.length < 1 && (

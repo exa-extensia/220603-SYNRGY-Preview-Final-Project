@@ -13,7 +13,6 @@ import Pagination from "../../components/atoms/Trial-pagination";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 
-import { getAllProducts } from "../../redux/product/productSlice";
 import { addToCart } from "../../redux/cart/cartSlice";
 
 import { FaLeaf } from "react-icons/fa";
@@ -30,10 +29,10 @@ export default function ProductBrand() {
 		});
 	}
 
-	const { user } = useSelector((state) => state.auth);
-	const needLogin = () => {
-		toast("Wah harus login dulu nih :)");
-	};
+	// const { user } = useSelector((state) => state.auth);
+	// const needLogin = () => {
+	// 	toast("Wah harus login dulu nih :)");
+	// };
 
 	// const PAGE_SIZE = 40;
 	// const [page, setPage] = useState(0);

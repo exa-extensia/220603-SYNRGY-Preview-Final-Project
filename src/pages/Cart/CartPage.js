@@ -3,15 +3,7 @@ import "./cartpage.css";
 import Navbar from "../../components/sections/_navbar/Navbar";
 import Footer from "../../components/sections/_footer/Footer";
 import Breadcrumb from "../../components/atoms/breadcrumb/BC-CartPage";
-import {
-	HiMinusSm,
-	HiPlusSm,
-	HiOutlineTrash,
-	HiOutlineScissors,
-	HiOutlineTicket,
-	HiOutlineChevronRight,
-	HiCheck,
-} from "react-icons/hi";
+import { HiOutlineTrash, HiCheck } from "react-icons/hi";
 import { TbDiscount2 } from "react-icons/tb";
 import illst from "../../assets/images/cartempty-illst.svg";
 import Skeleton from "@mui/material/Skeleton";
@@ -39,15 +31,6 @@ export default function CartPage() {
 			behavior: "smooth",
 		});
 	}
-
-	const [inputQuantity, setInputQuantity] = useState(1);
-	const inputQuantityHandler = (type) => {
-		if (type === "dec") {
-			inputQuantity > 1 && setInputQuantity(inputQuantity - 1);
-		} else {
-			setInputQuantity(inputQuantity + 1);
-		}
-	};
 	const [overview, setOverview] = useState({});
 	const [overviewTotal, setOverviewTotal] = useState(0);
 	const [items, setItems] = useState([]);
@@ -99,7 +82,6 @@ export default function CartPage() {
 	console.log("voucher A in component>>>>>>>", voucherA);
 	console.log("voucher B in component>>>>>>>", voucherB);
 
-	const [listVoucher, setListVoucher] = useState([]);
 	const [sendSelectedVoucher, setSendSelectedVoucher] = useState();
 	const [discount, setDiscount] = useState(0);
 	const [voucherID, setVoucherID] = useState("");

@@ -103,8 +103,8 @@ export default function Navbar() {
 				<hr className="hidden sm:block" />
 				<div className="nav__wrapper_bttm">
 					<div className="nav__linkitems">
-						{nav__links.map((item) => (
-							<Link to={item.url}>
+						{nav__links.map((item, i) => (
+							<Link key={i} to={item.url}>
 								<li className="item">{item.name}</li>
 							</Link>
 						))}
@@ -136,8 +136,8 @@ export default function Navbar() {
 								{!nav ? <AiOutlineMenu /> : <AiOutlineClose />}
 							</div>
 							<div className={!nav ? "hidden" : "nav__mobile__dropdown"}>
-								{nav__links.map((item) => (
-									<Link to={item.url}>
+								{nav__links.map((item, i) => (
+									<Link key={i} to={item.url}>
 										<li className="mobile__items" onClick={handleClose}>
 											{item.name}
 										</li>

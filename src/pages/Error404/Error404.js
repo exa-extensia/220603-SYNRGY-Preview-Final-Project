@@ -1,5 +1,4 @@
 import "./error404.css";
-import { useEffect, useState } from "react";
 import Skeleton from "@mui/material/Skeleton";
 
 export default function Error404() {

@@ -21,7 +21,7 @@ import {
 	HiOutlineCreditCard,
 } from "react-icons/hi";
 
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -53,15 +53,6 @@ export default function Shipping() {
 		buatPesananLoading,
 		buatpesananmessage,
 	} = useSelector((state) => state.cart.statusBuatPesanan);
-
-	// const statusBuatPesanan = useSelector(
-	// 	(state) => state.cart.statusBuatPesanan
-	// );
-	// console.log("STATUS BUAT PESANAN >>>", statusBuatPesanan);
-	// const buatPesananError = statusBuatPesanan.buatPesananError;
-	// const buatPesananSuccess = statusBuatPesanan.buatPesananSuccess;
-	// const buatPesananLoading = statusBuatPesanan.buatPesananLoading;
-	// const buatpesananmessage = statusBuatPesanan.buatpesananmessage;
 
 	const dataVoucher = useSelector((state) => state.cart.selectedVoucher);
 
@@ -281,6 +272,7 @@ export default function Shipping() {
 												onClick={tabsCourierHandler}
 												src={jne}
 												className="h-[40px] object-contain sm:m-auto sm:w-[50%] sm:bg-center"
+												alt="shipping"
 											></img>
 										</div>
 										<div className="ORDERING-GENERAL-DIV-V my-auto hidden h-10 sm:block"></div>
@@ -296,6 +288,7 @@ export default function Shipping() {
 												onClick={tabsCourierHandler}
 												src={pos}
 												className="h-[40px] object-contain sm:m-auto sm:w-[50%] sm:bg-center"
+												alt="shipping"
 											></img>
 										</div>
 										<div className="ORDERING-GENERAL-DIV-V my-auto hidden h-10 sm:block"></div>
@@ -311,6 +304,7 @@ export default function Shipping() {
 												onClick={tabsCourierHandler}
 												src={tiki}
 												className="h-[40px] object-contain sm:m-auto sm:w-[50%] sm:bg-center"
+												alt="shipping"
 											></img>
 										</div>
 									</div>
@@ -419,6 +413,7 @@ export default function Shipping() {
 														onClick={tabsBankHandler}
 														src={bca}
 														className="w-[50px] bg-center object-contain"
+														alt="shipping"
 													></img>
 													<p
 														id="BCA"
@@ -467,6 +462,7 @@ export default function Shipping() {
 														onClick={tabsBankHandler}
 														src={bni}
 														className="w-[50px] bg-center object-contain"
+														alt="shipping"
 													></img>
 													<p
 														id="BNI"
@@ -515,6 +511,7 @@ export default function Shipping() {
 														onClick={tabsBankHandler}
 														src={permata}
 														className="w-[50px] bg-center object-contain"
+														alt="shipping"
 													></img>
 													<p
 														id="PERMATA"
@@ -563,6 +560,7 @@ export default function Shipping() {
 														onClick={tabsBankHandler}
 														src={bri}
 														className="w-[50px] bg-center object-contain"
+														alt="shipping"
 													></img>
 													<p
 														id="BRI"

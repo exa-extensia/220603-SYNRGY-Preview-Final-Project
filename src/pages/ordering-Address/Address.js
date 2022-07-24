@@ -244,11 +244,6 @@ export default function Address() {
 									/>
 								</div>
 							</div>
-							{/* <div className="relative h-10 w-full">
-								<button className="btn-grad absolute right-0 bottom-0 rounded-full py-2 px-5 text-xs text-white sm:w-40">
-									Tambah Alamat
-								</button>
-							</div> */}
 							<div className="flex h-10 w-full items-center justify-center gap-2 xl:float-right xl:block xl:text-right  ">
 								<button
 									onClick={() => navigate(-1)}
