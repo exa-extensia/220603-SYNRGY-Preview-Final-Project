@@ -298,7 +298,7 @@ export default function CartPage() {
 																				setIsError(true);
 																			});
 																	}}
-																	className="rounded-full bg-white p-1 text-danger transition-all duration-300 ease-in-out hover:bg-danger hover:text-white"
+																	className="rounded-full bg-white p-1 text-danger transition-all duration-300 ease-in-out hover:bg-danger hover:text-white xl:mr-3"
 																>
 																	<HiOutlineTrash />
 																</button>
@@ -333,8 +333,8 @@ export default function CartPage() {
 												</div>
 											</div>
 											<p className="mb-2 text-sm text-white">
-												Pilih dan masukkan voucher diskon untuk mendapatkan
-												potongan harga.
+												Pilih voucher keinginanmu! Voucher akan memotong total
+												harga dan ongkir di akhir :)
 											</p>
 											<div
 												id="52"
@@ -421,11 +421,12 @@ export default function CartPage() {
 													</p>
 												</div>
 												<div className="flex justify-between">
-													<p>Diskon</p>
+													<p>Potongan</p>
 													<p className="font-bold">
 														-{potongan ? currencyIDR(potongan) : ""}
 													</p>
 												</div>
+												<hr className="my-2" />
 												<div className="flex justify-between">
 													<p>Jumlah Pembayaran</p>
 													<p className="font-bold">{currencyIDR(finalHarga)}</p>

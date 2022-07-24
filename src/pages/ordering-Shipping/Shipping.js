@@ -163,8 +163,9 @@ export default function Shipping() {
 			});
 	}, []);
 
-	const potongan = dataTotalBelanja * (dataVoucher.discount / 100);
-	const finalHarga = dataTotalBelanja - potongan;
+	const total_dan_ongkir = dataTotalBelanja + dataOngkir;
+	const potongan = total_dan_ongkir * (dataVoucher.discount / 100);
+	const finalHarga = total_dan_ongkir - potongan;
 
 	return (
 		<>
@@ -626,21 +627,20 @@ export default function Shipping() {
 													{currencyIDR(dataTotalBelanja)}
 												</p>
 											</div>
-											<div className="flex justify-between">
-												<p>Diskon</p>
-												<p className="font-bold">
-													-{potongan ? currencyIDR(potongan) : ""}
-												</p>
-											</div>
 											<div className="flex justify-between text-med-brown">
 												<p>*Ongkir</p>
 												<p className="font-bold">+{currencyIDR(dataOngkir)}</p>
 											</div>
 											<div className="flex justify-between">
-												<p>Jumlah Pembayaran</p>
+												<p>Diskon {dataVoucher.discount}%</p>
 												<p className="font-bold">
-													{currencyIDR(finalHarga + dataOngkir)}
+													-{potongan ? currencyIDR(potongan) : ""}
 												</p>
+											</div>
+											<hr className="my-2" />
+											<div className="flex justify-between">
+												<p>Jumlah Pembayaran</p>
+												<p className="font-bold">{currencyIDR(finalHarga)}</p>
 											</div>
 										</>
 									)}
