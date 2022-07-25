@@ -34,7 +34,7 @@ export const register = createAsyncThunk(
 // Login user
 export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
 	try {
-		console.log(user);
+		// console.log(user);
 		return await authService.login(user);
 	} catch (error) {
 		const message =
@@ -46,18 +46,23 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
 });
 
 // Auth google
-export const authGoogleThunk = createAsyncThunk("auth/google", async (tokenId, thunkAPI) => {
-	try {
-		console.log('id token slice', tokenId)
-		return await authService.authGoogle(tokenId);
-	} catch (error) {
-		const message =
-			(error.response && error.response.data && error.response.data.message) ||
-			error.message ||
-			error.toString();
-		return thunkAPI.rejectWithValue(message);
+export const authGoogleThunk = createAsyncThunk(
+	"auth/google",
+	async (tokenId, thunkAPI) => {
+		try {
+			// console.log('id token slice', tokenId)
+			return await authService.authGoogle(tokenId);
+		} catch (error) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString();
+			return thunkAPI.rejectWithValue(message);
+		}
 	}
-});
+);
 
 // Logout user
 export const logout = createAsyncThunk("auth/logout", async () => {
@@ -94,6 +99,7 @@ export const authSlice = createSlice({
 				state.isError = true;
 				state.message = action.payload;
 				state.user = null;
+				console.log("error register>>>>>>", action.payload);
 			})
 			.addCase(login.pending, (state) => {
 				state.isLoading = true;
@@ -110,6 +116,7 @@ export const authSlice = createSlice({
 				state.isError = true;
 				state.message = action.payload;
 				state.user = null;
+				console.log("error login>>>>", action.payload);
 			})
 			// auth google
 			.addCase(authGoogleThunk.pending, (state) => {
@@ -127,6 +134,7 @@ export const authSlice = createSlice({
 				state.isError = true;
 				state.message = action.payload;
 				state.user = null;
+				console.log("error google>>>>", action.payload);
 			})
 			.addCase(logout.fulfilled, (state) => {
 				state.user = null;

@@ -3,13 +3,7 @@ import addressService from "./addressService";
 
 import { toast } from "react-toastify";
 
-// const address = JSON.parse(localStorage.getItem("address"));
-
 const initialState = {
-	// address: localStorage.getItem("address")
-	// 	? JSON.parse(localStorage.getItem("address"))
-	// 	: [],
-	// address: address ? address : null,
 	address: [],
 	isError: false,
 	isSuccess: false,
@@ -17,14 +11,12 @@ const initialState = {
 	message: "",
 };
 
-// console.log(">>>>>initialstate", initialState.address);
-
 export const createAddress = createAsyncThunk(
 	"address/create",
 	async (address, thunkAPI) => {
 		try {
 			const token = JSON.parse(localStorage.getItem("token"));
-			// console.log("TOKEN LOCAL STORAGE>>>>>>", token);
+
 			return await addressService.CreateUserAddresss(address, token);
 		} catch (error) {
 			const message =
@@ -41,7 +33,7 @@ export const createAddress = createAsyncThunk(
 export const getAddress = createAsyncThunk("address/get", async (thunkAPI) => {
 	try {
 		const token = JSON.parse(localStorage.getItem("token"));
-		console.log("TOKEN LOCAL STORAGE>>>>>>", token);
+		// console.log("TOKEN LOCAL STORAGE>>>>>>", token);
 		return await addressService.GetUserAddresss(token);
 	} catch (error) {
 		const message =
@@ -117,13 +109,12 @@ export const addressSlice = createSlice({
 				state.isLoading = false;
 				state.isSuccess = true;
 				state.address.push(action.payload);
-				// state.address = action.payload;
-				// console.log(">>>di Slice", action.payload); // bentuknya object {id: xx, user:{}, phone: x, receiver: xxxx, }
 			})
 			.addCase(createAddress.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
 				state.message = action.payload;
+				console.log("error create adddress>>>>", action.payload);
 			})
 			.addCase(getAddress.pending, (state) => {
 				state.isLoading = true;
@@ -137,6 +128,7 @@ export const addressSlice = createSlice({
 				state.isLoading = false;
 				state.isError = true;
 				state.message = action.payload;
+				console.log("error get address>>>>", action.payload);
 			});
 		// .addCase(deleteAddress.pending, (state) => {
 		// 	state.isLoading = true;
