@@ -125,7 +125,7 @@ export default function ProductOrganic() {
 														</p>
 														<div className="rating">
 															<Rating
-																defaultValue={item.average}
+																defaultValue={3}
 																precision={0.5}
 																readOnly
 																size="small"

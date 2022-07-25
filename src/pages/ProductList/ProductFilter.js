@@ -73,14 +73,14 @@ export default function ProductFilter() {
 						))}
 					{!loading && error && <div>error :(</div>}
 				</div>
-				<div className="mt-2">Kategori </div>
+				{/* <div className="mt-2">Kategori </div>
 				<div className="ml-4 flex flex-col gap-2 text-xs font-extralight">
 					<div>KOCH, STOKES AND MANN </div>
 					<div>DENESIK, BEIER AND DENESIK </div>
 					<div>BALISTRERI, HUELS AND CARROLL</div>
 					<div>TREMBLAY, REINGER AND HELLER</div>
 					<div>WILLIAMSON AND SONS</div>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);

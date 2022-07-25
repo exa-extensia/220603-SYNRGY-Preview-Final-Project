@@ -27,11 +27,11 @@
 }
 
 .pl__main--list {
-	@apply grid w-full grid-cols-2 gap-4 p-4  lg:min-h-[1200px] lg:grid-cols-4;
+	@apply grid w-full grid-cols-2 grid-rows-3 gap-4 p-4  lg:min-h-[1200px] lg:grid-cols-4;
 }
 
 #productlist .pt__card {
-	@apply flex  h-[340px] flex-col overflow-hidden rounded-lg border border-med-gray bg-white  hover:cursor-pointer hover:border-2 hover:border-[#c09863] hover:bg-[#fcf5ea];
+	@apply flex h-[360px] flex-col overflow-hidden rounded-lg border border-med-gray bg-white px-3  hover:cursor-pointer hover:border-2 hover:border-[#c09863] hover:bg-[#fcf5ea];
 }
 
 #productlist .pt__card__img {
