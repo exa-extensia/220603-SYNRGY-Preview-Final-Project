@@ -78,8 +78,8 @@ export default function ProductTrending() {
 									))}
 								{!isTrendingLoading &&
 									!isTrendingError &&
-									trendingproducts.map((item) => (
-										<div className="relative">
+									trendingproducts.map((item, i) => (
+										<div key={i} className="relative">
 											<div className="absolute top-0 right-0 z-10 -translate-x-3 translate-y-3">
 												<button
 													onClick={(e) => {

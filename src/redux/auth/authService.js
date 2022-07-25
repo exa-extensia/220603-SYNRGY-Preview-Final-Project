@@ -24,7 +24,7 @@ const register = async ({ name, email, password }) => {
 
 	localStorage.setItem("token", JSON.stringify(response.data.data.token));
 	const decoded = jwt_decode(response.data.data.token);
-	console.log(">>>>>>>>", decoded);
+	// console.log(">>>>>>>>", decoded);
 	localStorage.setItem("user", JSON.stringify(decoded));
 
 	return decoded;
@@ -35,8 +35,8 @@ const login = async ({ password, email }) => {
 	const response = await axios.post(`${API_URL}/login`, { email, password });
 
 	const decoded = jwt_decode(response.data.data.token);
-	console.log(">>>>>>>>", decoded);
-	console.log("NYARI TOKEN>>>>>>>>", response.data.data);
+	// console.log(">>>>>>>>", decoded);
+	// console.log("NYARI TOKEN>>>>>>>>", response.data.data);
 	localStorage.setItem("user", JSON.stringify(decoded));
 	localStorage.setItem("token", JSON.stringify(response.data.data.token));
 
@@ -44,13 +44,13 @@ const login = async ({ password, email }) => {
 };
 
 const authGoogle = async (tokenId) => {
-    const response = await axios.post(`${API_URL}/oauth2`, { token: tokenId });
+	const response = await axios.post(`${API_URL}/oauth2`, { token: tokenId });
 	const token = response.data.data.token;
-    const decoded = jwt_decode(token);
-    localStorage.setItem("user", JSON.stringify(decoded));
-    localStorage.setItem("token", JSON.stringify(token));
+	const decoded = jwt_decode(token);
+	localStorage.setItem("user", JSON.stringify(decoded));
+	localStorage.setItem("token", JSON.stringify(token));
 
-    return decoded;
+	return decoded;
 };
 
 // Logout user
@@ -63,7 +63,7 @@ const authService = {
 	register,
 	logout,
 	login,
-	authGoogle
+	authGoogle,
 };
 
 export default authService;

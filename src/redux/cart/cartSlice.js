@@ -112,7 +112,7 @@ export const cartSlice = createSlice({
 			if (state.cartBadge > 0) {
 				state.cartBadge -= action.payload;
 				// localStorage.setItem("cartBadge", JSON.stringify(state.cartBadge));
-				console.log(">>>>>After Delete Cart Total Qty", state.cartBadge);
+				// console.log(">>>>>After Delete Cart Total Qty", state.cartBadge);
 			}
 		},
 		selectVoucher: (state, action) => {
@@ -128,15 +128,15 @@ export const cartSlice = createSlice({
 			.addCase(addToCart.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.isSuccess = true;
-				console.log(
-					">>>>>BERHASIL MSK KERNJANG action payload",
-					action.payload
-				);
+				// console.log(
+				// 	">>>>>BERHASIL MSK KERNJANG action payload",
+				// 	action.payload
+				// );
 				const dataCart = action.payload.data.carts;
 				const cartTotalQty = dataCart.reduce((currentQty, cart) => {
 					return cart.quantity + currentQty;
 				}, 0);
-				console.log(">>>>>After Add Cart Total Qty", cartTotalQty);
+				// console.log(">>>>>After Add Cart Total Qty", cartTotalQty);
 				state.cartBadge = cartTotalQty;
 				// localStorage.setItem("cartBadge", JSON.stringify(cartTotalQty));
 				toast("sudah dimasukkan ke keranjang!");
@@ -146,6 +146,7 @@ export const cartSlice = createSlice({
 				state.isError = true;
 				state.message = action.payload;
 				toast("oops ada error");
+				console.log("error add to cart>>>>", action.payload);
 			})
 			.addCase(getAllCart.pending, (state) => {
 				state.isLoading = true;
@@ -168,7 +169,7 @@ export const cartSlice = createSlice({
 					state.cartBadge = totalQty;
 					// localStorage.setItem("cartBadge", JSON.stringify(totalQty));
 				}
-				console.log(">>>>>GET ALL action payload", action.payload);
+				// console.log(">>>>>GET ALL action payload", action.payload);
 
 				state.statusBuatPesanan.buatPesananLoading = false;
 				state.statusBuatPesanan.buatPesananError = false;
@@ -180,6 +181,7 @@ export const cartSlice = createSlice({
 				state.isLoading = false;
 				state.isError = true;
 				state.message = action.payload;
+				console.log("error get all cart>>>>", action.payload);
 			})
 			.addCase(placeOrder.pending, (state) => {
 				state.statusBuatPesanan.buatPesananLoading = true;
@@ -192,12 +194,13 @@ export const cartSlice = createSlice({
 				state.statusBuatPesanan.buatPesananSuccess = true;
 				state.statusBuatPesanan.responseBuatPesanan = action.payload;
 
-				console.log(">>>>>Post Checkout action payload", action.payload);
+				// console.log(">>>>>Post Checkout action payload", action.payload);
 			})
 			.addCase(placeOrder.rejected, (state, action) => {
 				state.statusBuatPesanan.buatPesananLoading = false;
 				state.statusBuatPesanan.buatPesananError = true;
 				state.statusBuatPesanan.buatpesananmessage = action.payload;
+				console.log("error placeorder>>>>", action.payload);
 			});
 	},
 });

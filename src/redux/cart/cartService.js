@@ -15,7 +15,7 @@ const AddToCart = async ({ quantity, variantId }, token) => {
 			},
 		}
 	);
-	console.log(">>>>Added Cart Response", response.data.data);
+	// console.log(">>>>Added Cart Response", response.data.data);
 	return { data: response.data.data, quantity, existingVariantId: variantId };
 };
 
@@ -39,7 +39,7 @@ const DeleteCart = async ({ quantity, variantId }, token) => {
 		}
 	);
 
-	console.log(">>>>Delete Cart Response", response.data.data);
+	// console.log(">>>>Delete Cart Response", response.data.data);
 	return { data: response.data.data, quantity };
 };
 
@@ -63,7 +63,7 @@ const PlaceOrder = async (
 		}
 	);
 
-	console.log(">>>>Post Checkout Response", response.data.data);
+	// console.log(">>>>Post Checkout Response", response.data.data);
 	return { data: response.data.data };
 };
 

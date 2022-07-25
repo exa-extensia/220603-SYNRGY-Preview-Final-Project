@@ -83,8 +83,8 @@ export default function ProductOrganic() {
 								{!isLoading &&
 									!isError &&
 									products.products &&
-									products?.products.map((item) => (
-										<div className="relative">
+									products?.products.map((item, i) => (
+										<div key={i} className="relative">
 											<div className="absolute top-0 right-0 z-10 -translate-x-3 translate-y-3">
 												<button
 													onClick={(e) => {

@@ -35,20 +35,20 @@ export const getAllProducts = createAsyncThunk(
 );
 
 export const getFilteredProducts = createAsyncThunk(
-    "product/getAllProductsFilter",
-    async (data, { rejectWithValue }) => {
-        try {
-            return await productService.getAllProductsFilter(data);
-        } catch (error) {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
-            return rejectWithValue(message);
-        }
-    }
+	"product/getAllProductsFilter",
+	async (data, { rejectWithValue }) => {
+		try {
+			return await productService.getAllProductsFilter(data);
+		} catch (error) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString();
+			return rejectWithValue(message);
+		}
+	}
 );
 
 export const getTrendingProducts = createAsyncThunk(
@@ -69,20 +69,20 @@ export const getTrendingProducts = createAsyncThunk(
 );
 
 export const getSearchProduct = createAsyncThunk(
-    "product/getSearchProduct",
-    async (params, thunkAPI) => {
-        try {
-            return await productService.searchProduct(params);
-        } catch (error) {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
-            return thunkAPI.rejectWithValue(message);
-        }
-    }
+	"product/getSearchProduct",
+	async (params, thunkAPI) => {
+		try {
+			return await productService.searchProduct(params);
+		} catch (error) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString();
+			return thunkAPI.rejectWithValue(message);
+		}
+	}
 );
 
 // MASIH GABISA!!!!!!!!!!!!!! :(((((((((((((((((
@@ -143,6 +143,7 @@ export const productSlice = createSlice({
 				state.isError = true;
 				state.message = action.payload;
 				state.products = null;
+				console.log("error get filter products>>>>", action.payload);
 			})
 			.addCase(getSearchProduct.pending, (state) => {
 				state.isSearch = true;
@@ -160,6 +161,7 @@ export const productSlice = createSlice({
 				state.isError = true;
 				state.message = action.payload;
 				state.products = null;
+				console.log("error search products>>>>", action.payload);
 			})
 			.addCase(getTrendingProducts.pending, (state) => {
 				state.isTrendingLoading = true;
@@ -174,6 +176,7 @@ export const productSlice = createSlice({
 				state.isTrendingError = true;
 				state.trendingmessage = action.payload;
 				state.trendingproducts = null;
+				console.log("error get trending products>>>>", action.payload);
 			});
 	},
 });

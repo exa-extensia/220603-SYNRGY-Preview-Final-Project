@@ -21,18 +21,8 @@ import BeautyFeed from "./pages/beautyFeed/BeautyFeed";
 import DetailArticle from "./pages/detail-article/Detail-article";
 import ProductBrand from "./pages/ProductList/ProductBrand";
 import ProductReview from "./pages/ProductDetail-Review/ProductReview";
-import { useSelector } from "react-redux";
 
 function App() {
-	// const { products, isSearch, isLoading, isError, isSuccess, message } = useSelector(
-    //     (state) => {
-	// 		console.log('list state', state)
-	// 		return state.products;
-	// 	}
-    // );
-
-	// console.log("is search", isSearch);
-	
 	return (
 		<>
 			<Routes>

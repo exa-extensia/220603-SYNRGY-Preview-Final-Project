@@ -4,7 +4,7 @@ import Rating from "@mui/material/Rating";
 import { FaRegKissWinkHeart, FaRegTired } from "react-icons/fa";
 import { HiOutlineQuestionMarkCircle } from "react-icons/hi";
 import Footer from "../../components/sections/_footer/Footer";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { FaLeaf } from "react-icons/fa";
 import Skeleton from "@mui/material/Skeleton";
@@ -29,6 +29,10 @@ export default function ProductReview() {
 	const params = useParams();
 	const [oneProduct, setOneProduct] = useState([]);
 	const [mainImage, setMainImage] = useState(0);
+	const [totalPrice, setTotalPrice] = useState();
+	const [review, setReview] = useState([]);
+	const [reviewScore, setReviewScore] = useState({});
+
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(false);
 
@@ -48,9 +52,18 @@ export default function ProductReview() {
 		axios
 			.get(`https://cosmetic-b.herokuapp.com/api/v1/product/${params.id}`)
 			.then((response) => {
-				console.log(response.data);
+				const data = response.data.data;
+				console.log(data);
+				setOneProduct(data.product);
+				setTotalPrice(data.product.variants[0].price);
+				setReviewScore({
+					average: data.average,
+					effective: data.effective,
+					packaging: data.packaging,
+					price: data.price,
+					texture: data.texture,
+				});
 				setLoading(false);
-				setOneProduct(response.data.data);
 			})
 			.catch((error) => {
 				setLoading(false);
@@ -114,8 +127,8 @@ export default function ProductReview() {
 											</div>
 										))}
 									</div>
-									<h2 className="mt-8 mb-3 text-xl lg:text-[24px]">
-										{oneProduct.variant[0].name}
+									<h2 className="mb-3 mt-6 text-xl lg:text-[24px]">
+										{oneProduct.variants[0].name}
 									</h2>
 									<div
 										className={
@@ -131,9 +144,20 @@ export default function ProductReview() {
 									</div>
 									<p className="price mb-3 text-xl font-bold text-brown">
 										Rp
-										{oneProduct.variant[0].price.toLocaleString("id-ID")}
+										{oneProduct.variants[0].price.toLocaleString("id-ID")}
 									</p>
-									<div className="pd__brand mb-8 flex w-full items-center gap-4 rounded-lg bg-cream px-4 py-4 pt-3">
+									<div className="pd__rating">
+										<Rating
+											defaultValue={reviewScore.average}
+											precision={0.5}
+											readOnly
+											size="small"
+										/>
+									</div>
+									<Link
+										to={`/productbrand/${oneProduct.brand.id}`}
+										className="HOVER-BRAND pd__brand mt-6 mb-10 flex w-full items-center gap-4 rounded-lg bg-cream px-4 py-4 pt-3"
+									>
 										<div className="aspect-square h-12 overflow-hidden rounded-md">
 											<img
 												src={oneProduct.brand.banner}
@@ -147,7 +171,7 @@ export default function ProductReview() {
 												{oneProduct.brand.name}
 											</p>
 										</div>
-									</div>
+									</Link>
 								</div>
 								<div className="col-span-4 aspect-[4/3] sm:col-span-5 lg:col-span-6">
 									<div className="JUDUL flex flex-col">

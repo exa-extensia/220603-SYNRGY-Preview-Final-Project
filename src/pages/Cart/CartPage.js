@@ -51,7 +51,7 @@ export default function CartPage() {
 				setOverview(data.overview);
 				setOverviewTotal(data.overview.total);
 				setItems(data.cartItems);
-				console.log("get all cart in component>>>>>>>", data);
+				// console.log("get all cart in component>>>>>>>", data);
 				dispatch(getAllCart());
 			})
 			.catch((error) => {
