@@ -7,6 +7,7 @@ const initialState = {
 	isError: false,
 	isSuccess: false,
 	isLoading: false,
+	isSearch: false,
 	message: "",
 	trendingproducts: [],
 	isTrendingError: false,
@@ -69,9 +70,9 @@ export const getTrendingProducts = createAsyncThunk(
 
 export const getSearchProduct = createAsyncThunk(
     "product/getSearchProduct",
-    async (keyword, thunkAPI) => {
+    async (params, thunkAPI) => {
         try {
-            return await productService.searchProduct(keyword);
+            return await productService.searchProduct(params);
         } catch (error) {
             const message =
                 (error.response &&
@@ -143,6 +144,23 @@ export const productSlice = createSlice({
 				state.message = action.payload;
 				state.products = null;
 			})
+			.addCase(getSearchProduct.pending, (state) => {
+				state.isSearch = true;
+				state.isLoading = true;
+			})
+			.addCase(getSearchProduct.fulfilled, (state, action) => {
+				state.isSearch = true;
+				state.isLoading = false;
+				state.isSuccess = true;
+				state.products = action.payload;
+			})
+			.addCase(getSearchProduct.rejected, (state, action) => {
+				state.isSearch = true;
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
+				state.products = null;
+			})
 			.addCase(getTrendingProducts.pending, (state) => {
 				state.isTrendingLoading = true;
 			})
@@ -157,20 +175,6 @@ export const productSlice = createSlice({
 				state.trendingmessage = action.payload;
 				state.trendingproducts = null;
 			});
-		// .addCase(getOneProduct.pending, (state) => {
-		// 	state.isLoading = true;
-		// })
-		// .addCase(getOneProduct.fulfilled, (state, action) => {
-		// 	state.isLoading = false;
-		// 	state.isSuccess = true;
-		// 	state.products = action.payload;
-		// })
-		// .addCase(getOneProduct.rejected, (state, action) => {
-		// 	state.isLoading = false;
-		// 	state.isError = true;
-		// 	state.message = action.payload;
-		// 	state.products = null;
-		// });
 	},
 });
 

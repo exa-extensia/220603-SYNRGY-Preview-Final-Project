@@ -29,9 +29,9 @@ const getTrendingProducts = async () => {
 	return response.data.data;
 };
 
-const searchProduct = async (keyword) => {
-	const response = await axios.get(`${API_URL}/search?keyword=${keyword}`);
-	console.log(response.data.data);
+const searchProduct = async ({keyword, page = 0, size = 12}) => {
+	const response = await axios.get(`${API_URL}/search?keyword=${keyword}&page=${page}&size=${size}`);
+	console.log('ini data', response.data.data);
 	return response.data.data;
 };
 
@@ -48,7 +48,7 @@ const searchProduct = async (keyword) => {
 
 const productService = {
     getAllProducts,
-	getAllProductsFilter,
+    getAllProductsFilter,
     getTrendingProducts,
     searchProduct,
     // getOneProduct,
