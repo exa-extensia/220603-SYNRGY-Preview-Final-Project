@@ -65,7 +65,7 @@ export default function ProductList() {
 									Produk Semua
 								</h1>
 								<div className="pl__product-sort">
-									Jumlah Produk: {products.numberOfItems}
+									Jumlah Produk: {products?.numberOfItems}
 								</div>
 							</div>
 							<div className="pl__main--list">
@@ -125,7 +125,7 @@ export default function ProductList() {
 														</p>
 														<div className="rating">
 															<Rating
-																defaultValue={item.average}
+																defaultValue={3.5}
 																precision={0.5}
 																readOnly
 																size="small"
@@ -154,7 +154,7 @@ export default function ProductList() {
 							</div>
 							<div className="pl__main--bottom">
 								<Pagination
-									size={products.numberOfPages}
+									size={products?.numberOfPages}
 									handlePageClick={handlePageClick}
 								/>
 							</div>

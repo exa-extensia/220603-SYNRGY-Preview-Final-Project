@@ -14,13 +14,13 @@ import { getSearchProduct } from "../../../redux/product/productSlice";
 export default function Navbar() {
 	let nav__links = [
 		{ name: "Home", url: "/" },
-		{ name: "Kategori", url: "/productlist" },
+		{ name: "Semua Produk", url: "/productlist" },
+		{ name: "Beauty Feed", url: "/beautyfeed" },
 		{ name: "Produk Trending", url: "/producttrending" },
 		// {
 		// 	name: "Brands",
 		// 	url: "/productbrand/314f7728-d4cb-4f21-b9f4-512d83b048e3",
 		// },
-		{ name: "Beauty Feed", url: "/beautyfeed" },
 		{ name: "Produk Organik", url: "/productorganic" },
 	];
 
@@ -45,8 +45,8 @@ export default function Navbar() {
 	};
 
 	const onSearchProduct = (keyword) => {
-		dispatch(getSearchProduct({keyword}));
-	}
+		dispatch(getSearchProduct({ keyword }));
+	};
 
 	return (
 		<nav>
@@ -59,7 +59,7 @@ export default function Navbar() {
 						</div>
 					</Link>
 					{user ? (
-						<div className="relative nav__cart-profile">
+						<div className="nav__cart-profile relative">
 							<div className="nav__cart">
 								<Link to={`/cart`}>
 									<CartBadge />
@@ -98,7 +98,7 @@ export default function Navbar() {
 								<button className="nav__btn btn-sec">Login</button>
 							</Link>
 							<Link to={`/register`}>
-								<button className="text-white nav__btn btn-grad">
+								<button className="nav__btn btn-grad text-white">
 									Register
 								</button>
 							</Link>
@@ -115,8 +115,14 @@ export default function Navbar() {
 						))}
 					</div>
 					<div className="nav__searchbar__wrapper">
-						<input className="nav__inputsearch" placeholder="cari produk..." 
-						onChange={(e) => onSearchProduct(e.target.value)} />
+						<input
+							className="nav__inputsearch"
+							placeholder="cari produk..."
+							onChange={(e) => onSearchProduct(e.target.value)}
+							onKeyPress={(e) => {
+								e.key === "Enter" && navigate("/productlist");
+							}}
+						/>
 						<BsSearch className="input__icon" />
 					</div>
 				</div>
@@ -165,7 +171,7 @@ export default function Navbar() {
 								<button className="nav__btn btn-sec">Login</button>
 							</Link>
 							<Link to={`/register`}>
-								<button className="hidden text-white nav__btn btn-grad sm:block">
+								<button className="nav__btn btn-grad hidden text-white sm:block">
 									Register
 								</button>
 							</Link>
