@@ -9,6 +9,7 @@ import { logout, reset } from "../../../redux/auth/authSlice";
 import { useState } from "react";
 import CartBadge from "../../atoms/CartBadge";
 import useOAuth from "../../../hooks/oauth.hooks";
+import { getSearchProduct } from "../../../redux/product/productSlice";
 
 export default function Navbar() {
 	let nav__links = [
@@ -44,8 +45,7 @@ export default function Navbar() {
 	};
 
 	const onSearchProduct = (keyword) => {
-		console.log('ini keyword', keyword);
-		// dispatch(logout());
+		dispatch(getSearchProduct({keyword}));
 	}
 
 	return (
@@ -59,7 +59,7 @@ export default function Navbar() {
 						</div>
 					</Link>
 					{user ? (
-						<div className="nav__cart-profile relative">
+						<div className="relative nav__cart-profile">
 							<div className="nav__cart">
 								<Link to={`/cart`}>
 									<CartBadge />
@@ -98,7 +98,7 @@ export default function Navbar() {
 								<button className="nav__btn btn-sec">Login</button>
 							</Link>
 							<Link to={`/register`}>
-								<button className="nav__btn btn-grad text-white">
+								<button className="text-white nav__btn btn-grad">
 									Register
 								</button>
 							</Link>
@@ -115,7 +115,8 @@ export default function Navbar() {
 						))}
 					</div>
 					<div className="nav__searchbar__wrapper">
-						<input className="nav__inputsearch" placeholder="cari produk..." />
+						<input className="nav__inputsearch" placeholder="cari produk..." 
+						onChange={(e) => onSearchProduct(e.target.value)} />
 						<BsSearch className="input__icon" />
 					</div>
 				</div>
@@ -164,7 +165,7 @@ export default function Navbar() {
 								<button className="nav__btn btn-sec">Login</button>
 							</Link>
 							<Link to={`/register`}>
-								<button className="nav__btn btn-grad hidden text-white sm:block">
+								<button className="hidden text-white nav__btn btn-grad sm:block">
 									Register
 								</button>
 							</Link>
